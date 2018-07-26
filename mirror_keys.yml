@@ -1,0 +1,12 @@
+- hosts: mirror
+  remote_user: root
+  tasks:
+    - name: Ensure variable for user name is defined
+      assert:
+        that: 'nestbox_mirror_user is defined'
+        msg: "You must define the variable `nestbox_mirror_user` to copy the SSH key. Use `--extra-vars nestbox_mirror_user=user`."
+    - name: Copy SSH keys from mirror
+      fetch:
+        src: /home/{{ nestbox_mirror_user }}/.ssh/id_ecdsa
+        dest: /tmp/mirror_keys/nestbox_mirror_user_{{ nestbox_mirror_user }}_id
+        flat: yes

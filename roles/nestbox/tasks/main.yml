@@ -1,0 +1,203 @@
+- name: Create certificate dir
+  file:
+    path: /etc/nestbox/https
+    state: directory
+- name: Copy certificate generation config
+  copy:
+    src: files/openssl-x509.cfg
+    dest: /tmp/openssl-x509.cfg
+    owner: root
+    group: root
+    mode: 0644
+- name: Generate a self signed OpenSSL certificate
+  command: >-
+    openssl req
+    -x509 -sha256 -nodes
+    -days 3650
+    -newkey rsa:2048
+    -config /tmp/openssl-x509.cfg
+    -keyout /etc/nestbox/https/private-key.pem
+    -out /etc/nestbox/https/public-certificate.pem
+  args:
+    creates: /etc/nestbox/https/public-certificate.pem
+- name: Create group for certificate
+  group:
+    name: nestbox-certs
+- name: Set permissions for certificate
+  file:
+    path: "{{ item }}"
+    group: nestbox-certs
+    mode: o=rw,g=r
+  loop:
+    - /etc/nestbox/https/private-key.pem
+    - /etc/nestbox/https/public-certificate.pem
+
+- name: Install nginx
+  apt:
+    name: nginx
+    state: present
+- name: Disable the default nginx site
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify:
+    - reload nginx
+- name: Install nginx site for nestbox
+  copy:
+    src: files/nginx-site
+    dest: /etc/nginx/sites-available/nestbox
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - reload nginx
+- name: Enable nginx site for nestbox
+  file:
+    path: /etc/nginx/sites-enabled/nestbox
+    src: ../sites-available/nestbox
+    state: link
+  notify:
+    - reload nginx
+
+- name: Install PostgreSQL
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - sudo
+    - python-psycopg2
+    - postgresql-9.6
+    - postgresql-contrib-9.6
+- name: Set PostgreSQL superuser password
+  become: yes
+  become_user: postgres
+  postgresql_user:
+    name: postgres
+    password: superpass
+
+- name: Install RabbitMQ
+  apt:
+    name: rabbitmq-server
+    state: present
+
+- name: Add Nestbox APT PGP key
+  apt_key:
+    url: http://mirror.wazo.community/wazo_current.key
+    id: 2769B67EDBFF423F6874D7663F1BF7FC527FBC6A
+    state: present
+- name: Add Nestbox Debian repository SSH fingerprint
+  lineinfile:
+    create: yes
+    state: present
+    path: /root/.ssh/known_hosts
+    regexp: "^mirror.wazo.community "
+    line: mirror.wazo.community ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIlF17rPvUM0VG8dxznTbuqHQi5lQ3zdtqsSbpbC7g4vORhD/epcnXVe3bBTg1l/0yk5ozByp2bakVNvTFf3Jrc=
+- name: Configure SSH key for Nestbox Debian repository
+  blockinfile:
+    path: /root/.ssh/config
+    create: yes
+    block: |
+      Host mirror.wazo.community
+        IdentityFile /root/.ssh/nestbox_mirror_user_{{ nestbox_mirror_user }}_id
+
+- name: Copy SSH key
+  copy:
+    src: /tmp/mirror_keys/nestbox_mirror_user_{{ nestbox_mirror_user }}_id
+    dest: /root/.ssh/nestbox_mirror_user_{{ nestbox_mirror_user }}_id
+    owner: root
+    group: root
+    mode: 0600
+
+- name: Add Nestbox Debian repository
+  apt_repository:
+    repo: deb ssh://test@mirror.wazo.community:/data/reprepro/nestbox/ nestbox main
+    state: present
+    update_cache: yes
+
+- name: Create wazo-auth config dir
+  file:
+    path: /etc/wazo-auth/conf.d
+    state: directory
+- name: Add wazo-auth config
+  copy:
+    src: files/wazo-auth.yml
+    dest: /etc/wazo-auth/conf.d/50-nestbox.yml
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart wazo-auth
+- name: Install wazo-auth
+  apt:
+    name: wazo-auth
+    state: present
+  notify: reload nginx
+- name: Add wazo-auth user in groups
+  user:
+    name: wazo-auth
+    groups:
+      - nestbox-certs
+  notify: restart wazo-auth
+- name: Remove wazo-auth default config
+  file:
+    path: "/etc/wazo-auth/conf.d/{{ item }}"
+    state: absent
+  with_items:
+    - 050-xivo-consul-config.yml
+    - 050-xivo-consul-token.yml
+  notify: restart wazo-auth
+
+- name: Install wazo-auth-cli
+  apt:
+    name: wazo-auth-cli
+    state: present
+- name: Copy wazo-auth initializer
+  copy:
+    src: files/wazo-auth-init.sh
+    dest: /tmp/wazo-auth-init.sh
+    owner: root
+    mode: 755
+- name: Initialize wazo-auth
+  command: /tmp/wazo-auth-init.sh
+  args:
+    creates: /etc/nestbox-ui/conf.d/50-default-policies.yml
+
+- name: Copy wazo-deployd preconfiguration
+  copy:
+    src: files/wazo-deployd.cfg
+    dest: /tmp/wazo-deployd.cfg
+- name: Preconfigure wazo-deployd package
+  command: debconf-set-selections /tmp/wazo-deployd.cfg
+- name: Create wazo-deployd config dir
+  file:
+    path: /etc/wazo-deployd/conf.d
+    state: directory
+    owner: root
+    mode: 755
+- name: Copy wazo-deployd config
+  copy:
+    src: files/wazo-deployd.yml
+    dest: /etc/wazo-deployd/conf.d/50-nestbox.yml
+- name: Install wazo-deployd
+  apt:
+    name: wazo-deployd
+    state: present
+- name: Add wazo-deployd user in groups
+  user:
+    name: wazo-deployd
+    groups:
+      - nestbox-certs
+  notify: restart wazo-deployd
+
+- name: Copy nestbox-confd preconfiguration
+  copy:
+    src: files/nestbox-confd.cfg
+    dest: /tmp/nestbox-confd.cfg
+- name: Preconfigure nestbox-confd package
+  command: debconf-set-selections /tmp/nestbox-confd.cfg
+- name: install nestbox-confd
+  apt:
+    name: nestbox-confd
+    state: present
+  notify: reload nginx
+- name: Initialize nestbox-confd bus queues
+  command: nestbox-confd-init-amqp
