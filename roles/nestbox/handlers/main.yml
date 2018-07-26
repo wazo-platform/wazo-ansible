@@ -36,3 +36,8 @@
   service:
     name: wazo-deployd
     state: restarted
+
+- name: restart nestbox-ui
+  service:
+    name: nestbox-ui
+    state: restarted

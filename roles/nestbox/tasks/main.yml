@@ -194,10 +194,23 @@
     dest: /tmp/nestbox-confd.cfg
 - name: Preconfigure nestbox-confd package
   command: debconf-set-selections /tmp/nestbox-confd.cfg
-- name: install nestbox-confd
+- name: Install nestbox-confd
   apt:
     name: nestbox-confd
     state: present
   notify: reload nginx
 - name: Initialize nestbox-confd bus queues
   command: nestbox-confd-init-amqp
+# - name: Initialize nestbox-confd
+
+- name: Install nestbox-ui
+  apt:
+    name: nestbox-ui
+    state: present
+  notify: reload nginx
+
+- name: Install nestbox-ui-wazo-plugins
+  apt:
+    name: nestbox-ui-wazo-plugins
+    state: present
+  notify: restart nestbox-ui
