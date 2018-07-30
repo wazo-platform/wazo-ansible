@@ -1,3 +1,7 @@
+- name: Assert Debian Stretch
+  assert:
+    that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
+
 - name: Initialize wazo-auth, nestbox-confd
   script: files/nestbox-init.sh
   args:
