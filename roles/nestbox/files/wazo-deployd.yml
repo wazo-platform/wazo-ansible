@@ -1,5 +1,5 @@
 rest_api:
-  certificate: /etc/nestbox/https/public-certificate.pem
-  private_key: /etc/nestbox/https/private-key.pem
+  certificate: {{ https_certificate }}
+  private_key: {{ https_private_key }}
 auth:
-  verify_certificate: /etc/nestbox/https/public-certificate.pem
+  verify_certificate: {{ https_certificate }}

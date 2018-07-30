@@ -19,8 +19,8 @@
     -days 3650
     -newkey rsa:2048
     -config /tmp/openssl-x509.cfg
-    -keyout /etc/nestbox/https/private-key.pem
-    -out /etc/nestbox/https/public-certificate.pem
+    -keyout {{ https_private_key }}
+    -out {{ https_certificate }}
   args:
     creates: /etc/nestbox/https/public-certificate.pem
 - name: Create group for certificate
@@ -32,8 +32,8 @@
     group: nestbox-certs
     mode: o=rw,g=r
   loop:
-    - /etc/nestbox/https/private-key.pem
-    - /etc/nestbox/https/public-certificate.pem
+    - {{ https_private_key }}
+    - {{ https_certificate }}
 
 - name: Install nginx
   apt:
@@ -46,7 +46,7 @@
   notify:
     - reload nginx
 - name: Install nginx site for nestbox
-  copy:
+  template:
     src: files/nginx-site
     dest: /etc/nginx/sites-available/nestbox
     owner: root
@@ -122,7 +122,7 @@
     path: /etc/wazo-auth/conf.d
     state: directory
 - name: Add wazo-auth config
-  copy:
+  template:
     src: files/wazo-auth.yml
     dest: /etc/wazo-auth/conf.d/50-nestbox.yml
     owner: root
@@ -167,7 +167,7 @@
     owner: root
     mode: 755
 - name: Copy wazo-deployd config
-  copy:
+  template:
     src: files/wazo-deployd.yml
     dest: /etc/wazo-deployd/conf.d/50-nestbox.yml
 - name: Install wazo-deployd
