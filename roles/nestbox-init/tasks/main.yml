@@ -1,0 +1,4 @@
+- name: Initialize wazo-auth, nestbox-confd
+  script: files/nestbox-init.sh
+  args:
+    creates: /etc/nestbox-ui/conf.d/50-default-policies.yml

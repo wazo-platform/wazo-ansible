@@ -34,6 +34,7 @@ NESTBOX_RESELLER_POLICY=$(wazo-auth-cli policy create --description "Default res
 NESTBOX_CUSTOMER_POLICY=$(wazo-auth-cli policy create --description "Default customer nestbox policy" --acl "auth.users.me.#" "deployd.instances.*.credentials.#.read" "confd.#" -- nestbox_default_customer)
 NESTBOX_LOCATION_POLICY=$(wazo-auth-cli policy create --description "Default location nestbox policy" --acl "auth.users.me.#" "deployd.instances.*.credentials.#.read" "confd.#" -- nestbox_default_location)
 
+# Create nestbox-ui config
 mkdir -p /etc/nestbox-ui/conf.d
 cat >/etc/nestbox-ui/conf.d/50-default-policies.yml <<EOL
 policies:
@@ -41,3 +42,6 @@ policies:
     customer: ${NESTBOX_CUSTOMER_POLICY}
     location: ${NESTBOX_LOCATION_POLICY}
 EOL
+
+# Create nestbox-confd reseller
+sudo -u postgres psql nestbox-confd -c "INSERT INTO confd_reseller values ('$NESTBOX_TENANT', 'admin-reseller', now() at time zone 'utc');"

@@ -150,16 +150,6 @@
   apt:
     name: wazo-auth-cli
     state: present
-- name: Copy wazo-auth initializer
-  copy:
-    src: files/wazo-auth-init.sh
-    dest: /tmp/wazo-auth-init.sh
-    owner: root
-    mode: 755
-- name: Initialize wazo-auth
-  command: /tmp/wazo-auth-init.sh
-  args:
-    creates: /etc/nestbox-ui/conf.d/50-default-policies.yml
 
 - name: Copy wazo-deployd preconfiguration
   copy:
@@ -201,7 +191,6 @@
   notify: reload nginx
 - name: Initialize nestbox-confd bus queues
   command: nestbox-confd-init-amqp
-# - name: Initialize nestbox-confd
 
 - name: Install nestbox-ui
   apt:

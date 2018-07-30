@@ -11,6 +11,8 @@
 * Install Ansible: `pip install ansible`
 * Run `ansible-playbook -i dev mirror_keys.yml --extra-vars nestbox_mirror_user=test`
 * Run `ansible-playbook -i dev nestbox.yml`
+* Ensure your database server is running, if on another machine
+* Run `ansible-playbook -i dev nestbox-init.yml`
 * Nestbox will be installed on `nestbox-dev-ansible`
 
 ## File hierarchy
