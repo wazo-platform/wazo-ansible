@@ -155,7 +155,7 @@
     state: present
 
 - name: Copy wazo-deployd preconfiguration
-  copy:
+  template:
     src: files/wazo-deployd.cfg
     dest: /tmp/wazo-deployd.cfg
 - name: Preconfigure wazo-deployd package
@@ -182,7 +182,7 @@
   notify: restart wazo-deployd
 
 - name: Copy nestbox-confd preconfiguration
-  copy:
+  template:
     src: files/nestbox-confd.cfg
     dest: /tmp/nestbox-confd.cfg
 - name: Preconfigure nestbox-confd package
