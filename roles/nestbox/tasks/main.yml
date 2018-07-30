@@ -32,8 +32,8 @@
     group: nestbox-certs
     mode: o=rw,g=r
   loop:
-    - {{ https_private_key }}
-    - {{ https_certificate }}
+    - "{{ https_private_key }}"
+    - "{{ https_certificate }}"
 
 - name: Install nginx
   apt:
