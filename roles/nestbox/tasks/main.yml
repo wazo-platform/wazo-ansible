@@ -62,22 +62,6 @@
   notify:
     - reload nginx
 
-- name: Install PostgreSQL
-  apt:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - sudo
-    - python-psycopg2
-    - postgresql-9.6
-    - postgresql-contrib-9.6
-- name: Set PostgreSQL superuser password
-  become: yes
-  become_user: postgres
-  postgresql_user:
-    name: postgres
-    password: superpass
-
 - name: Install RabbitMQ
   apt:
     name: rabbitmq-server

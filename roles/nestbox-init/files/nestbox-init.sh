@@ -1,5 +1,9 @@
 #!/bin/bash
 
+db_host=$1
+db_username=$2
+db_password=$3
+
 # Add certificate in auth section:
 cat > ~/.config/wazo-auth-cli/50-certificate.yml <<EOF
 auth:
@@ -44,4 +48,4 @@ policies:
 EOL
 
 # Create nestbox-confd reseller
-sudo -u postgres psql nestbox-confd -c "INSERT INTO confd_reseller values ('$NESTBOX_TENANT', 'admin-reseller', now() at time zone 'utc');"
+psql "postgresql://$db_username:$db_password@$db_host" -c "INSERT INTO confd_reseller values ('$NESTBOX_TENANT', 'admin-reseller', now() at time zone 'utc');"
