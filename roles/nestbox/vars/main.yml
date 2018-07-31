@@ -1,13 +1,2 @@
 https_certificate: /etc/nestbox/https/public-certificate.pem
 https_private_key: /etc/nestbox/https/private-key.pem
-
-db_host: localhost
-
-db_deployd_user: wazo-deployd
-db_deployd_password: superpass
-
-db_confd_user: nestbox-confd
-db_confd_password: superpass
-
-db_admin_user: postgres
-db_admin_password: superpass

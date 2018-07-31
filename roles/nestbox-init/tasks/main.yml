@@ -2,6 +2,29 @@
   assert:
     that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
 
+- name: Install wazo-auth-cli
+  apt:
+    name: wazo-auth-cli
+    state: present
+
+- name: Copy nestbox-confd database preconfiguration
+  template:
+    src: files/nestbox-confd.cfg
+    dest: /tmp/nestbox-confd.cfg
+- name: Reconfigure database options for nestbox-confd package
+  command: debconf-set-selections /tmp/nestbox-confd.cfg
+- name: Initialize nestbox-confd database
+  command: dpkg-reconfigure nestbox-confd -f noninteractive
+
+- name: Copy wazo-deployd database preconfiguration
+  template:
+    src: files/wazo-deployd.cfg
+    dest: /tmp/wazo-deployd.cfg
+- name: Reconfigure database options for wazo-deployd package
+  command: debconf-set-selections /tmp/wazo-deployd.cfg
+- name: Initialize wazo-deployd database
+  command: dpkg-reconfigure wazo-deployd -f noninteractive
+
 - name: Initialize wazo-auth, nestbox-confd
   script: files/nestbox-init.sh
   args:
