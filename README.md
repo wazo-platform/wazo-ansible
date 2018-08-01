@@ -42,6 +42,7 @@ Variables that control the database initialization:
 * `db_deployd_password`: Default: `superpass`
 
 * `db_host`: Default: `localhost`
+* `db_port`: Default: `5432`
 
 ## File hierarchy
 

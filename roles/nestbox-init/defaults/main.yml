@@ -8,3 +8,4 @@ db_deployd_user: wazo-deployd
 db_deployd_password: superpass
 
 db_host: localhost
+db_port: 5432
