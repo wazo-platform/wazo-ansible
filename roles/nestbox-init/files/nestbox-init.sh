@@ -48,4 +48,4 @@ policies:
 EOL
 
 # Create nestbox-confd reseller
-psql "postgresql://$confd_db_username:$confd_db_password@$confd_db_host" -c "INSERT INTO confd_reseller values ('$NESTBOX_TENANT', 'admin-reseller', now() at time zone 'utc');"
+psql "postgresql://$confd_db_username:$confd_db_password@$confd_db_host/nestbox-confd" -c "INSERT INTO confd_reseller values ('$NESTBOX_TENANT', 'admin-reseller', now() at time zone 'utc');"
