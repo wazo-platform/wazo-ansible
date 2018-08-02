@@ -7,5 +7,8 @@ db_confd_password: superpass
 db_deployd_user: wazo-deployd
 db_deployd_password: superpass
 
+db_auth_user: asterisk
+db_auth_password: proformatique
+
 db_host: localhost
 db_port: 5432
