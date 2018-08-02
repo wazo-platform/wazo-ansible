@@ -101,6 +101,10 @@
     state: present
     update_cache: yes
 
+- name: Copy wazo-auth preconfiguration
+  template:
+    src: files/wazo-auth.cfg
+    dest: /tmp/wazo-auth.cfg
 - name: Create wazo-auth config dir
   file:
     path: /etc/wazo-auth/conf.d
