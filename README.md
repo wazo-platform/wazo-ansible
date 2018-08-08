@@ -15,6 +15,13 @@
 * Run `ansible-playbook -i dev nestbox-init.yml --extra-vars "db_host=remote db_admin_password=secret"`
 * Nestbox will be installed on `nestbox-dev-ansible`
 
+## How to install PostgreSQL
+
+* Install Ansible: `pip install ansible`
+* Run `ansible-galaxy install -r requirements-postgres.yml`
+* Run `ansible-playbook -i dev postgres.yml`
+* PostgreSQL be installed on `postgresql-ansible`
+
 ## Variables
 
 ### mirror_keys.yml
