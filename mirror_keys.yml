@@ -5,8 +5,36 @@
       assert:
         that: 'nestbox_mirror_user is defined'
         msg: "You must define the variable `nestbox_mirror_user` to copy the SSH key. Use `--extra-vars nestbox_mirror_user=user`."
-    - name: Copy SSH keys from mirror
+    - name: Generate private key
+      openssl_privatekey:
+        path: /etc/nginx/client_certs/{{ nestbox_mirror_user }}.key
+        state: present
+    - name: Generate CSR
+      openssl_csr:
+        path: /etc/nginx/client_certs/{{ nestbox_mirror_user }}.csr
+        privatekey_path: /etc/nginx/client_certs/{{ nestbox_mirror_user }}.key
+        state: present
+        common_name: "{{ nestbox_mirror_user }}.clients.wazo.io"
+    - name: Generate certificate signed by CA
+      command: |
+        openssl x509
+        -req
+        -days 3650
+        -sha256
+        -in {{ nestbox_mirror_user }}.csr
+        -CA ca.crt
+        -CAkey ca.key
+        -CAcreateserial
+        -out {{ nestbox_mirror_user }}.crt
+      args:
+        chdir: "/etc/nginx/client_certs"
+        creates: "{{ nestbox_mirror_user }}.crt"
+    - name: Copy client certificates from mirror
       fetch:
-        src: /home/{{ nestbox_mirror_user }}/.ssh/id_ecdsa
-        dest: /tmp/mirror_keys/nestbox_mirror_user_{{ nestbox_mirror_user }}_id
+        src: /etc/nginx/client_certs/{{ item }}
+        dest: /tmp/mirror_keys/{{ item }}
         flat: yes
+      loop:
+        - "{{ nestbox_mirror_user }}.key"
+        - "{{ nestbox_mirror_user }}.crt"
+        - ca.crt

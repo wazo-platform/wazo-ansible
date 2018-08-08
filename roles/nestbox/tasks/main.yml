@@ -67,37 +67,38 @@
     name: rabbitmq-server
     state: present
 
+- name: Install HTTPS driver for APT
+  apt:
+    name: apt-transport-https
+    state: latest
 - name: Add Nestbox APT PGP key
   apt_key:
     url: http://mirror.wazo.community/wazo_current.key
     id: 2769B67EDBFF423F6874D7663F1BF7FC527FBC6A
     state: present
-- name: Add Nestbox Debian repository SSH fingerprint
-  lineinfile:
-    create: yes
-    state: present
-    path: /root/.ssh/known_hosts
-    regexp: "^mirror.wazo.community "
-    line: mirror.wazo.community ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIlF17rPvUM0VG8dxznTbuqHQi5lQ3zdtqsSbpbC7g4vORhD/epcnXVe3bBTg1l/0yk5ozByp2bakVNvTFf3Jrc=
-- name: Configure SSH key for Nestbox Debian repository
-  blockinfile:
-    path: /root/.ssh/config
-    create: yes
-    block: |
-      Host mirror.wazo.community
-        IdentityFile /root/.ssh/nestbox_mirror_user_{{ nestbox_mirror_user }}_id
 
-- name: Copy SSH key
+- name: Configure client certificate for APT
+  template:
+    src: files/apt-client-certs-config
+    dest: /etc/apt/apt.conf.d/nestbox-mirror-{{ nestbox_mirror_user}}
+- name: Create directory for client cert
+  file:
+    dest: /etc/apt/certs
+    state: directory
+- name: Copy client certificate
   copy:
-    src: /tmp/mirror_keys/nestbox_mirror_user_{{ nestbox_mirror_user }}_id
-    dest: /root/.ssh/nestbox_mirror_user_{{ nestbox_mirror_user }}_id
-    owner: root
-    group: root
-    mode: 0600
+    src: /tmp/mirror_keys/{{ item }}
+    dest: /etc/apt/certs/{{ item }}
+    owner: _apt
+    mode: 0400
+  loop:
+    - ca.crt
+    - "{{ nestbox_mirror_user }}.key"
+    - "{{ nestbox_mirror_user }}.crt"
 
 - name: Add Nestbox Debian repository
   apt_repository:
-    repo: deb ssh://test@mirror.wazo.community:/data/reprepro/nestbox/ nestbox main
+    repo: deb https://mirror.wazo.io/nestbox nestbox main
     state: present
     update_cache: yes
 
