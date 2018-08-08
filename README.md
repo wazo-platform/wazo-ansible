@@ -18,8 +18,8 @@
 ## How to install PostgreSQL
 
 * Install Ansible: `pip install ansible`
-* Run `ansible-galaxy install -r requirements-postgres.yml`
-* Run `ansible-playbook -i dev postgres.yml`
+* Run `ansible-galaxy install -r requirements-postgresql.yml`
+* Run `ansible-playbook -i dev postgresql.yml`
 * PostgreSQL be installed on `postgresql-ansible`
 
 ## Variables
