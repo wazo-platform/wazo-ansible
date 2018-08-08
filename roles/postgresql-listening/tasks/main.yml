@@ -1,0 +1,17 @@
+- name: PostgreSQL listen on 0.0.0.0
+  lineinfile:
+    path: /etc/postgresql/9.6/main/postgresql.conf
+    regexp: "^listen_addresses ="
+    line: "listen_addresses = '*'"
+    state: present
+  notify: restart postgresql
+- name: Set PostgreSQL superuser password
+  become: yes
+  become_user: postgres
+  postgresql_user:
+    name: postgres
+    password: superpass
+- name: Install postgresql-contribs
+  apt:
+    name: postgresql-contrib-9.6
+    state: latest
