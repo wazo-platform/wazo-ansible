@@ -105,6 +105,8 @@
   template:
     src: files/wazo-auth.cfg
     dest: /tmp/wazo-auth.cfg
+- name: Preconfigure wazo-auth package
+  command: debconf-set-selections /tmp/wazo-auth.cfg
 - name: Create wazo-auth config dir
   file:
     path: /etc/wazo-auth/conf.d
