@@ -31,7 +31,7 @@
     path: "{{ item }}"
     group: nestbox-certs
     mode: o=rw,g=r
-  loop:
+  with_list:
     - "{{ https_private_key }}"
     - "{{ https_certificate }}"
 
@@ -76,12 +76,12 @@
   lineinfile:
     create: yes
     state: present
-    path: /root/.ssh/known_hosts
+    dest: /root/.ssh/known_hosts
     regexp: "^mirror.wazo.community "
     line: mirror.wazo.community ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIlF17rPvUM0VG8dxznTbuqHQi5lQ3zdtqsSbpbC7g4vORhD/epcnXVe3bBTg1l/0yk5ozByp2bakVNvTFf3Jrc=
 - name: Configure SSH key for Nestbox Debian repository
   blockinfile:
-    path: /root/.ssh/config
+    dest: /root/.ssh/config
     create: yes
     block: |
       Host mirror.wazo.community
@@ -125,8 +125,7 @@
 - name: Add wazo-auth user in groups
   user:
     name: wazo-auth
-    groups:
-      - nestbox-certs
+    groups: nestbox-certs
   notify: restart wazo-auth
 - name: Remove wazo-auth default config
   file:
@@ -160,8 +159,7 @@
 - name: Add wazo-deployd user in groups
   user:
     name: wazo-deployd
-    groups:
-      - nestbox-certs
+    groups: nestbox-certs
   notify: restart wazo-deployd
 
 - name: Copy nestbox-confd preconfiguration
