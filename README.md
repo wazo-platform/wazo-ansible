@@ -22,6 +22,13 @@
 * Run `ansible-playbook -i dev postgresql.yml`
 * PostgreSQL be installed on `postgresql-ansible`
 
+## How to install the HTTP reverse proxy
+
+* Install Ansible: `pip install ansible`
+* Run `ansible-galaxy install -r requirements-reverse-proxy.yml`
+* Run `ansible-playbook -i dev reverse-proxy.yml`
+* The HTTP reverse proxy will be installed on `reverse-proxy-ansible`
+
 ## Variables
 
 ### mirror_keys.yml
