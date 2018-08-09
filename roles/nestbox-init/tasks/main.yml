@@ -9,7 +9,7 @@
 
 - name: Copy wazo-auth database preconfiguration
   template:
-    src: files/wazo-auth.cfg
+    src: templates/wazo-auth.cfg
     dest: /tmp/wazo-auth.cfg
 - name: Reconfigure database options for wazo-auth package
   command: debconf-set-selections /tmp/wazo-auth.cfg
@@ -18,7 +18,7 @@
 
 - name: Copy nestbox-confd database preconfiguration
   template:
-    src: files/nestbox-confd.cfg
+    src: templates/nestbox-confd.cfg
     dest: /tmp/nestbox-confd.cfg
 - name: Reconfigure database options for nestbox-confd package
   command: debconf-set-selections /tmp/nestbox-confd.cfg
@@ -27,7 +27,7 @@
 
 - name: Copy wazo-deployd database preconfiguration
   template:
-    src: files/wazo-deployd.cfg
+    src: templates/wazo-deployd.cfg
     dest: /tmp/wazo-deployd.cfg
 - name: Reconfigure database options for wazo-deployd package
   command: debconf-set-selections /tmp/wazo-deployd.cfg

@@ -47,7 +47,7 @@
     - reload nginx
 - name: Install nginx site for nestbox
   template:
-    src: files/nginx-site
+    src: templates/nginx-site
     dest: /etc/nginx/sites-available/nestbox
     owner: root
     group: root
@@ -79,7 +79,7 @@
 
 - name: Configure client certificate for APT
   template:
-    src: files/apt-client-certs-config
+    src: templates/apt-client-certs-config
     dest: /etc/apt/apt.conf.d/nestbox-mirror-{{ nestbox_mirror_user}}
 - name: Create directory for client cert
   file:
@@ -114,7 +114,7 @@
     state: directory
 - name: Add wazo-auth config
   template:
-    src: files/wazo-auth.yml
+    src: templates/wazo-auth.yml
     dest: /etc/wazo-auth/conf.d/50-nestbox.yml
     owner: root
     group: root
@@ -154,7 +154,7 @@
     mode: 755
 - name: Copy wazo-deployd config
   template:
-    src: files/wazo-deployd.yml
+    src: templates/wazo-deployd.yml
     dest: /etc/wazo-deployd/conf.d/50-nestbox.yml
 - name: Install wazo-deployd
   apt:
