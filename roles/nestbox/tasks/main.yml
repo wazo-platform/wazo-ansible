@@ -102,12 +102,15 @@
     state: present
     update_cache: yes
 
-- name: Copy wazo-auth preconfiguration
-  template:
-    src: files/wazo-auth.cfg
-    dest: /tmp/wazo-auth.cfg
 - name: Preconfigure wazo-auth package
-  command: debconf-set-selections /tmp/wazo-auth.cfg
+  debconf:
+    name: wazo-auth
+    question: "{{ item }}"
+    vtype: boolean
+    value: true
+  loop:
+    - wazo-auth/bootstrap-skip
+    - wazo-auth/db-skip
 - name: Create wazo-auth config dir
   file:
     path: /etc/wazo-auth/conf.d
@@ -140,12 +143,12 @@
     - 050-xivo-consul-token.yml
   notify: restart wazo-auth
 
-- name: Copy wazo-deployd preconfiguration
-  template:
-    src: files/wazo-deployd.cfg
-    dest: /tmp/wazo-deployd.cfg
 - name: Preconfigure wazo-deployd package
-  command: debconf-set-selections /tmp/wazo-deployd.cfg
+  debconf:
+    name: wazo-deployd
+    question: wazo-deployd/db-skip
+    vtype: boolean
+    value: true
 - name: Create wazo-deployd config dir
   file:
     path: /etc/wazo-deployd/conf.d
@@ -167,12 +170,12 @@
       - nestbox-certs
   notify: restart wazo-deployd
 
-- name: Copy nestbox-confd preconfiguration
-  template:
-    src: files/nestbox-confd.cfg
-    dest: /tmp/nestbox-confd.cfg
 - name: Preconfigure nestbox-confd package
-  command: debconf-set-selections /tmp/nestbox-confd.cfg
+  debconf:
+    name: nestbox-confd
+    question: nestbox-confd/db-skip
+    vtype: boolean
+    value: true
 - name: Install nestbox-confd
   apt:
     name: nestbox-confd
