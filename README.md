@@ -1,10 +1,13 @@
 # wazo-ansible
 
+## Prerequisites for all recipes
+
+* A machine running with Debian Stretch vanilla
+* You can SSH easily into this machine
+
 ## Prerequisites for Nestbox
 
 * You need root access on `mirror.wazo.community`.
-* You need a Debian Stretch vanilla, reachable under the name `nestbox-dev-ansible` (via `/etc/hosts` for example).
-* You can SSH easily into this machine.
 
 ## How to install Nestbox
 
@@ -20,7 +23,7 @@
 * Install Ansible: `pip install ansible`
 * Run `ansible-galaxy install -r requirements-postgresql.yml`
 * Run `ansible-playbook -i dev postgresql.yml`
-* PostgreSQL be installed on `postgresql-ansible`
+* PostgreSQL will be installed on `postgresql-ansible`
 
 ## How to install the HTTP reverse proxy
 
