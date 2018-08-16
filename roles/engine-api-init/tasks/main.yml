@@ -1,0 +1,21 @@
+- name: Assert Debian Stretch
+  assert:
+    that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
+
+- name: Copy wazo-auth database preconfiguration
+  template:
+    src: templates/wazo-auth.cfg
+    dest: /tmp/wazo-auth.cfg
+- name: Reconfigure database options for wazo-auth package
+  command: debconf-set-selections /tmp/wazo-auth.cfg
+- name: Initialize wazo-auth database
+  command: dpkg-reconfigure wazo-auth -f noninteractive
+
+- name: Copy main database preconfiguration
+  template:
+    src: templates/xivo-manage-db.cfg
+    dest: /tmp/xivo-manage-db.cfg
+- name: Apply main database preconfiguration
+  command: debconf-set-selections /tmp/xivo-manage-db.cfg
+- name: Initialize main database
+  command: dpkg-reconfigure xivo-manage-db -f noninteractive

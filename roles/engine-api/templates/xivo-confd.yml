@@ -1,0 +1,7 @@
+ari:
+  host: {{ b2bua_host }}
+  port: 5039
+  username: {{ ami_username }}
+  password: {{ ami_password }}
+
+db_uri: postgresql://{{ db_confd_user }}:{{ db_confd_password }}@{{ db_host}}:{{ db_port }}/asterisk

@@ -1,0 +1,11 @@
+ami:
+  host: {{ b2bua_host }}
+  port: 5038
+  username: {{ ami_username }}
+  password: {{ ami_password }}
+
+ajam:
+  host: {{ b2bua_host }}
+  port: 5040
+  username: {{ ami_username }}
+  password: {{ ami_password }}

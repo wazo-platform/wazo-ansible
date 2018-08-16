@@ -1,8 +1,14 @@
 [mirror]
 mirror.wazo.community
 
+[reverse-proxy]
+reverse-proxy-ansible
+
 [nestbox]
 nestbox-dev-ansible
+
+[engine-api]
+engine-api-ansible
 
 [database]
 postgresql-ansible

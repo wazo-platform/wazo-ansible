@@ -1,0 +1,196 @@
+- name: Assert Debian Stretch
+  assert:
+    that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
+
+- name: Add Wazo distribution key
+  apt_key:
+    url: http://mirror.wazo.community/xivo_current.key
+    state: present
+- name: Add bootstrap Wazo repository
+  apt_repository:
+    repo: deb http://mirror.wazo.community/debian phoenix-stretch main
+    state: present
+    filename: wazo-install
+    update_cache: yes
+- name: Install xivo-dist
+  apt:
+    name: xivo-dist
+- name: Add persistent Wazo repository
+  command: xivo-dist wazo-dev-stretch
+- name: Remove bootstrap Wazo repository
+  apt_repository:
+    repo: deb http://mirror.wazo.community/debian phoenix-stretch main
+    state: absent
+    filename: wazo-install
+    update_cache: yes
+
+- name: Install xivo-certs
+  apt:
+    name: xivo-certs
+    state: latest
+
+- name: Preconfigure wazo-auth package
+  debconf:
+    name: wazo-auth
+    question: "{{ item }}"
+    vtype: boolean
+    value: true
+  loop:
+    - wazo-auth/bootstrap-skip
+    - wazo-auth/db-skip
+- name: Create wazo-auth config dir
+  file:
+    path: /etc/wazo-auth/conf.d
+    state: directory
+- name: Add wazo-auth config
+  copy:
+    src: files/wazo-auth.yml
+    dest: /etc/wazo-auth/conf.d/50-engine-api.yml
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart wazo-auth
+- name: Install wazo-auth
+  apt:
+    name: wazo-auth
+    state: present
+  notify: reload nginx
+
+- name: Install RabbitMQ
+  apt:
+    name: rabbitmq-server
+    state: present
+
+- name: Create /var/lib/xivo
+  file:
+    path: /var/lib/xivo
+    state: directory
+- name: Disable Wazo services
+  file:
+    path: /var/lib/xivo/disabled
+    state: touch
+
+- name: Create xivo-ctid-ng config dir
+  file:
+    path: /etc/xivo-ctid-ng/conf.d
+    state: directory
+- name: Add xivo-ctid-ng config
+  template:
+    src: templates/xivo-ctid-ng.yml
+    dest: /etc/xivo-ctid-ng/conf.d/50-engine-api.yml
+    owner: root
+    group: root
+    mode: 0644
+- name: Install xivo-ctid-ng
+  apt:
+    name: xivo-ctid-ng
+    state: present
+
+- name: Create xivo-amid config dir
+  file:
+    path: /etc/xivo-amid/conf.d
+    state: directory
+- name: Add xivo-amid config
+  template:
+    src: templates/xivo-amid.yml
+    dest: /etc/xivo-amid/conf.d/50-engine-api.yml
+    owner: root
+    group: root
+    mode: 0644
+- name: Install xivo-amid
+  apt:
+    name: xivo-amid
+    state: present
+
+- name: Preconfigure database initialization
+  debconf:
+    name: xivo-manage-db
+    question: xivo-manage-db/db-skip
+    vtype: boolean
+    value: true
+- name: Create xivo-confd config dir
+  file:
+    path: /etc/xivo-confd/conf.d
+    state: directory
+- name: Add xivo-confd config
+  template:
+    src: templates/xivo-confd.yml
+    dest: /etc/xivo-confd/conf.d/50-engine-api.yml
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart xivo-confd
+- name: Create xivo-dao config dir
+  file:
+    path: /etc/xivo-dao/conf.d
+    state: directory
+- name: Add xivo-dao config
+  template:
+    src: templates/xivo-dao.yml
+    dest: /etc/xivo-dao/conf.d/50-engine-api.yml
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart xivo-confd
+- name: Install xivo-confd
+  apt:
+    name: xivo-confd
+    state: present
+
+- name: Create xivo-confgend config dir
+  file:
+    path: /etc/xivo-confgend/conf.d
+    state: directory
+- name: Add xivo-confgend config
+  template:
+    src: templates/xivo-confgend.yml
+    dest: /etc/xivo-confgend/conf.d/50-engine-api.yml
+    owner: root
+    group: root
+    mode: 0644
+- name: Install xivo-confgend
+  apt:
+    name: xivo-confgend
+    state: present
+
+- name: Create xivo-agid config dir
+  file:
+    path: /etc/xivo-agid/conf.d
+    state: directory
+- name: Add xivo-agid config
+  template:
+    src: templates/xivo-agid.yml
+    dest: /etc/xivo-agid/conf.d/50-engine-api.yml
+    owner: root
+    group: root
+    mode: 0644
+- name: Install xivo-agid
+  apt:
+    name: xivo-agid
+    state: present
+
+- name: Install xivo-websocketd
+  apt:
+    name: xivo-websocketd
+    state: present
+
+- name: Install nginx
+  apt:
+    name: nginx
+    state: present
+- name: Install xivo-nginx
+  apt:
+    name: xivo-nginx
+    state: present
+  notify:
+    - restart nginx
+
+- name: Enable Wazo services
+  file:
+    path: /var/lib/xivo/disabled
+    state: absent
+
+- name: Ensure local PostgreSQL is shut down
+  service:
+    name: postgresql
+    state: stopped

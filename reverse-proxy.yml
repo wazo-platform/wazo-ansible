@@ -16,5 +16,12 @@
                 proxy_set_header    X-Script-Name       /nestbox;
                 proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;
               }
+              location ^~ /api/ {
+                proxy_pass https://{{ engine_api_host }}:{{ engine_api_port }}/api/;
+
+                proxy_set_header    Host                $http_host;
+                proxy_set_header    X-Script-Name       /api;
+                proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;
+              }
               ssl_certificate     /etc/nginx/certs/reverse-proxy.pem;
               ssl_certificate_key /etc/nginx/certs/reverse-proxy.key;
