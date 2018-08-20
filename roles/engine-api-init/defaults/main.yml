@@ -10,3 +10,9 @@ db_confd_password: proformatique
 
 db_host: localhost
 db_port: 5432
+
+entity_name: Wazo
+language: en_US
+number_start: 1000
+number_end: 1999
+engine_root_password: superpass

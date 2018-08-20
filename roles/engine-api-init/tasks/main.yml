@@ -19,3 +19,13 @@
   command: debconf-set-selections /tmp/xivo-manage-db.cfg
 - name: Initialize main database
   command: dpkg-reconfigure xivo-manage-db -f noninteractive
+
+- name: Install xivo-confd-client-python3
+  apt:
+    name: xivo-confd-client-python3
+    state: present
+- name: Pass wizard
+  script: "files/wizard.py --entity-name {{ entity_name }} --language {{ language }} --number-start {{ number_start }} --number-end {{ number_end }} --password {{ engine_root_password }}"
+  args:
+    executable: python3
+    creates: /var/lib/xivo/configured
