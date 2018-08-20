@@ -4,8 +4,9 @@ db_admin_password: superpass
 db_auth_user: wazo-auth
 db_auth_password: superpass
 
-db_wazo_user: asterisk
-db_wazo_password: proformatique
+db_confd_name: asterisk
+db_confd_user: asterisk
+db_confd_password: proformatique
 
 db_host: localhost
 db_port: 5432
