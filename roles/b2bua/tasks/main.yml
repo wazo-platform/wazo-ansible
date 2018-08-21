@@ -1,0 +1,56 @@
+- name: Assert Debian Stretch
+  assert:
+    that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
+
+- name: Add Wazo distribution key
+  apt_key:
+    url: http://mirror.wazo.community/xivo_current.key
+    state: present
+- name: Add bootstrap Wazo repository
+  apt_repository:
+    repo: deb http://mirror.wazo.community/debian phoenix-stretch main
+    state: present
+    filename: wazo-install
+    update_cache: yes
+- name: Install xivo-dist
+  apt:
+    name: xivo-dist
+- name: Add persistent Wazo repository
+  command: xivo-dist wazo-dev-stretch
+- name: Remove bootstrap Wazo repository
+  apt_repository:
+    repo: deb http://mirror.wazo.community/debian phoenix-stretch main
+    state: absent
+    filename: wazo-install
+    update_cache: yes
+
+- name: Install Asterisk
+  apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - xivo-config
+    - asterisk
+    - asterisk-moh-opsound-wav
+
+- name: Install xivo-confgend-client config
+  template:
+    src: templates/xivo-confgend-client.conf
+    dest: /etc/xivo-confgend-client/config.conf
+- name: Install xivo-confgend-client
+  apt:
+    name: xivo-confgend-client
+    state: latest
+
+- name: Create xivo-sysconfd drop-in file directory
+  file:
+    path: /etc/systemd/system/xivo-sysconfd.service.d
+    state: directory
+- name: Install xivo-sysconfd drop-in file
+  copy:
+    src: files/xivo-sysconfd.service
+    dest: /etc/systemd/system/xivo-sysconfd.service.d/b2bua.conf
+- name: Install xivo-sysconfd
+  apt:
+    name: xivo-sysconfd
+    state: latest

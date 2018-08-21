@@ -12,3 +12,6 @@ engine-api-ansible
 
 [database]
 postgresql-ansible
+
+[b2bua]
+asterisk-ansible
