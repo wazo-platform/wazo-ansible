@@ -185,11 +185,15 @@
   notify:
     - restart nginx
 
+- name: Install xivo-provd
+  apt:
+    name: xivo-provd
+    state: present
+
 - name: Enable Wazo services
   file:
     path: /var/lib/xivo/disabled
     state: absent
-
 - name: Ensure local PostgreSQL is shut down
   service:
     name: postgresql

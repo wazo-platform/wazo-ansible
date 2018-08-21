@@ -45,7 +45,6 @@ def init_uc_engine(entity_name, language, number_start, number_end, password):
          "manage_hosts_file": False,
          "manage_resolv_file": False,
          "commonconf": False,
-         "provisioning": False,
          "phonebook": False,
       }
     }
