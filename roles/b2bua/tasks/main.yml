@@ -24,10 +24,6 @@
     filename: wazo-install
     update_cache: yes
 
-- name: Install Asterisk configuration
-  template:
-    src: templates/asterisk-extensions.conf
-    dest: /etc/asterisk/extensions.d/engine-api.conf
 - name: Install Asterisk
   apt:
     name: "{{ item }}"
@@ -38,15 +34,37 @@
     - asterisk-moh-opsound-wav
     - asterisk-sounds-wav-en-us
     - xivo-sounds-en-us
-
-- name: Install xivo-confgend-client config
+- name: Ensure Asterisk is started
+  service:
+    name: asterisk
+    state: started
+- name: Create /etc/asterisk/extensions.d
+  file:
+    path: /etc/asterisk/extensions.d/engine-api.conf
+    state: directory
+    owner: asterisk
+    mode: 660
+- name: Install Asterisk AGI configuration
   template:
-    src: templates/xivo-confgend-client.conf
-    dest: /etc/xivo-confgend-client/config.conf
+    src: templates/asterisk-extensions.conf
+    dest: /etc/asterisk/extensions.d/engine-api.conf
+  notify:
+    - reload asterisk dialplan
+- name: Install Asterisk AGI configuration
+  template:
+    src: files/asterisk-http.conf
+    dest: /etc/asterisk/http.d/10-engine-api.conf
+  notify:
+    - reload asterisk
+
 - name: Install xivo-confgend-client
   apt:
     name: xivo-confgend-client
     state: latest
+- name: Install xivo-confgend-client config
+  template:
+    src: templates/xivo-confgend-client.conf
+    dest: /etc/xivo-confgend-client/config.conf
 
 - name: Create xivo-sysconfd drop-in file directory
   file:

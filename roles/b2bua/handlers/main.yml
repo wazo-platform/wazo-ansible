@@ -1,0 +1,4 @@
+- name: reload asterisk dialplan
+  command: asterisk -rx 'dialplan reload'
+- name: reload asterisk
+  command: asterisk -rx 'core reload'
