@@ -24,6 +24,10 @@
     filename: wazo-install
     update_cache: yes
 
+- name: Install Asterisk configuration
+  template:
+    src: templates/asterisk-extensions.conf
+    dest: /etc/asterisk/extensions.d/engine-api.conf
 - name: Install Asterisk
   apt:
     name: "{{ item }}"

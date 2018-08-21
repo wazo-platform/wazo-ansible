@@ -164,6 +164,10 @@
     owner: root
     group: root
     mode: 0644
+- name: Install xivo-config
+  apt:
+    name: xivo-config
+    state: latest
 - name: Install xivo-agid
   apt:
     name: xivo-agid
