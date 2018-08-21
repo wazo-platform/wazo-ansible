@@ -32,6 +32,8 @@
     - xivo-config
     - asterisk
     - asterisk-moh-opsound-wav
+    - asterisk-sounds-wav-en-us
+    - xivo-sounds-en-us
 
 - name: Install xivo-confgend-client config
   template:
