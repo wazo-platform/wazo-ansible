@@ -20,6 +20,18 @@
 - name: Initialize main database
   command: dpkg-reconfigure xivo-manage-db -f noninteractive
 
+- name: Start Wazo services
+  service:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - xivo-agid
+    - xivo-amid
+    - xivo-confd
+    - xivo-confgend
+    - xivo-ctid-ng
+    - xivo-provd
+
 - name: Install xivo-confd-client-python3
   apt:
     name: xivo-confd-client-python3
