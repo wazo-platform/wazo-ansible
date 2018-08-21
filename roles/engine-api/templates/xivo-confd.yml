@@ -3,8 +3,12 @@ ari:
   port: 5039
   username: {{ ami_username }}
   password: {{ ami_password }}
+
 sysconfd:
   host: {{ b2bua_host }}
   port: 8668
 
 db_uri: postgresql://{{ db_confd_user }}:{{ db_confd_password }}@{{ db_host}}:{{ db_port }}/{{ db_confd_name }}
+
+service_discovery:
+  enabled: false
