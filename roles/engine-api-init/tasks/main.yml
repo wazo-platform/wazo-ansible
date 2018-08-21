@@ -20,6 +20,8 @@
 - name: Initialize main database
   command: dpkg-reconfigure xivo-manage-db -f noninteractive
 
+- name: Fix Twisted dropin.cache
+  command: twistd --help-reactors
 - name: Start Wazo services
   service:
     name: "{{ item }}"
