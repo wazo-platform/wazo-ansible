@@ -1,4 +1,4 @@
-- hosts: mirror
+- hosts: mirror.wazo.io
   remote_user: root
   tasks:
     - name: Ensure variable for user name is defined

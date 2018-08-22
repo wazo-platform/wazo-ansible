@@ -1,5 +1,4 @@
-[mirror]
-mirror.wazo.community
+mirror.wazo.io
 
 [reverse-proxy]
 reverse-proxy-ansible
