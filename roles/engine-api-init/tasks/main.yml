@@ -33,6 +33,7 @@
     - xivo-confgend
     - xivo-ctid-ng
     - xivo-provd
+    - xivo-websocketd
 
 - name: Install xivo-confd-client-python3
   apt:
