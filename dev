@@ -16,3 +16,12 @@ nestbox_mirror_user=test
 
 [reverse-proxy]
 reverse-proxy-ansible
+
+[all:vars]
+b2bua_host = asterisk-ansible
+b2bua_port_https = 5040
+db_host = postgresql-ansible
+engine_api_host = engine-api-ansible
+engine_api_port = 443
+nestbox_host = nestbox-dev-ansible
+nestbox_port = 443
