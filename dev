@@ -1,16 +1,18 @@
 mirror.wazo.io
 
-[reverse-proxy]
-reverse-proxy-ansible
-
-[nestbox]
-nestbox-dev-ansible
-
-[engine-api]
-engine-api-ansible
+[b2bua]
+asterisk-ansible
 
 [database]
 postgresql-ansible
 
-[b2bua]
-asterisk-ansible
+[engine-api]
+engine-api-ansible
+
+[nestbox]
+nestbox-dev-ansible
+[nestbox:vars]
+nestbox_mirror_user=test
+
+[reverse-proxy]
+reverse-proxy-ansible
