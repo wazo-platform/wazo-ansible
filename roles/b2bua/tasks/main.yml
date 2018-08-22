@@ -30,6 +30,7 @@
     state: latest
   loop:
     - xivo-config
+    - xivo-certs
     - asterisk
     - asterisk-moh-opsound-wav
     - asterisk-sounds-wav-en-us
@@ -50,7 +51,7 @@
     dest: /etc/asterisk/extensions.d/engine-api.conf
   notify:
     - reload asterisk dialplan
-- name: Install Asterisk AGI configuration
+- name: Install Asterisk HTTP configuration
   template:
     src: files/asterisk-http.conf
     dest: /etc/asterisk/http.d/10-engine-api.conf
