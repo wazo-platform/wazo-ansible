@@ -7,12 +7,12 @@
         msg: "You must define the variable `nestbox_mirror_user` to copy the SSH key. Use `--extra-vars nestbox_mirror_user=user`."
     - name: Generate private key
       openssl_privatekey:
-        path: /etc/nginx/client_certs/{{ nestbox_mirror_user }}.key
+        path: /etc/nginx/client_certs/nestbox/{{ nestbox_mirror_user }}.key
         state: present
     - name: Generate CSR
       openssl_csr:
-        path: /etc/nginx/client_certs/{{ nestbox_mirror_user }}.csr
-        privatekey_path: /etc/nginx/client_certs/{{ nestbox_mirror_user }}.key
+        path: /etc/nginx/client_certs/nestbox/{{ nestbox_mirror_user }}.csr
+        privatekey_path: /etc/nginx/client_certs/nestbox/{{ nestbox_mirror_user }}.key
         state: present
         common_name: "{{ nestbox_mirror_user }}.clients.wazo.io"
     - name: Generate certificate signed by CA
@@ -27,11 +27,11 @@
         -CAcreateserial
         -out {{ nestbox_mirror_user }}.crt
       args:
-        chdir: "/etc/nginx/client_certs"
+        chdir: "/etc/nginx/client_certs/nestbox"
         creates: "{{ nestbox_mirror_user }}.crt"
     - name: Copy client certificates from mirror
       fetch:
-        src: /etc/nginx/client_certs/{{ item }}
+        src: /etc/nginx/client_certs/nestbox/{{ item }}
         dest: /tmp/mirror_keys/{{ item }}
         flat: yes
       loop:
