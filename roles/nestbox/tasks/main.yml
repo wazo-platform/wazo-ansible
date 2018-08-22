@@ -92,7 +92,6 @@
     owner: _apt
     mode: 0400
   loop:
-    - ca.crt
     - "{{ nestbox_mirror_user }}.key"
     - "{{ nestbox_mirror_user }}.crt"
 
