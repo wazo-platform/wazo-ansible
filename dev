@@ -30,6 +30,7 @@ db_host = postgresql-ansible
 engine_api_host = engine-api-ansible
 nestbox_host = nestbox-dev-ansible
 
+b2bua_port_ami = 5038
 b2bua_port_http = 5039
 b2bua_port_https = 5040
 engine_api_port = 443

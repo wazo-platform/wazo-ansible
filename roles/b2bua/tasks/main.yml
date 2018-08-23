@@ -51,6 +51,12 @@
     dest: /etc/asterisk/extensions.d/engine-api.conf
   notify:
     - reload asterisk dialplan
+- name: Install Asterisk AMI configuration
+  template:
+    src: templates/asterisk-manager.conf
+    dest: /etc/asterisk/manager.d/10-engine-api.conf
+  notify:
+    - reload asterisk manager
 - name: Install Asterisk HTTP configuration
   template:
     src: templates/asterisk-http.conf

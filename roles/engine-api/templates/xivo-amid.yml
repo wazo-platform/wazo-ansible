@@ -1,6 +1,6 @@
 ami:
   host: {{ b2bua_host }}
-  port: 5038
+  port: {{ b2bua_port_ami }}
   username: {{ ami_username }}
   password: {{ ami_password }}
 
