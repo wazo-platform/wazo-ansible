@@ -1,5 +1,5 @@
-db_admin_user: postgres
-db_admin_password: superpass
+engine_db_admin_user: postgres
+engine_db_admin_password: superpass
 
 engine_db_auth_user: wazo-auth
 engine_db_auth_password: superpass

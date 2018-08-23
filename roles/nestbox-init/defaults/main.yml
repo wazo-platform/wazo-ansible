@@ -1,5 +1,5 @@
-db_admin_user: postgres
-db_admin_password: superpass
+nestbox_db_admin_user: postgres
+nestbox_db_admin_password: superpass
 
 nestbox_db_confd_user: nestbox-confd
 nestbox_db_confd_password: superpass
