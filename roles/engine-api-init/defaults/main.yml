@@ -3,6 +3,7 @@ db_admin_password: superpass
 
 db_auth_user: wazo-auth
 db_auth_password: superpass
+db_auth_name: wazo-auth
 
 db_confd_name: asterisk
 db_confd_user: asterisk
