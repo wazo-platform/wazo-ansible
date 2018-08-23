@@ -5,7 +5,6 @@ ami_username: xivo_amid
 ami_password: eeCho8ied3u
 
 db_host: localhost
-db_port: 5432
 
 db_confd_name: asterisk
 db_confd_user: asterisk

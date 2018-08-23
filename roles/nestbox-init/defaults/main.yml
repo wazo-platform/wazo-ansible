@@ -11,4 +11,3 @@ db_auth_user: wazo-auth
 db_auth_password: superpass
 
 db_host: localhost
-db_port: 5432
