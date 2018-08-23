@@ -8,7 +8,7 @@ sysconfd:
   host: {{ b2bua_host }}
   port: {{ b2bua_port_sysconfd }}
 
-db_uri: postgresql://{{ db_confd_user }}:{{ db_confd_password }}@{{ db_host}}:{{ db_port }}/{{ db_confd_name }}
+db_uri: postgresql://{{ engine_db_confd_user }}:{{ engine_db_confd_password }}@{{ db_host}}:{{ db_port }}/{{ engine_db_confd_name }}
 
 service_discovery:
   enabled: false

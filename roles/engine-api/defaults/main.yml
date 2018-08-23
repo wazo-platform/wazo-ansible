@@ -6,8 +6,8 @@ ami_password: eeCho8ied3u
 
 db_host: localhost
 
-db_confd_name: asterisk
-db_confd_user: asterisk
-db_confd_password: proformatique
+engine_db_confd_name: asterisk
+engine_db_confd_user: asterisk
+engine_db_confd_password: proformatique
 
 engine_api_wazo_distribution: wazo-dev-stretch
