@@ -1,4 +1,14 @@
 - hosts: database
+  pre_tasks:
+    - name: Change PostgreSQL port
+      become: yes
+      include_role:
+        name: geerlingguy.postgresql
+      vars:
+        postgresql_global_config_options:
+          - option: port
+            value: "{{ db_port }}"
+        postgresql_users: []
   roles:
     - role: geerlingguy.postgresql
       become: yes
@@ -14,5 +24,7 @@
             value: "{{ db_port }}"
           - option: listen_addresses
             value: "*"
-        postgresql_restarted_state: "restarted"
-    - postgresql-listening
+        postgresql_users:
+          - name: postgres
+            password: superpass
+            port: "{{ db_port }}"
