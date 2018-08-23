@@ -53,7 +53,7 @@
     - reload asterisk dialplan
 - name: Install Asterisk HTTP configuration
   template:
-    src: files/asterisk-http.conf
+    src: templates/asterisk-http.conf
     dest: /etc/asterisk/http.d/10-engine-api.conf
   notify:
     - reload asterisk
