@@ -16,7 +16,7 @@
   apt:
     name: xivo-dist
 - name: Add persistent Wazo repository
-  command: xivo-dist wazo-dev-stretch
+  command: xivo-dist {{ engine_api_wazo_distribution }}
 - name: Remove bootstrap Wazo repository
   apt_repository:
     repo: deb http://mirror.wazo.community/debian phoenix-stretch main
