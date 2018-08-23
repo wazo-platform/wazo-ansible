@@ -6,6 +6,6 @@ ami:
 
 ajam:
   host: {{ b2bua_host }}
-  port: 5040
+  port: {{ b2bua_port_http }}
   username: {{ ami_username }}
   password: {{ ami_password }}
