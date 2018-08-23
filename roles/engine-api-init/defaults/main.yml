@@ -9,8 +9,8 @@ engine_db_confd_name: asterisk
 engine_db_confd_user: asterisk
 engine_db_confd_password: proformatique
 
-db_host: localhost
-db_port: 5432
+engine_db_host: localhost
+engine_db_port: 5432
 
 entity_name: Wazo
 language: en_US

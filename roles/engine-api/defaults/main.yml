@@ -4,7 +4,7 @@ ari_password: Nasheow8Eag
 ami_username: xivo_amid
 ami_password: eeCho8ied3u
 
-db_host: localhost
+engine_db_host: localhost
 
 engine_db_confd_name: asterisk
 engine_db_confd_user: asterisk

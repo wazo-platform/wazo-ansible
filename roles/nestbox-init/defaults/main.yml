@@ -13,4 +13,4 @@ nestbox_db_auth_user: wazo-auth
 nestbox_db_auth_password: superpass
 nestbox_db_auth_name: nestbox-auth
 
-db_host: localhost
+nestbox_db_host: localhost

@@ -9,7 +9,7 @@
       vars:
         postgresql_global_config_options:
           - option: port
-            value: "{{ db_port }}"
+            value: "{{ postgresql_port }}"
         postgresql_users: []
   roles:
     - role: geerlingguy.postgresql
@@ -23,10 +23,10 @@
           - { type: host, database: all, user: all, address: all, auth_method: md5 }
         postgresql_global_config_options:
           - option: port
-            value: "{{ db_port }}"
+            value: "{{ postgresql_port }}"
           - option: listen_addresses
             value: "*"
         postgresql_users:
           - name: postgres
             password: superpass
-            port: "{{ db_port }}"
+            port: "{{ postgresql_port }}"
