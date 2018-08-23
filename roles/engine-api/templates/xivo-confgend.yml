@@ -1,3 +1,4 @@
 db_uri: postgresql://{{ db_confd_user }}:{{ db_confd_password }}@{{ db_host}}:{{ db_port }}/{{ db_confd_name }}
 
 listen_address: 0.0.0.0
+listen_port: {{ engine_api_port_confgend }}
