@@ -12,4 +12,7 @@
         postgresql_global_config_options:
           - option: port
             value: "{{ db_port }}"
+          - option: listen_addresses
+            value: "*"
+        postgresql_restarted_state: "restarted"
     - postgresql-listening
