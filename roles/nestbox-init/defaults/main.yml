@@ -1,13 +1,13 @@
 db_admin_user: postgres
 db_admin_password: superpass
 
-db_confd_user: nestbox-confd
-db_confd_password: superpass
+nestbox_db_confd_user: nestbox-confd
+nestbox_db_confd_password: superpass
 
-db_deployd_user: wazo-deployd
-db_deployd_password: superpass
+nestbox_db_deployd_user: wazo-deployd
+nestbox_db_deployd_password: superpass
 
-db_auth_user: wazo-auth
-db_auth_password: superpass
+nestbox_db_auth_user: wazo-auth
+nestbox_db_auth_password: superpass
 
 db_host: localhost
