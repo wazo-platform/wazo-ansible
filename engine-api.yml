@@ -1,4 +1,4 @@
 ---
-- hosts: engines-api
+- hosts: engine-api
   roles:
     - engine-api
