@@ -1,0 +1,4 @@
+Acquire::https::mirror.wazo.io {
+  SslCert "/etc/apt/certs/nestbox_client.crt";
+  SslKey "/etc/apt/certs/nestbox_client.key";
+};

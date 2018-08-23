@@ -1,4 +1,0 @@
-Acquire::https::mirror.wazo.io {
-  SslCert "/etc/apt/certs/{{ nestbox_mirror_user }}.crt";
-  SslKey "/etc/apt/certs/{{ nestbox_mirror_user }}.key";
-};

@@ -79,21 +79,24 @@
 
 - name: Configure client certificate for APT
   template:
-    src: templates/apt-client-certs-config
-    dest: /etc/apt/apt.conf.d/nestbox-mirror-{{ nestbox_mirror_user}}
+    src: files/apt-client-certs-config
+    dest: /etc/apt/apt.conf.d/nestbox-mirror-client-certs
 - name: Create directory for client cert
   file:
     dest: /etc/apt/certs
     state: directory
-- name: Copy client certificate
+- name: Copy repo client certificate
   copy:
-    src: /tmp/mirror_keys/{{ item }}
-    dest: /etc/apt/certs/{{ item }}
+    src: "{{ nestbox_repo_client_cert}}"
+    dest: /etc/apt/certs/nestbox_client.crt
     owner: _apt
     mode: 0400
-  loop:
-    - "{{ nestbox_mirror_user }}.key"
-    - "{{ nestbox_mirror_user }}.crt"
+- name: Copy repo client key
+  copy:
+    src: "{{ nestbox_repo_client_key }}"
+    dest: /etc/apt/certs/nestbox_client.key
+    owner: _apt
+    mode: 0400
 
 - name: Add Nestbox Debian repository
   apt_repository:

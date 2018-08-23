@@ -29,12 +29,13 @@
       args:
         chdir: "/etc/nginx/client_certs/nestbox"
         creates: "{{ nestbox_mirror_user }}.crt"
-    - name: Copy client certificates from mirror
+    - name: Copy client certificate from mirror
       fetch:
-        src: /etc/nginx/client_certs/nestbox/{{ item }}
-        dest: /tmp/mirror_keys/{{ item }}
+        src: /etc/nginx/client_certs/nestbox/{{ nestbox_mirror_user }}.crt
+        dest: {{ nestbox_repo_client_cert }}
         flat: yes
-      loop:
-        - "{{ nestbox_mirror_user }}.key"
-        - "{{ nestbox_mirror_user }}.crt"
-        - ca.crt
+    - name: Copy client key from mirror
+      fetch:
+        src: /etc/nginx/client_certs/nestbox/{{ nestbox_mirror_user }}.key
+        dest: {{ nestbox_repo_client_key }}
+        flat: yes
