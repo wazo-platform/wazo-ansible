@@ -5,8 +5,8 @@ import argparse
 from xivo_confd_client import Client as Confd
 
 
-def init_uc_engine(entity_name, language, number_start, number_end, password):
-    c = Confd('localhost', port=9486, https=True, verify_certificate=False)
+def init_uc_engine(entity_name, language, number_start, number_end, password, engine_api_port):
+    c = Confd('localhost', port=engine_api_port, https=True, prefix='/api/confd', verify_certificate=False)
 
     if c.wizard.get()['configured'] is not True:
         discover = c.wizard.discover()
@@ -60,6 +60,7 @@ def _parse_args():
     parser.add_argument('--number-end', action='store')
     parser.add_argument('--password', action='store')
     parser.add_argument('--no-fail', action='store_true')
+    parser.add_argument('--engine-api-port', action='store')
     return parser.parse_args()
 
 
@@ -70,7 +71,8 @@ def main():
                        args.language,
                        args.number_start,
                        args.number_end,
-                       args.password)
+                       args.password,
+                       args.engine_api_port)
     except Exception:
         if not args.no_fail:
             raise
