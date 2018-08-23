@@ -35,6 +35,6 @@
   command: dpkg-reconfigure wazo-deployd -f noninteractive
 
 - name: Initialize wazo-auth, nestbox-confd
-  script: "files/nestbox-init.sh {{ db_host }} {{ db_port }} {{ nestbox_db_confd_user }} {{ nestbox_db_confd_password }}"
+  script: "files/nestbox-init.sh {{ db_host }} {{ db_port }} {{ nestbox_db_confd_user }} {{ nestbox_db_confd_password }} {{ nestbox_db_confd_name }}"
   args:
     creates: /etc/nestbox-ui/conf.d/50-default-policies.yml

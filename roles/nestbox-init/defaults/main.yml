@@ -3,11 +3,14 @@ db_admin_password: superpass
 
 nestbox_db_confd_user: nestbox-confd
 nestbox_db_confd_password: superpass
+nestbox_db_confd_name: nestbox-confd
 
 nestbox_db_deployd_user: wazo-deployd
 nestbox_db_deployd_password: superpass
+nestbox_db_deployd_name: wazo-deployd
 
 nestbox_db_auth_user: wazo-auth
 nestbox_db_auth_password: superpass
+nestbox_db_auth_name: nestbox-auth
 
 db_host: localhost
