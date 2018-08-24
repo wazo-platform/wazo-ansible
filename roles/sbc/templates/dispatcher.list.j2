@@ -1,0 +1,23 @@
+# $Id$
+# dispatcher destination sets
+#
+
+# line format
+# setit(int) destination(sip uri) flags(int,opt) priority(int,opt) attributes(str,opt)
+
+# Class 5 wazo servers
+{% for class5_wazo_server in class5_wazo_servers %}
+3 sip:{{ class5_wazo_server }}:5060
+{% endfor %}
+
+# sip_router servers
+{% for sipr_server in sipr_servers %}
+2 sip:{{ sipr_server }}:5060
+{% endfor %}
+
+
+# SBC servers
+{% for sbc_server in sbc_servers %}
+1 sip:{{ sbc_server }}:5060
+{% endfor %}
+

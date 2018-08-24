@@ -1,0 +1,25 @@
+## config/kamailio-local.cfg
+
+##!define DBURL "postgres://kamailio:mypass@1.1.1.1:5432/kamailiopyfb"
+#!define DBURL "postgres://{{ kamailio_db_user }}:{{ kamailio_db_pass }}@{{ kamailio_db_host }}:{{ kamailio_db_port }}/{{ kamailio_db_name }}"
+
+#!substdef "!MY_IP_ADDRESS!{{ kamailio_internal_interface }}!g"
+#!substdef "!MY_IP_ADDRESS_INTERNAL!{{ kamailio_internal_interface }}!g"
+#!substdef "!MY_IP_ADDRESS_EXTERNAL!{{ kamailio_external_interface }}!g"
+
+port=5060
+
+listen={{ kamailio_internal_interface }}
+listen={{ kamailio_external_interface }}
+
+debug={{ kamailio_debug }}
+
+## this variable define the functionnalities to be enabled
+## 3 values :
+## - APP_SBC : pure sbc
+## - APP_B2BUA
+## - APP_EDP : edge point, bridge between webrtc and sip endpoints
+#!define APP_{{ kamailio_app }}
+
+#!define WITH_ANTIFLOOD
+#!define WITH_REGISTRAR

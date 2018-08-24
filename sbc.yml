@@ -1,0 +1,5 @@
+---
+- hosts: all
+  remote_user: root
+  roles:
+    - mwolff44.kamailio-mw

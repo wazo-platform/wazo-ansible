@@ -1,0 +1,9 @@
+---
+- name: Copy configuration files to sbc server
+  copy:
+    src: include
+    dest: /etc/kamailio
+    directory_mode: 644
+    owner: kamailio
+    group: kamailio
+    backup: yes
