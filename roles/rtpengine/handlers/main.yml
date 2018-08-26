@@ -1,0 +1,2 @@
+- name: restart rtpengine
+  command: service rtpengine restart
