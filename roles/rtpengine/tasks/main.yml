@@ -18,14 +18,16 @@
   apt:
     name: "{{ item }}"
     state: latest
-  loop:
-    - rtpengine...
+  with_items: "{{ rtpe_packages }}"
 
 - name: Copy config file
-  // To Do
-
-- name: Copy iptables rules
-  // To Do
+  template:
+    src: "{{ rtpe_config_tempate_dir }}/{{ item }}.j2"
+    dest: "{{ rtpe_conf_dir }}/{{ item }}"
+    backup: yes
+  with_items: "{{ rtpe_config_files }}"
+  notify: restart rtpengine
+  when: rtpe_install_conf
 
 - name: Restart VM
   // To Do
