@@ -29,5 +29,3 @@
   notify: restart rtpengine
   when: rtpe_install_conf
 
-- name: Restart VM
-  // To Do
