@@ -1,0 +1,12 @@
+---
+kamailio_sip_domain: 'sip.wazo.com'
+kamailio_db_engine: 'PGSQL' # check Kamailio doc for supported DB engine (PGSQL)
+kamailio_db_host: '127.0.0.1'
+kamailio_db_port: 5432 # default for PGSQL engine
+kamailio_db_root_user: 'root'
+kamailio_db_root_pass: 'password' # root user password of DB
+kamailio_db_name: 'kamailio'
+kamailio_db_user: 'kamailio'
+kamailio_db_pass: 'password'
+kamailio_db_user_ro: 'kamailioro' # readonly user
+kamailio_db_pass_ro: 'password' # readonly pass
