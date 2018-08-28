@@ -53,4 +53,5 @@
   with_items: "{{ rtpe_config_files }}"
   notify: restart rtpengine
   when: rtpe_install_conf
+  tags: [never]
 
