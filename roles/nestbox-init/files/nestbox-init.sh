@@ -23,7 +23,7 @@ NESTBOX_POLICY=$(wazo-auth-cli policy create --description "Default super user n
 
 # Create your super user
 NESTBOX_TENANT=$(wazo-auth-cli tenant create admin-tenant)
-NESTBOX_USER=$(wazo-auth-cli user create --firstname John --lastname Doe --password secret --email "john@example.com" --tenant $NESTBOX_TENANT root)
+NESTBOX_USER=$(wazo-auth-cli user create --firstname John --lastname Doe --password {{ nestbox_root_password }} --email "john@example.com" --tenant $NESTBOX_TENANT {{ nestbox_root_user }})
 wazo-auth-cli user add --policy $NESTBOX_POLICY $NESTBOX_USER
 
 # Add the cli policy to the cli user
