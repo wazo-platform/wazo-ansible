@@ -2,16 +2,41 @@
   assert:
     that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
 
-- name: Add Wazo distribution key
+- name: Install HTTPS driver for APT
+  apt:
+    name: apt-transport-https
+    state: latest
+- name: Add Nestbox APT PGP key
   apt_key:
-    url: http://mirror.wazo.community/xivo_current.key
+    url: http://mirror.wazo.community/wazo_current.key
+    id: 2769B67EDBFF423F6874D7663F1BF7FC527FBC6A
     state: present
 
-- name: Add bootstrap Wazo repository
+- name: Configure client certificate for APT
+  template:
+    src: files/apt-client-certs-config
+    dest: /etc/apt/apt.conf.d/nexsis-mirror-client-certs
+- name: Create directory for client cert
+  file:
+    dest: /etc/apt/certs
+    state: directory
+- name: Copy repo client certificate
+  copy:
+    src: "{{ nestbox_repo_client_cert}}"
+    dest: /etc/apt/certs/nexsis_client.crt
+    owner: _apt
+    mode: 0400
+- name: Copy repo client key
+  copy:
+    src: "{{ nestbox_repo_client_key }}"
+    dest: /etc/apt/certs/nexsis_client.key
+    owner: _apt
+    mode: 0400
+
+- name: Add Nexsis Debian repository
   apt_repository:
-    repo: deb http://mirror.wazo.community/debian phoenix-stretch main
+    repo: deb https://mirror.wazo.io/nexsis nexsis main
     state: present
-    filename: wazo-install
     update_cache: yes
 
 - name: Install rtpengine packages

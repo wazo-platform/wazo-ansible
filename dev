@@ -47,6 +47,7 @@ engine_api_port_confgend = 8669
 mirror.wazo.io
 [repo_client_cert:children]
 nestbox
+rtpengine
 [repo_client_cert:vars]
 nestbox_repo_client_cert=/tmp/mirror_keys/test.crt
 nestbox_repo_client_key=/tmp/mirror_keys/test.key
