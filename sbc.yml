@@ -2,8 +2,10 @@
 - hosts: sbc
   remote_user: root
   roles:
+    - role: debian-nexsis-repo
     - role: mwolff44.kamailio-mw
       vars:
+        kamailio_manage_repo: False
         kamailio_version: 51
         kamailio_install_conf: true
         kamailio_packages:
