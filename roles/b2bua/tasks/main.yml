@@ -4,7 +4,8 @@
 
 - name: Add Wazo distribution key
   apt_key:
-    url: http://mirror.wazo.community/xivo_current.key
+    url: http://mirror.wazo.community/wazo_current.key
+    id: 2769B67EDBFF423F6874D7663F1BF7FC527FBC6A
     state: present
 - name: Add bootstrap Wazo repository
   apt_repository:
