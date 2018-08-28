@@ -197,3 +197,8 @@
     name: nestbox-ui-wazo-plugins
     state: present
   notify: restart nestbox-ui
+
+- name: Install nestbox-nexsis
+  apt:
+    name: nestbox-nexsis
+    state: latest

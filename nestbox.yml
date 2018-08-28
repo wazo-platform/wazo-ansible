@@ -2,4 +2,5 @@
 - hosts: nestbox
   remote_user: root
   roles:
+    - debian-nexsis-repo
     - nestbox
