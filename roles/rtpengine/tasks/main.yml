@@ -48,7 +48,7 @@
 - name: Copy config file
   template:
     src: "{{ rtpe_config_tempate_dir }}/{{ item }}.j2"
-    dest: "{{ rtpe_conf_dir }}/{{ item }}"
+    dest: "{{ rtpe_config_dir }}/{{ item }}"
     backup: yes
   with_items: "{{ rtpe_config_files }}"
   notify: restart rtpengine
