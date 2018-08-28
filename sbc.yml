@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: sbc
   remote_user: root
   roles:
     - mwolff44.kamailio-mw
