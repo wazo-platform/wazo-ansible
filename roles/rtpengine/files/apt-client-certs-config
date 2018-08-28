@@ -1,0 +1,4 @@
+Acquire::https::mirror.wazo.io {
+  SslCert "/etc/apt/certs/nexsis_client.crt";
+  SslKey "/etc/apt/certs/nexsis_client.key";
+};

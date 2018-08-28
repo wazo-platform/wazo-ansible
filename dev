@@ -18,13 +18,16 @@ nestbox-dev-ansible
 [reverse-proxy]
 reverse-proxy-ansible
 
+[rtp]
+rtp-ansible
+
 [nexsis:children]
 b2bua
 database
 engine-api
 nestbox
 reverse-proxy
-
+rtp
 [nexsis:vars]
 b2bua_host = asterisk-ansible
 engine_db_host = postgresql-ansible
@@ -54,7 +57,7 @@ mirror.wazo.io
 
 [repo_client_cert:children]
 nestbox
-
+rtpengine
 [repo_client_cert:vars]
 nestbox_repo_client_cert=/tmp/mirror_keys/test.crt
 nestbox_repo_client_key=/tmp/mirror_keys/test.key
