@@ -2,5 +2,23 @@
 - hosts: sbc
   remote_user: root
   roles:
-    - mwolff44.kamailio-mw
-    - sbc
+    - role: mwolff44.kamailio-mw
+      vars:
+        kamailio_version: 51
+        kamailio_install_conf: true
+        kamailio_packages:
+          - kamailio
+          - kamailio-tls-modules
+          - kamailio-extra-modules
+          - kamailio-postgres-modules
+          - kamailio-outbound-modules
+          - kamailio-xml-modules
+        kamailio_create_db: True # does the script create the kamailio DB (the engine must be installed before)
+        kamailio_db_engine: 'PGSQL' # check Kamailio doc for supported DB engine (PGSQL)
+        kamailio_db_name: 'kamailio'
+        kamailio_db_user: 'kamailio'
+        kamailio_db_pass: 'password'
+        kamailio_db_user_ro: 'kamailioro' # readonly user
+        kamailio_db_pass_ro: 'password' # readonly pass
+
+    - role: sbc
