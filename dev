@@ -43,6 +43,12 @@ nestbox_db_port = 5432
 postgresql_port = 5432
 engine_api_port_confgend = 8669
 
+kamailio_creatordb_host = sbc-ansible
+kamailio_db_host = sbc-ansible
+kamailio_db_port = 5432
+kamailio_db_root_user = postgres
+kamailio_db_root_pass = superpass
+
 [repo_client_cert]
 mirror.wazo.io
 
