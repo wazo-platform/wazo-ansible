@@ -79,7 +79,7 @@
     path: /etc/systemd/system/xivo-sysconfd.service.d
     state: directory
 - name: Install xivo-sysconfd drop-in file
-  copy:
+  template:
     src: templates/xivo-sysconfd.service
     dest: /etc/systemd/system/xivo-sysconfd.service.d/b2bua.conf
 - name: Install xivo-sysconfd
