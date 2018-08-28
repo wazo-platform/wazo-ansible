@@ -32,10 +32,10 @@
     - name: Copy client certificate from mirror
       fetch:
         src: /etc/nginx/client_certs/nestbox/{{ nestbox_mirror_user }}.crt
-        dest: {{ nestbox_repo_client_cert }}
+        dest: "{{ nestbox_repo_client_cert }}"
         flat: yes
     - name: Copy client key from mirror
       fetch:
         src: /etc/nginx/client_certs/nestbox/{{ nestbox_mirror_user }}.key
-        dest: {{ nestbox_repo_client_key }}
+        dest: "{{ nestbox_repo_client_key }}"
         flat: yes
