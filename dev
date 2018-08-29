@@ -62,6 +62,9 @@ router_port = 443
 router_db_host = postgresql-ansible
 router_db_port = 5432
 
+sbc_host = sbc-ansible
+sbc_port_kamailio_http = 8888
+
 [repo_client_cert]
 mirror.wazo.io
 

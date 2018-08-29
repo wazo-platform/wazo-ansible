@@ -123,6 +123,17 @@
     question: wazo-router-confd/db-skip
     vtype: boolean
     value: true
+- name: Create wazo-router-confd config dir
+  file:
+    path: /etc/wazo-router-confd/conf.d
+    state: directory
+    owner: root
+    mode: 755
+- name: Copy wazo-router-confd config
+  template:
+    src: templates/wazo-router-confd.yml
+    dest: /etc/wazo-router-confd/conf.d/50-router.yml
+  notify: restart wazo-router-confd
 - name: Install wazo-router-confd
   apt:
     name: wazo-router-confd

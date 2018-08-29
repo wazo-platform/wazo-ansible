@@ -1,0 +1,8 @@
+rest_api:
+  certificate: {{ https_certificate }}
+  private_key: {{ https_private_key }}
+auth:
+  verify_certificate: {{ https_certificate }}
+kamailio:
+  host: {{ sbc_host }}
+  port: {{ sbc_port_kamailio_http }}
