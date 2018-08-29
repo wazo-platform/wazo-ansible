@@ -18,8 +18,8 @@ nestbox-dev-ansible
 [reverse-proxy]
 reverse-proxy-ansible
 
-[rtp]
-rtp-ansible
+[rtpengine]
+rtpengine-ansible
 
 [nexsis:children]
 b2bua
@@ -27,7 +27,7 @@ database
 engine-api
 nestbox
 reverse-proxy
-rtp
+rtpengine
 [nexsis:vars]
 b2bua_host = asterisk-ansible
 engine_db_host = postgresql-ansible
