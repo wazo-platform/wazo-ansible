@@ -1,4 +1,5 @@
 rest_api:
+  listen: 0.0.0.0
   certificate: {{ https_certificate }}
   private_key: {{ https_private_key }}
 auth:
