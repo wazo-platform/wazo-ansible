@@ -192,11 +192,14 @@
     state: present
   notify: reload nginx
 
-- name: Install nestbox-ui-wazo-plugins
+- name: Install nestbox-ui plugins
   apt:
-    name: nestbox-ui-wazo-plugins
+    name: "{{ item }}"
     state: present
   notify: restart nestbox-ui
+  loop:
+    - nestbox-ui-wazo-plugins
+    - nestbox-ui-wazo-router-plugins
 
 - name: Install nestbox-nexsis
   apt:
