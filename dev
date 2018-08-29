@@ -18,6 +18,9 @@ nestbox-dev-ansible
 [reverse-proxy]
 reverse-proxy-ansible
 
+[router]
+router-ansible
+
 [rtpengine]
 rtpengine-ansible
 
@@ -27,6 +30,7 @@ database
 engine-api
 nestbox
 reverse-proxy
+router
 rtpengine
 sbc
 [nexsis:vars]

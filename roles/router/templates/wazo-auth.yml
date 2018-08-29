@@ -1,0 +1,12 @@
+uuid: undefined
+enabled_backend_plugins:
+  xivo_admin: false
+  xivo_user: false
+  xivo_service: false
+  ldap_user: false
+service_discovery:
+  enabled: false
+rest_api:
+  https:
+    certificate: {{ https_certificate }}
+    private_key: {{ https_private_key }}
