@@ -28,6 +28,7 @@ engine-api
 nestbox
 reverse-proxy
 rtpengine
+sbc
 [nexsis:vars]
 b2bua_host = asterisk-ansible
 engine_db_host = postgresql-ansible
