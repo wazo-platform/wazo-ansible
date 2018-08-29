@@ -2,6 +2,12 @@ mirror.wazo.io
 
 [sbc]
 sbc-ansible
+[sbc:vars]
+kamailio_creatordb_host = sbc-ansible
+kamailio_db_host = postgresql-ansible
+kamailio_db_port = 5432
+kamailio_db_root_user = postgres
+kamailio_db_root_pass = superpass
 
 [b2bua]
 asterisk-ansible
@@ -11,6 +17,12 @@ postgresql-ansible
 
 [edge-proxy]
 edge-proxy-ansible
+[edge-proxy:vars]
+kamailio_creatordb_host = edge-proxy-ansible
+kamailio_db_host = postgresql-ansible
+kamailio_db_port = 5432
+kamailio_db_root_user = postgres
+kamailio_db_root_pass = superpass
 
 [engine-api]
 engine-api-ansible
@@ -54,12 +66,6 @@ nestbox_port = 443
 nestbox_db_port = 5432
 postgresql_port = 5432
 engine_api_port_confgend = 8669
-
-kamailio_creatordb_host = sbc-ansible
-kamailio_db_host = sbc-ansible
-kamailio_db_port = 5432
-kamailio_db_root_user = postgres
-kamailio_db_root_pass = superpass
 
 router_host = router-ansible
 router_port = 443
