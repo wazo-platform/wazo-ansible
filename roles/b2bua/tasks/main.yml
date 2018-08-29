@@ -42,7 +42,7 @@
     state: started
 - name: Create /etc/asterisk/extensions.d
   file:
-    path: /etc/asterisk/extensions.d/engine-api.conf
+    path: /etc/asterisk/extensions.d
     state: directory
     owner: asterisk
     mode: 660
