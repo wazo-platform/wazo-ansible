@@ -9,6 +9,9 @@ asterisk-ansible
 [database]
 postgresql-ansible
 
+[edge-proxy]
+edge-proxy-ansible
+
 [engine-api]
 engine-api-ansible
 
@@ -27,6 +30,7 @@ rtpengine-ansible
 [nexsis:children]
 b2bua
 database
+edge-proxy
 engine-api
 nestbox
 reverse-proxy
