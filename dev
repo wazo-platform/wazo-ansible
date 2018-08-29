@@ -57,6 +57,11 @@ kamailio_db_port = 5432
 kamailio_db_root_user = postgres
 kamailio_db_root_pass = superpass
 
+router_host = router-ansible
+router_port = 443
+router_db_host = postgresql-ansible
+router_db_port = 5432
+
 [repo_client_cert]
 mirror.wazo.io
 

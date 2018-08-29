@@ -1,0 +1,12 @@
+router_db_admin_user: postgres
+router_db_admin_password: superpass
+
+router_db_confd_user: router-confd
+router_db_confd_password: superpass
+router_db_confd_name: router-confd
+
+router_db_auth_user: wazo-auth
+router_db_auth_password: superpass
+router_db_auth_name: router-auth
+
+router_db_host: localhost
