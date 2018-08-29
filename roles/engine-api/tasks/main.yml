@@ -86,6 +86,14 @@
   apt:
     name: xivo-ctid-ng
     state: present
+- name: Remove xivo-ctid-ng default config
+  file:
+    path: "/etc/xivo-ctid-ng/conf.d/{{ item }}"
+    state: absent
+  with_items:
+    - 050-xivo-consul-config.yml
+    - 050-xivo-consul-token.yml
+  notify: restart xivo-ctid-ng
 
 - name: Create xivo-amid config dir
   file:
