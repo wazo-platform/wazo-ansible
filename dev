@@ -8,6 +8,11 @@ kamailio_db_host = postgresql-ansible
 kamailio_db_port = 5432
 kamailio_db_root_user = postgres
 kamailio_db_root_pass = superpass
+kamailio_db_name = kamailio
+kamailio_db_user = kamailio
+kamailio_db_pass = password
+kamailio_db_user_ro = kamailioro
+kamailio_db_pass_ro = password
 
 [b2bua]
 asterisk-ansible
