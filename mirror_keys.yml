@@ -5,6 +5,10 @@
       assert:
         that: 'nestbox_mirror_user is defined'
         msg: "You must define the variable `nestbox_mirror_user` to copy the SSH key. Use `--extra-vars nestbox_mirror_user=user`."
+    - name: Ensure variable for user name is valid
+      assert:
+        that: 'nestbox_mirror_user != ca'
+        msg: "Invalid value for variable nestbox_mirror_user: '{{ nestbox_mirror_user }}'"
     - name: Generate private key
       openssl_privatekey:
         path: /etc/nginx/client_certs/nestbox/{{ nestbox_mirror_user }}.key
