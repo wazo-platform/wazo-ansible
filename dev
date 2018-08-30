@@ -75,6 +75,7 @@ engine_db_port = 5432
 nestbox_port = 443
 nestbox_db_port = 5432
 postgresql_port = 5432
+postgresql_superuser_password = superpass
 engine_api_port_confgend = 8669
 
 router_host = router-ansible

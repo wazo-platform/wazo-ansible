@@ -29,5 +29,5 @@
             value: "*"
         postgresql_users:
           - name: postgres
-            password: superpass
+            password: "{{ postgresql_superuser_password }}"
             port: "{{ postgresql_port }}"
