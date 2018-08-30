@@ -36,13 +36,13 @@
 
 - name: Initialize wazo-auth, nestbox-confd
   script: "files/nestbox-init.sh
-           {{ nestbox_db_host }}
-           {{ nestbox_db_port }}
-           {{ nestbox_db_confd_user }}
-           {{ nestbox_db_confd_password }}
-           {{ nestbox_db_confd_name }}
-           {{ nestbox_root_user }}
-           {{ nestbox_root_password }}
+           '{{ nestbox_db_host }}'
+           '{{ nestbox_db_port }}'
+           '{{ nestbox_db_confd_user }}'
+           '{{ nestbox_db_confd_password }}'
+           '{{ nestbox_db_confd_name }}'
+           '{{ nestbox_root_user }}'
+           '{{ nestbox_root_password }}'
            "
   args:
     creates: /etc/nestbox-ui/conf.d/50-default-policies.yml
