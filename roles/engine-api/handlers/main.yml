@@ -2,10 +2,6 @@
   service:
     name: wazo-auth
     state: restarted
-- name: restart xivo-ctid-ng
-  service:
-    name: xivo-ctid-ng
-    state: restarted
 - name: restart xivo-amid
   service:
     name: xivo-amid

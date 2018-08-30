@@ -93,7 +93,6 @@
   with_items:
     - 050-xivo-consul-config.yml
     - 050-xivo-consul-token.yml
-  notify: restart xivo-ctid-ng
 
 - name: Create xivo-amid config dir
   file:
