@@ -49,7 +49,7 @@
     - reload nginx
 - name: Install nginx site for wazo-router
   template:
-    src: templates/nginx-site
+    src: templates/nginx-site.j2
     dest: /etc/nginx/sites-available/wazo-router
     owner: root
     group: root
@@ -91,7 +91,7 @@
     state: directory
 - name: Add wazo-auth config
   template:
-    src: templates/wazo-auth.yml
+    src: templates/wazo-auth.yml.j2
     dest: /etc/wazo-auth/conf.d/50-wazo-router.yml
     owner: root
     group: root
@@ -131,7 +131,7 @@
     mode: 755
 - name: Copy wazo-router-confd config
   template:
-    src: templates/wazo-router-confd.yml
+    src: templates/wazo-router-confd.yml.j2
     dest: /etc/wazo-router-confd/conf.d/50-router.yml
   notify: restart wazo-router-confd
 - name: Install wazo-router-confd

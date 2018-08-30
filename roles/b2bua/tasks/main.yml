@@ -48,19 +48,19 @@
     mode: 660
 - name: Install Asterisk AGI configuration
   template:
-    src: templates/asterisk-extensions.conf
+    src: templates/asterisk-extensions.conf.j2
     dest: /etc/asterisk/extensions.d/engine-api.conf
   notify:
     - reload asterisk dialplan
 - name: Install Asterisk AMI configuration
   template:
-    src: templates/asterisk-manager.conf
+    src: templates/asterisk-manager.conf.j2
     dest: /etc/asterisk/manager.d/10-engine-api.conf
   notify:
     - reload asterisk manager
 - name: Install Asterisk HTTP configuration
   template:
-    src: templates/asterisk-http.conf
+    src: templates/asterisk-http.conf.j2
     dest: /etc/asterisk/http.d/10-engine-api.conf
   notify:
     - reload asterisk
@@ -71,7 +71,7 @@
     state: latest
 - name: Install xivo-confgend-client config
   template:
-    src: templates/xivo-confgend-client.conf
+    src: templates/xivo-confgend-client.conf.j2
     dest: /etc/xivo-confgend-client/config.conf
 
 - name: Create xivo-sysconfd drop-in file directory
@@ -80,7 +80,7 @@
     state: directory
 - name: Install xivo-sysconfd drop-in file
   template:
-    src: templates/xivo-sysconfd.service
+    src: templates/xivo-sysconfd.service.j2
     dest: /etc/systemd/system/xivo-sysconfd.service.d/b2bua.conf
 - name: Install xivo-sysconfd
   apt:

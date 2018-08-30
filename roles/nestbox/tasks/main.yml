@@ -47,7 +47,7 @@
     - reload nginx
 - name: Install nginx site for nestbox
   template:
-    src: templates/nginx-site
+    src: templates/nginx-site.j2
     dest: /etc/nginx/sites-available/nestbox
     owner: root
     group: root
@@ -119,7 +119,7 @@
     state: directory
 - name: Add wazo-auth config
   template:
-    src: templates/wazo-auth.yml
+    src: templates/wazo-auth.yml.j2
     dest: /etc/wazo-auth/conf.d/50-nestbox.yml
     owner: root
     group: root
@@ -159,7 +159,7 @@
     mode: 755
 - name: Copy wazo-deployd config
   template:
-    src: templates/wazo-deployd.yml
+    src: templates/wazo-deployd.yml.j2
     dest: /etc/wazo-deployd/conf.d/50-nestbox.yml
 - name: Install wazo-deployd
   apt:

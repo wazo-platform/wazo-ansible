@@ -77,7 +77,7 @@
     state: directory
 - name: Add xivo-ctid-ng config
   template:
-    src: templates/xivo-ctid-ng.yml
+    src: templates/xivo-ctid-ng.yml.j2
     dest: /etc/xivo-ctid-ng/conf.d/50-engine-api.yml
     owner: root
     group: root
@@ -100,7 +100,7 @@
     state: directory
 - name: Add xivo-amid config
   template:
-    src: templates/xivo-amid.yml
+    src: templates/xivo-amid.yml.j2
     dest: /etc/xivo-amid/conf.d/50-engine-api.yml
     owner: root
     group: root
@@ -122,7 +122,7 @@
     state: directory
 - name: Add xivo-confd config
   template:
-    src: templates/xivo-confd.yml
+    src: templates/xivo-confd.yml.j2
     dest: /etc/xivo-confd/conf.d/50-engine-api.yml
     owner: root
     group: root
@@ -134,7 +134,7 @@
     state: directory
 - name: Add xivo-dao config
   template:
-    src: templates/xivo-dao.yml
+    src: templates/xivo-dao.yml.j2
     dest: /etc/xivo-dao/conf.d/50-engine-api.yml
     owner: root
     group: root
@@ -151,7 +151,7 @@
     state: directory
 - name: Add xivo-confgend config
   template:
-    src: templates/xivo-confgend.yml
+    src: templates/xivo-confgend.yml.j2
     dest: /etc/xivo-confgend/conf.d/50-engine-api.yml
     owner: root
     group: root
@@ -167,7 +167,7 @@
     state: directory
 - name: Add xivo-agid config
   template:
-    src: templates/xivo-agid.yml
+    src: templates/xivo-agid.yml.j2
     dest: /etc/xivo-agid/conf.d/50-engine-api.yml
     owner: root
     group: root

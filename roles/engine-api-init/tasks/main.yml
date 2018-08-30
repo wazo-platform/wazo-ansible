@@ -4,7 +4,7 @@
 
 - name: Copy wazo-auth database preconfiguration
   template:
-    src: templates/wazo-auth.cfg
+    src: templates/wazo-auth.cfg.j2
     dest: /tmp/wazo-auth.cfg
 - name: Reconfigure database options for wazo-auth package
   command: debconf-set-selections /tmp/wazo-auth.cfg
@@ -13,7 +13,7 @@
 
 - name: Copy main database preconfiguration
   template:
-    src: templates/xivo-manage-db.cfg
+    src: templates/xivo-manage-db.cfg.j2
     dest: /tmp/xivo-manage-db.cfg
 - name: Apply main database preconfiguration
   command: debconf-set-selections /tmp/xivo-manage-db.cfg
