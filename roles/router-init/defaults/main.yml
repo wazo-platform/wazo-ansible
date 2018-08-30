@@ -13,3 +13,6 @@ router_db_auth_password: superpass
 router_db_auth_name: router-auth
 
 router_db_host: localhost
+
+router_root_user: root
+router_root_password: superpass

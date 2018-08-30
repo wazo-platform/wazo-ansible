@@ -28,4 +28,7 @@
   tags: [dev]
 
 - name: Initialize wazo-auth, wazo-router-confd
-  script: "files/router-init.sh {{ https_certificate }}"
+  script: "files/router-init.sh
+           {{ https_certificate }}
+           {{ router_root_user }}
+           {{ router_root_password }}"

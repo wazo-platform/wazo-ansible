@@ -1,6 +1,8 @@
 #!/bin/bash
 
 https_certificate=$1
+root_user=$2
+root_password=$3
 
 # Add certificate in auth section:
 cat > ~/.config/wazo-auth-cli/50-certificate.yml <<EOF
@@ -19,7 +21,7 @@ WAZO_POLICY=$(wazo-auth-cli policy create --description "Default super user nest
 
 # Create your super user
 WAZO_TENANT=$(wazo-auth-cli tenant create admin-tenant)
-WAZO_USER=$(wazo-auth-cli user create --firstname John --lastname Doe --password secret --email "john@example.com" --tenant $WAZO_TENANT root)
+WAZO_USER=$(wazo-auth-cli user create --firstname John --lastname Doe --password $root_password --email "john@example.com" --tenant $WAZO_TENANT $root_user)
 wazo-auth-cli user add --policy $WAZO_POLICY $WAZO_USER
 
 # Add the cli policy to the cli user
