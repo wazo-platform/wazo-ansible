@@ -14,3 +14,6 @@ nestbox_db_auth_password: superpass
 nestbox_db_auth_name: nestbox-auth
 
 nestbox_db_host: localhost
+
+nestbox_root_user: root
+nestbox_root_password: secret

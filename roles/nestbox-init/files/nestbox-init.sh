@@ -5,6 +5,8 @@ confd_db_port=$2
 confd_db_username=$3
 confd_db_password=$4
 confd_db_name=$5
+root_user=$6
+root_password=$7
 
 # Add certificate in auth section:
 cat > ~/.config/wazo-auth-cli/50-certificate.yml <<EOF
@@ -23,7 +25,7 @@ NESTBOX_POLICY=$(wazo-auth-cli policy create --description "Default super user n
 
 # Create your super user
 NESTBOX_TENANT=$(wazo-auth-cli tenant create admin-tenant)
-NESTBOX_USER=$(wazo-auth-cli user create --firstname John --lastname Doe --password {{ nestbox_root_password }} --email "john@example.com" --tenant $NESTBOX_TENANT {{ nestbox_root_user }})
+NESTBOX_USER=$(wazo-auth-cli user create --firstname John --lastname Doe --password $root_password --email "john@example.com" --tenant $NESTBOX_TENANT $root_user)
 wazo-auth-cli user add --policy $NESTBOX_POLICY $NESTBOX_USER
 
 # Add the cli policy to the cli user
