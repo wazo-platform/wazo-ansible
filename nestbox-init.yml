@@ -1,5 +1,5 @@
 ---
 - hosts: nestbox
-  remote_user: root
+  become: yes
   roles:
     - nestbox-init

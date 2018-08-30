@@ -1,4 +1,5 @@
 ---
 - hosts: router
+  become: yes
   roles:
     - router-init

@@ -1,4 +1,5 @@
 - hosts: reverse-proxy
+  become: yes
   roles:
     - role: reverse-proxy-certificates
     - role: geerlingguy.nginx

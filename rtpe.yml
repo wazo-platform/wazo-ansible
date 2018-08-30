@@ -1,4 +1,5 @@
 ---
 - hosts: rtpengine
+  become: yes
   roles:
     - rtpengine

@@ -1,6 +1,6 @@
 ---
 - hosts: sbc
-  remote_user: root
+  become: yes
   roles:
     - role: debian-nexsis-repo
     - role: mwolff44.kamailio-mw

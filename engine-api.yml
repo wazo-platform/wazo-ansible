@@ -1,5 +1,6 @@
 ---
 - hosts: engine-api
+  become: yes
   roles:
     - debian-nexsis-repo
     - engine-api

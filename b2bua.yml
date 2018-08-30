@@ -1,3 +1,4 @@
 - hosts: b2bua
+  become: yes
   roles:
     - b2bua
