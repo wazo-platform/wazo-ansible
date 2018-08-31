@@ -7,6 +7,7 @@
     owner: kamailio
     group: kamailio
     backup: yes
+
 - name: Copy kamailio configuration files.
   template:
     src: "{{ item }}.j2"
