@@ -5,9 +5,9 @@
     - role: debian-nexsis-repo
     - role: mwolff44.kamailio-mw
       vars:
-        kamailio_manage_repo: False
+        kamailio_manage_repo: false
         kamailio_version: 51
-        kamailio_install_conf: true
+        kamailio_install_conf: false
         kamailio_packages:
           - kamailio
           - kamailio-tls-modules
@@ -15,16 +15,17 @@
           - kamailio-postgres-modules
           - kamailio-outbound-modules
           - kamailio-xml-modules
-        kamailio_create_db: True # does the script create the kamailio DB (the engine must be installed before)
+        kamailio_create_db: false # does the script create the kamailio DB (the engine must be installed before)
         kamailio_db_engine: 'PGSQL' # check Kamailio doc for supported DB engine (PGSQL)
 
     - role: sbc
       vars:
         kamailio_app: 'SBC'
-        kamailio_internal_interface: 127.0.0.1
-        kamailio_external_interface: 127.0.0.1
-        kamailio_public_ip: 1.1.1.1
-        class5_wazo_servers:
-          - 127.0.0.1
-        rtp_engine_servers:
-          - udp:127.0.0.1:2223
+        # These lines are commented cause these variables need to be initialised in inventory's file
+        # kamailio_internal_interface: 127.0.0.1
+        # kamailio_external_interface: 127.0.0.1
+        # kamailio_public_ip: 1.1.1.1
+        # class5_wazo_servers:
+        #   - 127.0.0.1
+        # rtp_engine_servers:
+        #  - udp:127.0.0.1:2223
