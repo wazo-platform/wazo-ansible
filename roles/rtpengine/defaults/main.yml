@@ -9,7 +9,7 @@ rtpe_packages:
     - ngcp-rtpengine-kernel-dkms
     - ngcp-rtpengine-recording-daemon
 rtpe_install_conf: True
-rtpe_config_tempate_dir: ../templates/config/
+rtpe_config_tempate_dir: ../templates
 rtpe_config_dir: '/etc/rtpengine'
 rtpe_config_files: 
     - rtpengine.conf
