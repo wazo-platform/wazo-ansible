@@ -13,6 +13,6 @@
     src: "{{ item }}.j2"
     dest: "{{ sbc_conf_dir }}/{{ item }}"
     backup: yes
-    with_items: "{{ sbc_config_files }}"
-    notify: Restart kamailio
-    when: sbc_install_conf
+  with_items: "{{ sbc_config_files }}"
+  notify: Restart kamailio
+  when: sbc_install_conf
