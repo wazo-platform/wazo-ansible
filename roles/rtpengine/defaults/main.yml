@@ -12,12 +12,13 @@ rtpe_install_conf: True
 rtpe_config_tempate_dir: ../templates/config/
 rtpe_config_dir: '/etc/rtpengine'
 rtpe_config_files: 
-    - rtpengine.ini
+    - rtpengine.conf
 rtpe_interfaces: 'internal/12.23.34.45;external/23.34.45.54'
+rtpe_listen: '127.0.0.1:2223'
 rtpe_rtp_min_port: 10000
 rtpe_rtp_max_port: 20000
 rtpe_rtp_tos: 184
 rtpe_in_kernel_packet_forwarding: True
 rtpe_max_sessions: 1000
 rtpe_pidfile: '/var/run/rtpengine.pid'
-rtpe_table: 0
+rtpe_table: -1
