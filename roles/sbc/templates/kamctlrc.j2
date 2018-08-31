@@ -7,7 +7,7 @@
 # # will use their internal default values.
 
 # ## your SIP domain
-SIP_DOMAIN={{ kamailio_sip_domain  }}
+SIP_DOMAIN={{ kamailio_sip_domain }}
 
 ## chrooted directory
 ## $CHROOT_DIR="/path/to/chrooted/directory"
@@ -17,37 +17,37 @@ SIP_DOMAIN={{ kamailio_sip_domain  }}
 ##
 ## If you want to setup a database with kamdbctl, you must at least specify
 ## this parameter.
-DBENGINE={{ kamailio_db_engine  }}
+DBENGINE={{ kamailio_db_engine }}
 
 ### database host
-DBHOST={{ kamailio_db_host  }}
+DBHOST={{ kamailio_db_host }}
 
 ### database host
-DBPORT={{ kamailio_db_port  }}
+DBPORT={{ kamailio_db_port }}
 
 ### database name (for ORACLE this is TNS name)
-DBNAME={{ kamailio_db_name  }}
+DBNAME={{ kamailio_db_name }}
 
 ## database path used by dbtext, db_berkeley or sqlite
 ## DB_PATH="/usr/local/etc/kamailio/dbtext"
 #
 ### database read/write user
-DBRWUSER="{{ kamailio_db_user  }}"
+DBRWUSER="{{ kamailio_db_user }}"
 
 ### password for database read/write user
-DBRWPW="{{ kamailio_db_pass  }}"
+DBRWPW="{{ kamailio_db_pass }}"
 
 ### database read only user
-DBROUSER="{{ kamailio_db_user_ro  }}"
+DBROUSER="{{ kamailio_db_user_ro }}"
 
 ### password for database read only user
-DBROPW="{{ kamailio_db_pass_ro  }}"
+DBROPW="{{ kamailio_db_pass_ro }}"
 
 ### database access host (from where is kamctl used)
 ## DBACCESSHOST=192.168.0.1
 #
 ### database super user (for ORACLE this is 'scheme-creator' user)
-DBROOTUSER="{{ kamailio_db_root_user  }}"
+DBROOTUSER="{{ kamailio_db_root_user }}"
 
 ### database character set (used by MySQL when creating database)
 ##CHARSET="latin1"
