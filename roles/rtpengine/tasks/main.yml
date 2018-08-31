@@ -54,3 +54,15 @@
   notify: restart rtpengine
   when: rtpe_install_conf
 
+- name: Enable rtpengine
+  systemd:
+    name: ngcp-rtpengine-daemon
+    enabled: yes
+
+- name: Allow rtpengine to run
+  shell: sed -i 's/RUN_RTPENGINE=no/RUN_RTPENGINE=yes/' /etc/default/ngcp-rtpengine-daemon
+
+- name: Create file log
+  file:
+    path: /var/log/rtpengine
+

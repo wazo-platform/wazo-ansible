@@ -1,2 +1,5 @@
 - name: restart rtpengine
-  command: service rtpengine restart
+  systemd:
+    name: ngcp-rtpengine-daemon
+    state: restarted
+    daemon_reload: yes
