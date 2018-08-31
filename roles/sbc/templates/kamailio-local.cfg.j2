@@ -21,7 +21,8 @@ debug={{ kamailio_debug }}
 ## - APP_EDP : edge point, bridge between webrtc and sip endpoints
 #!define APP_{{ kamailio_app }}
 
-RTPENGINE_LIST={% for rtp_engine_server in rtp_engine_servers %}{{ rtp_engine_server }}{% endfor %}
+#!define RTPENGINE_LIST "{% for rtp_engine_server in rtp_engine_servers %}{{ rtp_engine_server }}{% endfor %}"
+
 
 #!define WITH_ANTIFLOOD
 #!define WITH_REGISTRAR
