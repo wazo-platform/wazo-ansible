@@ -2,5 +2,4 @@
 - hosts: rtpengine
   become: yes
   roles:
-      - debian-nexsis-repo
       - rtpengine
