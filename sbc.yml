@@ -15,6 +15,7 @@
           - kamailio-postgres-modules
           - kamailio-outbound-modules
           - kamailio-xml-modules
+          #- kamailio-websocket-modules 
         kamailio_create_db: false # does the script create the kamailio DB (the engine must be installed before)
         kamailio_db_engine: 'PGSQL' # check Kamailio doc for supported DB engine (PGSQL)
 
