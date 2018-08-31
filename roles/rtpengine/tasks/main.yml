@@ -65,4 +65,5 @@
 - name: Create file log
   file:
     path: /var/log/rtpengine
+    state: touch
 
