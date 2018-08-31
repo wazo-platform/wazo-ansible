@@ -17,3 +17,10 @@ sbc_config_files:
     - kamailio-local.cfg
     - dispatcher.list
     - kamctlrc
+kamailio_debug: 2
+sipr_servers:
+     - 127.0.0.2
+sbc_servers:
+    - 127.0.0.2
+rtp_engine_servers:
+    - udp:127.0.0.1:2223
