@@ -19,3 +19,12 @@
         kamailio_db_engine: 'PGSQL' # check Kamailio doc for supported DB engine (PGSQL)
 
     - role: sbc
+      vars:
+        kamailio_app: 'SBC'
+        kamailio_internal_interface: 127.0.0.1
+        kamailio_external_interface: 127.0.0.1
+        kamailio_public_ip: 1.1.1.1
+        class5_wazo_servers:
+          - 127.0.0.1
+        rtp_engine_servers:
+          - udp:127.0.0.1:2223
