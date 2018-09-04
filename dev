@@ -61,22 +61,25 @@ rtpengine
 sbc
 [nexsis:vars]
 b2bua_host = asterisk-ansible
-engine_db_host = postgresql-ansible
-engine_api_host = engine-api-ansible
-nestbox_db_host = postgresql-ansible
-nestbox_host = nestbox-dev-ansible
-
 b2bua_port_ami = 5038
 b2bua_port_http = 5039
 b2bua_port_https = 5040
 b2bua_port_sysconfd = 8668
-engine_api_port = 443
+
+engine_db_host = postgresql-ansible
 engine_db_port = 5432
+engine_api_host = engine-api-ansible
+engine_api_port = 443
+engine_api_port_confgend = 8669
+
+nestbox_host = nestbox-dev-ansible
 nestbox_port = 443
+nestbox_db_host = postgresql-ansible
 nestbox_db_port = 5432
+nestbox_db_admin_password = superpass
+
 postgresql_port = 5432
 postgresql_superuser_password = superpass
-engine_api_port_confgend = 8669
 
 router_host = router-ansible
 router_port = 443
@@ -88,7 +91,6 @@ sbc_port_kamailio_http = 8888
 
 [repo_client_cert]
 mirror.wazo.io
-
 [repo_client_cert:children]
 edge-proxy
 nestbox

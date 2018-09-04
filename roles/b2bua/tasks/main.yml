@@ -55,7 +55,7 @@
 - name: Install Asterisk AMI configuration
   template:
     src: templates/asterisk-manager.conf.j2
-    dest: /etc/asterisk/manager.d/10-engine-api.conf
+    dest: /etc/asterisk/manager.d/999-engine-api.conf
   notify:
     - reload asterisk manager
 - name: Install Asterisk HTTP configuration
