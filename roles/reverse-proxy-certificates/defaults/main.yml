@@ -1,2 +1,2 @@
-reverse_proxy_https_cert: files/reverse-proxy.crt
-reverse_proxy_https_private_key: files/reverse-proxy.key
+reverse_proxy_https_cert: files/default-https.crt
+reverse_proxy_https_private_key: files/default-https.key
