@@ -13,7 +13,7 @@ rtpe_config_tempate_dir: ../templates
 rtpe_config_dir: '/etc/rtpengine'
 rtpe_config_files: 
     - rtpengine.conf
-rtpe_interfaces: 'internal/12.23.34.45;external/23.34.45.54'
+rtpe_interfaces: '12.23.34.54 internal/12.23.34.45;external/23.34.45.54!publicip'
 rtpe_listen: '127.0.0.1:2223'
 rtpe_rtp_min_port: 10000
 rtpe_rtp_max_port: 20000
