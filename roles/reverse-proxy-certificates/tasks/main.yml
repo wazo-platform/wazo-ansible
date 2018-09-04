@@ -4,11 +4,15 @@
     state: directory
 - name: Copy certificate for HTTPS
   copy:
-    src: files/{{ item }}
-    dest: /etc/nginx/certs/{{ item }}
+    src: "{{ reverse_proxy_https_cert }}"
+    dest: /etc/nginx/certs/reverse-proxy.crt
     owner: root
     group: www-data
     mode: 0640
-  loop:
-    - reverse-proxy.pem
-    - reverse-proxy.key
+- name: Copy private key for HTTPS
+  copy:
+    src: "{{ reverse_proxy_https_private_key }}"
+    dest: /etc/nginx/certs/reverse-proxy.key
+    owner: root
+    group: www-data
+    mode: 0640
