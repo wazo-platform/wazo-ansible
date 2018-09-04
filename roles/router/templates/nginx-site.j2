@@ -21,6 +21,6 @@ server {
     include /etc/nginx/locations/https-enabled/*;
 
     ssl on;
-    ssl_certificate {{ https_certificate }};
-    ssl_certificate_key {{ https_private_key }};
+    ssl_certificate /etc/wazo-router/https/public-certificate.pem;
+    ssl_certificate_key /etc/wazo-router/https/private-key.pem;
 }

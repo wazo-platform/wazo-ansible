@@ -7,35 +7,31 @@
   file:
     path: /etc/wazo-router/https
     state: directory
-- name: Copy certificate generation config
-  copy:
-    src: files/openssl-x509.cfg
-    dest: /tmp/openssl-x509.cfg
-    owner: root
-    group: root
-    mode: 0644
-- name: Generate a self signed OpenSSL certificate
-  command: >-
-    openssl req
-    -x509 -sha256 -nodes
-    -days 3650
-    -newkey rsa:2048
-    -config /tmp/openssl-x509.cfg
-    -keyout {{ https_private_key }}
-    -out {{ https_certificate }}
-  args:
-    creates: "{{ https_certificate }}"
 - name: Create group for certificate
   group:
     name: wazo-router-certs
-- name: Set permissions for certificate
-  file:
-    path: "{{ item }}"
+- name: Install custom certificate for HTTPS
+  copy:
+    src: "{{ router_https_cert }}"
+    dest: /etc/wazo-router/https/public-certificate.pem
+    owner: root
     group: wazo-router-certs
     mode: o=rw,g=r
-  loop:
-    - "{{ https_private_key }}"
-    - "{{ https_certificate }}"
+  notify:
+    - restart wazo-auth
+    - restart wazo-router-confd
+    - reload nginx
+- name: Install custom private key for HTTPS
+  copy:
+    src: "{{ router_https_private_key }}"
+    dest: /etc/wazo-router/https/private-key.pem
+    owner: root
+    group: wazo-router-certs
+    mode: o=rw,g=r
+  notify:
+    - restart wazo-auth
+    - restart wazo-router-confd
+    - reload nginx
 
 - name: Install nginx
   apt:

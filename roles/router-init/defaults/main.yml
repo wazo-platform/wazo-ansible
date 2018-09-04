@@ -1,6 +1,3 @@
-https_certificate: /etc/wazo-router/https/public-certificate.pem
-https_private_key: /etc/wazo-router/https/private-key.pem
-
 router_db_admin_user: postgres
 router_db_admin_password: superpass
 
