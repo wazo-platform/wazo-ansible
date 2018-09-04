@@ -1,6 +1,7 @@
 ari:
   connection:
-    base_url: "http://{{ b2bua_host }}:{{ b2bua_port_http }}"
+    base_url: "https://{{ b2bua_host }}:{{ b2bua_port_https }}"
+    verify: false
     username: "{{ ari_username }}"
     password: "{{ ari_password }}"
 
