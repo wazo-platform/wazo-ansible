@@ -30,6 +30,11 @@
     name: xivo-certs
     state: latest
 
+- name: Install xivo-confgend-client
+  apt:
+    name: xivo-confgend-client
+    state: present
+
 - name: Preconfigure wazo-auth package
   debconf:
     name: wazo-auth
