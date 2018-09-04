@@ -200,8 +200,3 @@
   loop:
     - nestbox-ui-wazo-plugins
     - nestbox-ui-wazo-router-plugins
-
-- name: Install nestbox-nexsis
-  apt:
-    name: nestbox-nexsis
-    state: latest
