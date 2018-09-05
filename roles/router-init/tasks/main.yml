@@ -22,10 +22,8 @@
     dest: /tmp/wazo-router-confd.cfg
 - name: Reconfigure database options for wazo-router-confd package
   command: debconf-set-selections /tmp/wazo-router-confd.cfg
-  tags: [dev]
 - name: Initialize wazo-router-confd database
   command: dpkg-reconfigure wazo-router-confd -f noninteractive
-  tags: [dev]
 
 - name: Initialize wazo-auth, wazo-router-confd
   script: "files/router-init.sh
