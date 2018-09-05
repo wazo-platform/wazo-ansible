@@ -1,13 +1,14 @@
 #!/bin/bash
 
-https_certificate="$1"
-root_user="$2"
-root_password="$3"
+set -e
+
+root_user="$1"
+root_password="$2"
 
 # Add certificate in auth section:
 cat > ~/.config/wazo-auth-cli/50-certificate.yml <<EOF
 auth:
-    verify_certificate: $https_certificate
+    verify_certificate: /etc/wazo-router/https/public-certificate.pem
 EOF
 
 # Set wazo-auth-cli config

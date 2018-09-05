@@ -44,5 +44,5 @@
                 proxy_set_header Upgrade $http_upgrade;
                 proxy_set_header Connection "upgrade";
               }
-              ssl_certificate     /etc/nginx/certs/reverse-proxy.pem;
+              ssl_certificate     /etc/nginx/certs/reverse-proxy.crt;
               ssl_certificate_key /etc/nginx/certs/reverse-proxy.key;

@@ -1,2 +1,2 @@
-https_certificate: /etc/wazo-router/https/public-certificate.pem
-https_private_key: /etc/wazo-router/https/private-key.pem
+router_https_cert: files/default-https.crt
+router_https_private_key: files/default-https.key

@@ -25,6 +25,31 @@
     filename: wazo-install
     update_cache: yes
 
+- name: Install xivo-certs
+  apt:
+    name: xivo-certs
+    state: latest
+- name: Install custom certificate for HTTPS
+  copy:
+    src: "{{ b2bua_https_cert }}"
+    dest: /usr/share/xivo-certs/server.crt
+    owner: root
+    group: www-data
+    mode: 0640
+  when: b2bua_https_cert is defined
+  notify:
+    - reload asterisk
+- name: Install custom private key for HTTPS
+  copy:
+    src: "{{ b2bua_https_private_key }}"
+    dest: /usr/share/xivo-certs/server.key
+    owner: root
+    group: www-data
+    mode: 0640
+  when: b2bua_https_private_key is defined
+  notify:
+    - reload asterisk
+
 - name: Install Asterisk
   apt:
     name: "{{ item }}"
@@ -32,7 +57,6 @@
   loop:
     - xivo-config
     - wazo-nexsis-asterisk
-    - xivo-certs
     - asterisk
     - asterisk-moh-opsound-wav
     - asterisk-sounds-wav-en-us

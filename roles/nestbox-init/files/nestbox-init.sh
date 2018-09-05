@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 confd_db_host="$1"
 confd_db_port="$2"
 confd_db_username="$3"

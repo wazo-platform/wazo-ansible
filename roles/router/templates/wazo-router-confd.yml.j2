@@ -1,9 +1,9 @@
 rest_api:
   listen: 0.0.0.0
-  certificate: {{ https_certificate }}
-  private_key: {{ https_private_key }}
+  certificate: /etc/wazo-router/https/public-certificate.pem
+  private_key: /etc/wazo-router/https/private-key.pem
 auth:
-  verify_certificate: {{ https_certificate }}
+  verify_certificate: /etc/wazo-router/https/public-certificate.pem
 kamailio:
   host: {{ sbc_host }}
   port: {{ sbc_port_kamailio_http }}
