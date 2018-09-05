@@ -12,7 +12,7 @@ port=5060
 {% if kamailio_internal_interface != kamailio_external_interface %}
 listen={{ kamailio_internal_interface }}
 {% endif %}
-listen={{ kamailio_external_interface }} advertise {{ kamailio_public_ip }}:5060
+listen=udp:{{ kamailio_external_interface }}:5060 advertise {{ kamailio_public_ip }}:5060
 listen=tls:{{ kamailio_external_interface  }}:443 advertise {{ kamailio_public_ip  }}:443
 
 debug={{ kamailio_debug }}
