@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 root_user="$1"
 root_password="$2"
 
