@@ -1,1 +1,19 @@
 ---
+- name: Copy configuration files to sbc server
+  copy:
+    src: include
+    dest: /etc/kamailio
+    directory_mode: 644
+    owner: kamailio
+    group: kamailio
+    backup: yes
+  notify: Restart kamailio
+
+- name: Copy kamailio configuration files.
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ sbc_conf_dir }}/{{ item }}"
+    backup: yes
+  with_items: "{{ sbc_config_files }}"
+  notify: Restart kamailio
+  when: sbc_install_conf

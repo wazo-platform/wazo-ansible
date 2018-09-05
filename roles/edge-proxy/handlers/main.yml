@@ -1,0 +1,10 @@
+---
+# handlers file
+
+- name: Restart kamailio
+  service:
+    name: 'kamailio'
+    state: 'restarted'
+    enabled: yes
+  become: yes
+  when: kamailio_restart
