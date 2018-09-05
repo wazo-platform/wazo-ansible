@@ -14,6 +14,8 @@
           - kamailio-extra-modules
           - kamailio-postgres-modules
           - kamailio-outbound-modules
+          - kamailio-systemd-modules
+          - kamailio-utils-modules
           - kamailio-xml-modules
           - kamailio-websocket-modules
         kamailio_create_db: false # does the script create the kamailio DB (the engine must be installed before)
