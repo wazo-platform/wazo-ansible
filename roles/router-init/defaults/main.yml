@@ -10,6 +10,7 @@ router_db_auth_password: superpass
 router_db_auth_name: router-auth
 
 router_db_host: localhost
+router_db_port: 5432
 
 router_root_user: root
 router_root_password: superpass
