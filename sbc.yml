@@ -7,7 +7,7 @@
       vars:
         kamailio_manage_repo: false
         kamailio_version: 51
-        kamailio_install_conf: false
+        kamailio_install_conf: true
         kamailio_packages:
           - kamailio
           - kamailio-tls-modules
@@ -15,7 +15,6 @@
           - kamailio-postgres-modules
           - kamailio-outbound-modules
           - kamailio-xml-modules
-          #- kamailio-websocket-modules 
         kamailio_create_db: false # does the script create the kamailio DB (the engine must be installed before)
         kamailio_db_engine: 'PGSQL' # check Kamailio doc for supported DB engine (PGSQL)
 
