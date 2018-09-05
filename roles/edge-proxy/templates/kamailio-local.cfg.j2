@@ -13,6 +13,7 @@ port=5060
 listen={{ kamailio_internal_interface }}
 {% endif %}
 listen={{ kamailio_external_interface }} advertise {{ kamailio_public_ip }}:5060
+listen=tls:{{ kamailio_external_interface  }}:443 advertise {{ kamailio_public_ip  }}:443
 
 debug={{ kamailio_debug }}
 
@@ -26,5 +27,6 @@ debug={{ kamailio_debug }}
 #!define RTPENGINE_LIST "{% for rtp_engine_server in rtp_engine_servers %}{{ rtp_engine_server }}{% endfor %}"
 
 #!define WITH_WSS
+#!define WITH_TLS
 #!define WITH_ANTIFLOOD
 #!define WITH_REGISTRAR
