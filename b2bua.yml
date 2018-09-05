@@ -1,4 +1,5 @@
 - hosts: b2bua
   become: yes
   roles:
+    - debian-nexsis-repo
     - b2bua

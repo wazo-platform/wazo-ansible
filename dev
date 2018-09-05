@@ -92,6 +92,7 @@ sbc_port_kamailio_http = 8888
 [repo_client_cert]
 mirror.wazo.io
 [repo_client_cert:children]
+b2bua
 edge-proxy
 nestbox
 rtpengine
