@@ -9,7 +9,7 @@
 - name: Reconfigure database options for wazo-auth package
   command: debconf-set-selections /tmp/wazo-auth.cfg
 - name: Initialize wazo-auth database
-  command: dpkg-reconfigure wazo-auth -f noninteractive
+  command: dpkg-reconfigure wazo-auth --frontend noninteractive
 
 - name: Copy nestbox-confd database preconfiguration
   template:
@@ -18,7 +18,7 @@
 - name: Reconfigure database options for nestbox-confd package
   command: debconf-set-selections /tmp/nestbox-confd.cfg
 - name: Initialize nestbox-confd database
-  command: dpkg-reconfigure nestbox-confd -f noninteractive
+  command: dpkg-reconfigure nestbox-confd --frontend noninteractive
 
 - name: Copy wazo-deployd database preconfiguration
   template:
@@ -27,7 +27,7 @@
 - name: Reconfigure database options for wazo-deployd package
   command: debconf-set-selections /tmp/wazo-deployd.cfg
 - name: Initialize wazo-deployd database
-  command: dpkg-reconfigure wazo-deployd -f noninteractive
+  command: dpkg-reconfigure wazo-deployd --frontend noninteractive
 
 - name: Initialize wazo-auth, nestbox-confd
   script: "files/nestbox-init.sh

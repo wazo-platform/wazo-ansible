@@ -9,7 +9,7 @@
 - name: Reconfigure database options for wazo-auth package
   command: debconf-set-selections /tmp/wazo-auth.cfg
 - name: Initialize wazo-auth database
-  command: dpkg-reconfigure wazo-auth -f noninteractive
+  command: dpkg-reconfigure wazo-auth --frontend noninteractive
 
 - name: Copy main database preconfiguration
   template:
@@ -18,7 +18,7 @@
 - name: Apply main database preconfiguration
   command: debconf-set-selections /tmp/xivo-manage-db.cfg
 - name: Initialize main database
-  command: dpkg-reconfigure xivo-manage-db -f noninteractive
+  command: dpkg-reconfigure xivo-manage-db --frontend noninteractive
 
 - name: Fix Twisted dropin.cache
   command: twistd --help-reactors
