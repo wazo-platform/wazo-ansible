@@ -130,6 +130,7 @@ All variable can be shared with other recipes, except `kamailio_creatordb_host` 
 * `number_start`: (default: `1000`) start of phone numbers range
 * `number_end`: (default: `1999`) end of phone numbers range
 * `engine_root_password`: (default: `superpass`) password for engine superuser `root`
+* `postgresql_pinned_version`: (default: `9.6.10-0+deb9u1`) version of package postgresql-9.1
 
 ### mirror keys
 
@@ -163,6 +164,7 @@ Variables that control the path for certificates used for HTTPS:
 * `nestbox_https_private_key`: (default: `files/default-https.key`) custom private key for HTTPS
 * `nestbox_root_user`: (default: `root`) nestbox superuser username
 * `nestbox_root_password`: (default: `secret`) nestbox superuser password
+* `postgresql_pinned_version`: (default: `9.6.10-0+deb9u1`) version of package postgresql-9.1
 
 ### reverse-proxy
 
@@ -187,6 +189,7 @@ Variables that control the path for certificates used for HTTPS:
 * `router_https_private_key`: (default: `files/default-https.key`) custom private key for HTTPS
 * `router_root_user`: (default: `root`) router superuser username
 * `router_root_password`: (default: `superpass`) router superuser password
+* `postgresql_pinned_version`: (default: `9.6.10-0+deb9u1`) version of package postgresql-9.1
 
 ### sbc
 
