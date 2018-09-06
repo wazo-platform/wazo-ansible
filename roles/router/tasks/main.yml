@@ -72,6 +72,15 @@
     filename: wazo-router
     update_cache: yes
 
+- name: Install postgresql pinned version for xivo-dbms
+  apt:
+    name: "{{ item }}={{ postgresql_pinned_version }}"
+    state: present
+  with_items:
+    - postgresql-9.6
+    - postgresql-contrib-9.6
+    - postgresql-plpython-9.6
+
 - name: Preconfigure wazo-auth package
   debconf:
     name: wazo-auth
