@@ -39,6 +39,8 @@ router-ansible
 
 [rtpengine]
 rtpengine-ansible
+[rtpengine:vars]
+rtpe_interfaces = "internal/192.168.16.10;external/192.168.16.10!172.16.42.7"
 
 [sbc]
 sbc-ansible
