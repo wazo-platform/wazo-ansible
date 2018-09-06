@@ -2,11 +2,6 @@
   assert:
     that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
 
-- name: Install wazo-auth-cli
-  apt:
-    name: wazo-auth-cli
-    state: present
-
 - name: Copy wazo-auth database preconfiguration
   template:
     src: templates/wazo-auth.cfg.j2

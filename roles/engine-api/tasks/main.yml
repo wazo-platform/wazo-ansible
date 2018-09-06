@@ -176,6 +176,10 @@
   apt:
     name: xivo-confd
     state: present
+- name: Install xivo-confd-client-python3
+  apt:
+    name: xivo-confd-client-python3
+    state: present
 
 - name: Create xivo-confgend config dir
   file:

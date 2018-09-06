@@ -112,6 +112,10 @@
     - 050-xivo-consul-config.yml
     - 050-xivo-consul-token.yml
   notify: restart wazo-auth
+- name: Install wazo-auth-cli
+  apt:
+    name: wazo-auth-cli
+    state: present
 
 - name: Preconfigure wazo-router-confd package
   debconf:
