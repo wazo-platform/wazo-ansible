@@ -11,3 +11,5 @@ engine_db_confd_user: asterisk
 engine_db_confd_password: proformatique
 
 engine_api_wazo_distribution: wazo-dev-stretch
+
+postgresql_pinned_version: 9.6.10-0+deb9u1
