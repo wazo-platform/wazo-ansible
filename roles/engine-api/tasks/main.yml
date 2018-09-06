@@ -83,6 +83,16 @@
     group: root
     mode: 0644
   notify: restart wazo-auth
+
+- name: Install postgresql pinned version for xivo-dbms
+  apt:
+    name: "{{ item }}=9.6.10-0+deb9u1"
+    state: present
+  with_items:
+    - postgresql-9.6
+    - postgresql-contrib-9.6
+    - postgresql-plpython-9.6  
+
 - name: Install wazo-auth
   apt:
     name: wazo-auth
