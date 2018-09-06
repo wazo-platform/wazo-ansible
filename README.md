@@ -103,11 +103,6 @@ This recipe uses the role mwolff44.kamailio-mw, the complete list of variables i
 
 All variable can be shared with other recipes, except `kamailio_creatordb_host` which should be applied only on the `edge-proxy` group.
 
-Variables that are not inherited from roles:
-
-* `nestbox_repo_client_cert`: (no default value) certificate used to access the private package repository
-* `nestbox_repo_client_key`: (no default value) private key used to access the private package repository
-
 ### engine-api
 
 * `engine_api_host`: (default: `engine-api-ansible`) where other services should contact the engine API
@@ -136,11 +131,16 @@ Variables that are not inherited from roles:
 * `number_end`: (default: `1999`) end of phone numbers range
 * `engine_root_password`: (default: `superpass`) password for engine superuser `root`
 
-### mirror_keys.yml
+### mirror keys
 
 * `nestbox_mirror_user`: (no default value) the name of the certificate that will be created on the mirror to access the private Debian repo
 
-### nestbox.yml
+### private mirror access
+
+* `nestbox_repo_client_cert`: (no default value) certificate used to access the private package repository
+* `nestbox_repo_client_key`: (no default value) private key used to access the private package repository
+
+### nestbox
 
 Variables that control the path for certificates used for HTTPS:
 
@@ -161,8 +161,6 @@ Variables that control the path for certificates used for HTTPS:
 * `nestbox_db_deployd_password`: (default: `superpass`) database password for wazo-deployd
 * `nestbox_https_cert`: (default: `files/default-https.crt`) custom certificate for HTTPS
 * `nestbox_https_private_key`: (default: `files/default-https.key`) custom private key for HTTPS
-* `nestbox_repo_client_cert`: (no default value) certificate used to access the private package repository
-* `nestbox_repo_client_key`: (no default value) private key used to access the private package repository
 * `nestbox_root_user`: (default: `root`) nestbox superuser username
 * `nestbox_root_password`: (default: `secret`) nestbox superuser password
 
@@ -190,15 +188,10 @@ Variables that control the path for certificates used for HTTPS:
 * `router_root_user`: (default: `root`) router superuser username
 * `router_root_password`: (default: `superpass`) router superuser password
 
-### rtpengine
-
-* `nestbox_repo_client_cert`: (no default value) certificate used to access the private package repository
-* `nestbox_repo_client_key`: (no default value) private key used to access the private package repository
-
 ### sbc
 
-* `nestbox_repo_client_cert`: (no default value) certificate used to access the private package repository
-* `nestbox_repo_client_key`: (no default value) private key used to access the private package repository
+* `sbc_host`: (default: `sbc-ansible`) where other services should contact the sbc
+* `sbc_port_kamailio_http`: (default: `8888`) TCP port for HTTP RPC
 
 
 ## File hierarchy
