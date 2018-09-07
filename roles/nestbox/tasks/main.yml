@@ -34,7 +34,7 @@
 - name: Install nginx
   apt:
     name: nginx
-    state: present
+    state: latest
 - name: Disable the default nginx site
   file:
     path: /etc/nginx/sites-enabled/default
@@ -61,7 +61,7 @@
 - name: Install RabbitMQ
   apt:
     name: rabbitmq-server
-    state: present
+    state: latest
 
 - name: Install HTTPS driver for APT
   apt:
@@ -133,7 +133,7 @@
 - name: Install wazo-auth
   apt:
     name: wazo-auth
-    state: present
+    state: latest
   notify: reload nginx
 - name: Add wazo-auth user in groups
   user:
@@ -152,7 +152,7 @@
 - name: Install wazo-auth-cli
   apt:
     name: wazo-auth-cli
-    state: present
+    state: latest
 
 - name: Preconfigure wazo-deployd package
   debconf:
@@ -173,7 +173,7 @@
 - name: Install wazo-deployd
   apt:
     name: wazo-deployd
-    state: present
+    state: latest
 - name: Add wazo-deployd user in groups
   user:
     name: wazo-deployd
@@ -190,7 +190,7 @@
 - name: Install nestbox-confd
   apt:
     name: nestbox-confd
-    state: present
+    state: latest
   notify: reload nginx
 - name: Initialize nestbox-confd bus queues
   command: nestbox-confd-init-amqp
@@ -198,13 +198,13 @@
 - name: Install nestbox-ui
   apt:
     name: nestbox-ui
-    state: present
+    state: latest
   notify: reload nginx
 
 - name: Install nestbox-ui plugins
   apt:
     name: "{{ item }}"
-    state: present
+    state: latest
   notify: restart nestbox-ui
   loop:
     - nestbox-ui-wazo-plugins

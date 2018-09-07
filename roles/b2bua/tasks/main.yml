@@ -16,6 +16,7 @@
 - name: Install xivo-dist
   apt:
     name: xivo-dist
+    state: latest
 - name: Add persistent Wazo repository
   command: xivo-dist {{ b2bua_wazo_distribution }}
 - name: Remove bootstrap Wazo repository

@@ -16,6 +16,7 @@
 - name: Install xivo-dist
   apt:
     name: xivo-dist
+    state: latest
 - name: Add persistent Wazo repository
   command: xivo-dist {{ engine_api_wazo_distribution }}
 - name: Remove bootstrap Wazo repository
@@ -60,7 +61,7 @@
 - name: Install xivo-confgend-client
   apt:
     name: xivo-confgend-client
-    state: present
+    state: latest
 
 - name: Preconfigure wazo-auth package
   debconf:
@@ -96,13 +97,13 @@
 - name: Install wazo-auth
   apt:
     name: wazo-auth
-    state: present
+    state: latest
   notify: reload nginx
 
 - name: Install RabbitMQ
   apt:
     name: rabbitmq-server
-    state: present
+    state: latest
 
 - name: Create /var/lib/xivo
   file:
@@ -127,7 +128,7 @@
 - name: Install xivo-ctid-ng
   apt:
     name: xivo-ctid-ng
-    state: present
+    state: latest
 - name: Remove xivo-ctid-ng default config
   file:
     path: "/etc/xivo-ctid-ng/conf.d/{{ item }}"
@@ -150,7 +151,7 @@
 - name: Install xivo-amid
   apt:
     name: xivo-amid
-    state: present
+    state: latest
 
 - name: Preconfigure database initialization
   debconf:
@@ -185,11 +186,11 @@
 - name: Install xivo-confd
   apt:
     name: xivo-confd
-    state: present
+    state: latest
 - name: Install xivo-confd-client-python3
   apt:
     name: xivo-confd-client-python3
-    state: present
+    state: latest
 
 - name: Create xivo-confgend config dir
   file:
@@ -205,7 +206,7 @@
 - name: Install xivo-confgend
   apt:
     name: xivo-confgend
-    state: present
+    state: latest
 
 - name: Create xivo-agid config dir
   file:
@@ -225,28 +226,28 @@
 - name: Install xivo-agid
   apt:
     name: xivo-agid
-    state: present
+    state: latest
 
 - name: Install xivo-websocketd
   apt:
     name: xivo-websocketd
-    state: present
+    state: latest
 
 - name: Install nginx
   apt:
     name: nginx
-    state: present
+    state: latest
 - name: Install xivo-nginx
   apt:
     name: xivo-nginx
-    state: present
+    state: latest
   notify:
     - restart nginx
 
 - name: Install xivo-provd
   apt:
     name: xivo-provd
-    state: present
+    state: latest
 
 - name: Install wazo-nexsis
   apt:
