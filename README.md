@@ -10,7 +10,7 @@
 
 * You need a valid certificate to access the package repository.
   * If you have root access on mirror.wazo.io, you can get them with:
-    `ansible-playbook -i dev mirror_keys.yml --extra-vars nestbox_mirror_user=test`
+    `ansible-playbook -i dev mirror_keys.yml --extra-vars private_repo_user=test`
 
 ## Recipes
 
@@ -134,7 +134,7 @@ All variable can be shared with other recipes, except `kamailio_creatordb_host` 
 
 ### mirror keys
 
-* `nestbox_mirror_user`: (no default value) the name of the certificate that will be created on the mirror to access the private Debian repo
+* `private_repo_user`: (no default value) the name of the certificate that will be created on the mirror to access the private Debian repo
 
 ### private mirror access
 

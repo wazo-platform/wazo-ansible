@@ -3,43 +3,43 @@
   tasks:
     - name: Ensure variable for user name is defined
       assert:
-        that: 'nestbox_mirror_user is defined'
-        msg: "You must define the variable `nestbox_mirror_user` to copy the SSH key. Use `--extra-vars nestbox_mirror_user=user`."
+        that: 'private_repo_user is defined'
+        msg: "You must define the variable `private_repo_user` to copy the SSH key. Use `--extra-vars private_repo_user=user`."
     - name: Ensure variable for user name is valid
       assert:
-        that: 'nestbox_mirror_user != "ca"'
-        msg: "Invalid value for variable nestbox_mirror_user: '{{ nestbox_mirror_user }}'"
+        that: 'private_repo_user != "ca"'
+        msg: "Invalid value for variable private_repo_user: '{{ private_repo_user }}'"
     - name: Generate private key
       openssl_privatekey:
-        path: /etc/nginx/client_certs/nestbox/{{ nestbox_mirror_user }}.key
+        path: /etc/nginx/client_certs/nestbox/{{ private_repo_user }}.key
         state: present
     - name: Generate CSR
       openssl_csr:
-        path: /etc/nginx/client_certs/nestbox/{{ nestbox_mirror_user }}.csr
-        privatekey_path: /etc/nginx/client_certs/nestbox/{{ nestbox_mirror_user }}.key
+        path: /etc/nginx/client_certs/nestbox/{{ private_repo_user }}.csr
+        privatekey_path: /etc/nginx/client_certs/nestbox/{{ private_repo_user }}.key
         state: present
-        common_name: "{{ nestbox_mirror_user }}.clients.wazo.io"
+        common_name: "{{ private_repo_user }}.clients.wazo.io"
     - name: Generate certificate signed by CA
       command: |
         openssl x509
         -req
         -days 3650
         -sha256
-        -in {{ nestbox_mirror_user }}.csr
+        -in {{ private_repo_user }}.csr
         -CA ca.crt
         -CAkey ca.key
         -CAcreateserial
-        -out {{ nestbox_mirror_user }}.crt
+        -out {{ private_repo_user }}.crt
       args:
         chdir: "/etc/nginx/client_certs/nestbox"
-        creates: "{{ nestbox_mirror_user }}.crt"
+        creates: "{{ private_repo_user }}.crt"
     - name: Copy client certificate from mirror
       fetch:
-        src: /etc/nginx/client_certs/nestbox/{{ nestbox_mirror_user }}.crt
+        src: /etc/nginx/client_certs/nestbox/{{ private_repo_user }}.crt
         dest: "{{ nestbox_repo_client_cert }}"
         flat: yes
     - name: Copy client key from mirror
       fetch:
-        src: /etc/nginx/client_certs/nestbox/{{ nestbox_mirror_user }}.key
+        src: /etc/nginx/client_certs/nestbox/{{ private_repo_user }}.key
         dest: "{{ nestbox_repo_client_key }}"
         flat: yes
