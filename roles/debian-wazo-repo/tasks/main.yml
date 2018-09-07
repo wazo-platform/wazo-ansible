@@ -7,12 +7,16 @@
     url: http://mirror.wazo.community/wazo_current.key
     id: 2769B67EDBFF423F6874D7663F1BF7FC527FBC6A
     state: present
+- name: Gather packages facts
+  package_facts:
+    manager: auto
 - name: Add bootstrap Wazo repository
   apt_repository:
     repo: deb http://mirror.wazo.community/debian phoenix-stretch main
     state: present
     filename: wazo-install
     update_cache: yes
+  when: '"xivo-dist" not in ansible_facts.packages'
 - name: Install xivo-dist
   apt:
     name: xivo-dist
@@ -25,4 +29,5 @@
     state: absent
     filename: wazo-install
     update_cache: yes
+  when: '"xivo-dist" not in ansible_facts.packages'
 
