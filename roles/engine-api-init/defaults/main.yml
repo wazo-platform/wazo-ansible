@@ -1,19 +1,19 @@
-engine_db_admin_user: postgres
-engine_db_admin_password: superpass
+engine_api_db_admin_user: postgres
+engine_api_db_admin_password: superpass
 
-engine_db_auth_user: wazo-auth
-engine_db_auth_password: superpass
-engine_db_auth_name: wazo-auth
+engine_api_db_auth_user: wazo-auth
+engine_api_db_auth_password: superpass
+engine_api_db_auth_name: wazo-auth
 
-engine_db_confd_name: asterisk
-engine_db_confd_user: asterisk
-engine_db_confd_password: proformatique
+engine_api_db_confd_name: asterisk
+engine_api_db_confd_user: asterisk
+engine_api_db_confd_password: proformatique
 
-engine_db_host: localhost
-engine_db_port: 5432
+engine_api_db_host: localhost
+engine_api_db_port: 5432
 
 entity_name: Wazo
 language: en_US
 number_start: 1000
 number_end: 1999
-engine_root_password: superpass
+engine_api_root_password: superpass

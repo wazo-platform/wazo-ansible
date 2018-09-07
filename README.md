@@ -111,16 +111,16 @@ All variable can be shared with other recipes, except `kamailio_creatordb_host` 
 * `engine_api_https_cert`: (default: `files/default-https.crt`) custom certificate for HTTPS
 * `engine_api_https_private_key`: (default: `files/default-https.key`) custom private key for HTTPS
 * `engine_api_wazo_distribution`: (default: `wazo-dev-stretch`) wazo distribution from where packages are installed
-* `engine_db_host`: (default: `database-ansible`) PostgreSQL host
-* `engine_db_port`: (default: `5432`) PostgreSQL port
-* `engine_db_admin_user`: (default: `postgres`) PostgreSQL superuser username
-* `engine_db_admin_password`: (default: `superpass`) PostgreSQL superuser password
-* `engine_db_auth_name`: (default: `wazo-auth`) database name for wazo-auth
-* `engine_db_auth_user`: (default: `wazo-auth`) database username for wazo-auth
-* `engine_db_auth_password`: (default: `superpass`) database password for wazo-auth
-* `engine_db_confd_name`: (default: `asterisk`) database name for xivo-confd
-* `engine_db_confd_user`: (default: `asterisk`) database username for xivo-confd
-* `engine_db_confd_password`: (default: `superpass`) database password for xivo-confd
+* `engine_api_db_host`: (default: `database-ansible`) PostgreSQL host
+* `engine_api_db_port`: (default: `5432`) PostgreSQL port
+* `engine_api_db_admin_user`: (default: `postgres`) PostgreSQL superuser username
+* `engine_api_db_admin_password`: (default: `superpass`) PostgreSQL superuser password
+* `engine_api_db_auth_name`: (default: `wazo-auth`) database name for wazo-auth
+* `engine_api_db_auth_user`: (default: `wazo-auth`) database username for wazo-auth
+* `engine_api_db_auth_password`: (default: `superpass`) database password for wazo-auth
+* `engine_api_db_confd_name`: (default: `asterisk`) database name for xivo-confd
+* `engine_api_db_confd_user`: (default: `asterisk`) database username for xivo-confd
+* `engine_api_db_confd_password`: (default: `superpass`) database password for xivo-confd
 * `ari_username`: (default: `xivo`) B2BUA ARI username
 * `ari_password`: (default: `Nasheow8Eag`) B2BUA ARI password
 * `ami_username`: (default: `xivo_amid`) B2BUA AMI username
@@ -129,7 +129,7 @@ All variable can be shared with other recipes, except `kamailio_creatordb_host` 
 * `language`: (default: `en_US`)
 * `number_start`: (default: `1000`) start of phone numbers range
 * `number_end`: (default: `1999`) end of phone numbers range
-* `engine_root_password`: (default: `superpass`) password for engine superuser `root`
+* `engine_api_root_password`: (default: `superpass`) password for engine superuser `root`
 * `postgresql_pinned_version`: (default: `9.6.10-0+deb9u1`) version of package postgresql-9.1
 
 ### mirror keys
