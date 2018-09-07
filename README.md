@@ -168,6 +168,7 @@ Variables that control the path for certificates used for HTTPS:
 
 ### reverse-proxy
 
+* `reverse_proxy_engine_api`: (default: `true`) should engine APIs be exposed by reverse-proxy?
 * `reverse_proxy_https_cert`: (default: `files/default-https.crt`) custom certificate for HTTPS
 * `reverse_proxy_https_private_key`: (default: `files/default-https.key`) custom private key for HTTPS
 
