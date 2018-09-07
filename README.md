@@ -79,7 +79,6 @@
 * `b2bua_port_sysconfd`: (default: `8668`) TCP port for xivo-sysconfd HTTP interface
 * `b2bua_https_cert`: (default: `files/default-https.crt`) custom certificate for HTTPS
 * `b2bua_https_private_key`: (default: `files/default-https.key`) custom private key for HTTPS
-* `b2bua_wazo_distribution`: (default: `wazo-dev-stretch`) wazo distribution from where packages are installed
 
 ### database
 
@@ -140,6 +139,10 @@ All variable can be shared with other recipes, except `kamailio_creatordb_host` 
 
 * `nestbox_repo_client_cert`: (no default value) certificate used to access the private package repository
 * `nestbox_repo_client_key`: (no default value) private key used to access the private package repository
+
+### mirror distribution
+
+* `wazo_distribution`: (default: `wazo-dev-stretch`) wazo distribution from where packages are installed
 
 ### nestbox
 

@@ -2,35 +2,14 @@
   assert:
     that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
 
-- name: Add Wazo distribution key
-  apt_key:
-    url: http://mirror.wazo.community/wazo_current.key
-    id: 2769B67EDBFF423F6874D7663F1BF7FC527FBC6A
-    state: present
-- name: Add bootstrap Wazo repository
-  apt_repository:
-    repo: deb http://mirror.wazo.community/debian phoenix-stretch main
-    state: present
-    filename: wazo-install
-    update_cache: yes
-- name: Install xivo-dist
-  apt:
-    name: xivo-dist
-    state: latest
-- name: Add persistent Wazo repository
-  command: xivo-dist {{ engine_api_wazo_distribution }}
-- name: Remove bootstrap Wazo repository
-  apt_repository:
-    repo: deb http://mirror.wazo.community/debian phoenix-stretch main
-    state: absent
-    filename: wazo-install
-    update_cache: yes
+- name: Install Wazo repo package source
+  include_role:
+    name: debian-wazo-repo
 
 - name: Install xivo-certs
   apt:
     name: xivo-certs
     state: latest
-
 - name: Install custom certificate for HTTPS
   copy:
     src: "{{ engine_api_https_cert }}"
