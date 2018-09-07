@@ -6,7 +6,7 @@ from xivo_confd_client import Client as Confd
 
 
 def init_uc_engine(entity_name, language, number_start, number_end, password, engine_api_port):
-    c = Confd('localhost', port=engine_api_port, https=True, prefix='/api/confd', verify_certificate=False)
+    c = Confd('localhost', port=engine_api_port, https=True, prefix='/api/confd', verify_certificate='/usr/share/xivo-certs/server.crt')
 
     if c.wizard.get()['configured'] is not True:
         discover = c.wizard.discover()
