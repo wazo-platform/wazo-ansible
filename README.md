@@ -35,8 +35,8 @@
 
 * Run `ansible-playbook -i dev nestbox.yml`
 * Ensure your database server is running, if on another machine
-* Run `ansible-playbook -i dev nestbox-init.yml --extra-vars "db_host=remote db_admin_password=secret"`
-* Nestbox will be installed on `nestbox-dev-ansible`
+* Run `ansible-playbook -i dev nestbox-init.yml`
+* Nestbox will be installed on `nestbox-dev-ansible`, linked to `database-ansible` as its database server.
 
 ### PostgreSQL
 
