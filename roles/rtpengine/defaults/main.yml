@@ -1,24 +1,24 @@
-rtpe_distribution: stretch
-rtpe_version: 'mr6.4.1.1'
-rtpe_dependencies:
+rtpengine_distribution: stretch
+rtpengine_version: 'mr6.4.1.1'
+rtpengine_dependencies:
     - libavcodec-extra
-rtpe_packages:
+rtpengine_packages:
     - ngcp-rtpengine
     - ngcp-rtpengine-daemon
     - ngcp-rtpengine-iptables
     - ngcp-rtpengine-kernel-dkms
     - ngcp-rtpengine-recording-daemon
-rtpe_install_conf: True
-rtpe_config_tempate_dir: ../templates
-rtpe_config_dir: '/etc/rtpengine'
-rtpe_config_files: 
+rtpengine_install_conf: True
+rtpengine_config_tempate_dir: ../templates
+rtpengine_config_dir: '/etc/rtpengine'
+rtpengine_config_files: 
     - rtpengine.conf
-rtpe_interfaces: '12.23.34.54 internal/12.23.34.45;external/23.34.45.54!publicip'
-rtpe_listen: '127.0.0.1:2223'
-rtpe_rtp_min_port: 10000
-rtpe_rtp_max_port: 20000
-rtpe_rtp_tos: 184
-rtpe_in_kernel_packet_forwarding: True
-rtpe_max_sessions: 1000
-rtpe_pidfile: '/var/run/rtpengine.pid'
-rtpe_table: -1
+rtpengine_interfaces: '12.23.34.54 internal/12.23.34.45;external/23.34.45.54!publicip'
+rtpengine_listen: '127.0.0.1:2223'
+rtpengine_rtp_min_port: 10000
+rtpengine_rtp_max_port: 20000
+rtpengine_rtp_tos: 184
+rtpengine_in_kernel_packet_forwarding: True
+rtpengine_max_sessions: 1000
+rtpengine_pidfile: '/var/run/rtpengine.pid'
+rtpengine_table: -1

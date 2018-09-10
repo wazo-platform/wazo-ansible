@@ -214,23 +214,23 @@ Variables that control the path for certificates used for HTTPS:
 
 ### rtpengine
 
-* `rtpe_distribution`: (default: `stretch`)
-* `rtpe_version`: (default: `mr6.4.1.1`)
-* `rtpe_dependencies`: (default: list of `libavcodec-extra`) Debian packages to install as dependencies
-* `rtpe_packages`: (default: see `roles/rtpengine/defaults/main.yml`)
-* `rtpe_install_conf`: (default: `True`) should the recipe copy configuration files
-* `rtpe_config_tempate_dir`: (default: `../templates`)
-* `rtpe_config_dir`: (default: `/etc/rtpengine`)
-* `rtpe_config_files`: (default: list of `rtpengine.conf`)
-* `rtpe_interfaces`: (default: `12.23.34.54 internal/12.23.34.45;external/23.34.45.54!publicip`)
-* `rtpe_listen`: (default: `127.0.0.1:2223`)
-* `rtpe_rtp_min_port`: (default: `10000`)
-* `rtpe_rtp_max_port`: (default: `20000`)
-* `rtpe_rtp_tos`: (default: `184`)
-* `rtpe_in_kernel_packet_forwarding`: (default: `True`)
-* `rtpe_max_sessions`: (default: `1000`) maximum count of simulatneous RTP sessions
-* `rtpe_pidfile`: (default: `/var/run/rtpengine.pid`)
-* `rtpe_table`: (default: `-1`)
+* `rtpengine_distribution`: (default: `stretch`)
+* `rtpengine_version`: (default: `mr6.4.1.1`)
+* `rtpengine_dependencies`: (default: list of `libavcodec-extra`) Debian packages to install as dependencies
+* `rtpengine_packages`: (default: see `roles/rtpengine/defaults/main.yml`)
+* `rtpengine_install_conf`: (default: `True`) should the recipe copy configuration files
+* `rtpengine_config_tempate_dir`: (default: `../templates`)
+* `rtpengine_config_dir`: (default: `/etc/rtpengine`)
+* `rtpengine_config_files`: (default: list of `rtpengine.conf`)
+* `rtpengine_interfaces`: (default: `12.23.34.54 internal/12.23.34.45;external/23.34.45.54!publicip`)
+* `rtpengine_listen`: (default: `127.0.0.1:2223`)
+* `rtpengine_rtp_min_port`: (default: `10000`)
+* `rtpengine_rtp_max_port`: (default: `20000`)
+* `rtpengine_rtp_tos`: (default: `184`)
+* `rtpengine_in_kernel_packet_forwarding`: (default: `True`)
+* `rtpengine_max_sessions`: (default: `1000`) maximum count of simulatneous RTP sessions
+* `rtpengine_pidfile`: (default: `/var/run/rtpengine.pid`)
+* `rtpengine_table`: (default: `-1`)
 
 
 ### sbc

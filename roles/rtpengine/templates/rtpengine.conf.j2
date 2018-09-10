@@ -1,6 +1,6 @@
 [rtpengine]
 
-table = {{ rtpe_table }}
+table = {{ rtpengine_table }}
 no-fallback = false
 ### for userspace forwarding only:
 # table = -1
@@ -8,29 +8,29 @@ no-fallback = false
 ### a single interface:
 # interface = 123.234.345.456
 ### separate multiple interfaces with semicolons:
-interface = {{ rtpe_interfaces }}
+interface = {{ rtpengine_interfaces }}
 ### for different advertised address:
 # interface = 12.23.34.45!23.34.45.56
 
 
-listen-ng = {{ rtpe_listen}}
+listen-ng = {{ rtpengine_listen}}
 # listen-tcp = 25060
 # listen-udp = 12222
 
 timeout = 60
 silent-timeout = 3600
-tos = {{ rtpe_rtp_tos }}
+tos = {{ rtpengine_rtp_tos }}
 #control-tos = 184
 # delete-delay = 30
 # final-timeout = 10800
 
 # foreground = false
-pidfile = {{ rtpe_pidfile }}
+pidfile = {{ rtpengine_pidfile }}
 # num-threads = 16
 
-port-min = {{ rtpe_rtp_min_port }}
-port-max = {{ rtpe_rtp_max_port }}
-max-sessions = {{ rtpe_max_sessions }}
+port-min = {{ rtpengine_rtp_min_port }}
+port-max = {{ rtpengine_rtp_max_port }}
+max-sessions = {{ rtpengine_max_sessions }}
 
 # recording-dir = /var/spool/rtpengine
 # recording-method = proc

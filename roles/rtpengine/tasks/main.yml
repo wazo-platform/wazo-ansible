@@ -6,16 +6,16 @@
   apt:
     name: "{{ item }}"
     state: latest
-  with_items: "{{ rtpe_packages }}"
+  with_items: "{{ rtpengine_packages }}"
 
 - name: Copy config file
   template:
-    src: "{{ rtpe_config_tempate_dir }}/{{ item }}.j2"
-    dest: "{{ rtpe_config_dir }}/{{ item }}"
+    src: "{{ rtpengine_config_tempate_dir }}/{{ item }}.j2"
+    dest: "{{ rtpengine_config_dir }}/{{ item }}"
     backup: yes
-  with_items: "{{ rtpe_config_files }}"
+  with_items: "{{ rtpengine_config_files }}"
   notify: restart rtpengine
-  when: rtpe_install_conf
+  when: rtpengine_install_conf
 
 - name: Enable rtpengine
   systemd:
