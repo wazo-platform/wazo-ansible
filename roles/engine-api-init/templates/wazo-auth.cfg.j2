@@ -1,12 +1,12 @@
 wazo-auth wazo-auth/bootstrap-skip boolean false
 wazo-auth wazo-auth/db-skip boolean false
-wazo-auth wazo-auth/db-host string {{ engine_db_host }}
-wazo-auth wazo-auth/db-port string {{ engine_db_port }}
-wazo-auth wazo-auth/db-app-name string {{ engine_db_auth_name }}
-wazo-auth wazo-auth/db-app-username string {{ engine_db_auth_user }}
-wazo-auth wazo-auth/db-app-password password {{ engine_db_auth_password }}
-wazo-auth wazo-auth/db-admin-username string {{ engine_db_admin_user }}
-wazo-auth wazo-auth/db-admin-password password {{ engine_db_admin_password }}
-wazo-auth wazo-auth/db-confd-name string {{ engine_db_confd_name }}
-wazo-auth wazo-auth/db-confd-username string {{ engine_db_confd_user }}
-wazo-auth wazo-auth/db-confd-password password {{ engine_db_confd_password }}
+wazo-auth wazo-auth/db-host string {{ engine_api_db_host }}
+wazo-auth wazo-auth/db-port string {{ engine_api_db_port }}
+wazo-auth wazo-auth/db-app-name string {{ engine_api_db_auth_name }}
+wazo-auth wazo-auth/db-app-username string {{ engine_api_db_auth_user }}
+wazo-auth wazo-auth/db-app-password password {{ engine_api_db_auth_password }}
+wazo-auth wazo-auth/db-admin-username string {{ engine_api_db_admin_user }}
+wazo-auth wazo-auth/db-admin-password password {{ engine_api_db_admin_password }}
+wazo-auth wazo-auth/db-confd-name string {{ engine_api_db_confd_name }}
+wazo-auth wazo-auth/db-confd-username string {{ engine_api_db_confd_user }}
+wazo-auth wazo-auth/db-confd-password password {{ engine_api_db_confd_password }}

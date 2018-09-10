@@ -2,11 +2,6 @@
   assert:
     that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
 
-- name: Install wazo-auth-cli
-  apt:
-    name: wazo-auth-cli
-    state: present
-
 - name: Copy wazo-auth database preconfiguration
   template:
     src: templates/wazo-auth.cfg.j2
@@ -14,7 +9,7 @@
 - name: Reconfigure database options for wazo-auth package
   command: debconf-set-selections /tmp/wazo-auth.cfg
 - name: Initialize wazo-auth database
-  command: dpkg-reconfigure wazo-auth -f noninteractive
+  command: dpkg-reconfigure wazo-auth --frontend noninteractive
 
 - name: Copy wazo-router-confd database preconfiguration
   template:
@@ -23,7 +18,7 @@
 - name: Reconfigure database options for wazo-router-confd package
   command: debconf-set-selections /tmp/wazo-router-confd.cfg
 - name: Initialize wazo-router-confd database
-  command: dpkg-reconfigure wazo-router-confd -f noninteractive
+  command: dpkg-reconfigure wazo-router-confd --frontend noninteractive
 
 - name: Initialize wazo-auth, wazo-router-confd
   script: "files/router-init.sh

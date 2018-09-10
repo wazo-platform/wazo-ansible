@@ -1,2 +1,4 @@
 nestbox_https_cert: files/default-https.crt
 nestbox_https_private_key: files/default-https.key
+
+postgresql_pinned_version: 9.6.10-0+deb9u1

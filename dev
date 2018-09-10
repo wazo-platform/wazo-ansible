@@ -19,6 +19,11 @@ kamailio_db_user = kamailio_edge_proxy
 kamailio_db_pass = password
 kamailio_db_user_ro = kamailioro_edge_proxy
 kamailio_db_pass_ro = password
+kamailio_internal_interface = 192.168.16.4
+kamailio_external_interface = 192.168.16.4
+kamailio_public_ip = 69.70.94.94
+class5_wazo_servers = ["192.168.8.13"]
+rtp_engine_servers = ["udp:192.168.16.10:2223"]
 
 [engine-api]
 engine-api-ansible
@@ -34,6 +39,8 @@ router-ansible
 
 [rtpengine]
 rtpengine-ansible
+[rtpengine:vars]
+rtpe_interfaces = "internal/192.168.16.10;external/192.168.16.10!172.16.42.7"
 
 [sbc]
 sbc-ansible
@@ -48,6 +55,11 @@ kamailio_db_user = kamailio
 kamailio_db_pass = password
 kamailio_db_user_ro = kamailioro
 kamailio_db_pass_ro = password
+kamailio_internal_interface = 192.168.16.13
+kamailio_external_interface = 192.168.16.13
+kamailio_public_ip = 69.70.94.94
+class5_wazo_servers = ["192.168.8.13"]
+rtp_engine_servers = ["udp:192.168.16.10:2223"]
 
 [nexsis:children]
 b2bua
@@ -66,8 +78,8 @@ b2bua_port_http = 5039
 b2bua_port_https = 5040
 b2bua_port_sysconfd = 8668
 
-engine_db_host = postgresql-ansible
-engine_db_port = 5432
+engine_api_db_host = postgresql-ansible
+engine_api_db_port = 5432
 engine_api_host = engine-api-ansible
 engine_api_port = 443
 engine_api_port_confgend = 8669

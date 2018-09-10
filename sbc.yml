@@ -2,7 +2,7 @@
 - hosts: sbc
   become: yes
   roles:
-    - role: debian-nexsis-repo
+    - role: debian-repo-nexsis
     - role: mwolff44.kamailio-mw
       vars:
         kamailio_manage_repo: false
