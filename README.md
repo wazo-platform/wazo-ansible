@@ -102,6 +102,23 @@ This recipe uses the role mwolff44.kamailio-mw, the complete list of variables i
 
 All variable can be shared with other recipes, except `kamailio_creatordb_host` which should be applied only on the `edge-proxy` group.
 
+Other variables specific to the edge proxy:
+
+* `sbc_host`: (default: `sbc-ansible`) where other services should contact the sbc
+* `sbc_port_kamailio_http`: (default: `8888`) TCP port for HTTP RPC
+* `kamailio_internal_interface`: (default: `127.0.0.1`) the IP address of the interface exposed to providers
+* `kamailio_external_interface`: (default: `127.0.0.1`) the IP address of the interface exposed to clients
+* `kamailio_public_ip`: (default: `1.1.1.1`) the public IP address of the edge proxy (NAT detection)
+* `class5_wazo_servers`: (default: list with `127.0.0.1`)
+* `rtp_engine_servers`: (default: list with `udp:127.0.0.1:2223`)
+* `kamailio_sip_domain`: (default: `sip.wazo.com`)
+* `sbc_install_conf`: (default: `true`) should the recipe copy the configuration files
+* `sbc_conf_dir`: (default: `/etc/kamailio`) where ther recipe will copy the configuration files
+* `sbc_config_files`: (default: see `roles/sbc/defaults/main.yml`)
+* `kamailio_debug`: (default: `2`) debug level for Kamailio
+* `sipr_servers`: (default: list of `127.0.0.2`)
+* `sbc_servers`: (default: list of `127.0.0.2`)
+
 ### engine-api
 
 * `engine_api_host`: (default: `engine-api-ansible`) where other services should contact the engine API
@@ -195,10 +212,58 @@ Variables that control the path for certificates used for HTTPS:
 * `router_root_password`: (default: `superpass`) router superuser password
 * `postgresql_pinned_version`: (default: `9.6.10-0+deb9u1`) version of package postgresql-9.1
 
+### rtpengine
+
+* `rtpe_distribution`: (default: `stretch`)
+* `rtpe_version`: (default: `mr6.4.1.1`)
+* `rtpe_dependencies`: (default: list of `libavcodec-extra`) Debian packages to install as dependencies
+* `rtpe_packages`: (default: see `roles/rtpengine/defaults/main.yml`)
+* `rtpe_install_conf`: (default: `True`) should the recipe copy configuration files
+* `rtpe_config_tempate_dir`: (default: `../templates`)
+* `rtpe_config_dir`: (default: `/etc/rtpengine`)
+* `rtpe_config_files`: (default: list of `rtpengine.conf`)
+* `rtpe_interfaces`: (default: `12.23.34.54 internal/12.23.34.45;external/23.34.45.54!publicip`)
+* `rtpe_listen`: (default: `127.0.0.1:2223`)
+* `rtpe_rtp_min_port`: (default: `10000`)
+* `rtpe_rtp_max_port`: (default: `20000`)
+* `rtpe_rtp_tos`: (default: `184`)
+* `rtpe_in_kernel_packet_forwarding`: (default: `True`)
+* `rtpe_max_sessions`: (default: `1000`) maximum count of simulatneous RTP sessions
+* `rtpe_pidfile`: (default: `/var/run/rtpengine.pid`)
+* `rtpe_table`: (default: `-1`)
+
+
 ### sbc
+
+This recipe uses the role mwolff44.kamailio-mw, the complete list of variables is available [on Github](https://github.com/mwolff44/kamailio-mw#role-variables). Here are the most interesting ones:
+
+* `kamailio_creatordb_host`
+* `kamailio_db_host`
+* `kamailio_db_port`
+* `kamailio_db_root_user`
+* `kamailio_db_root_pass`
+* `kamailio_db_name`
+* `kamailio_db_user`
+* `kamailio_db_pass`
+* `kamailio_db_user_ro`
+* `kamailio_db_pass_ro`
+
+Other variables specific to the SBC:
 
 * `sbc_host`: (default: `sbc-ansible`) where other services should contact the sbc
 * `sbc_port_kamailio_http`: (default: `8888`) TCP port for HTTP RPC
+* `kamailio_internal_interface`: (default: `127.0.0.1`) the IP address of the interface exposed to providers
+* `kamailio_external_interface`: (default: `127.0.0.1`) the IP address of the interface exposed to clients
+* `kamailio_public_ip`: (default: `1.1.1.1`) the public IP address of the SBC (NAT detection)
+* `class5_wazo_servers`: (default: list with `127.0.0.1`)
+* `rtp_engine_servers`: (default: list with `udp:127.0.0.1:2223`)
+* `kamailio_sip_domain`: (default: `sip.wazo.com`)
+* `sbc_install_conf`: (default: `true`) should the recipe copy the configuration files
+* `sbc_conf_dir`: (default: `/etc/kamailio`) where ther recipe will copy the configuration files
+* `sbc_config_files`: (default: see `roles/sbc/defaults/main.yml`)
+* `kamailio_debug`: (default: `2`) debug level for Kamailio
+* `sipr_servers`: (default: list of `127.0.0.2`)
+* `sbc_servers`: (default: list of `127.0.0.2`)
 
 
 ## File hierarchy
