@@ -24,3 +24,11 @@
     - role: edge-proxy
       vars:
         kamailio_app: 'EDP'
+        # These lines are commented cause these variables need to be initialised in inventory's file
+        # kamailio_internal_interface: 127.0.0.1
+        # kamailio_external_interface: 127.0.0.1
+        # kamailio_public_ip: 1.1.1.1
+        # class5_wazo_servers:
+        #   - 127.0.0.1
+        # rtp_engine_servers:
+        #  - udp:127.0.0.1:2223
