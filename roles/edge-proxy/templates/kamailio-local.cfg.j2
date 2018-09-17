@@ -3,17 +3,28 @@
 ##!define DBURL "postgres://kamailio:mypass@1.1.1.1:5432/kamailiopyfb"
 #!define DBURL "postgres://{{ kamailio_db_user }}:{{ kamailio_db_pass }}@{{ kamailio_db_host }}:{{ kamailio_db_port }}/{{ kamailio_db_name }}"
 
-#!substdef "!MY_IP_ADDRESS!{{ kamailio_internal_interface }}!g"
+
+#!substdef "!MY_IP_ADDR!{{ kamailio_internal_interface }}!g"
 #!substdef "!MY_IP_ADDRESS_INTERNAL!{{ kamailio_internal_interface }}!g"
 #!substdef "!MY_IP_ADDRESS_EXTERNAL!{{ kamailio_external_interface }}!g"
+#!substdef "!MY_DOMAIN!{{ kamailio_sip_domain }}!g"
+#!substdef "!MY_WS_PORT!80!g"
+#!substdef "!MY_WSS_PORT!443!g"
+#!substdef "!MY_WS_ADDR!tcp:MY_IP_ADDRESS_EXTERNAL:MY_WS_PORT!g"
+#!substdef "!MY_WSS_ADDR!tls:MY_IP_ADDRESS_EXTERNAL:MY_WSS_PORT!g"
+
+
+#!define LISTEN_UDP_PUBLIC udp:MY_IP_ADDRESS_EXTERNAL:5060
+#!define LISTEN_UDP_PRIVATE udp:MY_IP_ADDRESS_INTERNAL:5070
+#!define LISTEN_PUBLIC_WS ws:MY_IP_ADDRESS_EXTERNAL:80
+#!define LISTEN_UDP_PUBLIC_WSS wss:MY_IP_ADDRESS_EXTERNAL:443
 
 port=5060
+port=5070
 
-{% if kamailio_internal_interface != kamailio_external_interface %}
-listen={{ kamailio_internal_interface }}
-{% endif %}
+listen=udp:{{ kamailio_internal_interface }}:5070
 listen=udp:{{ kamailio_external_interface }}:5060 advertise {{ kamailio_public_ip }}:5060
-listen=tls:{{ kamailio_external_interface  }}:443 advertise {{ kamailio_public_ip  }}:443
+listen=tcp:{{ kamailio_external_interface }}:80 advertise {{ kamailio_public_ip }}:80
 
 debug={{ kamailio_debug }}
 
@@ -26,7 +37,10 @@ debug={{ kamailio_debug }}
 
 #!define RTPENGINE_LIST "{% for rtp_engine_server in rtp_engine_servers %}{{ rtp_engine_server }}{% endfor %}"
 
+{% if edp_tls_on %}
 #!define WITH_WSS
 #!define WITH_TLS
+listen=tls:{{ kamailio_external_interface  }}:443 advertise {{ kamailio_public_ip  }}:443
+{% endif %}
 #!define WITH_ANTIFLOOD
 #!define WITH_REGISTRAR
