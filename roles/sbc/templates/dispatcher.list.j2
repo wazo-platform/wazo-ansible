@@ -21,3 +21,8 @@
 1 sip:{{ sbc_server }}:5060
 {% endfor %}
 
+# Carrier servers
+{% for carrier_server in carrier_servers %}
+11 sip:{{ carrier_server }}:5060
+4 sip:{{ carrier_server }}:5060
+{% endfor %}

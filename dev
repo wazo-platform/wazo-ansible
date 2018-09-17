@@ -59,6 +59,7 @@ kamailio_internal_interface = 192.168.16.13
 kamailio_external_interface = 192.168.16.13
 kamailio_public_ip = 69.70.94.94
 class5_wazo_servers = ["192.168.8.13"]
+carrier_servers = ["194.177.32.2"]
 rtp_engine_servers = ["udp:192.168.16.10:2223"]
 
 [nexsis:children]

@@ -22,5 +22,7 @@ sipr_servers:
      - 127.0.0.2
 sbc_servers:
     - 127.0.0.2
+carrier_servers:
+    - 127.0.0.2
 rtp_engine_servers:
     - udp:127.0.0.1:2223=1 # protocol:ip_address:port=1  multiple rtproxies for LB with weights (missing weight defaults to 1)
