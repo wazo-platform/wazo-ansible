@@ -1,4 +1,6 @@
 ---
+kamailio_app: 'APP_EDP'
+edp_tls_on: False
 kamailio_sip_domain: 'openstack.wazo.community'
 kamailio_db_engine: 'PGSQL' # check Kamailio doc for supported DB engine (PGSQL)
 kamailio_db_host: '127.0.0.1'
