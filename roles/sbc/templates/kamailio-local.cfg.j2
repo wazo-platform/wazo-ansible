@@ -6,13 +6,14 @@
 #!substdef "!MY_IP_ADDRESS!{{ kamailio_internal_interface }}!g"
 #!substdef "!MY_IP_ADDRESS_INTERNAL!{{ kamailio_internal_interface }}!g"
 #!substdef "!MY_IP_ADDRESS_EXTERNAL!{{ kamailio_external_interface }}!g"
+#!define ADDRESS_INTERNAL udp:{{ kamailio_internal_interface }}:5070
+#!define ADDRESS_EXTERNAL udp:{{ kamailio_external_interface }}:5070
 
 port=5060
+port=5070
 
-{% if kamailio_internal_interface != kamailio_external_interface %}
-listen={{ kamailio_internal_interface }}
-{% endif %}
-listen={{ kamailio_external_interface }} advertise {{ kamailio_public_ip }}:5060
+listen=udp:{{ kamailio_internal_interface }}:5070
+listen=udp:{{ kamailio_external_interface }}:5060 advertise {{ kamailio_public_ip }}:5060
 
 debug={{ kamailio_debug }}
 
