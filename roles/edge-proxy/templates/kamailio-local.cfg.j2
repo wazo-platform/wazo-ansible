@@ -14,10 +14,10 @@
 #!substdef "!MY_WSS_ADDR!tls:MY_IP_ADDRESS_EXTERNAL:MY_WSS_PORT!g"
 
 
-#!define LISTEN_UDP_PUBLIC udp:MY_IP_ADDRESS_EXTERNAL:5060
-#!define LISTEN_UDP_PRIVATE udp:MY_IP_ADDRESS_INTERNAL:5070
-#!define LISTEN_PUBLIC_WS ws:MY_IP_ADDRESS_EXTERNAL:80
-#!define LISTEN_UDP_PUBLIC_WSS wss:MY_IP_ADDRESS_EXTERNAL:443
+#!define LISTEN_UDP_PUBLIC udp:{{ kamailio_external_interface }}:5060
+#!define LISTEN_UDP_PRIVATE udp:{{ kamailio_internal_interface }}:5070
+#!define LISTEN_PUBLIC_WS ws:{{ kamailio_external_interface }}:80
+#!define LISTEN_UDP_PUBLIC_WSS wss:{{ kamailio_external_interface }}:443
 
 port=5060
 port=5070
