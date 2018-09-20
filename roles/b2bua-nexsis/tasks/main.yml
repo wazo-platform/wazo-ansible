@@ -1,0 +1,7 @@
+- name: Install Nexsis repo package source
+  include_role:
+    name: debian-repo-nexsis
+- name: Install wazo-asterisk-nexsis
+  apt:
+    name: wazo-nexsis-asterisk
+    state: latest
