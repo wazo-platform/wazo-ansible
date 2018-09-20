@@ -232,7 +232,3 @@
   file:
     path: /var/lib/xivo/disabled
     state: absent
-- name: Ensure local PostgreSQL is shut down
-  service:
-    name: postgresql
-    state: stopped
