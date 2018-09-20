@@ -228,11 +228,6 @@
     name: xivo-provd
     state: latest
 
-- name: Install wazo-nexsis
-  apt:
-    name: wazo-nexsis
-    state: latest
-
 - name: Enable Wazo services
   file:
     path: /var/lib/xivo/disabled
