@@ -102,6 +102,7 @@ router_host = router-ansible
 router_port = 443
 router_db_host = postgresql-ansible
 router_db_port = 5432
+router_listen_address = 0.0.0.0
 
 sbc_host = sbc-ansible
 sbc_port_kamailio_http = 8888
