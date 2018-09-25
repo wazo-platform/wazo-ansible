@@ -1,4 +1,4 @@
 [general](+)
-bindaddr=0.0.0.0
+bindaddr={{ b2bua_listen_address }}
 bindport={{ b2bua_port_http }}
-tlsbindaddr=0.0.0.0:{{ b2bua_port_https }}
+tlsbindaddr={{ b2bua_listen_address }}:{{ b2bua_port_https }}

@@ -78,6 +78,9 @@ b2bua_port_ami = 5038
 b2bua_port_http = 5039
 b2bua_port_https = 5040
 b2bua_port_sysconfd = 8668
+b2bua_ami_permit_client_address = 0.0.0.0
+b2bua_ami_permit_client_mask = 0.0.0.0
+b2bua_listen_address = 0.0.0.0
 
 engine_api_db_host = postgresql-ansible
 engine_api_db_port = 5432
