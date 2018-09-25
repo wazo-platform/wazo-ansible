@@ -1,5 +1,5 @@
 - hosts: b2bua
   become: yes
   roles:
-    - role: b2bua-nexsis
     - role: b2bua
+    - role: b2bua-nexsis
