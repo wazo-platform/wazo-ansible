@@ -203,9 +203,8 @@
 
 - name: Install nestbox-ui plugins
   apt:
-    name: "{{ item }}"
+    name:
+      - nestbox-ui-wazo-plugins
+      - nestbox-ui-wazo-router-plugins
     state: latest
   notify: restart nestbox-ui
-  loop:
-    - nestbox-ui-wazo-plugins
-    - nestbox-ui-wazo-router-plugins

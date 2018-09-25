@@ -33,14 +33,13 @@
 
 - name: Install Asterisk
   apt:
-    name: "{{ item }}"
+    name:
+      - xivo-config
+      - asterisk
+      - asterisk-moh-opsound-wav
+      - asterisk-sounds-wav-en-us
+      - xivo-sounds-en-us
     state: latest
-  loop:
-    - xivo-config
-    - asterisk
-    - asterisk-moh-opsound-wav
-    - asterisk-sounds-wav-en-us
-    - xivo-sounds-en-us
 - name: Ensure Asterisk is started
   service:
     name: asterisk
