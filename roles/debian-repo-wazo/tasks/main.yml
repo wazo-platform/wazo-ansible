@@ -7,9 +7,13 @@
     url: http://mirror.wazo.community/wazo_current.key
     id: 2769B67EDBFF423F6874D7663F1BF7FC527FBC6A
     state: present
+- name: Install APT python bindings
+  apt:
+    name: python-apt
+    state: present
 - name: Gather packages facts
   package_facts:
-    manager: auto
+    manager: apt
 - name: Add bootstrap Wazo repository
   apt_repository:
     repo: deb http://mirror.wazo.community/debian phoenix-stretch main
