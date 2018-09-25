@@ -9,5 +9,6 @@ engine_api_db_host: localhost
 engine_api_db_confd_name: asterisk
 engine_api_db_confd_user: asterisk
 engine_api_db_confd_password: proformatique
+engine_api_listen_address: 127.0.0.1
 
 postgresql_pinned_version: 9.6.10-0+deb9u1

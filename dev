@@ -87,6 +87,7 @@ engine_api_db_port = 5432
 engine_api_host = engine-api-ansible
 engine_api_port = 443
 engine_api_port_confgend = 8669
+engine_api_listen_address = 0.0.0.0
 
 nestbox_host = nestbox-dev-ansible
 nestbox_port = 443
