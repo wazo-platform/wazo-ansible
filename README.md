@@ -79,11 +79,15 @@
 * `b2bua_port_sysconfd`: (default: `8668`) TCP port for xivo-sysconfd HTTP interface
 * `b2bua_https_cert`: (default: `files/default-https.crt`) custom certificate for HTTPS
 * `b2bua_https_private_key`: (default: `files/default-https.key`) custom private key for HTTPS
+* `b2bua_ami_permit_client_address`: (default: `127.0.0.1`)
+* `b2bua_ami_permit_client_mask`: (default: `255.255.255.255`)
+* `b2bua_listen_address`: (default: `127.0.0.1`)
 
 ### database
 
 `postgresql_port`: (default: `5432`) TCP port for PostgreSQL
 `postgresql_superuser_password`: (default: `superpass`) password for superuser `postgres`
+`postgresql_listen_addresses`: (default: `127.0.0.1`)
 
 ### edge-proxy
 
@@ -137,6 +141,8 @@ Other variables specific to the edge proxy:
 * `engine_api_db_confd_name`: (default: `asterisk`) database name for xivo-confd
 * `engine_api_db_confd_user`: (default: `asterisk`) database username for xivo-confd
 * `engine_api_db_confd_password`: (default: `superpass`) database password for xivo-confd
+* `engine_api_listen_address`: (default: `127.0.0.1`)
+* `engine_api_configure_wizard:`: (default: `true`)
 * `ari_username`: (default: `xivo`) B2BUA ARI username
 * `ari_password`: (default: `Nasheow8Eag`) B2BUA ARI password
 * `ami_username`: (default: `xivo_amid`) B2BUA AMI username
@@ -210,6 +216,7 @@ Variables that control the path for certificates used for HTTPS:
 * `router_https_private_key`: (default: `files/default-https.key`) custom private key for HTTPS
 * `router_root_user`: (default: `root`) router superuser username
 * `router_root_password`: (default: `superpass`) router superuser password
+* `router_listen_address`: (default: `127.0.0.1`)
 * `postgresql_pinned_version`: (default: `9.6.10-0+deb9u1`) version of package postgresql-9.1
 
 ### rtpengine
