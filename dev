@@ -97,6 +97,7 @@ nestbox_db_admin_password = superpass
 
 postgresql_port = 5432
 postgresql_superuser_password = superpass
+postgresql_listen_addresses = *
 
 router_host = router-ansible
 router_port = 443

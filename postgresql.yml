@@ -23,7 +23,7 @@
           - option: port
             value: "{{ postgresql_port }}"
           - option: listen_addresses
-            value: "*"
+            value: "{{ postgresql_listen_addresses }}"
         postgresql_users:
           - name: postgres
             password: "{{ postgresql_superuser_password }}"
