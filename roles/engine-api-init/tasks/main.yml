@@ -40,3 +40,4 @@
   args:
     executable: python3
     creates: /var/lib/xivo/configured
+  when: engine_api_configure_wizard == "true"

@@ -12,6 +12,7 @@ engine_api_db_confd_password: proformatique
 engine_api_db_host: localhost
 engine_api_db_port: 5432
 
+engine_api_configure_wizard: true
 entity_name: Wazo
 language: en_US
 number_start: 1000
