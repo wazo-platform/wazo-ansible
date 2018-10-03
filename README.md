@@ -130,7 +130,6 @@ Other variables specific to the edge proxy:
 * `engine_api_port_confgend`: (default: `8669`) TCP port for xivo-confgend
 * `engine_api_https_cert`: (default: `files/default-https.crt`) custom certificate for HTTPS
 * `engine_api_https_private_key`: (default: `files/default-https.key`) custom private key for HTTPS
-* `engine_api_wazo_distribution`: (default: `wazo-dev-stretch`) wazo distribution from where packages are installed
 * `engine_api_db_host`: (default: `database-ansible`) PostgreSQL host
 * `engine_api_db_port`: (default: `5432`) PostgreSQL port
 * `engine_api_db_admin_user`: (default: `postgres`) PostgreSQL superuser username
