@@ -10,6 +10,10 @@ kamailio_db_user: 'kamailio'
 kamailio_db_pass: 'password'
 kamailio_db_user_ro: 'kamailioro' # readonly user
 kamailio_db_pass_ro: 'password' # readonly pass
+
+kamailio_internal_port: 5070
+kamailio_external_port: 5060
+
 sbc_install_conf: true
 sbc_conf_dir: '/etc/kamailio'
 sbc_config_files:
