@@ -2,9 +2,9 @@
 method = TLSv1
 verify_certificate = yes
 require_certificate = no
-private_key = /etc/certs/demoCA/openstack.wazo.io/key.pem
-certificate = /etc/certs/demoCA/openstack.wazo.io/cert.pem
-#ca_list = /etc/certs/demoCA/cert.pem
+private_key = {{ edp_certs_directory }}/key.pem
+certificate = {{ edp_certs_directory }}/cert.pem
+#ca_list = {{ edp_certs_directory }}/cert.pem
 
 [client:default]
 verify_certificate = no
