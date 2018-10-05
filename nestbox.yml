@@ -2,5 +2,4 @@
 - hosts: nestbox
   become: yes
   roles:
-    - debian-repo-nexsis
     - nestbox
