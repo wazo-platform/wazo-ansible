@@ -11,3 +11,24 @@
   roles:
     - role: engine-api
     - role: engine-api-init
+
+- hosts: engine-api
+  tasks:
+    - name: Install wazo-service
+      apt:
+        name: wazo-service
+        state: latest
+    - name: Install remaining daemons
+      apt:
+        name:
+          - consul
+          - xivo-dxtora
+          - wazo-call-logd
+          - wazo-dird
+          - wazo-plugind
+          - wazo-webhookd
+          - xivo-agentd
+          - xivo-ctid
+          - xivo-dird-phoned
+          - xivo-dxtora
+        state: latest
