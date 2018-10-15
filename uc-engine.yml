@@ -23,6 +23,7 @@
         name:
           - consul
           - xivo-dxtora
+          - xivo-monitoring
           - wazo-call-logd
           - wazo-dird
           - wazo-plugind
