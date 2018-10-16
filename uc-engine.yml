@@ -33,3 +33,10 @@
           - xivo-dird-phoned
           - xivo-dxtora
         state: latest
+
+    - name: Install nestbox plugin
+      apt:
+        name:
+          - wazo-deployd-client
+          - wazo-nestbox-plugin
+        state: latest
