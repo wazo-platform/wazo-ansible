@@ -18,6 +18,10 @@
       apt:
         name: wazo-service
         state: latest
+    - name: Install wazo-upgrade
+      apt:
+        name: xivo-upgrade
+        state: latest
     - name: Install remaining daemons
       apt:
         name:
