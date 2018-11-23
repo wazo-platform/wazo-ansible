@@ -1,7 +1,6 @@
 uuid: undefined
 enabled_backend_plugins:
   xivo_admin: true
-  xivo_service: true
   ldap_user: true
 service_discovery:
   enabled: false
