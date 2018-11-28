@@ -11,6 +11,13 @@
 - name: Initialize wazo-auth database
   command: dpkg-reconfigure wazo-auth --frontend noninteractive
 
+- name: Install wazo-auth-keys
+  apt:
+    name: wazo-auth-keys
+    state: latest
+- name: Create service users with wazo-auth-keys
+  command: wazo-auth-keys service update
+
 - name: Copy main database preconfiguration
   template:
     src: templates/xivo-manage-db.cfg.j2
