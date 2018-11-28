@@ -7,20 +7,9 @@
   apt:
     name: xivo-upgrade
     state: latest
-- name: Install remaining daemons
+- name: Install remaining daemons with xivo-base
   apt:
-    name:
-      - consul
-      - xivo-dxtora
-      - xivo-monitoring
-      - wazo-call-logd
-      - wazo-dird
-      - wazo-plugind
-      - wazo-webhookd
-      - xivo-agentd
-      - xivo-ctid
-      - xivo-dird-phoned
-      - xivo-dxtora
+    name: xivo-base
     state: latest
 
 - name: Install nestbox plugin
