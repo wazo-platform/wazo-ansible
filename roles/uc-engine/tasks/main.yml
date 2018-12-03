@@ -7,11 +7,14 @@
   apt:
     name: xivo-upgrade
     state: latest
-- name: Install remaining daemons with xivo-base
+- name: Install xivo-base
   apt:
     name: xivo-base
     state: latest
-
+- name: Install wazo-setupd
+  apt:
+    name: wazo-setupd
+    state: latest
 - name: Install nestbox plugin
   apt:
     name:
