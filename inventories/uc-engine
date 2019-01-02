@@ -1,7 +1,7 @@
 # You only have to change [uc-engine], other values are correct
 
 [uc-engine-host]
-localhost ansible_connection=local
+192.168.32.112
 
 [database:children]
 uc-engine-host
@@ -23,12 +23,18 @@ b2bua_port_http = 5039
 b2bua_port_https = 5040
 b2bua_port_sysconfd = 8668
 
-engine_api_db_host = localhost
-engine_api_db_port = 5432
 engine_api_host = localhost
 engine_api_port = 443
 engine_api_port_confgend = 8669
 engine_api_configure_wizard = false
+engine_api_db_host = localhost
+engine_api_db_port = 5432
+engine_api_db_auth_name = asterisk
+engine_api_db_auth_user = asterisk
+engine_api_db_auth_password = proformatique
+engine_api_db_confd_name = asterisk
+engine_api_db_confd_user = asterisk
+engine_api_db_confd_password = proformatique
 
 postgresql_port = 5432
 postgresql_superuser_password = superpass
