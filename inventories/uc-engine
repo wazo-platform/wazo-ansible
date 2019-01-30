@@ -1,4 +1,4 @@
-# You only have to change [uc-engine], other values are correct
+# You only have to change [uc-engine-host], other values are correct
 
 [uc-engine-host]
 localhost ansible_connection=local
