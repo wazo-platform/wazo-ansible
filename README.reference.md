@@ -10,62 +10,62 @@
 
 * You need a valid certificate to access the package repository.
   * If you have root access on mirror.wazo.io, you can get them with:
-    `ansible-playbook -i inventories/dev mirror_keys.yml --extra-vars private_repo_user=test`
+    `ansible-playbook -i inventories/distributed mirror_keys.yml --extra-vars private_repo_user=test`
 
 ## Recipes
 
 ### B2BUA
 
-* Run `ansible-playbook -i inventories/dev b2bua.yml`
+* Run `ansible-playbook -i inventories/distributed b2bua.yml`
 * The B2BUA will be installed on `b2bua-ansible`
 
 ### Edge proxy
 
-* Run `ansible-playbook -i inventories/dev edge-proxy.yml`
+* Run `ansible-playbook -i inventories/distributed edge-proxy.yml`
 * The edge proxy will be installed on `edge-proxy-ansible`
 
 ### Engine API
 
-* Run `ansible-playbook -i inventories/dev engine-api.yml`
+* Run `ansible-playbook -i inventories/distributed engine-api.yml`
 * Ensure your database server is running, if on another machine
-* Run `ansible-playbook -i inventories/dev engine-api-init.yml`
+* Run `ansible-playbook -i inventories/distributed engine-api-init.yml`
 * The engine API will be installed on `engine-api-ansible`
 
 ### Nestbox
 
-* Run `ansible-playbook -i inventories/dev nestbox.yml`
+* Run `ansible-playbook -i inventories/distributed nestbox.yml`
 * Ensure your database server is running, if on another machine
-* Run `ansible-playbook -i inventories/dev nestbox-init.yml`
+* Run `ansible-playbook -i inventories/distributed nestbox-init.yml`
 * Nestbox will be installed on `nestbox-dev-ansible`, linked to `database-ansible` as its database server.
 
 ### PostgreSQL
 
 * Run `ansible-galaxy install -r requirements-postgresql.yml`
-* Run `ansible-playbook -i inventories/dev postgresql.yml`
+* Run `ansible-playbook -i inventories/distributed postgresql.yml`
 * PostgreSQL will be installed on `postgresql-ansible`
 
 ### Reverse proxy HTTP
 
 * Run `ansible-galaxy install -r requirements-reverse-proxy.yml`
-* Run `ansible-playbook -i inventories/dev reverse-proxy.yml`
+* Run `ansible-playbook -i inventories/distributed reverse-proxy.yml`
 * The HTTP reverse proxy will be installed on `reverse-proxy-ansible`
 
 ### Router
 
-* Run `ansible-playbook -i inventories/dev router.yml`
+* Run `ansible-playbook -i inventories/distributed router.yml`
 * Ensure your database server is running, if on another machine
-* Run `ansible-playbook -i inventories/dev router-init.yml`
+* Run `ansible-playbook -i inventories/distributed router-init.yml`
 * The router will be installed on `router-ansible`
 
 ### RTP Engine
 
-* Run `ansible-playbook -i inventories/dev rtpe.yml`
+* Run `ansible-playbook -i inventories/distributed rtpe.yml`
 * The RTP engine will be installed on `rtpengine-ansible`
 
 ### SBC
 
 * Run `ansible-galaxy install -r requirements-sbc.yml`
-* Run `ansible-playbook -i inventories/dev sbc.yml`
+* Run `ansible-playbook -i inventories/distributed sbc.yml`
 * The SBC will be installed on `sbc-ansible`
 
 ## Variables
