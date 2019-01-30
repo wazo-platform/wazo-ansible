@@ -19,6 +19,22 @@ ansible-galaxy install -r requirements-reverse-proxy.yml
 ansible-playbook -i inventories/uc-engine uc-engine.yml
 ```
 
+
+## Nestbox (all in one machine)
+
+* You need a valid certificate to access the package repository.
+  * If you have root access on mirror.wazo.io, you can get them with:
+    `ansible-playbook -i inventories/nestbox mirror_keys.yml --extra-vars private_repo_user=test`
+* Edit `inventories/nestbox` and set your host in `[nestbox-host]`
+* Run:
+
+```shell
+ansible-galaxy install -r requirements-postgresql.yml
+
+ansible-playbook -i inventories/nestbox nestbox-all-in-one.yml
+```
+
+
 ## Distributed Wazo
 
 * Edit or copy `inventories/distributed` and replace the hosts `*-ansible` with your hosts

@@ -1,0 +1,8 @@
+---
+- import_playbook: postgresql.yml
+
+- hosts: nestbox-host
+  become: yes
+  roles:
+    - role: nestbox
+    - role: nestbox-init
