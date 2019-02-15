@@ -50,6 +50,8 @@
     state: directory
     owner: asterisk
     mode: 660
+- name: Ensure Asterisk permissions
+  command: xivo-fix-paths-rights
 - name: Install Asterisk AGI configuration
   template:
     src: templates/asterisk-extensions.conf.j2
