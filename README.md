@@ -14,7 +14,6 @@
 
 ```shell
 ansible-galaxy install -r requirements-postgresql.yml
-ansible-galaxy install -r requirements-reverse-proxy.yml
 
 ansible-playbook -i inventories/uc-engine uc-engine.yml
 ```
