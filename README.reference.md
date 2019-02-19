@@ -162,8 +162,9 @@ Other variables specific to the edge proxy:
 * `nestbox_repo_client_cert`: (no default value) certificate used to access the private package repository
 * `nestbox_repo_client_key`: (no default value) private key used to access the private package repository
 
-### mirror distribution
+### debian repo and distribution
 
+* `wazo_debian_repo`: (default: `main`) wazo repository from where packages are installed. Valid values: `main` and `archive`
 * `wazo_distribution`: (default: `wazo-dev-stretch`) wazo distribution from where packages are installed
 
 ### nestbox

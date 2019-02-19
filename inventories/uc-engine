@@ -40,4 +40,5 @@ postgresql_port = 5432
 postgresql_superuser_password = superpass
 postgresql_listen_addresses = 127.0.0.1
 
+wazo_debian_repo = main
 wazo_distribution = wazo-dev-stretch
