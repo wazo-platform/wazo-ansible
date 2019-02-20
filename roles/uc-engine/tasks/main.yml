@@ -21,3 +21,5 @@
       - wazo-deployd-client
       - wazo-nestbox-plugin
     state: latest
+- name: Change Wazo distribution for later upgrades
+  command: xivo-dist --{{ wazo_debian_repo_upgrade }}-repo {{ wazo_distribution_upgrade }}

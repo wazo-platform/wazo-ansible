@@ -166,6 +166,8 @@ Other variables specific to the edge proxy:
 
 * `wazo_debian_repo`: (default: `main`) wazo repository from where packages are installed. Valid values: `main` and `archive`
 * `wazo_distribution`: (default: `wazo-dev-stretch`) wazo distribution from where packages are installed
+* `wazo_debian_repo_upgrade`: (default: `main`) wazo repository for later upgrades. This repo is not used during installation, only set up at the end for later upgrades. Valid values: `main` and `archive`
+* `wazo_distribution_upgrade`: (default: `wazo-dev-stretch`) wazo distribution for later upgrades. This distribution is not used during installation, only set up at the end for later upgrades.
 
 ### nestbox
 
