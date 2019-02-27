@@ -22,7 +22,12 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 ## Nestbox (all in one machine)
 
 * You need a valid certificate to access the package repository.
-  * If you have root access on mirror.wazo.io, you can get them with:
+  * If you have root access on mirror.wazo.io, the following command will:
+    * Connect to mirror.wazo.io
+    * Generate key pair for the given user `<test>`
+    * Authorize key to access nestbox repo
+    * Download key to your machine
+
     `ansible-playbook -i inventories/nestbox mirror_keys.yml --extra-vars private_repo_user=test`
 * Edit `inventories/nestbox` and set your host in `[nestbox-host]`
 * Run:
