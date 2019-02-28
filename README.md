@@ -28,15 +28,18 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
     * Authorize key to access nestbox repo
     * Download key to your machine
 
-    `ansible-playbook -i inventories/nestbox mirror_keys.yml --extra-vars private_repo_user=test`
+    ```shell
+    ansible-playbook -i inventories/nestbox mirror_keys.yml --extra-vars private_repo_user=test
+    ```
 * Edit `inventories/nestbox` and set your host in `[nestbox-host]`
 * Run:
 
-```shell
-ansible-galaxy install -r requirements-postgresql.yml
+    ```shell
+    ansible-galaxy install -r requirements-postgresql.yml
 
-ansible-playbook -i inventories/nestbox nestbox-all-in-one.yml
-```
+    ansible-playbook -i inventories/nestbox nestbox-all-in-one.yml
+    ```
+* Then, you can access Nestbox ui through your browser at the previously set ip
 
 
 ## Distributed Wazo
