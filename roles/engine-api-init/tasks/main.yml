@@ -43,7 +43,7 @@
     - xivo-websocketd
 
 - name: Pass wizard
-  script: "files/wizard.py --entity-name {{ entity_name }} --language {{ language }} --number-start {{ number_start }} --number-end {{ number_end }} --password {{ engine_api_root_password }} --engine-api-port {{ engine_api_port }}"
+  script: "files/wizard.py --language {{ language }} --password {{ engine_api_root_password }} --engine-api-port {{ engine_api_port }}"
   args:
     executable: python3
     creates: /var/lib/xivo/configured

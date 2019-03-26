@@ -13,8 +13,5 @@ engine_api_db_host: localhost
 engine_api_db_port: 5432
 
 engine_api_configure_wizard: true
-entity_name: Wazo
 language: en_US
-number_start: 1000
-number_end: 1999
 engine_api_root_password: superpass
