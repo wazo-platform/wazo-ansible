@@ -146,10 +146,7 @@ Other variables specific to the edge proxy:
 * `ari_password`: (default: `Nasheow8Eag`) B2BUA ARI password
 * `ami_username`: (default: `xivo_amid`) B2BUA AMI username
 * `ami_password`: (default: `eeCho8ied3u`) B2BUA AMI password
-* `entity_name`: (default: `Wazo`) first entity name
 * `language`: (default: `en_US`)
-* `number_start`: (default: `1000`) start of phone numbers range
-* `number_end`: (default: `1999`) end of phone numbers range
 * `engine_api_root_password`: (default: `superpass`) password for engine superuser `root`
 * `postgresql_pinned_version`: (default: `9.6.11-0+deb9u1`) version of package postgresql-9.1
 
