@@ -148,7 +148,6 @@ Other variables specific to the edge proxy:
 * `ami_password`: (default: `eeCho8ied3u`) B2BUA AMI password
 * `language`: (default: `en_US`)
 * `engine_api_root_password`: (default: `superpass`) password for engine superuser `root`
-* `postgresql_pinned_version`: (default: `9.6.12-0+deb9u1`) version of package postgresql-9.6
 
 ### mirror keys
 
@@ -189,7 +188,6 @@ Variables that control the path for certificates used for HTTPS:
 * `nestbox_https_private_key`: (default: `files/default-https.key`) custom private key for HTTPS
 * `nestbox_root_user`: (default: `root`) nestbox superuser username
 * `nestbox_root_password`: (default: `secret`) nestbox superuser password
-* `postgresql_pinned_version`: (default: `9.6.12-0+deb9u1`) version of package postgresql-9.6
 
 ### reverse-proxy
 
@@ -216,7 +214,6 @@ Variables that control the path for certificates used for HTTPS:
 * `router_root_user`: (default: `root`) router superuser username
 * `router_root_password`: (default: `superpass`) router superuser password
 * `router_listen_address`: (default: `127.0.0.1`)
-* `postgresql_pinned_version`: (default: `9.6.12-0+deb9u1`) version of package postgresql-9.6
 
 ### rtpengine
 
