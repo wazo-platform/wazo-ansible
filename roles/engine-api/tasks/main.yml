@@ -92,24 +92,24 @@
     path: /var/lib/xivo/disabled
     state: touch
 
-- name: Create xivo-ctid-ng config dir
+- name: Create wazo-calld config dir
   file:
-    path: /etc/xivo-ctid-ng/conf.d
+    path: /etc/wazo-calld/conf.d
     state: directory
-- name: Add xivo-ctid-ng config
+- name: Add wazo-calld config
   template:
-    src: templates/xivo-ctid-ng.yml.j2
-    dest: /etc/xivo-ctid-ng/conf.d/50-engine-api.yml
+    src: templates/wazo-calld.yml.j2
+    dest: /etc/wazo-calld/conf.d/50-engine-api.yml
     owner: root
     group: root
     mode: 0644
-- name: Install xivo-ctid-ng
+- name: Install wazo-calld
   apt:
-    name: xivo-ctid-ng
+    name: wazo-calld
     state: latest
-- name: Remove xivo-ctid-ng default config
+- name: Remove wazo-calld default config
   file:
-    path: "/etc/xivo-ctid-ng/conf.d/{{ item }}"
+    path: "/etc/wazo-calld/conf.d/{{ item }}"
     state: absent
   with_items:
     - 050-xivo-consul-config.yml

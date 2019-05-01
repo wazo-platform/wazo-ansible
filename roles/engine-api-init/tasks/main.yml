@@ -38,7 +38,7 @@
     - xivo-amid
     - xivo-confd
     - xivo-confgend
-    - xivo-ctid-ng
+    - wazo-calld
     - xivo-provd
     - xivo-websocketd
 
