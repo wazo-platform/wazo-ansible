@@ -64,14 +64,6 @@
     mode: 0644
   notify: restart wazo-auth
 
-- name: Install postgresql packages
-  apt:
-    name:
-      - postgresql-9.6
-      - postgresql-contrib-9.6
-      - postgresql-plpython-9.6
-    state: latest
-
 - name: Install wazo-auth
   apt:
     name: wazo-auth
