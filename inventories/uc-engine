@@ -1,8 +1,7 @@
 # You only have to change [uc-engine-host], other values are correct
 
 [uc-engine-host]
-#localhost ansible_connection=local
-192.168.32.83
+localhost ansible_connection=local
 
 [database:children]
 uc-engine-host
