@@ -198,9 +198,9 @@
     name: xivo-agid
     state: latest
 
-- name: Install xivo-websocketd
+- name: Install wazo-websocketd
   apt:
-    name: xivo-websocketd
+    name: wazo-websocketd
     state: latest
 
 - name: Install nginx

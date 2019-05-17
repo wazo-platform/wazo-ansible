@@ -40,7 +40,7 @@
     - xivo-confgend
     - wazo-calld
     - xivo-provd
-    - xivo-websocketd
+    - wazo-websocketd
 
 - name: Pass wizard
   script: "files/wizard.py --language {{ language }} --password {{ engine_api_root_password }} --engine-api-port {{ engine_api_port }}"
