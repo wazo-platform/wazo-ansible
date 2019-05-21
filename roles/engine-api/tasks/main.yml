@@ -75,13 +75,13 @@
     name: rabbitmq-server
     state: latest
 
-- name: Create /var/lib/xivo
+- name: Create /var/lib/wazo
   file:
-    path: /var/lib/xivo
+    path: /var/lib/wazo
     state: directory
 - name: Disable Wazo services
   file:
-    path: /var/lib/xivo/disabled
+    path: /var/lib/wazo/disabled
     state: touch
 
 - name: Create wazo-calld config dir
@@ -221,5 +221,5 @@
 
 - name: Enable Wazo services
   file:
-    path: /var/lib/xivo/disabled
+    path: /var/lib/wazo/disabled
     state: absent
