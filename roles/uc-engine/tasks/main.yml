@@ -4,9 +4,9 @@
   apt:
     name: ntp
     state: latest
-- name: Install xivo-base
+- name: Install wazo-platform
   apt:
-    name: xivo-base
+    name: wazo-platform
     state: latest
 - name: Install wazo-setupd
   apt:
