@@ -1,4 +1,9 @@
 ---
+- name: Install NTP daemon
+  # Some machines have chrony installed
+  apt:
+    name: ntp
+    state: latest
 - name: Install xivo-base
   apt:
     name: xivo-base
