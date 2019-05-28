@@ -268,6 +268,10 @@ Other variables specific to the SBC:
 * `sipr_servers`: (default: list of `127.0.0.2`)
 * `sbc_servers`: (default: list of `127.0.0.2`)
 
+### uc-engine
+
+* `debian_upgrade_first`: (default: `true`) do we `apt-get dist-upgrade` before installing Wazo?
+
 
 ## File hierarchy
 
