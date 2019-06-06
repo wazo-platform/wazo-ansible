@@ -157,9 +157,9 @@
   apt:
     name: xivo-confd
     state: latest
-- name: Install xivo-confd-client-python3
+- name: Install wazo-confd-client-python3
   apt:
-    name: xivo-confd-client-python3
+    name: wazo-confd-client-python3
     state: latest
 
 - name: Create xivo-confgend config dir

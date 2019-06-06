@@ -4,7 +4,7 @@
 
 import argparse
 
-from xivo_confd_client import Client as Confd
+from wazo_confd_client import Client as Confd
 
 
 def init_uc_engine(language, password, engine_api_port):
