@@ -36,7 +36,7 @@
   loop:
     - xivo-agid
     - xivo-amid
-    - xivo-confd
+    - wazo-confd
     - xivo-confgend
     - wazo-calld
     - xivo-provd

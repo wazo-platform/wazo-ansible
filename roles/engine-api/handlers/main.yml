@@ -6,9 +6,9 @@
   service:
     name: xivo-amid
     state: restarted
-- name: restart xivo-confd
+- name: restart wazo-confd
   service:
-    name: xivo-confd
+    name: wazo-confd
     state: restarted
 - name: restart xivo-confgend
   service:

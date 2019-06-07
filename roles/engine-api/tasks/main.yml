@@ -21,7 +21,7 @@
   notify:
     - restart wazo-auth
     - restart xivo-amid
-    - restart xivo-confd
+    - restart wazo-confd
     - reload nginx
 - name: Install custom private key for HTTPS
   copy:
@@ -34,7 +34,7 @@
   notify:
     - restart wazo-auth
     - restart xivo-amid
-    - restart xivo-confd
+    - restart wazo-confd
     - reload nginx
 
 - name: Install xivo-confgend-client
@@ -129,18 +129,18 @@
     question: xivo-manage-db/db-skip
     vtype: boolean
     value: true
-- name: Create xivo-confd config dir
+- name: Create wazo-confd config dir
   file:
-    path: /etc/xivo-confd/conf.d
+    path: /etc/wazo-confd/conf.d
     state: directory
-- name: Add xivo-confd config
+- name: Add wazo-confd config
   template:
-    src: templates/xivo-confd.yml.j2
-    dest: /etc/xivo-confd/conf.d/50-engine-api.yml
+    src: templates/wazo-confd.yml.j2
+    dest: /etc/wazo-confd/conf.d/50-engine-api.yml
     owner: root
     group: root
     mode: 0644
-  notify: restart xivo-confd
+  notify: restart wazo-confd
 - name: Create xivo-dao config dir
   file:
     path: /etc/xivo-dao/conf.d
@@ -152,10 +152,10 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart xivo-confd
-- name: Install xivo-confd
+  notify: restart wazo-confd
+- name: Install wazo-confd
   apt:
-    name: xivo-confd
+    name: wazo-confd
     state: latest
 - name: Install wazo-confd-client-python3
   apt:

@@ -137,9 +137,9 @@ Other variables specific to the edge proxy:
 * `engine_api_db_auth_name`: (default: `wazo-auth`) database name for wazo-auth
 * `engine_api_db_auth_user`: (default: `wazo-auth`) database username for wazo-auth
 * `engine_api_db_auth_password`: (default: `superpass`) database password for wazo-auth
-* `engine_api_db_confd_name`: (default: `asterisk`) database name for xivo-confd
-* `engine_api_db_confd_user`: (default: `asterisk`) database username for xivo-confd
-* `engine_api_db_confd_password`: (default: `superpass`) database password for xivo-confd
+* `engine_api_db_confd_name`: (default: `asterisk`) database name for wazo-confd
+* `engine_api_db_confd_user`: (default: `asterisk`) database username for wazo-confd
+* `engine_api_db_confd_password`: (default: `superpass`) database password for wazo-confd
 * `engine_api_listen_address`: (default: `127.0.0.1`)
 * `engine_api_configure_wizard:`: (default: `true`)
 * `ari_username`: (default: `xivo`) B2BUA ARI username
