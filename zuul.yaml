@@ -1,5 +1,5 @@
 - job:
-    name: install
+    name: wazo-ansible-install
     description: install Wazo platform
     pre-run: pre.yaml
     run: run.yaml
