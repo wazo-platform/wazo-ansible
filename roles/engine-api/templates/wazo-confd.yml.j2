@@ -1,0 +1,14 @@
+ari:
+  host: {{ b2bua_host }}
+  port: {{ b2bua_port_http }}
+  username: {{ ari_username }}
+  password: {{ ari_password }}
+
+sysconfd:
+  host: {{ b2bua_host }}
+  port: {{ b2bua_port_sysconfd }}
+
+db_uri: postgresql://{{ engine_api_db_confd_user }}:{{ engine_api_db_confd_password }}@{{ engine_api_db_host}}:{{ engine_api_db_port }}/{{ engine_api_db_confd_name }}
+
+service_discovery:
+  enabled: false

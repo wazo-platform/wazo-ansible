@@ -1,0 +1,47 @@
+- name: restart wazo-auth
+  service:
+    name: wazo-auth
+    state: restarted
+- name: restart xivo-amid
+  service:
+    name: xivo-amid
+    state: restarted
+- name: restart wazo-confd
+  service:
+    name: wazo-confd
+    state: restarted
+- name: restart xivo-confgend
+  service:
+    name: xivo-confgend
+    state: restarted
+- name: restart xivo-agid
+  service:
+    name: xivo-agid
+    state: restarted
+
+- name: reload nginx
+  debug: msg="checking config first"
+  changed_when: True
+  notify:
+    - check nginx configuration
+    - reload nginx - after config check
+- name: restart nginx
+  debug: msg="checking config first"
+  changed_when: True
+  notify:
+    - check nginx configuration
+    - restart nginx - after config check
+- name: check nginx configuration
+  command: "nginx -t"
+  register: result
+  changed_when: "result.rc != 0"
+  check_mode: no
+- name: reload nginx - after config check
+  service:
+    name: nginx
+    state: reloaded
+- name: restart nginx - after config check
+  service:
+    name: nginx
+    state: restarted
+

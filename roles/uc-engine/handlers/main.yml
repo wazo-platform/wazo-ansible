@@ -1,0 +1,4 @@
+- name: restart wazo-setupd
+  service:
+    name: wazo-setupd
+    state: restarted

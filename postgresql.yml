@@ -1,0 +1,30 @@
+- hosts: database
+  become: yes
+  pre_tasks:
+    # The role does not handle changing the port while changing users.
+    # See https://github.com/geerlingguy/ansible-role-postgresql/issues/51
+    - name: Change PostgreSQL port
+      become: yes
+      include_role:
+        name: geerlingguy.postgresql
+      vars:
+        postgresql_global_config_options:
+          - option: port
+            value: "{{ postgresql_port }}"
+        postgresql_users: []
+  roles:
+    - role: geerlingguy.postgresql
+      become: yes
+      vars:
+        postgresql_hba_entries:
+          - { type: local, database: all, user: postgres, auth_method: peer }
+          - { type: host, database: all, user: all, address: all, auth_method: md5 }
+        postgresql_global_config_options:
+          - option: port
+            value: "{{ postgresql_port }}"
+          - option: listen_addresses
+            value: "{{ postgresql_listen_addresses }}"
+        postgresql_users:
+          - name: postgres
+            password: "{{ postgresql_superuser_password }}"
+            port: "{{ postgresql_port }}"

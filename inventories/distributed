@@ -1,0 +1,118 @@
+mirror.wazo.io
+
+[b2bua]
+asterisk-ansible
+
+[database]
+postgresql-ansible
+
+[edge-proxy]
+edge-proxy-ansible
+[edge-proxy:vars]
+kamailio_creatordb_host = edge-proxy-ansible
+kamailio_db_host = postgresql-ansible
+kamailio_db_port = 5432
+kamailio_db_root_user = postgres
+kamailio_db_root_pass = superpass
+kamailio_db_name = kamailio_edge_proxy
+kamailio_db_user = kamailio_edge_proxy
+kamailio_db_pass = password
+kamailio_db_user_ro = kamailioro_edge_proxy
+kamailio_db_pass_ro = password
+kamailio_internal_interface = 192.168.16.4
+kamailio_external_interface = 192.168.16.4
+kamailio_public_ip = 69.70.94.94
+class5_wazo_servers = ["192.168.8.13"]
+rtp_engine_servers = ["udp:192.168.16.10:2223"]
+
+[engine-api]
+engine-api-ansible
+
+[reverse-proxy]
+reverse-proxy-ansible
+
+[router]
+router-ansible
+
+[rtpengine]
+rtpengine-ansible
+[rtpengine:vars]
+rtpengine_interfaces = "internal/192.168.16.10;external/192.168.16.10!172.16.42.7"
+
+[sbc]
+sbc-ansible
+[sbc:vars]
+kamailio_creatordb_host = sbc-ansible
+kamailio_db_host = postgresql-ansible
+kamailio_db_port = 5432
+kamailio_db_root_user = postgres
+kamailio_db_root_pass = superpass
+kamailio_db_name = kamailio
+kamailio_db_user = kamailio
+kamailio_db_pass = password
+kamailio_db_user_ro = kamailioro
+kamailio_db_pass_ro = password
+kamailio_internal_interface = 192.168.16.13
+kamailio_external_interface = 192.168.16.13
+kamailio_public_ip = 69.70.94.94
+class5_wazo_servers = ["192.168.8.13"]
+carrier_servers = ["194.177.32.2"]
+rtp_engine_servers = ["udp:192.168.16.10:2223"]
+
+[nexsis:children]
+b2bua
+database
+edge-proxy
+engine-api
+nestbox
+reverse-proxy
+router
+rtpengine
+sbc
+[nexsis:vars]
+b2bua_host = asterisk-ansible
+b2bua_port_ami = 5038
+b2bua_port_http = 5039
+b2bua_port_https = 5040
+b2bua_port_sysconfd = 8668
+b2bua_ami_permit_client_address = 0.0.0.0
+b2bua_ami_permit_client_mask = 0.0.0.0
+b2bua_listen_address = 0.0.0.0
+
+engine_api_db_host = postgresql-ansible
+engine_api_db_port = 5432
+engine_api_host = engine-api-ansible
+engine_api_port = 443
+engine_api_port_confgend = 8669
+engine_api_listen_address = 0.0.0.0
+
+nestbox_host = nestbox-dev-ansible
+nestbox_port = 443
+nestbox_db_host = postgresql-ansible
+nestbox_db_port = 5432
+nestbox_db_admin_password = superpass
+
+postgresql_port = 5432
+postgresql_superuser_password = superpass
+postgresql_listen_addresses = *
+
+router_host = router-ansible
+router_port = 443
+router_db_host = postgresql-ansible
+router_db_port = 5432
+router_listen_address = 0.0.0.0
+
+sbc_host = sbc-ansible
+sbc_port_kamailio_http = 8888
+
+[repo_client_cert]
+mirror.wazo.io
+[repo_client_cert:children]
+b2bua
+edge-proxy
+nestbox
+rtpengine
+sbc
+[repo_client_cert:vars]
+nestbox_repo_client_cert=/tmp/mirror_keys/test.crt
+nestbox_repo_client_key=/tmp/mirror_keys/test.key

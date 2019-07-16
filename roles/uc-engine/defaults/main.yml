@@ -1,0 +1,2 @@
+wazo_debian_repo_upgrade: main
+wazo_distribution_upgrade: wazo-dev-stretch

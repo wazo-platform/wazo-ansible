@@ -1,0 +1,225 @@
+- name: Assert Debian Stretch
+  assert:
+    that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
+
+- name: Install Wazo repo package source
+  include_role:
+    name: debian-repo-wazo
+
+- name: Install xivo-certs
+  apt:
+    name: xivo-certs
+    state: latest
+- name: Install custom certificate for HTTPS
+  copy:
+    src: "{{ engine_api_https_cert }}"
+    dest: /usr/share/xivo-certs/server.crt
+    owner: root
+    group: www-data
+    mode: 0640
+  when: engine_api_https_cert is defined
+  notify:
+    - restart wazo-auth
+    - restart xivo-amid
+    - restart wazo-confd
+    - reload nginx
+- name: Install custom private key for HTTPS
+  copy:
+    src: "{{ engine_api_https_private_key }}"
+    dest: /usr/share/xivo-certs/server.key
+    owner: root
+    group: www-data
+    mode: 0640
+  when: engine_api_https_private_key is defined
+  notify:
+    - restart wazo-auth
+    - restart xivo-amid
+    - restart wazo-confd
+    - reload nginx
+
+- name: Install xivo-confgend-client
+  apt:
+    name: xivo-confgend-client
+    state: latest
+
+- name: Preconfigure wazo-auth package
+  debconf:
+    name: wazo-auth
+    question: "{{ item }}"
+    vtype: boolean
+    value: true
+  loop:
+    - wazo-auth/bootstrap-skip
+    - wazo-auth/db-skip
+- name: Create wazo-auth config dir
+  file:
+    path: /etc/wazo-auth/conf.d
+    state: directory
+- name: Add wazo-auth config
+  copy:
+    src: files/wazo-auth.yml
+    dest: /etc/wazo-auth/conf.d/50-engine-api.yml
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart wazo-auth
+
+- name: Install wazo-auth
+  apt:
+    name: wazo-auth
+    state: latest
+  notify: reload nginx
+
+- name: Install RabbitMQ
+  apt:
+    name: rabbitmq-server
+    state: latest
+
+- name: Create /var/lib/wazo
+  file:
+    path: /var/lib/wazo
+    state: directory
+- name: Disable Wazo services
+  file:
+    path: /var/lib/wazo/disabled
+    state: touch
+
+- name: Create wazo-calld config dir
+  file:
+    path: /etc/wazo-calld/conf.d
+    state: directory
+- name: Add wazo-calld config
+  template:
+    src: templates/wazo-calld.yml.j2
+    dest: /etc/wazo-calld/conf.d/50-engine-api.yml
+    owner: root
+    group: root
+    mode: 0644
+- name: Install wazo-calld
+  apt:
+    name: wazo-calld
+    state: latest
+- name: Remove wazo-calld default config
+  file:
+    path: "/etc/wazo-calld/conf.d/{{ item }}"
+    state: absent
+  with_items:
+    - 050-xivo-consul-config.yml
+    - 050-xivo-consul-token.yml
+
+- name: Create xivo-amid config dir
+  file:
+    path: /etc/xivo-amid/conf.d
+    state: directory
+- name: Add xivo-amid config
+  template:
+    src: templates/xivo-amid.yml.j2
+    dest: /etc/xivo-amid/conf.d/50-engine-api.yml
+    owner: root
+    group: root
+    mode: 0644
+- name: Install xivo-amid
+  apt:
+    name: xivo-amid
+    state: latest
+
+- name: Preconfigure database initialization
+  debconf:
+    name: xivo-manage-db
+    question: xivo-manage-db/db-skip
+    vtype: boolean
+    value: true
+- name: Create wazo-confd config dir
+  file:
+    path: /etc/wazo-confd/conf.d
+    state: directory
+- name: Add wazo-confd config
+  template:
+    src: templates/wazo-confd.yml.j2
+    dest: /etc/wazo-confd/conf.d/50-engine-api.yml
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart wazo-confd
+- name: Create xivo-dao config dir
+  file:
+    path: /etc/xivo-dao/conf.d
+    state: directory
+- name: Add xivo-dao config
+  template:
+    src: templates/xivo-dao.yml.j2
+    dest: /etc/xivo-dao/conf.d/50-engine-api.yml
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart wazo-confd
+- name: Install wazo-confd
+  apt:
+    name: wazo-confd
+    state: latest
+- name: Install wazo-confd-client-python3
+  apt:
+    name: wazo-confd-client-python3
+    state: latest
+
+- name: Create xivo-confgend config dir
+  file:
+    path: /etc/xivo-confgend/conf.d
+    state: directory
+- name: Add xivo-confgend config
+  template:
+    src: templates/xivo-confgend.yml.j2
+    dest: /etc/xivo-confgend/conf.d/50-engine-api.yml
+    owner: root
+    group: root
+    mode: 0644
+- name: Install xivo-confgend
+  apt:
+    name: xivo-confgend
+    state: latest
+
+- name: Create xivo-agid config dir
+  file:
+    path: /etc/xivo-agid/conf.d
+    state: directory
+- name: Add xivo-agid config
+  template:
+    src: templates/xivo-agid.yml.j2
+    dest: /etc/xivo-agid/conf.d/50-engine-api.yml
+    owner: root
+    group: root
+    mode: 0644
+- name: Install xivo-config
+  apt:
+    name: xivo-config
+    state: latest
+- name: Install xivo-agid
+  apt:
+    name: xivo-agid
+    state: latest
+
+- name: Install wazo-websocketd
+  apt:
+    name: wazo-websocketd
+    state: latest
+
+- name: Install nginx
+  apt:
+    name: nginx
+    state: latest
+- name: Install xivo-nginx
+  apt:
+    name: xivo-nginx
+    state: latest
+  notify:
+    - restart nginx
+
+- name: Install xivo-provd
+  apt:
+    name: xivo-provd
+    state: latest
+
+- name: Enable Wazo services
+  file:
+    path: /var/lib/wazo/disabled
+    state: absent

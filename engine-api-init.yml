@@ -1,0 +1,5 @@
+---
+- hosts: engine-api
+  become: yes
+  roles:
+    - engine-api-init

@@ -1,0 +1,17 @@
+engine_api_db_admin_user: postgres
+engine_api_db_admin_password: superpass
+
+engine_api_db_auth_user: wazo-auth
+engine_api_db_auth_password: superpass
+engine_api_db_auth_name: wazo-auth
+
+engine_api_db_confd_name: asterisk
+engine_api_db_confd_user: asterisk
+engine_api_db_confd_password: proformatique
+
+engine_api_db_host: localhost
+engine_api_db_port: 5432
+
+engine_api_configure_wizard: true
+language: en_US
+engine_api_root_password: superpass

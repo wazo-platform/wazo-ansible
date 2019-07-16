@@ -1,0 +1,5 @@
+uuid: undefined
+enabled_backend_plugins:
+  ldap_user: true
+service_discovery:
+  enabled: false

@@ -1,0 +1,22 @@
+---
+- hosts:
+    - database
+    - b2bua
+    - engine-api
+  become: yes
+  roles:
+    - role: debian_upgrade_first
+
+- import_playbook: postgresql.yml
+
+- hosts: b2bua
+  become: yes
+  roles:
+    - role: b2bua
+
+- hosts: engine-api
+  become: yes
+  roles:
+    - role: engine-api
+    - role: engine-api-init
+    - role: uc-engine

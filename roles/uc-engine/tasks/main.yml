@@ -1,0 +1,23 @@
+---
+- name: Install NTP daemon
+  # Some machines have chrony installed
+  apt:
+    name: ntp
+    state: latest
+- name: Install wazo-platform
+  apt:
+    name: wazo-platform
+    state: latest
+- name: Install wazo-setupd
+  apt:
+    name: wazo-setupd
+    state: latest
+- name: Install nestbox plugin
+  apt:
+    name:
+      - wazo-deployd-client
+      - wazo-nestbox-plugin
+    state: latest
+  notify: restart wazo-setupd
+- name: Change Wazo distribution for later upgrades
+  command: wazo-dist --{{ wazo_debian_repo_upgrade }}-repo {{ wazo_distribution_upgrade }}

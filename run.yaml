@@ -1,0 +1,7 @@
+---
+- hosts: all
+  tasks:
+    - name: nop
+      command: "true"
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
