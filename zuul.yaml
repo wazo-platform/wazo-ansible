@@ -7,5 +7,5 @@
 - project:
     check:
       jobs:
-        - install:
+        - wazo-ansible-install:
             nodeset: debian9-vm
