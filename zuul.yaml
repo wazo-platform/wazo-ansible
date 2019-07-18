@@ -1,7 +1,10 @@
 - job:
+    parent: base
     name: wazo-ansible-install
     description: install Wazo platform
-    run: run.yaml
+    pre-run: zuul.d/pre.yaml
+    run: zuul.d/run.yaml
+    post-run: zuul.d/fetch-logs.yaml
 
 - project:
     check:
