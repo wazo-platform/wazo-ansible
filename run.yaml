@@ -1,7 +1,30 @@
 ---
 - hosts: all
   tasks:
-    - name: nop
-      command: "true"
+    - name: Install list of packages
+      become: yes
+      apt: name={{item}} state=installed
+      with_items:
+        - python3-pip
+
+    - name: Install ansible via pip
+      become: yes
+      pip:
+        name: ansible==2.7.9
+
+    - name: Install paramiko via pip
+      become: yes
+      pip:
+        name: paramiko
+
+    - name: run installation script
+      become: yes
+      command: "ansible-galaxy install -r requirements-postgresql.yml"
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
+
+    - name: run installation script
+      become: yes
+      command: "ansible-playbook -i inventories/uc-engine uc-engine.yml"
       args:
         chdir: "{{ zuul.project.src_dir }}"
