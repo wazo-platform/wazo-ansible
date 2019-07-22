@@ -8,3 +8,7 @@
       jobs:
         - wazo-ansible-install:
             nodeset: debian9-vm
+    gate:
+      jobs:
+        - wazo-ansible-install:
+            nodeset: debian9-vm
