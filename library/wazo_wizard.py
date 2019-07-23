@@ -34,7 +34,7 @@ options:
         default: localhost
     language:
         description:
-            - language to use (ex. en_US).
+            - language to use (e.g. en_US).
         required: true
     password:
         description:
