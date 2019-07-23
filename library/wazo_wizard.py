@@ -38,7 +38,7 @@ options:
         required: true
     password:
         description:
-            - password for the Wazo engine
+            - password for the root user of the Wazo engine
         required: true
     engine_api_port:
         description:
