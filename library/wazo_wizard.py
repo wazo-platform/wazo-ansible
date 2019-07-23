@@ -152,7 +152,7 @@ def run_module():
     c = Confd(module.params['hostname'],
               port=module.params['engine_api_port'],
               https=module.params['https'],
-              prefix='/api/confd',
+              prefix=module.params['prefix'],
               verify_certificate='/usr/share/xivo-certs/server.crt')
 
     # use whatever logic you need to determine whether or not this module
