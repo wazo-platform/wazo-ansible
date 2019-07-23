@@ -52,37 +52,37 @@ options:
         default: true
     prefix:
         description:
-            - prefix to contact the configuration service
+            - prefix to contact the configuration service of the Wazo engine
         required: false
         default: /api/confd
     verify_certificate:
         description:
-            - verify SSL certificates
+            - verify the SSL certificate used by the Wazo engine
         required: false
         default: true
     provisioning_step:
         description:
-            - enable the provisioning step
+            - enable the provisioning configuration step
         required: false
         default: true
     manage_services_step:
         description:
-            - enable the manage service step
+            - manage the services of the Wazo engine
         required: false
         default: true
     manage_hosts_file_step:
         description:
-            - enable the manage hosts file step
+            - manage the hosts file of the Wazo engine
         required: false
         default: true
     manage_resolv_file_step:
         description:
-            - enable the manage resolv file step
+            - manage the file /etc/resolv of the Wazo engine
         required: false
         default: true
     commonconf_step:
         description:
-            - enable the commonconf step
+            - manage extra services configuration (via `/etc/xivo/common.conf`) like DHCP, monit, etc.
         required: false
         default: true
 
