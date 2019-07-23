@@ -49,7 +49,7 @@ options:
         description:
             - use https to connect to the Wazo engine
         required: false
-        default:true
+        default: true
     prefix:
         description:
             - prefix to contact the configuration service
