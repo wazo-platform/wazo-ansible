@@ -98,12 +98,7 @@ EXAMPLES = '''
     password: solidpass
 '''
 
-RETURN = '''
-:
-    description: 
-    type: str
-    returned: always
-'''
+RETURN = r''' # '''
 
 
 def run_module():
@@ -198,5 +193,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# wazo.py ends here
