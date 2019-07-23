@@ -115,7 +115,7 @@ def run_module():
         engine_api_port=dict(type='int', required=False, default=443),
         https=dict(type='bool', required=False, default=True),
         prefix=dict(type='str', required=False, default='/api/confd'),
-        verify_certificate=dict(type='str', required=False, default=None),
+        verify_certificate=dict(type='str', required=False, default=True),
         provisioning_step=dict(type='bool', required=False, default=True),
         manage_services_step=dict(type='bool', required=False, default=True),
         manage_hosts_file_step=dict(type='bool', required=False, default=True),
