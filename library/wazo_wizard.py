@@ -42,7 +42,7 @@ options:
         required: true
     engine_api_port:
         description:
-            - password for the Wazo engine
+            - TCP port to use to connect to the Wazo engine
         required: false
         default: 443
     https:
