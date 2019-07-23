@@ -153,7 +153,7 @@ def run_module():
               port=module.params['engine_api_port'],
               https=module.params['https'],
               prefix=module.params['prefix'],
-              verify_certificate='/usr/share/xivo-certs/server.crt')
+              verify_certificate=module.params['verify_certificate'])
 
     # use whatever logic you need to determine whether or not this module
     # made any modifications to your target
