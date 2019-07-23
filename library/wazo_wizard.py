@@ -29,7 +29,7 @@ description:
 options:
     hostname:
         description:
-            - This is the hostname of the wazo engine host
+            - This is the hostname of the Wazo engine host
         required: false
         default: localhost
     language:
