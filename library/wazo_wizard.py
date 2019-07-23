@@ -24,7 +24,7 @@ short_description: initial configuration of a Wazo engine
 version_added: "2.4"
 
 description:
-    - "This is my longer description explaining my sample module"
+    - "The wazo_wizard module configures a Wazo engine after a fresh installation, in order to tailor it to its new environment (password, locale, network, etc.)"
 
 options:
     hostname:
