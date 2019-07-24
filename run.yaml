@@ -37,4 +37,4 @@
 
     - name: check services
       become: yes
-      command: "wazo-service status"
+      shell: "wazo-service status || :"
