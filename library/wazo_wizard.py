@@ -142,16 +142,15 @@ def run_module():
     if module.check_mode:
         module.exit_json(**result)
 
-    # manipulate or modify the state as needed (this is going to be the
-    # part where your module will do what it needs to do)
+    # From here do the asked modifications
     c = Confd(module.params['hostname'],
               port=module.params['engine_api_port'],
               https=module.params['https'],
               prefix=module.params['prefix'],
               verify_certificate=module.params['verify_certificate'])
 
-    # use whatever logic you need to determine whether or not this module
-    # made any modifications to your target
+    # Configuration can happen only once so report it as the changed
+    # status
     result['changed'] = c.wizard.get()['configured'] is not True
 
     if result['changed']:
