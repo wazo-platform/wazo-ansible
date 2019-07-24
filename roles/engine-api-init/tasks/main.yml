@@ -43,8 +43,8 @@
     - wazo-websocketd
 
 - name: Pass wizard
-  script: "files/wizard.py --language {{ language }} --password {{ engine_api_root_password }} --engine-api-port {{ engine_api_port }}"
-  args:
-    executable: python3
-    creates: /var/lib/wazo/configured
+  wazo_wizard:
+    language: "{{ language }}"
+    password: "{{ engine_api_root_password }}"
+    engine-api-port: "{{ engine_api_port }}"
   when: engine_api_configure_wizard == "true"
