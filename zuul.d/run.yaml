@@ -1,0 +1,18 @@
+---
+- hosts: all
+  tasks:
+    - name: Run the installation script
+      become: yes
+      command: "ansible-playbook -i inventories/uc-engine uc-engine.yml --extra-vars engine_api_configure_wizard=true"
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
+
+    - name: Check packages
+      become: yes
+      command: "apt-get install -fs -qq"
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
+
+    - name: Check services
+      become: yes
+      shell: "wazo-service status"

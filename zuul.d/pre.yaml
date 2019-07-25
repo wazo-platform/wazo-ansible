@@ -17,14 +17,8 @@
       pip:
         name: paramiko
 
-    - name: run installation script
+    - name: Install postgresql ansible module from galaxy
       become: yes
       command: "ansible-galaxy install -r requirements-postgresql.yml"
-      args:
-        chdir: "{{ zuul.project.src_dir }}"
-
-    - name: run installation script
-      become: yes
-      command: "ansible-playbook -i inventories/uc-engine uc-engine.yml"
       args:
         chdir: "{{ zuul.project.src_dir }}"

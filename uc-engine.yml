@@ -18,5 +18,5 @@
   become: yes
   roles:
     - role: engine-api
-    - role: engine-api-init
     - role: uc-engine
+    - role: engine-api-init
