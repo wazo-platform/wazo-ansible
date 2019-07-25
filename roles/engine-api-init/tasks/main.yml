@@ -47,4 +47,5 @@
     language: "{{ language }}"
     password: "{{ engine_api_root_password }}"
     engine_api_port: "{{ engine_api_port }}"
+    verify_certificate: "{{ verify_certificate }}"
   when: engine_api_configure_wizard == "true"

@@ -15,3 +15,5 @@ engine_api_db_port: 5432
 engine_api_configure_wizard: true
 language: en_US
 engine_api_root_password: superpass
+
+verify_certificate: /usr/share/xivo-certs/server.crt
