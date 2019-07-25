@@ -46,5 +46,5 @@
   wazo_wizard:
     language: "{{ language }}"
     password: "{{ engine_api_root_password }}"
-    engine-api-port: "{{ engine_api_port }}"
+    engine_api_port: "{{ engine_api_port }}"
   when: engine_api_configure_wizard == "true"
