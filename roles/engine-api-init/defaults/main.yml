@@ -17,3 +17,9 @@ language: en_US
 engine_api_root_password: superpass
 
 verify_certificate: /usr/share/xivo-certs/server.crt
+manage_services_step: true
+provisioning_step: true
+manage_services_step: true
+manage_hosts_file_step: true
+manage_resolv_file_step: true
+commonconf_step: true
