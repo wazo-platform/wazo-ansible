@@ -4,7 +4,6 @@
     # The role does not handle changing the port while changing users.
     # See https://github.com/geerlingguy/ansible-role-postgresql/issues/51
     - name: Change PostgreSQL port
-      become: yes
       include_role:
         name: geerlingguy.postgresql
       vars:

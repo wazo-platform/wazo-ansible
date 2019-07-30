@@ -2,10 +2,12 @@
   service:
     name: wazo-confd
     state: restarted
+
 - name: restart xivo-confgend
   service:
     name: xivo-confgend
     state: restarted
+
 - name: restart xivo-agid
   service:
     name: xivo-agid

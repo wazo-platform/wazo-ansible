@@ -16,3 +16,9 @@
     - name: Check services
       become: yes
       shell: "wazo-service status"
+
+    - name: Run simple validation tests
+      become: yes
+      command: "ansible-playbook -i inventories/uc-engine test.yml"
+      args:
+        chdir: "{{ zuul.project.src_dir }}"

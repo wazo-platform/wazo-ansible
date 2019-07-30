@@ -12,14 +12,11 @@ engine_api_db_confd_password: proformatique
 engine_api_db_host: localhost
 engine_api_db_port: 5432
 
-engine_api_configure_wizard: true
-language: en_US
+engine_api_configure_wizard: false
+engine_language: en_US
 engine_api_root_password: superpass
+engine_setupd_path: /api/setupd/1.0
+tenant_name: my-company
+api_client_name: api-client
+api_client_password: api-password
 
-verify_certificate: /usr/share/xivo-certs/server.crt
-manage_services_step: true
-provisioning_step: true
-manage_services_step: true
-manage_hosts_file_step: true
-manage_resolv_file_step: true
-commonconf_step: true
