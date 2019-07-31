@@ -75,6 +75,6 @@
   command: "wazo-auth-cli policy create api-client-policy --tenant {{ tenant_name }} --acl 'confd.#'"
   when: engine_api_configure_wizard == "true"
 
-- name: Affect policy to API client
+- name: Enable policy for API client
   command: "wazo-auth-cli user add {{ api_client_name}} --policy api-client-policy"
   when: engine_api_configure_wizard == "true"

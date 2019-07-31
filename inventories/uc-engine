@@ -1,4 +1,6 @@
-# You only have to change [uc-engine-host], other values are correct
+# -*- ini -*-
+# You only have to change [uc-engine-host] and set variables according
+# to your needs
 
 [uc-engine-host]
 localhost ansible_connection=local
@@ -16,33 +18,29 @@ uc-engine-host
 b2bua
 database
 engine-api
+
 [uc-engine:vars]
+# Mandatory variables
 b2bua_host = localhost
 b2bua_port_ami = 5038
 b2bua_port_http = 5039
 b2bua_port_https = 5040
 b2bua_port_sysconfd = 8668
-
 engine_api_host = localhost
 engine_api_port = 443
 engine_api_port_confgend = 8669
-engine_api_configure_wizard = false
 engine_api_db_host = localhost
 engine_api_db_port = 5432
-engine_api_db_auth_name = asterisk
-engine_api_db_auth_user = asterisk
-engine_api_db_auth_password = proformatique
-engine_api_db_confd_name = asterisk
-engine_api_db_confd_user = asterisk
-engine_api_db_confd_password = proformatique
 
-postgresql_port = 5432
-postgresql_superuser_password = superpass
-postgresql_listen_addresses = 127.0.0.1
+# Optional variables are defined in:
+# ../roles/debian_upgrade_first/defaults/amin.yml
+# ../roles/engine-api/defaults/main.yml
+# ../roles/engine-api-init/defaults/main.yml
+# ../roles/debian-repo-wazo/defaults/main.yml
+# ../roles/b2bua/defaults/main.yml
+# ../roles/uc-engine/defaults/main.yml
 
-wazo_debian_repo = main
-wazo_distribution = wazo-dev-stretch
-wazo_debian_repo_upgrade = main
-wazo_distribution_upgrade = wazo-dev-stretch
-
-debian_upgrade_first = true
+# PostgreSQL settings
+# postgresql_port = 5432
+# postgresql_superuser_password = superpass
+# postgresql_listen_addresses = 127.0.0.1
