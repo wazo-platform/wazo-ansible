@@ -1,4 +1,4 @@
-# -*- ini -*-
+# -*- conf -*-
 # You only have to change [uc-engine-host] and set variables according
 # to your needs
 
@@ -18,6 +18,10 @@ uc-engine-host
 b2bua
 database
 engine-api
+
+# Uncomment the 2 following lines if you want to deploy wazo-ui too:
+# [uc-ui:children]
+# uc-engine-host
 
 [uc-engine:vars]
 # Mandatory variables

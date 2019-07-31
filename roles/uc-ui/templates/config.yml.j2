@@ -1,0 +1,85 @@
+# This file should not be modified as it may get changed by the maintainer.
+# Add extra configuration files in the extra_config_files directory to override
+# the content from this file
+
+# Extra configuration directory where the config files overriding this file
+# should be.
+extra_config_files: /etc/wazo-ui/conf.d/
+
+# Change the log level to debug level.
+debug: false
+
+# Log file.
+log_filename: /var/log/wazo-ui.log
+
+# PID file.
+pid_filename: /var/run/wazo-ui/wazo-ui.pid
+
+https:
+  listen: {{ uc_ui_listen_address }}
+  port: {{ uc_ui_port}}
+  certificate: /usr/share/xivo-certs/server.crt
+  private_key: /usr/share/xivo-certs/server.key
+
+auth:
+  host: {{ engine_api_host }}
+  port: {{ engine_api_port }}
+  prefix: /api/auth
+  verify_certificate: false
+
+confd:
+  host: {{ engine_api_host }}
+  port: {{ engine_api_port }}
+  prefix: /api/confd
+  verify_certificate: false
+
+policies:
+  # You must set a valid UUID policy
+  reseller:
+  customer:
+  location:
+
+enabled_plugins:
+  index: true
+  authentication: true
+  application: true
+  agent: true
+  cli: true
+  call_filter: true
+  call_permission: true
+  call_pickup: true
+  cdr: true
+  conference: true
+  context: true
+  device: true
+  dird_profile: true
+  dird_source: true
+  dhcp: true
+  extension: true
+  external_auth: true
+  funckey: true
+  general_settings: true
+  group: true
+  ha: true
+  hep: true
+  identity: true
+  incall: true
+  ivr: true
+  line: true
+  moh: true
+  outcall: true
+  paging: true
+  parking_lot: true
+  plugin: true
+  provisioning: true
+  queue: true
+  rtp: true
+  schedule: true
+  skill: true
+  skillrule: true
+  sound: true
+  switchboard: true
+  trunk: true
+  user: true
+  voicemail: true
+  webhook: true

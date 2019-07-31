@@ -25,3 +25,8 @@
     - role: engine-api
     - role: uc-engine
     - role: engine-api-init
+
+- hosts: uc-ui
+  become: yes
+  roles:
+    - role: uc-ui
