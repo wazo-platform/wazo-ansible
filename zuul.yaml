@@ -1,6 +1,8 @@
 - job:
     parent: base
     name: wazo-ansible-install
+    required-projects:
+      wazo-pbx/wazo-acceptance
     description: install Wazo platform
     pre-run: zuul.d/pre.yaml
     run: zuul.d/run.yaml

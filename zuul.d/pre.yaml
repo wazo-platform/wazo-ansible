@@ -6,6 +6,10 @@
       apt: name={{item}} state=installed
       with_items:
         - ansible
+        - libsasl2-dev
+        - linphone-nogtk
+        - python-dev
+        - lsof
 
     - name: Install postgresql ansible module from galaxy
       become: yes
