@@ -1,0 +1,31 @@
+- name: Get token
+  uri:
+    url: "https://{{ engine_api_host}}:{{ engine_api_port}}{{ engine_auth_path }}/token"
+    method: POST
+    validate_certs: no
+    body_format: json
+    force_basic_auth: yes
+    user: "{{ api_client_name }}"
+    password: "{{ api_client_password }}"
+    body:
+      expiration: 3600
+    return_content: yes
+  register: token_data
+
+- name: debug token data
+  debug:
+    var: token_data
+
+- name: Get users
+  uri:
+    url: "https://{{ engine_api_host}}:{{ engine_api_port}}{{ engine_confd_path }}/users"
+    headers:
+      X-Auth-Token: "{{ token_data.json.data.token }}"
+    method: GET
+    validate_certs: no
+    return_content: yes
+  register: users_data
+
+- name: debug users data
+  debug:
+    var: users_data

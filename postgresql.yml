@@ -4,13 +4,12 @@
     # The role does not handle changing the port while changing users.
     # See https://github.com/geerlingguy/ansible-role-postgresql/issues/51
     - name: Change PostgreSQL port
-      become: yes
       include_role:
         name: geerlingguy.postgresql
       vars:
         postgresql_global_config_options:
           - option: port
-            value: "{{ postgresql_port }}"
+            value: "{{ postgresql_port | default(5432) }}"
         postgresql_users: []
   roles:
     - role: geerlingguy.postgresql
@@ -21,10 +20,10 @@
           - { type: host, database: all, user: all, address: all, auth_method: md5 }
         postgresql_global_config_options:
           - option: port
-            value: "{{ postgresql_port }}"
+            value: "{{ postgresql_port | default(5432) }}"
           - option: listen_addresses
-            value: "{{ postgresql_listen_addresses }}"
+            value: "{{ postgresql_listen_addresses | default('127.0.0.1') }}"
         postgresql_users:
           - name: postgres
-            password: "{{ postgresql_superuser_password }}"
-            port: "{{ postgresql_port }}"
+            password: "{{ postgresql_superuser_password | default('superpass') }}"
+            port: "{{ postgresql_port | default(5432) }}"
