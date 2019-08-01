@@ -16,6 +16,8 @@ engine_api_configure_wizard: false
 engine_language: en_US
 engine_api_root_password: superpass
 engine_setupd_path: /api/setupd/1.0
+engine_auth_path: /api/auth/0.1
+engine_confd_path: /api/confd/1.1
 tenant_name: my-company
 api_client_name: api-client
 api_client_password: api-password

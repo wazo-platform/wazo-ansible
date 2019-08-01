@@ -1,6 +1,6 @@
 - name: Get token
   uri:
-    url: "https://{{ engine_api_host}}:{{ engine_api_port}}/api/auth/0.1/token"
+    url: "https://{{ engine_api_host}}:{{ engine_api_port}}{{ engine_auth_path }}/token"
     method: POST
     validate_certs: no
     body_format: json
@@ -18,7 +18,7 @@
 
 - name: Get users
   uri:
-    url: "https://{{ engine_api_host}}:{{ engine_api_port}}/api/confd/1.1/users"
+    url: "https://{{ engine_api_host}}:{{ engine_api_port}}{{ engine_confd_path }}/users"
     headers:
       X-Auth-Token: "{{ token_data.json.data.token }}"
     method: GET
