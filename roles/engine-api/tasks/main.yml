@@ -10,6 +10,7 @@
   apt:
     name: xivo-certs
     state: latest
+
 - name: Install custom certificate for HTTPS
   copy:
     src: "{{ engine_api_https_cert }}"
@@ -23,6 +24,7 @@
     - restart xivo-amid
     - restart wazo-confd
     - reload nginx
+
 - name: Install custom private key for HTTPS
   copy:
     src: "{{ engine_api_https_private_key }}"
@@ -51,6 +53,7 @@
   loop:
     - wazo-auth/bootstrap-skip
     - wazo-auth/db-skip
+
 - name: Create wazo-auth config dir
   file:
     path: /etc/wazo-auth/conf.d
@@ -71,6 +74,7 @@
   file:
     path: /var/lib/wazo
     state: directory
+
 - name: Disable Wazo services
   file:
     path: /var/lib/wazo/disabled
@@ -80,6 +84,7 @@
   file:
     path: /etc/wazo-calld/conf.d
     state: directory
+
 - name: Add wazo-calld config
   template:
     src: templates/wazo-calld.yml.j2
@@ -87,10 +92,12 @@
     owner: root
     group: root
     mode: 0644
+
 - name: Install wazo-calld
   apt:
     name: wazo-calld
     state: latest
+
 - name: Remove wazo-calld default config
   file:
     path: "/etc/wazo-calld/conf.d/{{ item }}"
@@ -103,6 +110,7 @@
   file:
     path: /etc/xivo-amid/conf.d
     state: directory
+
 - name: Add xivo-amid config
   template:
     src: templates/xivo-amid.yml.j2
@@ -110,6 +118,7 @@
     owner: root
     group: root
     mode: 0644
+
 - name: Install xivo-amid
   apt:
     name: xivo-amid
@@ -121,10 +130,12 @@
     question: xivo-manage-db/db-skip
     vtype: boolean
     value: true
+
 - name: Create wazo-confd config dir
   file:
     path: /etc/wazo-confd/conf.d
     state: directory
+
 - name: Add wazo-confd config
   template:
     src: templates/wazo-confd.yml.j2
@@ -133,10 +144,12 @@
     group: root
     mode: 0644
   notify: restart wazo-confd
+
 - name: Create xivo-dao config dir
   file:
     path: /etc/xivo-dao/conf.d
     state: directory
+
 - name: Add xivo-dao config
   template:
     src: templates/xivo-dao.yml.j2
@@ -145,6 +158,7 @@
     group: root
     mode: 0644
   notify: restart wazo-confd
+
 - name: Install wazo-confd
   apt:
     name: wazo-confd
@@ -158,6 +172,7 @@
   file:
     path: /etc/xivo-confgend/conf.d
     state: directory
+
 - name: Add xivo-confgend config
   template:
     src: templates/xivo-confgend.yml.j2
@@ -165,6 +180,7 @@
     owner: root
     group: root
     mode: 0644
+
 - name: Install xivo-confgend
   apt:
     name: xivo-confgend
@@ -174,6 +190,7 @@
   file:
     path: /etc/xivo-agid/conf.d
     state: directory
+
 - name: Add xivo-agid config
   template:
     src: templates/xivo-agid.yml.j2
@@ -181,10 +198,12 @@
     owner: root
     group: root
     mode: 0644
+
 - name: Install xivo-config
   apt:
     name: xivo-config
     state: latest
+
 - name: Install xivo-agid
   apt:
     name: xivo-agid
@@ -199,9 +218,10 @@
   apt:
     name: nginx
     state: latest
-- name: Install xivo-nginx
+
+- name: Install wazo-nginx
   apt:
-    name: xivo-nginx
+    name: wazo-nginx
     state: latest
   notify:
     - restart nginx
