@@ -8,7 +8,7 @@
     name: xivo-confgend
     state: restarted
 
-- name: restart xivo-agid
+- name: restart wazo-agid
   service:
-    name: xivo-agid
+    name: wazo-agid
     state: restarted

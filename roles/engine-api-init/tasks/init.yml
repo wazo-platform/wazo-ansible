@@ -40,7 +40,7 @@
     name: "{{ item }}"
     state: restarted
   loop:
-    - xivo-agid
+    - wazo-agid
     - xivo-amid
     - wazo-confd
     - xivo-confgend
