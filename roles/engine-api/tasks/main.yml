@@ -186,15 +186,15 @@
     name: xivo-confgend
     state: latest
 
-- name: Create xivo-agid config dir
+- name: Create wazo-agid config dir
   file:
-    path: /etc/xivo-agid/conf.d
+    path: /etc/wazo-agid/conf.d
     state: directory
 
-- name: Add xivo-agid config
+- name: Add wazo-agid config
   template:
-    src: templates/xivo-agid.yml.j2
-    dest: /etc/xivo-agid/conf.d/50-engine-api.yml
+    src: templates/wazo-agid.yml.j2
+    dest: /etc/wazo-agid/conf.d/50-engine-api.yml
     owner: root
     group: root
     mode: 0644
@@ -204,9 +204,9 @@
     name: xivo-config
     state: latest
 
-- name: Install xivo-agid
+- name: Install wazo-agid
   apt:
-    name: xivo-agid
+    name: wazo-agid
     state: latest
 
 - name: Install wazo-websocketd
