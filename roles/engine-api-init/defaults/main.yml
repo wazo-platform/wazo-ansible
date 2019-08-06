@@ -1,9 +1,9 @@
 engine_api_db_admin_user: postgres
 engine_api_db_admin_password: superpass
 
-engine_api_db_auth_user: wazo-auth
-engine_api_db_auth_password: superpass
-engine_api_db_auth_name: wazo-auth
+engine_api_db_auth_name: asterisk
+engine_api_db_auth_user: asterisk
+engine_api_db_auth_password: proformatique
 
 engine_api_db_confd_name: asterisk
 engine_api_db_confd_user: asterisk
