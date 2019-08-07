@@ -1,4 +1,9 @@
 ---
+- hosts: all
+  become: yes
+  roles:
+    - role: preflight_checks
+
 - hosts:
     - database
     - b2bua
