@@ -1,4 +1,6 @@
+---
 - import_tasks: init.yml
   when: validate_wazo_engine is not defined
+
 - import_tasks: validate.yml
   when: validate_wazo_engine is defined

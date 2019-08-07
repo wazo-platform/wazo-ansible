@@ -1,3 +1,4 @@
+---
 - name: Assert Debian Stretch
   assert:
     that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
@@ -10,6 +11,7 @@
   apt:
     name: xivo-certs
     state: latest
+
 - name: Install custom certificate for HTTPS
   copy:
     src: "{{ b2bua_https_cert }}"
@@ -20,6 +22,7 @@
   when: b2bua_https_cert is defined
   notify:
     - reload asterisk
+
 - name: Install custom private key for HTTPS
   copy:
     src: "{{ b2bua_https_private_key }}"
@@ -50,20 +53,24 @@
     state: directory
     owner: asterisk
     mode: 660
+
 - name: Ensure Asterisk permissions
   command: xivo-fix-paths-rights
+
 - name: Install Asterisk AGI configuration
   template:
     src: templates/asterisk-extensions.conf.j2
     dest: /etc/asterisk/extensions.d/engine-api.conf
   notify:
     - reload asterisk dialplan
+
 - name: Install Asterisk AMI configuration
   template:
     src: templates/asterisk-manager.conf.j2
     dest: /etc/asterisk/manager.d/999-engine-api.conf
   notify:
     - reload asterisk manager
+
 - name: Install Asterisk HTTP configuration
   template:
     src: templates/asterisk-http.conf.j2
@@ -75,6 +82,7 @@
   apt:
     name: xivo-confgend-client
     state: latest
+
 - name: Install xivo-confgend-client config
   template:
     src: templates/xivo-confgend-client.conf.j2
@@ -84,10 +92,12 @@
   file:
     path: /etc/systemd/system/xivo-sysconfd.service.d
     state: directory
+
 - name: Install xivo-sysconfd drop-in file
   template:
     src: templates/xivo-sysconfd.service.j2
     dest: /etc/systemd/system/xivo-sysconfd.service.d/b2bua.conf
+
 - name: Install xivo-sysconfd
   apt:
     name: xivo-sysconfd

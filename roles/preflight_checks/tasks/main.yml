@@ -1,0 +1,5 @@
+---
+- name: Validate database names
+  assert:
+    that:
+      - engine_api_db_confd_name == engine_api_db_auth_name

@@ -1,4 +1,0 @@
-b2bua_ami_permit_client_address: 127.0.0.1
-b2bua_ami_permit_client_mask: 255.255.255.255
-b2bua_listen_address: 127.0.0.1
-b2bua_port_ami: 5038
