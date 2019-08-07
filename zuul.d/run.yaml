@@ -32,7 +32,10 @@
       args:
         chdir: "{{ zuul.project.src_dir }}"
 
-    - name: Check ui service
+    - name: Get service facts
       become: yes
-      shell: "systemctl status wazo-ui"
+      service_facts:
 
+    - name: Assert wazo-ui is running
+      assert:
+        that: ansible_facts.services['wazo-ui.service'].state == 'running'
