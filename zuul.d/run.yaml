@@ -32,7 +32,6 @@
       args:
         chdir: "{{ zuul.project.src_dir }}"
 
-<<<<<<< HEAD
     - name: Get service facts
       become: yes
       service_facts:
@@ -40,7 +39,7 @@
     - name: Assert wazo-ui is running
       assert:
         that: ansible_facts.services['wazo-ui.service'].state == 'running'
-=======
+
     - name: Reset engine
       become: yes
       shell: "wazo-reset -f"
@@ -69,4 +68,4 @@
       shell: "tox -e behave -- features/daily"
       args:
         chdir: "{{ zuul.project.src_dir }}/../wazo-acceptance"
->>>>>>> run acceptance tests in zuul job
+
