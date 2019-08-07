@@ -1,3 +1,4 @@
+---
 - name: Assert Debian Stretch
   assert:
     that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
@@ -7,13 +8,16 @@
     url: http://mirror.wazo.community/wazo_current.key
     id: 2769B67EDBFF423F6874D7663F1BF7FC527FBC6A
     state: present
+
 - name: Install APT python bindings
   apt:
     name: python-apt
     state: present
+
 - name: Gather packages facts
   package_facts:
     manager: apt
+
 - name: Add bootstrap Wazo repository
   apt_repository:
     repo: deb http://mirror.wazo.community/debian pelican-stretch main
@@ -21,12 +25,15 @@
     filename: wazo-install
     update_cache: yes
   when: '"xivo-dist" not in ansible_facts.packages'
+
 - name: Install xivo-dist
   apt:
     name: xivo-dist
     state: latest
+
 - name: Add persistent Wazo repository
   command: wazo-dist --{{ wazo_debian_repo }}-repo {{ wazo_distribution }}
+
 - name: Remove bootstrap Wazo repository
   apt_repository:
     repo: deb http://mirror.wazo.community/debian pelican-stretch main
