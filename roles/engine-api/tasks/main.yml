@@ -227,9 +227,9 @@
   notify:
     - restart nginx
 
-- name: Install xivo-provd
+- name: Install wazo-provd
   apt:
-    name: xivo-provd
+    name: wazo-provd
     state: latest
 
 - name: Enable Wazo services
