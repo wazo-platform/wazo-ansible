@@ -76,3 +76,11 @@
   - name: Enable policy for API client
     command: "wazo-auth-cli user add {{ api_client_name}} --policy api-client-policy"
   when: engine_api_configure_wizard == "true"
+
+- name: Create an index.html for the home page
+  become: true
+  file:
+    src: /var/www/html/index.wazo.html
+    dest: /var/www/html/index.html
+    state: link
+  when: groups['uc-ui'] is not defined
