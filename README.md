@@ -4,7 +4,7 @@
 
 * Enough machines running with Debian Stretch vanilla
 * You can SSH easily into those machines (i.e. without password prompt)
-* Ansible: `pip install ansible`
+* Ansible 2.7.9: `pip install ansible==2.7.9`
 
 
 ## UC Engine (all in one machine)
@@ -17,3 +17,88 @@ ansible-galaxy install -r requirements-postgresql.yml
 
 ansible-playbook -i inventories/uc-engine uc-engine.yml
 ```
+
+## Variables
+
+### uc-engine
+
+* `debian_upgrade_first`: (default: `true`) do we `apt-get dist-upgrade` before installing Wazo?
+
+### b2bua
+
+* `b2bua_host`: (default: `b2bua-ansible`) where other services should contact the B2BUA
+* `b2bua_port_ami`: (default: `5038`) TCP port for AMI
+* `b2bua_port_http`: (default: `5039`) TCP port for HTTP interfaces
+* `b2bua_port_https`: (default: `5040`) TCP port for HTTPS interfaces
+* `b2bua_port_sysconfd`: (default: `8668`) TCP port for xivo-sysconfd HTTP interface
+* `b2bua_https_cert`: (default: `files/default-https.crt`) custom certificate for HTTPS
+* `b2bua_https_private_key`: (default: `files/default-https.key`) custom private key for HTTPS
+* `b2bua_ami_permit_client_address`: (default: `127.0.0.1`)
+* `b2bua_ami_permit_client_mask`: (default: `255.255.255.255`)
+* `b2bua_listen_address`: (default: `127.0.0.1`)
+
+### database
+
+`postgresql_port`: (default: `5432`) TCP port for PostgreSQL
+`postgresql_superuser_password`: (default: `superpass`) password for superuser `postgres`
+`postgresql_listen_addresses`: (default: `127.0.0.1`)
+
+### engine-api
+
+* `engine_api_host`: (default: `engine-api-ansible`) where other services should contact the engine API
+* `engine_api_port`: (default: `443`) TCP port for HTTPS API
+* `engine_api_port_confgend`: (default: `8669`) TCP port for xivo-confgend
+* `engine_api_https_cert`: (default: `files/default-https.crt`) custom certificate for HTTPS
+* `engine_api_https_private_key`: (default: `files/default-https.key`) custom private key for HTTPS
+* `engine_api_db_host`: (default: `database-ansible`) PostgreSQL host
+* `engine_api_db_port`: (default: `5432`) PostgreSQL port
+* `engine_api_db_admin_user`: (default: `postgres`) PostgreSQL superuser username
+* `engine_api_db_admin_password`: (default: `superpass`) PostgreSQL superuser password
+* `engine_api_db_auth_name`: (default: `wazo-auth`) database name for wazo-auth
+* `engine_api_db_auth_user`: (default: `wazo-auth`) database username for wazo-auth
+* `engine_api_db_auth_password`: (default: `superpass`) database password for wazo-auth
+* `engine_api_db_confd_name`: (default: `asterisk`) database name for wazo-confd
+* `engine_api_db_confd_user`: (default: `asterisk`) database username for wazo-confd
+* `engine_api_db_confd_password`: (default: `superpass`) database password for wazo-confd
+* `engine_api_listen_address`: (default: `127.0.0.1`)
+* `engine_api_configure_wizard:`: (default: `true`)
+* `ari_username`: (default: `xivo`) B2BUA ARI username
+* `ari_password`: (default: `Nasheow8Eag`) B2BUA ARI password
+* `ami_username`: (default: `xivo_amid`) B2BUA AMI username
+* `ami_password`: (default: `eeCho8ied3u`) B2BUA AMI password
+* `language`: (default: `en_US`)
+* `engine_api_root_password`: (default: `superpass`) password for engine superuser `root`
+
+### debian repo and distribution
+
+Wazo has two difference Debian repositories: the `main` and `archive`
+repositories. Each repository contains multiple distributions, themselves
+containing multiple packages, in a certain version:
+
+  * The `main` repository contains the "rolling" distributions: `phoenix-stretch`,
+    `pelican-stretch`, `wazo-dev-stretch`, etc. Packages in those distributions
+    are updated at each release.
+  * The `archive` repository contains the "frozen" distributions: `wazo-19.10`,
+    `wazo-19.11`, etc. Packages in those distribution do not change (except for
+    important bugfixes), each distribution is created once a new version of the
+    Wazo engine is released, then the packages are never updated. This ensures
+    the installation will be the same, even a few months later (except for
+    changes in the base Debian install).
+
+For a new Wazo engine installation, there are two distribution to consider:
+
+1. which distribution is used for the current installation (defined by the repo
+   and distribution `wazo_debian_repo` and `wazo_distribution`)
+2. which distribution will be used for future upgrades (defined by the repo and
+   distribution `wazo_debian_repo_upgrade` and `wazo_distribution_upgrade`)
+
+* `wazo_debian_repo`: (default: `main`) wazo repository from where packages are
+  installed. Valid values: `main` and `archive`
+* `wazo_distribution`: (default: `wazo-dev-stretch`) wazo distribution from
+  where packages are installed
+* `wazo_debian_repo_upgrade`: (default: `main`) wazo repository for later
+  upgrades. This repo is not used during installation, only set up at the end
+  for later upgrades. Valid values: `main` and `archive`
+* `wazo_distribution_upgrade`: (default: `wazo-dev-stretch`) wazo distribution
+  for later upgrades. This distribution is not used during installation, only
+  set up at the end for later upgrades.
