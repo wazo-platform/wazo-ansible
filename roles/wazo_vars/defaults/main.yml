@@ -1,14 +1,3 @@
-b2bua_ami_permit_client_address: 127.0.0.1
-b2bua_ami_permit_client_mask: 255.255.255.255
-b2bua_listen_address: 127.0.0.1
-b2bua_port_ami: 5038
-
-ari_username: xivo
-ari_password: Nasheow8Eag
-
-ami_username: xivo_amid
-ami_password: eeCho8ied3u
-
 debian_upgrade_first: true
 
 wazo_distribution: wazo-dev-stretch
@@ -16,10 +5,20 @@ wazo_debian_repo: main
 wazo_distribution_upgrade: wazo-dev-stretch
 wazo_debian_repo_upgrade: main
 
-engine_api_listen_address: 127.0.0.1
+engine_api_host: localhost
+engine_api_port: 443
+engine_language: en_US
+
+engine_api_configure_wizard: false
+tenant_name: my-company
+api_client_name: api-client
+api_client_password: api-password
+
 engine_api_db_host: localhost
 engine_api_db_port: 5432
-engine_api_configure_wizard: false
+engine_api_listen_address: 127.0.0.1
+
+engine_api_port_confgend: 8669
 
 engine_api_db_confd_name: asterisk
 engine_api_db_confd_user: asterisk
@@ -32,12 +31,24 @@ engine_api_db_auth_name: asterisk
 engine_api_db_auth_user: asterisk
 engine_api_db_auth_password: proformatique
 
-engine_language: en_US
 engine_api_root_password: superpass
 engine_setupd_path: /api/setupd/1.0
 engine_auth_path: /api/auth/0.1
 engine_confd_path: /api/confd/1.1
-tenant_name: my-company
-api_client_name: api-client
-api_client_password: api-password
+
+b2bua_host: localhost
+b2bua_port_ami: 5038
+b2bua_port_http: 5039
+b2bua_port_https: 5040
+b2bua_port_sysconfd: 8668
+b2bua_ami_permit_client_address: 127.0.0.1
+b2bua_ami_permit_client_mask: 255.255.255.255
+b2bua_listen_address: 127.0.0.1
+b2bua_port_ami: 5038
+
+ari_username: xivo
+ari_password: Nasheow8Eag
+
+ami_username: xivo_amid
+ami_password: eeCho8ied3u
 

@@ -1,0 +1,55 @@
+---
+- name: Assert Debian Stretch
+  assert:
+    that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
+
+- name: Install Wazo repo package source
+  include_role:
+    name: debian-repo-wazo
+
+- name: Install xivo-certs
+  apt:
+    name: xivo-certs
+    state: latest
+
+- name: Install nginx
+  apt:
+    name: nginx
+    state: latest
+
+- name: Install xivo-nginx
+  apt:
+    name: xivo-nginx
+    state: latest
+  notify:
+    - restart nginx
+
+- name: Install custom certificate for HTTPS
+  copy:
+    src: "{{ engine_api_https_cert }}"
+    dest: /usr/share/xivo-certs/server.crt
+    owner: root
+    group: www-data
+    mode: 0640
+  when: engine_api_https_cert is defined
+  notify:
+    - restart wazo-ui
+    - reload nginx
+
+- name: Install custom private key for HTTPS
+  copy:
+    src: "{{ engine_api_https_private_key }}"
+    dest: /usr/share/xivo-certs/server.key
+    owner: root
+    group: www-data
+    mode: 0640
+  when: engine_api_https_private_key is defined
+  notify:
+    - restart wazo-ui
+    - reload nginx
+
+- name: Install wazo-ui
+  become: true
+  apt:
+    name: wazo-ui
+    state: latest
