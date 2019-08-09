@@ -24,25 +24,7 @@ engine-api
 # uc-engine-host
 
 [uc-engine:vars]
-# Mandatory variables
-b2bua_host = localhost
-b2bua_port_ami = 5038
-b2bua_port_http = 5039
-b2bua_port_https = 5040
-b2bua_port_sysconfd = 8668
-engine_api_host = localhost
-engine_api_port = 443
-engine_api_port_confgend = 8669
-engine_api_db_host = localhost
-engine_api_db_port = 5432
-
-# Optional variables are defined in:
-# ../roles/debian_upgrade_first/defaults/amin.yml
-# ../roles/engine-api/defaults/main.yml
-# ../roles/engine-api-init/defaults/main.yml
-# ../roles/debian-repo-wazo/defaults/main.yml
-# ../roles/b2bua/defaults/main.yml
-# ../roles/uc-engine/defaults/main.yml
+# Variables are defined in ../roles/wazo_vars/defaults/main.yml
 
 # PostgreSQL settings
 # postgresql_port = 5432
