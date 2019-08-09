@@ -53,10 +53,3 @@
   apt:
     name: wazo-ui
     state: latest
-
-- name: Configure ui
-  template:
-    src: templates/config.yml.j2
-    dest: /etc/wazo-ui/conf.d/ansible.yml
-  notify:
-    - restart wazo-ui
