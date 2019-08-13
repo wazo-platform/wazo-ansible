@@ -39,9 +39,9 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 
 ### database
 
-`postgresql_port`: (default: `5432`) TCP port for PostgreSQL
-`postgresql_superuser_password`: (default: `superpass`) password for superuser `postgres`
-`postgresql_listen_addresses`: (default: `127.0.0.1`)
+* `postgresql_port`: (default: `5432`) TCP port for PostgreSQL
+* `postgresql_superuser_password`: (default: `superpass`) password for superuser `postgres`
+* `postgresql_listen_addresses`: (default: `127.0.0.1`)
 
 ### engine-api
 
