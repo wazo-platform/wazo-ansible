@@ -10,8 +10,8 @@
     check:
       jobs:
         - wazo-ansible-install:
-            nodeset: debian9-vm
+            nodeset: debian10-vm
     gate:
       jobs:
         - wazo-ansible-install:
-            nodeset: debian9-vm
+            nodeset: debian10-vm
