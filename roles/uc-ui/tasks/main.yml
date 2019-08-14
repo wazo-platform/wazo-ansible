@@ -17,9 +17,9 @@
     name: nginx
     state: latest
 
-- name: Install xivo-nginx
+- name: Install wazo-nginx
   apt:
-    name: xivo-nginx
+    name: wazo-nginx
     state: latest
   notify:
     - restart nginx
