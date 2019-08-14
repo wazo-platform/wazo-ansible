@@ -1,7 +1,4 @@
 ---
 - hosts: uc-engine-host
-  become: yes
-  vars:
-    validate_wazo_engine: true
   roles:
-    - role: engine-api-init
+    - role: validate_uc
