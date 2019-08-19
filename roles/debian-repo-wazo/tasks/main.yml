@@ -16,7 +16,7 @@
 
 - name: Add bootstrap Wazo repository
   apt_repository:
-    repo: deb http://mirror.wazo.community/debian pelican-stretch main
+    repo: deb http://mirror.wazo.community/debian wazo-dev-buster main
     state: present
     filename: wazo-install
     update_cache: yes
@@ -32,7 +32,7 @@
 
 - name: Remove bootstrap Wazo repository
   apt_repository:
-    repo: deb http://mirror.wazo.community/debian pelican-stretch main
+    repo: deb http://mirror.wazo.community/debian wazo-dev-buster main
     state: absent
     filename: wazo-install
     update_cache: yes
