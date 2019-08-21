@@ -1,6 +1,11 @@
 - hosts: database
   become: yes
   pre_tasks:
+    - name: ensure correct locale
+      lineinfile:
+        path: /etc/default/locale
+        regexp: '^LANG='
+        line: LANG=C.UTF-8
     # The role does not handle changing the port while changing users.
     # See https://github.com/geerlingguy/ansible-role-postgresql/issues/51
     - name: Change PostgreSQL port
