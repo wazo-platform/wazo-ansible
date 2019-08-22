@@ -1,8 +1,10 @@
 ---
-- name: Install NTP daemon
+- name: Install the ntp and postfix daemons
   # Some machines have chrony installed
   apt:
-    name: ntp
+    name:
+      - ntp
+      - postfix
     state: latest
 
 - name: Install wazo-platform

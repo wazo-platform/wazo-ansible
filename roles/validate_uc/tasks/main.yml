@@ -29,3 +29,22 @@
 - name: debug users data
   debug:
     var: users_data
+
+- block:
+    - name: Get the home page
+      uri:
+        url: "https://{{ groups['uc-ui'][0] }}/"
+        validate_certs: false
+      register: home_page
+
+    - name: debug home_page data
+      debug:
+        var: home_page
+
+    - name: verify redirect url
+      assert:
+        that:
+          - home_page.url == "https://{{ groups['uc-ui'][0] }}/login/"
+          - home_page.redirected
+
+  when: groups['uc-ui'] is defined
