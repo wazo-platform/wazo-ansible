@@ -5,17 +5,7 @@
       become: yes
       apt: name={{item}} state=installed
       with_items:
-        - python3-pip
-
-    - name: Install ansible via pip
-      become: yes
-      pip:
-        name: ansible==2.7.9
-
-    - name: Install paramiko via pip
-      become: yes
-      pip:
-        name: paramiko
+        - ansible
 
     - name: Install postgresql ansible module from galaxy
       become: yes
