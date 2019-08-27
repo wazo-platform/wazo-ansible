@@ -7,3 +7,10 @@
   assert:
     that:
       - engine_api_db_confd_name == engine_api_db_auth_name
+
+- name: Check UTF-8 locale
+  shell: grep 'LANG=.*\.UTF-8"\?$' /etc/default/locale
+
+- name: Re-generate UTF-8 locale
+  become: true
+  shell: ". /etc/default/locale; grep \"^$LANG\" /etc/locale.gen || echo $LANG UTF-8 >> /etc/locale.gen; locale-gen"
