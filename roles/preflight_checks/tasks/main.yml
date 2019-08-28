@@ -1,5 +1,12 @@
 ---
+- name: Assert Debian Stretch
+  assert:
+    that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
+
 - name: Validate database names
   assert:
     that:
       - engine_api_db_confd_name == engine_api_db_auth_name
+
+- name: Assert UTF-8 locale
+  shell: grep 'LANG=.*\.UTF-8"\?$' /etc/default/locale
