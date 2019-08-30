@@ -2,7 +2,7 @@
     parent: base
     name: wazo-ansible-install
     required-projects:
-      wazo-pbx/wazo-acceptance
+      wazo-platform/wazo-acceptance
     description: install Wazo platform
     timeout: 10800
     pre-run: zuul.d/pre.yaml
