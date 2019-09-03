@@ -26,13 +26,14 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 
 ### b2bua
 
-* `b2bua_host`: (default: `b2bua-ansible`) where other services should contact the B2BUA
+* `b2bua_host`: (default: `localhost`) where other services should contact the B2BUA
+* `b2bua_listen_address`: (default: `127.0.0.1`)
 * `b2bua_port_ami`: (default: `5038`) TCP port for AMI
 * `b2bua_port_http`: (default: `5039`) TCP port for HTTP interfaces
 * `b2bua_port_https`: (default: `5040`) TCP port for HTTPS interfaces
 * `b2bua_port_sysconfd`: (default: `8668`) TCP port for xivo-sysconfd HTTP interface
-* `b2bua_https_cert`: (default: `files/default-https.crt`) custom certificate for HTTPS
-* `b2bua_https_private_key`: (default: `files/default-https.key`) custom private key for HTTPS
+* `b2bua_https_cert`: custom certificate filename for HTTPS
+* `b2bua_https_private_key`: custom private key filename for HTTPS
 * `b2bua_ami_permit_client_address`: (default: `127.0.0.1`)
 * `b2bua_ami_permit_client_mask`: (default: `255.255.255.255`)
 * `b2bua_listen_address`: (default: `127.0.0.1`)
@@ -45,28 +46,34 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 
 ### engine-api
 
-* `engine_api_host`: (default: `engine-api-ansible`) where other services should contact the engine API
+* `engine_api_host`: (default: `localhost`) where other services should contact the engine API
 * `engine_api_port`: (default: `443`) TCP port for HTTPS API
 * `engine_api_port_confgend`: (default: `8669`) TCP port for xivo-confgend
-* `engine_api_https_cert`: (default: `files/default-https.crt`) custom certificate for HTTPS
-* `engine_api_https_private_key`: (default: `files/default-https.key`) custom private key for HTTPS
-* `engine_api_db_host`: (default: `database-ansible`) PostgreSQL host
+* `engine_api_https_cert`: custom certificate filename for HTTPS
+* `engine_api_https_private_key`: custom private key filename for HTTPS
+* `engine_api_db_host`: (default: `localhost`) PostgreSQL host
 * `engine_api_db_port`: (default: `5432`) PostgreSQL port
 * `engine_api_db_admin_user`: (default: `postgres`) PostgreSQL superuser username
 * `engine_api_db_admin_password`: (default: `superpass`) PostgreSQL superuser password
-* `engine_api_db_auth_name`: (default: `wazo-auth`) database name for wazo-auth
-* `engine_api_db_auth_user`: (default: `wazo-auth`) database username for wazo-auth
-* `engine_api_db_auth_password`: (default: `superpass`) database password for wazo-auth
+* `engine_api_db_auth_name`: (default: `asterisk`) database name for wazo-auth
+* `engine_api_db_auth_user`: (default: `asterisk`) database username for wazo-auth
+* `engine_api_db_auth_password`: (default: `proformatique`) database password for wazo-auth
 * `engine_api_db_confd_name`: (default: `asterisk`) database name for wazo-confd
 * `engine_api_db_confd_user`: (default: `asterisk`) database username for wazo-confd
-* `engine_api_db_confd_password`: (default: `superpass`) database password for wazo-confd
+* `engine_api_db_confd_password`: (default: `proformatique`) database password for wazo-confd
+* `engine_auth_path`: (default: `/api/auth/0.1`)
+* `engine_confd_path`: (default: `/api/confd/1.1`)
+* `engine_setupd_path`: (default: `/api/setupd/1.0`)
 * `engine_api_listen_address`: (default: `127.0.0.1`)
-* `engine_api_configure_wizard:`: (default: `true`)
+* `engine_api_configure_wizard`: (default: `false`) run the configuration wizard
+* `api_client_name`: (default: `api-client`) client name to manage the api. Used when `engine_api_configure_wizard` is `true`.
+* `api_client_password`: (default: `api-password`) password for `api_client_name`. Used when `engine_api_configure_wizard` is `true`.
+* `tenant_name`: (default: `my-company`) first tenant to create. Used when `engine_api_configure_wizard` is `true`.
 * `ari_username`: (default: `xivo`) B2BUA ARI username
 * `ari_password`: (default: `Nasheow8Eag`) B2BUA ARI password
 * `ami_username`: (default: `xivo_amid`) B2BUA AMI username
 * `ami_password`: (default: `eeCho8ied3u`) B2BUA AMI password
-* `language`: (default: `en_US`)
+* `engine_language`: (default: `en_US`)
 * `engine_api_root_password`: (default: `superpass`) password for engine superuser `root`
 
 ### debian repo and distribution
