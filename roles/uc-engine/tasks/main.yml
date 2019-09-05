@@ -27,3 +27,32 @@
 
 - name: Change Wazo distribution for later upgrades
   command: wazo-dist --{{ wazo_debian_repo_upgrade }}-repo {{ wazo_distribution_upgrade }}
+
+- name: Finalize engine configuration
+  block:
+  - name: Setup engine
+    uri:
+      url: "https://{{ engine_api_host}}:{{ engine_api_port}}{{ engine_setupd_path }}/setup"
+      method: POST
+      timeout: 300
+      validate_certs: no
+      body_format: json
+      body:
+        engine_internal_address: "{{ engine_api_host }}"
+        engine_language: "{{ engine_language }}"
+        engine_license: true
+        engine_password: "{{ engine_api_root_password }}"
+      status_code: 201
+
+  - name: Create tenant
+    command: "wazo-auth-cli tenant create {{ tenant_name }}"
+
+  - name: Create API client
+    command: "wazo-auth-cli user create {{ api_client_name}} --tenant {{ tenant_name }} --password {{ api_client_password }} --purpose external_api"
+
+  - name: Create policy
+    command: "wazo-auth-cli policy create api-client-policy --tenant {{ tenant_name }} --acl 'confd.#'"
+
+  - name: Enable policy for API client
+    command: "wazo-auth-cli user add {{ api_client_name}} --policy api-client-policy"
+  when: engine_api_configure_wizard == "true"
