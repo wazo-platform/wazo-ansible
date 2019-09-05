@@ -23,8 +23,8 @@
   become: yes
   roles:
     - role: engine-api
-    - role: uc-engine
     - role: engine-api-init
+    - role: uc-engine
 
 - hosts: uc-ui
   become: yes
