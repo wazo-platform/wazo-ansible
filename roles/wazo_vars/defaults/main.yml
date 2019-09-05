@@ -2,8 +2,8 @@ debian_upgrade_first: true
 
 wazo_debian_repo: main
 wazo_debian_repo_upgrade: main
-wazo_distribution: wazo-dev-stretch
-wazo_distribution_upgrade: wazo-dev-stretch
+wazo_distribution: wazo-dev-buster
+wazo_distribution_upgrade: wazo-dev-buster
 
 engine_api_host: localhost
 engine_api_port: 443
