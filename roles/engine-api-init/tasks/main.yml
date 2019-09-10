@@ -38,7 +38,7 @@
     state: restarted
   loop:
     - wazo-agid
-    - xivo-amid
+    - wazo-amid
     - wazo-confd
     - xivo-confgend
     - wazo-calld

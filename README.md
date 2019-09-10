@@ -71,7 +71,7 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 * `tenant_name`: (default: `my-company`) first tenant to create. Used when `engine_api_configure_wizard` is `true`.
 * `ari_username`: (default: `xivo`) B2BUA ARI username
 * `ari_password`: (default: `Nasheow8Eag`) B2BUA ARI password
-* `ami_username`: (default: `xivo_amid`) B2BUA AMI username
+* `ami_username`: (default: `wazo_amid`) B2BUA AMI username
 * `ami_password`: (default: `eeCho8ied3u`) B2BUA AMI password
 * `engine_language`: (default: `en_US`)
 * `engine_api_root_password`: (default: `superpass`) password for engine superuser `root`

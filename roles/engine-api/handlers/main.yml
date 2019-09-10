@@ -2,9 +2,9 @@
   service:
     name: wazo-auth
     state: restarted
-- name: restart xivo-amid
+- name: restart wazo-amid
   service:
-    name: xivo-amid
+    name: wazo-amid
     state: restarted
 - name: restart wazo-confd
   service:
