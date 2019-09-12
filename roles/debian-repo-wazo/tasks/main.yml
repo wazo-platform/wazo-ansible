@@ -20,11 +20,11 @@
     state: present
     filename: wazo-install
     update_cache: yes
-  when: '"xivo-dist" not in ansible_facts.packages'
+  when: '"wazo-dist" not in ansible_facts.packages'
 
-- name: Install xivo-dist
+- name: Install wazo-dist
   apt:
-    name: xivo-dist
+    name: wazo-dist
     state: latest
 
 - name: Add persistent Wazo repository
@@ -36,5 +36,5 @@
     state: absent
     filename: wazo-install
     update_cache: yes
-  when: '"xivo-dist" not in ansible_facts.packages'
+  when: '"wazo-dist" not in ansible_facts.packages'
 
