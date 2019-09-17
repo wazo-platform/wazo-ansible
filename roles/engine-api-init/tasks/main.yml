@@ -3,6 +3,17 @@
   template:
     src: templates/wazo-auth.cfg.j2
     dest: /tmp/wazo-auth.cfg
+  when:
+    - engine_api_db_admin_password is defined
+    - engine_api_db_admin_user is defined
+    - engine_api_db_auth_name is defined
+    - engine_api_db_auth_password is defined
+    - engine_api_db_auth_user is defined
+    - engine_api_db_confd_name is defined
+    - engine_api_db_confd_password is defined
+    - engine_api_db_confd_user is defined
+    - engine_api_db_host is defined
+    - engine_api_db_port is defined
 
 - name: Reconfigure database options for wazo-auth package
   command: debconf-set-selections /tmp/wazo-auth.cfg
@@ -22,6 +33,14 @@
   template:
     src: templates/xivo-manage-db.cfg.j2
     dest: /tmp/xivo-manage-db.cfg
+  when:
+    - engine_api_db_admin_password is defined
+    - engine_api_db_admin_user is defined
+    - engine_api_db_confd_name is defined
+    - engine_api_db_confd_password is defined
+    - engine_api_db_confd_user is defined
+    - engine_api_db_host is defined
+    - engine_api_db_port is defined
 
 - name: Apply main database preconfiguration
   command: debconf-set-selections /tmp/xivo-manage-db.cfg

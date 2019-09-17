@@ -7,6 +7,9 @@
   assert:
     that:
       - engine_api_db_confd_name == engine_api_db_auth_name
+  when:
+    - engine_api_db_confd_name is defined
+    - engine_api_db_auth_name is defined
 
 - name: Assert UTF-8 locale
   shell: grep 'LANG=.*\.UTF-8"\?$' /etc/default/locale
