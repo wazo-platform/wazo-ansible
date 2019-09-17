@@ -1,5 +1,10 @@
 ---
-- name: Copy wazo-auth database preconfiguration
+- name: Create default wazo-auth database preconfiguration
+  file:
+    path: /tmp/wazo-auth.cfg
+    state: touch
+
+- name: Copy wazo-auth database preconfiguration if needed
   template:
     src: templates/wazo-auth.cfg.j2
     dest: /tmp/wazo-auth.cfg
@@ -15,6 +20,9 @@
     - engine_api_db_host is defined
     - engine_api_db_port is defined
 
+- name: Reset database options for wazo-auth package
+  shell: "echo PURGE | debconf-communicate wazo-auth"
+
 - name: Reconfigure database options for wazo-auth package
   command: debconf-set-selections /tmp/wazo-auth.cfg
 
@@ -29,6 +37,11 @@
 - name: Create service users with wazo-auth-keys
   command: wazo-auth-keys service update
 
+- name: Create default main database preconfiguration
+  file:
+    path: /tmp/xivo-manage-db.cfg
+    state: touch
+
 - name: Copy main database preconfiguration
   template:
     src: templates/xivo-manage-db.cfg.j2
@@ -42,7 +55,10 @@
     - engine_api_db_host is defined
     - engine_api_db_port is defined
 
-- name: Apply main database preconfiguration
+- name: Reset main database options for wazo-auth package
+  shell: "echo PURGE | debconf-communicate xivo-manage-db"
+
+- name: Reconfigure main database options
   command: debconf-set-selections /tmp/xivo-manage-db.cfg
 
 - name: Initialize main database
