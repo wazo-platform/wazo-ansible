@@ -48,7 +48,7 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 
 * `engine_api_host`: (default: `localhost`) where other services should contact the engine API
 * `engine_api_port`: (default: `443`) TCP port for HTTPS API
-* `engine_api_port_confgend`: (default: `8669`) TCP port for xivo-confgend
+* `engine_api_port_confgend`: (default: `8669`) TCP port for wazo-confgend
 * `engine_api_https_cert`: custom certificate filename for HTTPS
 * `engine_api_https_private_key`: custom private key filename for HTTPS
 * `engine_api_db_host`: (default: `localhost`) PostgreSQL host

@@ -10,9 +10,9 @@
   service:
     name: wazo-confd
     state: restarted
-- name: restart xivo-confgend
+- name: restart wazo-confgend
   service:
-    name: xivo-confgend
+    name: wazo-confgend
     state: restarted
 - name: restart wazo-agid
   service:

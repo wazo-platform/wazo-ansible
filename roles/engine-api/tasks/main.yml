@@ -193,15 +193,15 @@
     name: wazo-confd-client-python3
     state: latest
 
-- name: Create xivo-confgend config dir
+- name: Create wazo-confgend config dir
   file:
-    path: /etc/xivo-confgend/conf.d
+    path: /etc/wazo-confgend/conf.d
     state: directory
 
-- name: Add xivo-confgend config
+- name: Add wazo-confgend config
   template:
-    src: templates/xivo-confgend.yml.j2
-    dest: /etc/xivo-confgend/conf.d/50-engine-api.yml
+    src: templates/wazo-confgend.yml.j2
+    dest: /etc/wazo-confgend/conf.d/50-engine-api.yml
     owner: root
     group: root
     mode: 0644
@@ -214,9 +214,9 @@
     - engine_api_port_confgend is defined
     - engine_api_listen_address is defined
 
-- name: Install xivo-confgend
+- name: Install wazo-confgend
   apt:
-    name: xivo-confgend
+    name: wazo-confgend
     state: latest
 
 - name: Create wazo-agid config dir

@@ -75,7 +75,7 @@
     - wazo-agid
     - wazo-amid
     - wazo-confd
-    - xivo-confgend
+    - wazo-confgend
     - wazo-calld
     - wazo-provd
     - wazo-websocketd
