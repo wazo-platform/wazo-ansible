@@ -30,5 +30,3 @@ engine-api
 # postgresql_port = 5432
 # postgresql_superuser_password =
 # postgresql_listen_addresses = 127.0.0.1
-
-# engine_api_root_password: superpass

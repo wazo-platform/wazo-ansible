@@ -65,7 +65,7 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 * `engine_confd_path`: (default: `/api/confd/1.1`)
 * `engine_setupd_path`: (default: `/api/setupd/1.0`)
 * `engine_api_listen_address`: (default: `127.0.0.1`)
-* `engine_api_configure_wizard`: (default: `false`) run the configuration wizard
+* `engine_api_configure_wizard`: (default: `false`) run the configuration wizard. When `true`, `engine_api_root_password` must be set.
 * `api_client_name`: (default: `api-client`) client name to manage the api. Used when `engine_api_configure_wizard` is `true`.
 * `api_client_password`: (default: `api-password`) password for `api_client_name`. Used when `engine_api_configure_wizard` is `true`.
 * `tenant_name`: (default: `my-company`) first tenant to create. Used when `engine_api_configure_wizard` is `true`.

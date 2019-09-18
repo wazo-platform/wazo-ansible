@@ -11,5 +11,13 @@
     - engine_api_db_confd_name is defined
     - engine_api_db_auth_name is defined
 
+- name: Assert root password for setup
+  assert:
+    that:
+      - engine_api_root_password is defined
+    fail_msg: "The variable engine_api_root_password is required when configuring the wizard."
+  when:
+    - engine_api_configure_wizard == "true"
+
 - name: Assert UTF-8 locale
   shell: grep 'LANG=.*\.UTF-8"\?$' /etc/default/locale
