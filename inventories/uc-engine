@@ -28,5 +28,5 @@ engine-api
 
 # PostgreSQL settings
 # postgresql_port = 5432
-# postgresql_superuser_password = superpass
+# postgresql_superuser_password =
 # postgresql_listen_addresses = 127.0.0.1

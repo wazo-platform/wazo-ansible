@@ -11,6 +11,15 @@
           - option: port
             value: "{{ postgresql_port | default(5432) }}"
         postgresql_users: []
+    - name: Set PostgreSQL superadmin password
+      include_role:
+        name: geerlingguy.postgresql
+      vars:
+        postgresql_users:
+          - name: postgres
+            password: "{{ postgresql_superuser_password }}"
+            port: "{{ postgresql_port | default(5432) }}"
+      when: postgresql_superuser_password is defined
   roles:
     - role: geerlingguy.postgresql
       become: yes
@@ -23,7 +32,3 @@
             value: "{{ postgresql_port | default(5432) }}"
           - option: listen_addresses
             value: "{{ postgresql_listen_addresses | default('127.0.0.1') }}"
-        postgresql_users:
-          - name: postgres
-            password: "{{ postgresql_superuser_password | default('superpass') }}"
-            port: "{{ postgresql_port | default(5432) }}"

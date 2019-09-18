@@ -14,7 +14,6 @@ api_client_password: api-password
 engine_api_configure_wizard: false
 tenant_name: my-company
 
-engine_api_root_password: superpass
 engine_auth_path: /api/auth/0.1
 engine_confd_path: /api/confd/1.1
 engine_setupd_path: /api/setupd/1.0
@@ -35,7 +34,7 @@ engine_setupd_path: /api/setupd/1.0
 # engine_api_db_confd_password: proformatique
 # engine_api_db_confd_user: asterisk
 
-# engine_api_db_admin_password: superpass
+# engine_api_db_admin_password:
 # engine_api_db_admin_user: postgres
 
 # engine_api_db_auth_name: asterisk
