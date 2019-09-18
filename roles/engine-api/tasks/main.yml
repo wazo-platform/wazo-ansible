@@ -89,6 +89,11 @@
     owner: root
     group: root
     mode: 0644
+  when:
+    - ari_password is defined
+    - ari_username is defined
+    - b2bua_host is defined
+    - b2bua_port_http is defined
 
 - name: Install wazo-calld
   apt:
@@ -115,6 +120,12 @@
     owner: root
     group: root
     mode: 0644
+  when:
+    - ami_password is defined
+    - ami_username is defined
+    - b2bua_host is defined
+    - b2bua_port_ami is defined
+    - b2bua_port_https is defined
 
 - name: Install wazo-amid
   apt:
@@ -141,6 +152,17 @@
     group: root
     mode: 0644
   notify: restart wazo-confd
+  when:
+    - ari_password is defined
+    - ari_username is defined
+    - b2bua_host is defined
+    - b2bua_port_http is defined
+    - b2bua_port_sysconfd is defined
+    - engine_api_db_confd_name is defined
+    - engine_api_db_confd_password is defined
+    - engine_api_db_confd_user is defined
+    - engine_api_db_host is defined
+    - engine_api_db_port is defined
 
 - name: Create xivo-dao config dir
   file:
@@ -155,6 +177,12 @@
     group: root
     mode: 0644
   notify: restart wazo-confd
+  when:
+    - engine_api_db_confd_name is defined
+    - engine_api_db_confd_password is defined
+    - engine_api_db_confd_user is defined
+    - engine_api_db_host is defined
+    - engine_api_db_port is defined
 
 - name: Install wazo-confd
   apt:
@@ -177,6 +205,14 @@
     owner: root
     group: root
     mode: 0644
+  when:
+    - engine_api_db_confd_name is defined
+    - engine_api_db_confd_user is defined
+    - engine_api_db_confd_password is defined
+    - engine_api_db_host is defined
+    - engine_api_db_port is defined
+    - engine_api_port_confgend is defined
+    - engine_api_listen_address is defined
 
 - name: Install xivo-confgend
   apt:
@@ -195,6 +231,13 @@
     owner: root
     group: root
     mode: 0644
+  when:
+    - engine_api_db_confd_name is defined
+    - engine_api_db_confd_user is defined
+    - engine_api_db_confd_password is defined
+    - engine_api_db_host is defined
+    - engine_api_db_port is defined
+    - engine_api_listen_address is defined
 
 - name: Install xivo-config
   apt:
