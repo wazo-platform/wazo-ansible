@@ -41,7 +41,7 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 ### database
 
 * `postgresql_port`: (default: `5432`) TCP port for PostgreSQL
-* `postgresql_superuser_password`: (default: `superpass`) password for superuser `postgres`
+* `postgresql_superuser_password`: password for superuser `postgres`
 * `postgresql_listen_addresses`: (default: `127.0.0.1`)
 
 ### engine-api
@@ -54,7 +54,7 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 * `engine_api_db_host`: (default: `localhost`) PostgreSQL host
 * `engine_api_db_port`: (default: `5432`) PostgreSQL port
 * `engine_api_db_admin_user`: (default: `postgres`) PostgreSQL superuser username
-* `engine_api_db_admin_password`: (default: `superpass`) PostgreSQL superuser password
+* `engine_api_db_admin_password`: PostgreSQL superuser password
 * `engine_api_db_auth_name`: (default: `asterisk`) database name for wazo-auth
 * `engine_api_db_auth_user`: (default: `asterisk`) database username for wazo-auth
 * `engine_api_db_auth_password`: (default: `proformatique`) database password for wazo-auth
@@ -74,7 +74,7 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 * `ami_username`: (default: `wazo_amid`) B2BUA AMI username
 * `ami_password`: (default: `eeCho8ied3u`) B2BUA AMI password
 * `engine_language`: (default: `en_US`)
-* `engine_api_root_password`: (default: `superpass`) password for engine superuser `root`
+* `engine_api_root_password`: password for engine superuser `root`
 
 ### debian repo and distribution
 
