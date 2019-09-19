@@ -100,14 +100,6 @@
     name: wazo-calld
     state: latest
 
-- name: Remove wazo-calld default config
-  file:
-    path: "/etc/wazo-calld/conf.d/{{ item }}"
-    state: absent
-  with_items:
-    - 050-xivo-consul-config.yml
-    - 050-xivo-consul-token.yml
-
 - name: Create wazo-amid config dir
   file:
     path: /etc/wazo-amid/conf.d
