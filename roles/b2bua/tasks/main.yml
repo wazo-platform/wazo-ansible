@@ -84,15 +84,15 @@
     - b2bua_port_http is defined
     - b2bua_port_https is defined
 
-- name: Install xivo-confgend-client
+- name: Install wazo-confgend-client
   apt:
-    name: xivo-confgend-client
+    name: wazo-confgend-client
     state: latest
 
-- name: Install xivo-confgend-client config
+- name: Install wazo-confgend-client config
   template:
-    src: templates/xivo-confgend-client.conf.j2
-    dest: /etc/xivo-confgend-client/config.conf
+    src: templates/wazo-confgend-client.conf.j2
+    dest: /etc/wazo-confgend-client/config.conf
   when:
     - engine_api_host is defined
     - engine_api_port_confgend is defined

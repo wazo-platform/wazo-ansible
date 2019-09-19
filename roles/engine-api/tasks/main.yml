@@ -36,9 +36,9 @@
     - restart wazo-confd
     - reload nginx
 
-- name: Install xivo-confgend-client
+- name: Install wazo-confgend-client
   apt:
-    name: xivo-confgend-client
+    name: wazo-confgend-client
     state: latest
 
 - name: Preconfigure wazo-auth package
