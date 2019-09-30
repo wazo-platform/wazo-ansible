@@ -2,6 +2,7 @@
 - name: Create default wazo-auth database preconfiguration
   tempfile:
     state: file
+    prefix: wazo_auth_debconf_file
   register: wazo_auth_debconf_file
 
 - name: Copy wazo-auth database preconfiguration if needed
@@ -40,6 +41,7 @@
 - name: Create default main database preconfiguration
   tempfile:
     state: file
+    prefix: xivo_managedb_debconf_file
   register: xivo_managedb_debconf_file
 
 - name: Copy main database preconfiguration
