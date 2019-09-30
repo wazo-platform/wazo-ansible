@@ -1,13 +1,14 @@
 ---
 - name: Create default wazo-auth database preconfiguration
-  file:
-    path: /tmp/wazo-auth.cfg
-    state: touch
+  tempfile:
+    state: file
+    prefix: wazo_auth_debconf_file
+  register: wazo_auth_debconf_file
 
 - name: Copy wazo-auth database preconfiguration if needed
   template:
     src: templates/wazo-auth.cfg.j2
-    dest: /tmp/wazo-auth.cfg
+    dest: "{{ wazo_auth_debconf_file.path }}"
   when:
     - engine_api_db_admin_password is defined
     - engine_api_db_admin_user is defined
@@ -24,7 +25,7 @@
   shell: "echo PURGE | debconf-communicate wazo-auth"
 
 - name: Reconfigure database options for wazo-auth package
-  command: debconf-set-selections /tmp/wazo-auth.cfg
+  command: debconf-set-selections "{{ wazo_auth_debconf_file.path }}"
 
 - name: Initialize wazo-auth database
   command: dpkg-reconfigure wazo-auth --frontend noninteractive
@@ -38,14 +39,15 @@
   command: wazo-auth-keys service update
 
 - name: Create default main database preconfiguration
-  file:
-    path: /tmp/xivo-manage-db.cfg
-    state: touch
+  tempfile:
+    state: file
+    prefix: xivo_managedb_debconf_file
+  register: xivo_managedb_debconf_file
 
 - name: Copy main database preconfiguration
   template:
     src: templates/xivo-manage-db.cfg.j2
-    dest: /tmp/xivo-manage-db.cfg
+    dest: "{{ xivo_managedb_debconf_file.path }}"
   when:
     - engine_api_db_admin_password is defined
     - engine_api_db_admin_user is defined
@@ -59,7 +61,7 @@
   shell: "echo PURGE | debconf-communicate xivo-manage-db"
 
 - name: Reconfigure main database options
-  command: debconf-set-selections /tmp/xivo-manage-db.cfg
+  command: debconf-set-selections "{{ xivo_managedb_debconf_file.path }}"
 
 - name: Initialize main database
   command: dpkg-reconfigure xivo-manage-db --frontend noninteractive
