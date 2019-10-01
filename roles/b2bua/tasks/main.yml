@@ -37,7 +37,7 @@
       - asterisk
       - asterisk-moh-opsound-wav
       - asterisk-sounds-wav-en-us
-      - xivo-sounds-en-us
+      - wazo-sounds-en-us
     state: latest
 - name: Ensure Asterisk is started
   service:
