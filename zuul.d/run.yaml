@@ -49,15 +49,14 @@
         create: yes
         path: ~/.wazo-acceptance/config.yml
         block: |
-          default:
-            wazo_host: localhost
-            debug:
-              global: True
-              
-              acceptance: True
-              linphone: False  # otherwise, there are unprintable (^H) character that jenkins cannot decode in junit.xml
-            setupd:
-              timeout: 120
+          debug:
+            global: True
+
+            acceptance: True
+            linphone: True
+          instances:
+            default:
+              wazo_host: 127.0.0.1
 
     - name: Setup acceptance tests
       shell: "tox -e setup"
