@@ -1,7 +1,10 @@
 - job:
     parent: base
     name: wazo-ansible-install
+    required-projects:
+      wazo-platform/wazo-acceptance
     description: install Wazo platform
+    timeout: 10800
     pre-run: zuul.d/pre.yaml
     run: zuul.d/run.yaml
     post-run: zuul.d/fetch-logs.yaml
