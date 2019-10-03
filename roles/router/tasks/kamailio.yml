@@ -1,0 +1,30 @@
+- name: Add the apt key for kamailio official repository
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: fb40d3e6508ea4c8
+
+- name: Add the kamailio official apt repository
+  apt_repository:
+    repo: deb http://deb.kamailio.org/kamailio52 buster main
+    state: present
+
+- name: Update repositories cache
+  apt:
+    update_cache: yes
+
+- name: Install kamailio-local
+  template:
+    src: templates/kamailio-local.cfg.j2
+    dest: /etc/kamailio/kamailio-local.cfg
+
+- name: Install the kamailio packages
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - wazo-kamailio-config
+    - kamailio=5.2.4+buster
+    - kamailio-json-modules=5.2.4+buster
+    - kamailio-utils-modules=5.2.4+buster
+    - kamailio-extra-modules=5.2.4+buster
+    - kamailio-xml-modules=5.2.4+buster

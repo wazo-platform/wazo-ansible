@@ -1,0 +1,58 @@
+- name: Install python3-pip
+  apt:
+    name: python3-pip
+    state: latest
+
+- name: Install packages needed to build python extensions
+  become: yes
+  apt:
+    name: "{{item}}"
+    state: latest
+  with_items:
+    - python3-pip
+    - python3-setuptools
+    - python3-dev
+    - gcc
+
+- name: Install non-yet packaged python extensions
+  pip:
+    name: "{{item}}"
+    state: latest
+    executable: pip3
+  with_items:
+    - fastapi
+    - psycopg2-binary
+    - uvicorn
+
+- name: Install Wazo repo package source
+  include_role:
+    name: debian-repo-wazo
+
+- name: Create /etc/wazo
+  file:
+    path: /etc/wazo
+    state: directory
+
+- name: Install wazo-router-confd.ini
+  template:
+    src: templates/wazo-router-confd.ini.j2
+    dest: /etc/wazo/wazo-router-confd.ini
+  notify:
+    - restart wazo-router-confd
+
+- name: Install wazo-router-call-logd.ini
+  template:
+    src: templates/wazo-router-call-logd.ini.j2
+    dest: /etc/wazo/wazo-router-call-logd.ini
+  notify:
+    - restart wazo-router-call-logd
+
+- name: Install wazo-router-confd
+  apt:
+    name: wazo-router-confd
+    state: latest
+
+# - name: Install wazo-router-call-logd
+#   apt:
+#     name: wazo-router-call-logd
+#     state: latest

@@ -6,6 +6,16 @@
 * You can SSH easily into those machines (i.e. without password prompt)
 * Ansible 2.7.9: `pip install ansible==2.7.9`
 
+## Router (all in one machine)
+
+* Edit `inventories/router` and set your host in `[router-host]`
+* Run:
+
+```shell
+ansible-galaxy install -r requirements-postgresql.yml
+
+ansible-playbook -i inventories/router router.yml
+```
 
 ## UC Engine (all in one machine)
 
@@ -19,6 +29,15 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 ```
 
 ## Variables
+
+### router
+
+* `debian_upgrade_first`: (default: `true`) do we `apt-get dist-upgrade` before installing Wazo Router?
+* `router_api_db_host`: (default: `localhost`) PostgreSQL host
+* `router_api_db_port`: (default: `5432`) PostgreSQL port
+* `router_api_db_confd_name`: (default: `wazo`) database name for wazo-router-confd
+* `router_api_db_confd_user`: (default: `wazo`) database username for wazo-router-confd
+* `router_api_db_confd_password`: (default: `wazo`) database password for wazo-router-confd
 
 ### uc-engine
 
