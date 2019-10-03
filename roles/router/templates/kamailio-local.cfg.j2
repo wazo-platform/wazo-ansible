@@ -1,0 +1,12 @@
+/* add API address used for routing */
+#!define HTTP_API_ENDPOINT "{{ router_api_endpoint_confd }}/kamailio/routing"
+
+/* add API http timeout */
+#!define HTTP_API_TIMEOUT 5000
+
+/* add listen protocol, address and port / advertise (optional) */
+{% if router_advertise_address is defined and router_advertise_address %}
+#!define LISTEN udp:{{ ansible_default_ipv4.interface }}:5060 advertise {{ router_advertise_address }}
+{% else %}
+#!define LISTEN udp:{{ ansible_default_ipv4.interface }}:5060
+{% endif %}

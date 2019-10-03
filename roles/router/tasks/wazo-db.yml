@@ -1,0 +1,22 @@
+- name: Install the package
+  apt:
+    name: "sudo"
+
+- name: Create router-confd PostgreSQL database
+  become: true
+  become_user: postgres
+  postgresql_db:
+    name: "{{ router_api_db_confd_name }}"
+    encoding: UTF-8
+    lc_collate: en_US.UTF-8
+    lc_ctype: en_US.UTF-8
+    template: template0
+
+- name: Create router-confd PostgreSQL user
+  become: true
+  become_user: postgres
+  postgresql_user:
+    db: "{{ router_api_db_confd_name }}"
+    name: "{{ router_api_db_confd_user }}"
+    password: "{{ router_api_db_confd_password }}"
+    priv: "ALL"
