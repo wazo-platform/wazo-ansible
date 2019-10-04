@@ -1,6 +1,10 @@
-- name: Install the package
+- name: Install needed package for switching to non priviledged user
   apt:
-    name: "sudo"
+    name: "{{item}}"
+    state: latest
+  with_items:
+    - acl
+    - sudo
 
 - name: Create router-confd PostgreSQL database
   become: true

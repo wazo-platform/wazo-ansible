@@ -1,7 +1,7 @@
 - job:
     parent: base
     name: wazo-ansible-uc
-    description: install Wazo Platform UC user case
+    description: install Wazo Platform UC use case
     timeout: 10800
     pre-run: zuul.d/pre.yaml
     run: zuul.d/run.yaml

@@ -1,3 +1,7 @@
+- import_tasks: wazo-packages.yml
+  tags:
+  - wazo-packages
+
 - import_tasks: kamailio.yml
   tags:
   - kamailio
@@ -9,7 +13,3 @@
 - import_tasks: wazo-db.yml
   tags:
   - wazo-db
-
-- import_tasks: wazo-packages.yml
-  tags:
-  - wazo-packages
