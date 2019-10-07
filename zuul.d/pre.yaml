@@ -30,7 +30,7 @@
         - ansible
         - libsasl2-dev
         - linphone-nogtk
-        - python-dev
+        - python3-dev
         - lsof
 
     - name: Install postgresql ansible module from galaxy
