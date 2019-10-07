@@ -1,9 +1,11 @@
 ---
 - hosts: all
   tasks:
-    - name: Create an SSH key in .ssh/id_rsa
+    - name: Create user and SSH key in .ssh/id_rsa
+      become: yes
       user:
         name: zuul-worker
+        group: audio
         generate_ssh_key: yes
         ssh_key_file: "~/.ssh/id_rsa"
 
