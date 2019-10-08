@@ -1,0 +1,32 @@
+- name: Install Wazo repo package source
+  include_role:
+    name: debian-repo-wazo
+
+- name: Install wazo-router-confd
+  apt:
+    name: wazo-router-confd
+    state: latest
+
+- name: Install wazo-router-call-logd
+  apt:
+    name: wazo-router-call-logd
+    state: latest
+
+- name: Create /etc/wazo
+  file:
+    path: /etc/wazo
+    state: directory
+
+- name: Install wazo-router-confd.ini
+  template:
+    src: templates/wazo-router-confd.ini.j2
+    dest: /etc/wazo/wazo-router-confd.ini
+  notify:
+    - restart wazo-router-confd
+
+- name: Install wazo-router-call-logd.ini
+  template:
+    src: templates/wazo-router-call-logd.ini.j2
+    dest: /etc/wazo/wazo-router-call-logd.ini
+  notify:
+    - restart wazo-router-call-logd

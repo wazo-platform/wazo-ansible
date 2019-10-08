@@ -1,0 +1,4 @@
+- name: Install RabbitMQ
+  apt:
+    name: rabbitmq-server
+    state: latest

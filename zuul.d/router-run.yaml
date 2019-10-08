@@ -1,0 +1,15 @@
+---
+- hosts: all
+  tasks:
+    - name: Run the installation script
+      become: yes
+      command: "ansible-playbook -i inventories/router router.yml -vv"
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
+
+    - name: Check packages
+      become: yes
+      command: "apt-get install -fs -qq"
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
+
