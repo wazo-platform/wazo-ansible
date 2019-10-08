@@ -1,40 +1,14 @@
 ---
 - hosts: all
   tasks:
-    - name: Create user and SSH key in .ssh/id_rsa
-      become: yes
-      user:
-        name: zuul-worker
-        group: audio
-        generate_ssh_key: yes
-        ssh_key_file: "~/.ssh/id_rsa"
-
-    - name: Capturing SSH Keys
-      command: "cat ~/.ssh/id_rsa.pub"
-      register: "_ssh_pub_key"
-
-    - name: Set authorized key for root
-      become: yes
-      authorized_key:
-        user: root
-        state: present
-        key: "{{ _ssh_pub_key.stdout }}"
-
-    - name: Validate root key
-      shell: "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o PreferredAuthentications=publickey root@localhost -n \"/bin/ls\""
-
-    - name: Install list of packages
+    - name: Install Ansible
       become: yes
       apt: name={{item}} state=installed
       with_items:
         - ansible
-        - libsasl2-dev
-        - linphone-nogtk
-        - python3-dev
-        - lsof
 
     - name: Install postgresql ansible module from galaxy
       become: yes
       command: "ansible-galaxy install -r requirements-postgresql.yml"
       args:
-        chdir: "{{ zuul.project.src_dir }}"
+        chdir: "{{ zuul.project.src_dir }}/../wazo-ansible"

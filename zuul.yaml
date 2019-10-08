@@ -1,9 +1,7 @@
 - job:
     parent: base
     name: wazo-ansible-install
-    required-projects:
-      wazo-platform/wazo-acceptance
-    description: install Wazo platform
+    description: install Wazo Platform
     timeout: 10800
     pre-run: zuul.d/pre.yaml
     run: zuul.d/run.yaml
@@ -17,4 +15,8 @@
     gate:
       jobs:
         - wazo-ansible-install:
+            nodeset: debian10-vm
+    experimental:
+      jobs:
+        - wazo-acceptance-job:
             nodeset: debian10-vm
