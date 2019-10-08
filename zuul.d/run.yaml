@@ -40,31 +40,3 @@
       assert:
         that: ansible_facts.services['wazo-ui.service'].state == 'running'
 
-    - name: Reset engine
-      become: yes
-      shell: "wazo-reset -f"
-
-    - name: create acceptance config
-      blockinfile:
-        create: yes
-        path: ~/.wazo-acceptance/config.yml
-        block: |
-          debug:
-            global: True
-
-            acceptance: True
-            linphone: True
-          instances:
-            default:
-              wazo_host: 127.0.0.1
-
-    - name: Setup acceptance tests
-      shell: "tox -e setup"
-      args:
-        chdir: "{{ zuul.project.src_dir }}/../wazo-acceptance"
-
-    - name: Run acceptance tests
-      shell: "tox -e behave -- features/daily"
-      args:
-        chdir: "{{ zuul.project.src_dir }}/../wazo-acceptance"
-
