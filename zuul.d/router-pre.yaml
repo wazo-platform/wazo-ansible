@@ -23,9 +23,9 @@
 
     - name: Install list of packages
       become: yes
-      apt: name={{item}} state=installed
-      with_items:
-        - ansible
+      apt:
+        name: ansible
+        state: present
 
     - name: Install postgresql ansible module from galaxy
       become: yes

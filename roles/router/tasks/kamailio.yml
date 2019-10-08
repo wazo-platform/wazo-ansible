@@ -7,22 +7,18 @@
   apt_repository:
     repo: deb http://deb.kamailio.org/kamailio52 buster main
     state: present
-
-- name: Update repositories cache
-  apt:
     update_cache: yes
 
 - name: Install the kamailio packages
   apt:
-    name: "{{ packages }}"
-  vars:
-    packages:
-    - kamailio=5.2.4+buster
-    - kamailio-json-modules=5.2.4+buster
-    - kamailio-utils-modules=5.2.4+buster
-    - kamailio-extra-modules=5.2.4+buster
-    - kamailio-xml-modules=5.2.4+buster
-    - wazo-kamailio-config
+    name:
+      - kamailio=5.2.4+buster
+      - kamailio-json-modules=5.2.4+buster
+      - kamailio-utils-modules=5.2.4+buster
+      - kamailio-extra-modules=5.2.4+buster
+      - kamailio-xml-modules=5.2.4+buster
+      - wazo-kamailio-config
+    state: present
 
 - name: Install kamailio-local
   template:
