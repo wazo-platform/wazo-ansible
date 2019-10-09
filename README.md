@@ -3,7 +3,7 @@
 ## Prerequisites for all recipes
 
 * Enough machines running with Debian Buster vanilla
-* You can SSH easily into those machines (i.e. without password prompt)
+* You can become root on the target machines (See https://docs.ansible.com/ansible/latest/user_guide/become.html)
 * Ansible 2.7.9: `pip install ansible==2.7.9`
 
 ## Router (all in one machine)
