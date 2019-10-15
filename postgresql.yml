@@ -1,6 +1,11 @@
 - hosts: database
   become: yes
   pre_tasks:
+    # Used to switch to user postgres
+    - name: Install sudo
+      apt:
+        name: sudo
+        state: latest
     # The role does not handle changing the port while changing users.
     # See https://github.com/geerlingguy/ansible-role-postgresql/issues/51
     - name: Change PostgreSQL port
