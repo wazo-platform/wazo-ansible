@@ -1,4 +1,4 @@
-- name: Install needed package for switching to non priviledged user
+- name: Install needed package for switching to non privileged user
   apt:
     name:
       - acl
