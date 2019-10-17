@@ -1,13 +1,15 @@
 ---
+- name: Install APT python bindings and gpg
+  apt:
+    name:
+      - python-apt
+      - gpg
+    state: present
+
 - name: Add Wazo distribution key
   apt_key:
     url: http://mirror.wazo.community/wazo_current.key
     id: 2769B67EDBFF423F6874D7663F1BF7FC527FBC6A
-    state: present
-
-- name: Install APT python bindings
-  apt:
-    name: python-apt
     state: present
 
 - name: Gather packages facts

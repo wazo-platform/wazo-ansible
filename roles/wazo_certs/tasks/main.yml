@@ -1,28 +1,8 @@
 ---
-- name: Install Wazo repo package source
-  include_role:
-    name: debian-repo-wazo
-
-- name: Create/Configure SSL certs
-  include_role:
-    name: debian-repo-wazo
-
 - name: Install xivo-certs
   apt:
     name: xivo-certs
     state: latest
-
-- name: Install nginx
-  apt:
-    name: nginx
-    state: latest
-
-- name: Install wazo-nginx
-  apt:
-    name: wazo-nginx
-    state: latest
-  notify:
-    - restart nginx
 
 - name: Install custom certificate for HTTPS
   copy:
@@ -33,7 +13,9 @@
     mode: 0640
   when: engine_api_https_cert is defined
   notify:
-    - restart wazo-ui
+    - restart wazo-auth
+    - restart wazo-amid
+    - restart wazo-confd
     - reload nginx
 
 - name: Install custom private key for HTTPS
@@ -45,11 +27,16 @@
     mode: 0640
   when: engine_api_https_private_key is defined
   notify:
-    - restart wazo-ui
+    - restart wazo-auth
+    - restart wazo-amid
+    - restart wazo-confd
     - reload nginx
 
-- name: Install wazo-ui
-  become: true
-  apt:
-    name: wazo-ui
-    state: latest
+- name: Remove generated files
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /usr/share/xivo-certs/server.key
+    - /usr/share/xivo-certs/server.crt
+  when: not runtime

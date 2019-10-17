@@ -1,0 +1,9 @@
+#!/bin/bash
+
+/var/lib/dpkg/info/xivo-certs.postinst configure
+
+cd /var/spool/asterisk
+
+exec /usr/sbin/asterisk -g -U asterisk -f
+
+# init ends here

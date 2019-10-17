@@ -1,0 +1,26 @@
+---
+- name: Create SSL certs
+  include_role:
+    name: wazo_certs
+
+- name: Workaround systemd
+  file:
+    src: /bin/true
+    dest: /sbin/systemctl
+    state: link
+  when: not runtime
+
+- name: Install Consul
+  apt:
+    name:
+      - systemd
+      - wazo-consul-config
+    state: latest
+
+- name: Remove generated files
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /var/lib/consul/master_token
+  when: not runtime

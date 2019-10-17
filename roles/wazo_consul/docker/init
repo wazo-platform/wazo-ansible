@@ -1,0 +1,21 @@
+#!/bin/bash
+
+/var/lib/dpkg/info/xivo-certs.postinst configure
+
+DATA_DIR="/var/lib/consul"
+MASTER_TOKEN_FILE="${DATA_DIR}/master_token"
+
+# Create the master token file
+if [ ! -f ${MASTER_TOKEN_FILE} ]; then
+    touch ${MASTER_TOKEN_FILE}
+    chown ${USER}:${GROUP} ${MASTER_TOKEN_FILE}
+    chmod 600 ${MASTER_TOKEN_FILE}
+    token=$(od -An -tx4 -N32 -w /dev/urandom | tr -d " ")
+    echo ${token} > ${MASTER_TOKEN_FILE}
+fi
+
+mkdir -p /var/run/consul
+
+exec /usr/bin/consul agent -server -data-dir=/var/lib/consul -config-dir=/etc/consul.d -bind 0.0.0.0 -client 0.0.0.0 -bootstrap-expect=1 -ui
+
+# init ends here

@@ -1,26 +1,11 @@
-- name: Add the apt key for kamailio official repository
-  apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: fb40d3e6508ea4c8
-
-- name: Add the kamailio official apt repository
-  apt_repository:
-    repo: deb http://deb.kamailio.org/kamailio52 buster main
-    state: present
-    update_cache: yes
-
-- name: Install the kamailio packages
-  apt:
-    name:
-      - kamailio
-      - kamailio-json-modules
-      - kamailio-utils-modules
-      - kamailio-extra-modules
-      - kamailio-xml-modules
-      - wazo-kamailio-config
-    state: present
-
-- name: Install kamailio-local
-  template:
-    src: templates/kamailio-local.cfg.j2
-    dest: /etc/kamailio/kamailio-local.cfg
+---
+- name: Install Kamailio
+  vars:
+    kamailio_interface: "{{ router_interface }}"
+    kamailio_advertise_address: "{%if router_advertise_address is defined %}{{ router_advertise_address }}{% endif %}"
+    kamailio_advertise_port: "{% if router_advertise_port is defined %}{{ router_advertise_port }}{% endif %}"
+    kamailio_routing_api_endpoint: "{{ router_api_endpoint_confd }}/kamailio/routing"
+    kamailio_cdr_api_endpoint: "{{ router_api_endpoint_confd }}/kamailio/cdr"
+    kamailio_rtpengine_list: "{{ router_rtpengine_list }}"
+  include_role:
+    name: wazo_kamailio
