@@ -12,11 +12,11 @@
 - name: Install the kamailio packages
   apt:
     name:
-      - kamailio=5.2.4+buster
-      - kamailio-json-modules=5.2.4+buster
-      - kamailio-utils-modules=5.2.4+buster
-      - kamailio-extra-modules=5.2.4+buster
-      - kamailio-xml-modules=5.2.4+buster
+      - kamailio
+      - kamailio-json-modules
+      - kamailio-utils-modules
+      - kamailio-extra-modules
+      - kamailio-xml-modules
       - wazo-kamailio-config
     state: present
 
