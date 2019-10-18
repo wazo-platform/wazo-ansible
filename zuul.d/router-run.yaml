@@ -13,3 +13,10 @@
       args:
         chdir: "{{ zuul.project.src_dir }}"
 
+    - name: Check Kamailio config
+      become: yes
+      command: "kamailio -c -f /etc/kamailio/kamailio.cfg"
+
+    - name: Check Kamailio status
+      become: yes
+      command: "systemctl status kamailio"
