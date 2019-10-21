@@ -5,11 +5,14 @@ Ansible and a container based one, docker images are built from
 ansible roles.
 
 The `role2docker` script in the `bin` directory creates the docker
-image for a specific role. For example: `./bin/role2docker wazo_message_bus`.
+image for a specific Ansible role based on the `debian:buster-slim`
+image. For example: `./bin/role2docker wazo_message_bus`will generate
+the docker image named `wazo-platform/wazo_message_bus`.
 
 ## Settings
 
-A role that can be used to create a container must have a `docker` directory.
+The role that that is used to create a container must have a `docker`
+directory.
 
 This `docker` directory can contain the following files:
 
@@ -18,9 +21,11 @@ container. This is usually used to install dependencies from galaxy.
 
 `post`: executable run after installing the role.
 
-`init`: executable that is coped in `/init` and used as the entry point.
+`cmd`: [`CMD` instruction](https://docs.docker.com/engine/reference/builder/#cmd)
+for the generated `Dockerfile`.
 
-`cmd`: entry point to inject in the container.
+`init`: executable that is coped in `/init` and used as the entry
+point if `cmd` is not provided.
 
 ## Labels
 

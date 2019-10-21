@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Create a docker image from an ansible role. See the documentation in
+# ../doc/docker.md.
+#
+# Steps:
+#
+# 1. create a base role wazo-platform/base with ansible installed.
+# 2. run the role <name>, remove ansible to generate wazo-platform/<name>
+
 set -euo pipefail
 set -x
 
