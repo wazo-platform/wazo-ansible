@@ -26,6 +26,8 @@ engine-api
 [uc-engine:vars]
 # Variables are defined in ../roles/wazo_vars/defaults/main.yml
 
+engine_api_configure_wizard = true
+
 # PostgreSQL settings
 # postgresql_port = 5432
 # postgresql_superuser_password =

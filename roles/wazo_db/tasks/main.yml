@@ -1,0 +1,7 @@
+---
+- import_tasks: docker.yml
+  when: not runtime
+
+- import_tasks: live.yml
+  become: yes
+  when: runtime

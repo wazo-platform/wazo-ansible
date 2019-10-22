@@ -12,7 +12,11 @@
   roles:
     - role: debian_upgrade_first
 
-- import_playbook: postgresql.yml
+- hosts:
+    - database
+  become: yes
+  roles:
+    - role: wazo_db
 
 - hosts: b2bua
   become: yes

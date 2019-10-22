@@ -3,10 +3,11 @@
 # Create a docker image from an ansible role. See the documentation in
 # ../doc/docker.md.
 #
-# Steps:
+# Steps with <name> in argument:
 #
-# 1. create a base role wazo-platform/base with ansible installed.
-# 2. run the role <name>, remove ansible to generate wazo-platform/<name>
+# 1. create wazo-platform/base with ansible installed and the wazo platform debian repo configured.
+# 2. create a temporay image running the Ansible role <name>, removing ansible and cleaning some files.
+# 3. create wazo-platform/<name> with the metadata injected (list of pkgs and distro names).
 
 set -euo pipefail
 set -x
