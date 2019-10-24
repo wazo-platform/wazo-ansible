@@ -1,0 +1,42 @@
+---
+- name: Install xivo-certs
+  apt:
+    name: xivo-certs
+    state: latest
+
+- name: Install custom certificate for HTTPS
+  copy:
+    src: "{{ engine_api_https_cert }}"
+    dest: /usr/share/xivo-certs/server.crt
+    owner: root
+    group: www-data
+    mode: 0640
+  when: engine_api_https_cert is defined
+  notify:
+    - restart wazo-auth
+    - restart wazo-amid
+    - restart wazo-confd
+    - reload nginx
+
+- name: Install custom private key for HTTPS
+  copy:
+    src: "{{ engine_api_https_private_key }}"
+    dest: /usr/share/xivo-certs/server.key
+    owner: root
+    group: www-data
+    mode: 0640
+  when: engine_api_https_private_key is defined
+  notify:
+    - restart wazo-auth
+    - restart wazo-amid
+    - restart wazo-confd
+    - reload nginx
+
+- name: Remove generated files
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /usr/share/xivo-certs/server.key
+    - /usr/share/xivo-certs/server.crt
+  when: not runtime

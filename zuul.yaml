@@ -1,7 +1,7 @@
 - job:
     parent: base
     name: wazo-ansible-uc
-    description: install Wazo Platform UC use case
+    description: Install Wazo Platform UC use case
     timeout: 10800
     pre-run: zuul.d/pre.yaml
     run: zuul.d/run.yaml
@@ -10,10 +10,16 @@
 - job:
     parent: base
     name: wazo-ansible-router
-    description: install Wazo Platform Router use case
+    description: Install Wazo Platform Router use case
     pre-run: zuul.d/router-pre.yaml
     run: zuul.d/router-run.yaml
     post-run: zuul.d/fetch-logs.yaml
+
+- job:
+    parent: base
+    name: wazo-ansible-docker
+    description: Build Wazo Platform docker images
+    run: zuul.d/docker-run.yaml
 
 - project:
     check:
@@ -22,11 +28,15 @@
             nodeset: debian10-vm
         - wazo-ansible-router:
             nodeset: debian10-vm
+        - wazo-ansible-docker:
+            nodeset: debian10-vm
     gate:
       jobs:
         - wazo-ansible-uc:
             nodeset: debian10-vm
         - wazo-ansible-router:
+            nodeset: debian10-vm
+        - wazo-ansible-docker:
             nodeset: debian10-vm
     experimental:
       jobs:

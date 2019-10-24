@@ -128,3 +128,9 @@ For a new Wazo engine installation, there are two distribution to consider:
 * `wazo_distribution_upgrade`: (default: `wazo-dev-buster`) wazo distribution
   for later upgrades. This distribution is not used during installation, only
   set up at the end for later upgrades.
+
+### runtime
+
+* `runtime`: (default: `true`) set to `true` when services are running while
+  Ansible is executing. Set to `false` when Ansible must only make file
+  modifications and no services are running (e.g. at docker build time)

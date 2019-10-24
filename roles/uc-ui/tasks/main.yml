@@ -3,10 +3,9 @@
   include_role:
     name: debian-repo-wazo
 
-- name: Install xivo-certs
-  apt:
-    name: xivo-certs
-    state: latest
+- name: Create/Configure SSL certs
+  include_role:
+    name: wazo_certs
 
 - name: Install nginx
   apt:

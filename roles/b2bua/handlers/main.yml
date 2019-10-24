@@ -1,6 +1,11 @@
 - name: reload asterisk dialplan
   command: asterisk -rx 'dialplan reload'
+  when: runtime
+
 - name: reload asterisk manager
   command: asterisk -rx 'manager reload'
+  when: runtime
+
 - name: reload asterisk
   command: asterisk -rx 'core reload'
+  when: runtime

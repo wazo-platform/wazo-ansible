@@ -1,4 +1,4 @@
+---
 - name: Install RabbitMQ
-  apt:
-    name: rabbitmq-server
-    state: latest
+  include_role:
+    name: wazo_message_bus

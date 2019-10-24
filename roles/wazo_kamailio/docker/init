@@ -1,0 +1,13 @@
+#!/bin/bash
+
+CFGFILE=/etc/kamailio/kamailio.cfg
+SHM_MEMORY=64
+PKG_MEMORY=8
+USER=kamailio
+GROUP=kamailio
+
+kamailio -c -f $CFGFILE || sleep 3600
+
+exec /usr/sbin/kamailio -P /var/run/kamailio/kamailio.pid -f $CFGFILE -m $SHM_MEMORY -M $PKG_MEMORY -u $USER -g $GROUP
+
+# init ends here

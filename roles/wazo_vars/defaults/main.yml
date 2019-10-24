@@ -26,6 +26,9 @@ router_api_db_port: 5432
 router_api_db_confd_name: wazo_router_confd
 router_api_db_confd_user: wazo_router_confd
 router_api_db_confd_password: wazo_router_confd
+router_interface: "{{ ansible_default_ipv4.interface }}"
+router_rtpengine_list: udp:localhost:22222
+runtime: true
 
 ###################################################################################
 # The following variables must only be set for a customized value. The default

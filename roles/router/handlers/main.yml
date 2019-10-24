@@ -1,5 +1,2 @@
-- name: restart wazo-router-confd
-  service: name=wazo-router-confd state=restarted
-
 - name: restart wazo-router-call-logd
   service: name=wazo-router-call-logd state=restarted

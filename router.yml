@@ -11,9 +11,14 @@
   roles:
     - role: debian_upgrade_first
 
-- import_playbook: postgresql.yml
+- hosts:
+    - database
+  become: yes
+  roles:
+    - role: wazo_db
 
-- hosts: router-api
+- hosts:
+    - router-api
   become: yes
   roles:
     - role: router

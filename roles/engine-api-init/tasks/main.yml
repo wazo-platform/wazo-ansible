@@ -1,34 +1,15 @@
 ---
-- name: Create default wazo-auth database preconfiguration
-  tempfile:
-    state: file
-    prefix: wazo_auth_debconf_file
-  register: wazo_auth_debconf_file
+- name: Install Wazo auth
+  include_role:
+    name: wazo_auth
 
-- name: Copy wazo-auth database preconfiguration if needed
-  template:
-    src: templates/wazo-auth.cfg.j2
-    dest: "{{ wazo_auth_debconf_file.path }}"
-  when:
-    - engine_api_db_admin_password is defined
-    - engine_api_db_admin_user is defined
-    - engine_api_db_auth_name is defined
-    - engine_api_db_auth_password is defined
-    - engine_api_db_auth_user is defined
-    - engine_api_db_confd_name is defined
-    - engine_api_db_confd_password is defined
-    - engine_api_db_confd_user is defined
-    - engine_api_db_host is defined
-    - engine_api_db_port is defined
-
-- name: Reset database options for wazo-auth package
-  shell: "echo PURGE | debconf-communicate wazo-auth"
-
-- name: Reconfigure database options for wazo-auth package
-  command: debconf-set-selections "{{ wazo_auth_debconf_file.path }}"
-
-- name: Initialize wazo-auth database
-  command: dpkg-reconfigure wazo-auth --frontend noninteractive
+- name: Create an index.html for the home page
+  become: true
+  file:
+    src: /var/www/html/index.wazo.html
+    dest: /var/www/html/index.html
+    state: link
+  when: groups['uc-ui'] is not defined
 
 - name: Install wazo-auth-keys
   apt:
@@ -37,6 +18,7 @@
 
 - name: Create service users with wazo-auth-keys
   command: wazo-auth-keys service update
+  when: runtime
 
 - name: Create default main database preconfiguration
   tempfile:
@@ -56,6 +38,11 @@
     - engine_api_db_confd_user is defined
     - engine_api_db_host is defined
     - engine_api_db_port is defined
+
+- name: Copy main database preconfiguration template
+  copy:
+    src: templates/xivo-manage-db.cfg.j2
+    dest: /etc/xivo-manage-db.cfg.j2
 
 - name: Reset main database options for wazo-auth package
   shell: "echo PURGE | debconf-communicate xivo-manage-db"
@@ -81,11 +68,3 @@
     - wazo-calld
     - wazo-provd
     - wazo-websocketd
-
-- name: Create an index.html for the home page
-  become: true
-  file:
-    src: /var/www/html/index.wazo.html
-    dest: /var/www/html/index.html
-    state: link
-  when: groups['uc-ui'] is not defined

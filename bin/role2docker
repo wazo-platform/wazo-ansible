@@ -1,0 +1,152 @@
+#!/bin/bash
+
+# Create a docker image from an ansible role. See the documentation in
+# ../doc/docker.md.
+#
+# Steps with <name> in argument:
+#
+# 1. create wazo-platform/base with ansible installed and the wazo platform debian repo configured.
+# 2. create a temporay image running the Ansible role <name>, removing ansible and cleaning some files.
+# 3. create wazo-platform/<name> with the metadata injected (list of pkgs and distro names).
+
+set -euo pipefail
+set -x
+
+if [ "$1" = '-d' ]; then
+    DEBUG=1
+    shift
+else
+    DEBUG=0
+fi
+
+ROLE=$1
+TOP=$(cd $(dirname $0)/..; pwd)
+
+if [ -z "$ROLE" ]; then
+    echo "Usage: $0 <role>" 1>&2
+    exit 1
+fi
+
+cd $TOP
+
+if [ ! -d roles/$ROLE ]; then
+    echo "No role $ROLE" 1>&2
+    exit 1
+fi
+
+if [ ! -d roles/$ROLE/docker ]; then
+    echo "No role docker support in $ROLE" 1>&2
+    exit 1
+fi
+
+PLAYBOOK=$(mktemp -p $TOP/roles/$ROLE/docker playbookXXXXXX.yml)
+BASENAME=$(basename $PLAYBOOK .yml)
+BASE=
+
+cleanup() {
+    set +e
+    rm -f $PLAYBOOK
+
+    if [ -n "$BASE" -a "$DEBUG" -eq 0 ]; then
+        docker stop $BASE
+        docker rm $BASE
+        docker rmi -f $BASE
+    fi
+}
+
+trap cleanup 0
+
+# Build base image if it doesn't exist
+if ! docker image inspect --format='{{ .Id }}' wazo-platform/base; then
+    cat > $PLAYBOOK <<EOF
+---
+- hosts: localhost
+  become: yes
+  roles:
+    - role: preflight_checks
+    - role: debian_upgrade_first
+    - role: debian-repo-wazo
+EOF
+
+    docker build -t wazo-platform/base -f- . <<EOF
+FROM debian:buster-slim
+COPY roles /etc/ansible/roles/
+RUN set -x && \
+    apt update && \
+    apt install -y --no-install-recommends ansible locales && \
+    echo LANG=en_US.UTF-8 > /etc/default/locale && \
+    grep "en_US.UTF-8 " /usr/share/i18n/SUPPORTED >> /etc/locale.gen && \
+    locale-gen && \
+    ansible-playbook /etc/ansible/roles/$ROLE/docker/$BASENAME.yml -e '{"runtime":false}' && \
+    rm -rf /usr/share/{man,info} /etc/ansible/roles/*
+EOF
+fi
+
+# Build role image in 2 steps to be able to inject metadata about the
+# build
+cat > $PLAYBOOK <<EOF
+---
+- hosts: localhost
+  become: yes
+  roles:
+    - role: $ROLE
+  tasks:
+    - name: gather variables for docker labels
+      shell: "echo 'org.wazo-platform.wazo_debian_repo={{ wazo_debian_repo }} org.wazo-platform.wazo_distribution={{ wazo_distribution }}' > /etc/ansible/labels"
+EOF
+
+COPYINIT=
+if [ -f roles/$ROLE/docker/cmd ]; then
+    CMD="$(cat roles/$ROLE/docker/cmd)"
+else
+    if [ -x roles/$ROLE/docker/init ]; then
+        COPYINIT="COPY roles/$ROLE/docker/init /init"
+        CMD='["/init"]'
+    else
+        CMD='["/bin/bash"]'
+    fi
+fi
+
+if [ -x roles/$ROLE/docker/pre ]; then
+    PRE=/etc/ansible/roles/$ROLE/docker/pre
+else
+    PRE=/bin/true
+fi
+
+if [ -x roles/$ROLE/docker/post ]; then
+    POST=/etc/ansible/roles/$ROLE/docker/post
+else
+    POST=/bin/true
+fi
+
+BASE=$(tr [A-Z] [a-z] <<< $BASENAME)
+
+docker build -t $BASE -f- . <<EOF
+FROM wazo-platform/base:latest
+COPY roles /etc/ansible/roles/
+$COPYINIT
+RUN set -x && \
+    $PRE && \
+    ansible-playbook /etc/ansible/roles/$ROLE/docker/$BASENAME.yml -e '{"runtime":false}' && \
+    $POST && \
+    apt purge -y ansible && \
+    apt autopurge -y && \
+    apt clean && \
+    rm -rf /usr/share/{man,info} /etc/ansible/roles/*
+CMD $CMD
+EOF
+
+docker run --name $BASE -it -d $BASE
+
+PKGS="$(docker exec -i $BASE dpkg-query -f '${binary:Package}-${Version} ' -W)"
+LABELS="$(docker exec -i $BASE cat /etc/ansible/labels)"
+
+docker build -t wazo-platform/$ROLE -f- . <<EOF
+FROM $BASE
+LABEL org.wazo-platform.pkgs="$PKGS" $LABELS
+RUN rm -rf /var/lib/apt /etc/ansible/labels
+EOF
+
+docker inspect wazo-platform/$ROLE
+
+# role2docker ends here

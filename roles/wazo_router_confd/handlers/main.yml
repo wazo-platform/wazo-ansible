@@ -1,0 +1,3 @@
+- name: restart wazo-router-confd
+  service: name=wazo-router-confd state=restarted
+  when: runtime
