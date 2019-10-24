@@ -1,6 +1,6 @@
 #!/bin/bash
 
-/var/lib/dpkg/info/xivo-certs.postinst configure
+dpkg --reconfigure xivo-certs
 
 cd /var/spool/asterisk
 

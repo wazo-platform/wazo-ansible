@@ -12,27 +12,6 @@
     name: wazo-confgend-client
     state: latest
 
-- name: Preconfigure wazo-auth package
-  debconf:
-    name: wazo-auth
-    question: "{{ item }}"
-    vtype: boolean
-    value: true
-  loop:
-    - wazo-auth/bootstrap-skip
-    - wazo-auth/db-skip
-
-- name: Create wazo-auth config dir
-  file:
-    path: /etc/wazo-auth/conf.d
-    state: directory
-
-- name: Install wazo-auth
-  apt:
-    name: wazo-auth
-    state: latest
-  notify: reload nginx
-
 - name: Install RabbitMQ
   include_role:
     name: wazo_message_bus
