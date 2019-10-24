@@ -1,4 +1,11 @@
 ---
+- name: Install APT python bindings and GPG
+  apt:
+    name:
+      - python-apt
+      - gpg
+    state: present
+
 - name: Add the apt key for kamailio official repository
   apt_key:
     keyserver: keyserver.ubuntu.com

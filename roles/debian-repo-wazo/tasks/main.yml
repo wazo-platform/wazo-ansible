@@ -1,5 +1,5 @@
 ---
-- name: Install APT python bindings and gpg
+- name: Install APT python bindings and GPG
   apt:
     name:
       - python-apt
