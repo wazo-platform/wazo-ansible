@@ -69,8 +69,9 @@ And the service should create them on start in its init script:
 
 ## Constraints on services
 
-Services should get their settings/configuration from Consul to be
-able to run in containers. The only settings that should be provided
-by the container management system are the environment variables to
+Services should get their settings/configuration from Consul to be able to run
+in containers, in accordance with
+[WPEP-2](https://github.com/wazo-platform/wpep). The only settings that should
+be provided by the container management system are the environment variables to
 configure Consul. See the available ones at
 https://www.consul.io/docs/commands/#environment-variables.
