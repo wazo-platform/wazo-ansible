@@ -4,6 +4,11 @@
   apt:
     name: sudo
     state: latest
+- name: Ensure PostgreSQL Python libraries are installed.
+  apt:
+    name: python-psycopg2
+    state: present
+
 
 # The role does not handle changing the port while changing users.
 # See https://github.com/geerlingguy/ansible-role-postgresql/issues/51
