@@ -5,7 +5,7 @@
 
 - name: Create/Configure SSL certs
   include_role:
-    name: debian-repo-wazo
+    name: wazo_certs
 
 - name: Install wazo-confgend-client
   apt:
