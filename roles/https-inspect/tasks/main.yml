@@ -1,0 +1,117 @@
+- name: Install mitmproxy
+  apt:
+    name: mitmproxy
+    state: present
+
+- name: Change nginx listening port
+  lineinfile:
+    path: /etc/nginx/sites-enabled/wazo
+    regexp: '^    listen [0-9]+ default_server;'
+    line: '    listen 8443 default_server;'
+    firstmatch: yes
+  notify:
+    - restart nginx
+
+- name: Change nginx IPv6 listening port
+  lineinfile:
+    path: /etc/nginx/sites-enabled/wazo
+    regexp: '^    listen \[::\]:[0-9]+ default_server;'
+    line: '    listen [::]:8443 default_server;'
+    firstmatch: yes
+  notify:
+    - restart nginx
+
+- tags:
+    - never
+    - uninstall
+  block:
+  - name: Restore nginx listening port
+    lineinfile:
+      path: /etc/nginx/sites-enabled/wazo
+      regexp: '^    listen [0-9]+ default_server;'
+      line: '    listen 443 default_server;'
+      firstmatch: yes
+    notify:
+      - restart nginx
+
+  - name: Restore nginx IPv6 listening port
+    lineinfile:
+      path: /etc/nginx/sites-enabled/wazo
+      regexp: '^    listen \[::\]:[0-9]+ default_server;'
+      line: '    listen [::]:443 default_server;'
+      firstmatch: yes
+    notify:
+      - restart nginx
+
+- name: Install mitmdump service file
+  template:
+    src: templates/mitmdump.service.j2
+    dest: /etc/systemd/system/mitmdump.service
+  notify:
+    - reload systemd
+
+- name: Run mitmdump
+  service:
+    name: mitmdump
+    state: started
+
+- name: Remove mitmdump
+  tags:
+    - never
+    - uninstall
+  block:
+    - name: Stop mitmdump service
+      service:
+        name: mitmdump
+        state: stopped
+      ignore_errors: yes
+    - name: Uninstall mitmdump service file
+      file:
+        path: /etc/systemd/system/mitmdump.service
+        state: absent
+      notify:
+        - reload systemd
+
+- name: Find wazo service config directories
+  find:
+    paths: /etc
+    patterns:
+      - 'wazo-*'
+      - 'xivo-*'
+    recurse: no
+    file_type: directory
+  register: wazo_config_directories
+
+- name: Find wazo service config directories
+  find:
+    paths: "{{ wazo_config_directories.files | map(attribute='path') | list }}"
+    patterns: 'conf.d'
+    recurse: no
+    file_type: directory
+  register: wazo_config_custom_directories
+
+- name: Redirect wazo-confd trafic to mitmdump
+  template:
+    src: templates/mitm-wazo-confd.yml.j2
+    dest: '{{ item.path }}/mitm-wazo-confd.yml'
+  loop: '{{ wazo_config_custom_directories.files }}'
+  tags: wazo-confd
+  notify:
+    - restart wazo services
+
+- tags:
+    - uninstall
+    - never
+  block:
+    - name: Find mitmdump config files
+      find:
+        paths: /etc/
+        patterns: 'mitm-*.yml'
+      register: mitmdump_wazo_config_files
+    - name: Remove mitmdump config files
+      file:
+        path: '{{ item.path }}'
+        state: absent
+      loop: '{{ mitmdump_wazo_config_files.files }}'
+      notify:
+        - restart wazo services

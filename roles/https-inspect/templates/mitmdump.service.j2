@@ -1,0 +1,13 @@
+[Unit]
+Description=mitmdump service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=mitmdump -w /var/log/https.dump --certs /usr/share/xivo-certs/server.all.pem --mode reverse:https://localhost:8443 --listen-port 443
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target
