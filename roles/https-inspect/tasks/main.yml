@@ -90,14 +90,32 @@
     file_type: directory
   register: wazo_config_custom_directories
 
-- name: Redirect wazo-confd trafic to mitmdump
+- name: Create temporary mitm config directory
+  tempfile:
+    prefix: wazo-mitm-config
+    state: directory
+  register: wazo_mitm_config_master_directory
+
+- name: Copy mitm redirection config file
   template:
-    src: templates/mitm-wazo-confd.yml.j2
-    dest: '{{ item.path }}/mitm-wazo-confd.yml'
-  loop: '{{ wazo_config_custom_directories.files }}'
-  tags: wazo-confd
+    src: templates/mitm-wazo-agentd.yml.j2
+    dest: '{{ wazo_mitm_config_master_directory.path }}/mitm-{{ item }}.yml'
+  loop: '{{ redirected_wazo_services }}'
+
+# Using template module is way too slow to duplicate that many files
+- name: Replicate mitm redirection config file to all services
+  shell: |
+    for wazo_config_custom_directory in {{ ' '.join(wazo_config_custom_directories.files | map(attribute='path') | list) }} ; do
+      cp -t $wazo_config_custom_directory {{ wazo_mitm_config_master_directory.path }}/mitm-{{ item }}.yml
+    done
+  loop: '{{ redirected_wazo_services }}'
   notify:
     - restart wazo services
+
+- name: Remove temporary mitm config directory
+  file:
+    path: '{{ wazo_mitm_config_master_directory.path }}'
+    state: absent
 
 - tags:
     - uninstall
@@ -107,11 +125,11 @@
       find:
         paths: /etc/
         patterns: 'mitm-*.yml'
+        recurse: yes
       register: mitmdump_wazo_config_files
+    # Using file module is way too slow to remove that many files
     - name: Remove mitmdump config files
-      file:
-        path: '{{ item.path }}'
-        state: absent
-      loop: '{{ mitmdump_wazo_config_files.files }}'
+      shell: "rm -f {{ ' '.join(mitmdump_wazo_config_files.files | map(attribute='path') | list) }}"
       notify:
         - restart wazo services
+      warn: false

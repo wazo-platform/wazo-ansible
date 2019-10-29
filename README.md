@@ -28,6 +28,22 @@ ansible-galaxy install -r requirements-postgresql.yml
 ansible-playbook -i inventories/uc-engine uc-engine.yml
 ```
 
+## HTTPS inspect (mitmproxy)
+
+* Edit `inventories/uc-engine` and set your host in `[uc-engine-host]`
+* Run:
+
+```shell
+ansible-playbook -i inventories/uc-engine https-inspect
+```
+
+* All internal and external HTTPS requests are logged in:
+  - `/var/log/https.dump` (binary, see below)
+  - `journalctl -u mitmdump` (plain text)
+  
+* You can inspect HTTPS requests with `mitmproxy -nr /var/log/https.dump`
+* You can flush `/var/log/https.dump` with `systemctl restart mitmdump`
+
 ## Variables
 
 ### router

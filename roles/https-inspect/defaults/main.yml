@@ -1,0 +1,9 @@
+---
+redirected_wazo_services:
+  - wazo-agentd
+  - wazo-amid
+  - wazo-auth
+  - wazo-call-logd
+  - wazo-confd
+  - wazo-dird
+  - wazo-provd
