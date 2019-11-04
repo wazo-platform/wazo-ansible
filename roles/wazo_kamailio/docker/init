@@ -6,7 +6,7 @@ PKG_MEMORY=8
 USER=kamailio
 GROUP=kamailio
 
-kamailio -c -f $CFGFILE || sleep 3600
+kamailio -c -f $CFGFILE
 
 exec /usr/sbin/kamailio -P /var/run/kamailio/kamailio.pid -f $CFGFILE -m $SHM_MEMORY -M $PKG_MEMORY -u $USER -g $GROUP
 

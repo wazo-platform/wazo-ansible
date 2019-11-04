@@ -5,7 +5,6 @@
       - postgresql
       - postgresql-contrib
       - libpq-dev
-      - net-tools
     state: present
 
 - name: Configure client auth
