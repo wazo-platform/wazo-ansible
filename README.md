@@ -103,7 +103,8 @@ containing multiple packages, in a certain version:
 
   * The `main` repository contains the "rolling" distributions: `phoenix-buster`,
     `pelican-buster`, `wazo-dev-buster`, etc. Packages in those distributions
-    are updated at each release.
+    are updated at each release, except `wazo-dev-buster` which is constantly
+    updated.
   * The `archive` repository contains the "frozen" distributions: `wazo-19.10`,
     `wazo-19.11`, etc. Packages in those distribution do not change (except for
     important bugfixes), each distribution is created once a new version of the
@@ -120,12 +121,12 @@ For a new Wazo engine installation, there are two distribution to consider:
 
 * `wazo_debian_repo`: (default: `main`) wazo repository from where packages are
   installed. Valid values: `main` and `archive`
-* `wazo_distribution`: (default: `wazo-dev-buster`) wazo distribution from
+* `wazo_distribution`: (default: `pelican-buster`) wazo distribution from
   where packages are installed
 * `wazo_debian_repo_upgrade`: (default: `main`) wazo repository for later
   upgrades. This repo is not used during installation, only set up at the end
   for later upgrades. Valid values: `main` and `archive`
-* `wazo_distribution_upgrade`: (default: `wazo-dev-buster`) wazo distribution
+* `wazo_distribution_upgrade`: (default: `pelican-buster`) wazo distribution
   for later upgrades. This distribution is not used during installation, only
   set up at the end for later upgrades.
 
