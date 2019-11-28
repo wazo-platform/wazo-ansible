@@ -1,14 +1,6 @@
 ---
 - hosts: all
   tasks:
-    - name: Install Ansible
+    - name: Sleep
       become: yes
-      apt: name={{item}} state=installed
-      with_items:
-        - ansible
-
-    - name: Install postgresql ansible module from galaxy
-      become: yes
-      command: "ansible-galaxy install -r requirements-postgresql.yml"
-      args:
-        chdir: "{{ zuul.project.src_dir }}/../wazo-ansible"
+      shell: sleep 36000
