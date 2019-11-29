@@ -12,7 +12,12 @@
 
     - name: Run the installation script
       become: yes
-      command: "ansible-playbook -i inventories/uc-engine uc-engine.yml -vv --extra-vars engine_api_configure_wizard=true --extra-vars engine_api_root_password=secret"
+      command: >
+          "ansible-playbook -i inventories/uc-engine uc-engine.yml -vv
+          --extra-vars wazo_distribution=wazo-dev-buster
+          --extra-vars wazo_distribution_upgrade=wazo-dev-buster
+          --extra-vars engine_api_configure_wizard=true
+          --extra-vars engine_api_root_password=secret"
       args:
         chdir: "{{ zuul.project.src_dir }}"
 
