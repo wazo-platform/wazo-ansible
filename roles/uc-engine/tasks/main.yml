@@ -32,6 +32,16 @@
     state: latest
   notify: restart wazo-setupd
 
+- name: Ensure that asterisk has been started with wazo-confgend config
+  service:
+    name: asterisk
+    state: restarted
+
+- name: Start wazo-calld that can be not restarted if asterisk wasn't not fully configured
+  service:
+    name: wazo-calld
+    state: restarted
+
 - name: Change Wazo distribution for later upgrades
   command: wazo-dist --{{ wazo_debian_repo_upgrade }}-repo {{ wazo_distribution_upgrade }}
 

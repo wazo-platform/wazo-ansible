@@ -65,6 +65,6 @@
     - wazo-amid
     - wazo-confd
     - wazo-confgend
-    - wazo-calld
+    # - wazo-calld  # the wazo-calld start should not depend from asterisk
     - wazo-provd
     - wazo-websocketd

@@ -26,16 +26,16 @@
       jobs:
         - wazo-ansible-uc:
             nodeset: debian10-vm
-        - wazo-ansible-router:
-            nodeset: debian10-vm
+#         - wazo-ansible-router:
+#             nodeset: debian10-vm
         - wazo-ansible-docker:
             nodeset: debian10-vm
     gate:
       jobs:
         - wazo-ansible-uc:
             nodeset: debian10-vm
-        - wazo-ansible-router:
-            nodeset: debian10-vm
+#         - wazo-ansible-router:
+#             nodeset: debian10-vm
         - wazo-ansible-docker:
             nodeset: debian10-vm
     experimental:
