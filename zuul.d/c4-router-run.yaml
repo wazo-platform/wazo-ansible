@@ -3,7 +3,7 @@
   tasks:
     - name: Run the installation script
       become: yes
-      command: "ansible-playbook -i inventories/router router.yml -vv"
+      command: "ansible-playbook -i inventories/c4-router c4-router.yml -vv"
       args:
         chdir: "{{ zuul.project.src_dir }}"
 

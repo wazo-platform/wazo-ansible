@@ -1,0 +1,12 @@
+- name: Create /etc/rtpengine
+  file:
+    path: /etc/rtpengine
+    state: directory
+    owner: root
+    mode: 666
+
+- name: Install rtpengine.conf
+  template:
+    src: templates/rtpengine.conf.j2
+    dest: /etc/rtpengine/rtpengine.conf
+  notify: restart rtpengine

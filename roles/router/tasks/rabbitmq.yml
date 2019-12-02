@@ -1,4 +1,0 @@
----
-- name: Install RabbitMQ
-  include_role:
-    name: wazo_message_bus

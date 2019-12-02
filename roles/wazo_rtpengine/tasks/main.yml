@@ -1,0 +1,11 @@
+---
+- name: Install Wazo repo package source
+  include_role:
+    name: debian-repo-wazo
+
+- name: Install the RTPengine packages
+  apt:
+    name:
+      - ngcp-rtpengine-daemon
+    state: present
+    install_recommends: false
