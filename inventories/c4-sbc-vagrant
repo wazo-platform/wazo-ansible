@@ -1,0 +1,14 @@
+# -*- conf -*-
+# You only have to change [sbc_host] and set variables according
+# to your needs
+
+[sbc_host]
+debian-ssh ansible_ssh_host=localhost ansible_ssh_port=2200 ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/sbc/virtualbox/private_key
+
+[sbc:children]
+sbc_host
+
+[sbc:vars]
+# Variables are defined in ../roles/wazo_vars/defaults/main.yml
+wazo_distribution = wazo-dev-buster
+wazo_distribution_upgrade = wazo-dev-buster

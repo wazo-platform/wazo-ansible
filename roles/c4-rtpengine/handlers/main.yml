@@ -1,0 +1,4 @@
+- name: restart rtpengine
+  service:
+    name: ngcp-rtpengine-daemon
+    state: restarted

@@ -1,0 +1,17 @@
+# *** Value defines - IDs used later in config
+#!define DISPATCHER_ALG "0"
+
+/* add listen protocol, address and port / advertise (optional) */
+{% if router_advertise_address is defined and router_advertise_address and router_advertise_port is defined and router_advertise_port %}
+#!define LISTEN udp:{{ router_interface }}:5060 advertise {{ router_advertise_address }}:{{ router_advertise_port }}
+{% else %}
+#!define LISTEN udp:{{ router_interface }}:5060
+{% endif %}
+#!define LISTEN_XHTTP tcp:lo:8800
+
+/* DMQ settings */
+# #!define WITH_DMQ 1
+# #!define DMQ_PORT 5062
+# #!define DMQ_LISTEN udp:192.168.1.1:5062
+# #!define DMQ_SERVER_ADDRESS udp:192.168.1.1:5062
+# #!define DMQ_NOTIFICATION_ADDRESS udp:192.168.1.1:5062

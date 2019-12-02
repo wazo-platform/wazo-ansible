@@ -1,0 +1,30 @@
+---
+- hosts: all
+  become: yes
+  roles:
+    - role: preflight_checks
+
+- hosts:
+    - database
+    - router_api
+  become: yes
+  roles:
+    - role: debian_upgrade_first
+
+- hosts:
+    - database
+  become: yes
+  roles:
+    - role: wazo_db
+
+- hosts:
+    - router_api
+  become: yes
+  roles:
+    - role: c4-router
+
+- hosts:
+    - rtpengine
+  become: yes
+  roles:
+    - role: c4-rtpengine

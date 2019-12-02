@@ -1,0 +1,26 @@
+- name: Install Wazo repo package source
+  include_role:
+    name: debian-repo-wazo
+
+- name: Install the wazo-c4-sbc packages
+  apt:
+    name: wazo-c4-sbc
+    state: present
+
+- name: Install kamailio-local.cfg
+  template:
+    src: templates/kamailio-local.cfg.j2
+    dest: /etc/kamailio/kamailio-local.cfg
+  notify: restart kamailio
+
+- name: Install dispatcher.list
+  template:
+    src: templates/dispatcher.list.j2
+    dest: /etc/kamailio/dispatcher.list
+  notify: restart kamailio
+
+- name: Install dbtext/domain
+  template:
+    src: templates/domain.j2
+    dest: /etc/kamailio/dbtext/domain
+  notify: restart kamailio

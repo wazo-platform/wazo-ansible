@@ -1,0 +1,7 @@
+- import_tasks: kamailio.yml
+  tags:
+  - kamailio
+
+- import_tasks: wazo-packages.yml
+  tags:
+  - wazo-packages

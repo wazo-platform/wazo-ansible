@@ -19,5 +19,11 @@
   when:
     - engine_api_configure_wizard == "true"
 
+- name: Check if /etc/default/locale exists
+  stat:
+    path: /etc/default/locale
+  register: stat_result
+
 - name: Assert UTF-8 locale
   shell: grep 'LANG=.*\.UTF-8"\?$' /etc/default/locale
+  when: stat_result.stat.exists == True
