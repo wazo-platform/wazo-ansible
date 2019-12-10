@@ -12,6 +12,6 @@
 - name: Install wazo-router-confd.ini
   template:
     src: templates/wazo-router-confd.ini.j2
-    dest: /etc/wazo/wazo-router-confd.ini
+    dest: /etc/wazo-router-confd/wazo-router-confd.ini
   notify:
     - restart wazo-router-confd
