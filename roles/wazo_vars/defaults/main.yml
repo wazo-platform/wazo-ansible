@@ -37,16 +37,13 @@ rtpengine_port_max: "32768"
 
 runtime: true
 
-<<<<<<< HEAD
 # sbc_advertise_address: democ4.wazo.community
 # sbc_advertise_port: 5060
 sbc_interface: "{{ ansible_default_ipv4.interface }}"
 sbc_dispatcher_list: "1 sip:localhost:5060 16 10"
-=======
 wazo_consul_host: localhost
 wazo_consul_port: 8500
 wazo_consul_scheme: http
->>>>>>> zuul.d/docker-run.yaml: run a docker-compose to test the containers
 
 ###################################################################################
 # The following variables must only be set for a customized value. The default

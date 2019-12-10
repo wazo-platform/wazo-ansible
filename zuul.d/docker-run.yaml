@@ -2,7 +2,7 @@
 - hosts: all
   tasks:
     - name: Create docker images
-      shell: "set -e; for f in $(ls -d roles/*/docker|grep -v kamailio); do ./bin/role2docker $(basename $(dirname $f)); done"
+      shell: "set -e; for f in $(ls -d roles/*/docker); do ./bin/role2docker $(basename $(dirname $f)); done"
       args:
         chdir: "{{ zuul.project.src_dir }}"
 
