@@ -20,3 +20,7 @@
     - name: Check Kamailio status
       become: yes
       command: "systemctl status kamailio"
+
+    - name: Check RTPEngine status
+      become: yes
+      command: "systemctl status ngcp-rtpengine-daemon"
