@@ -34,7 +34,13 @@
 
     - name: Run simple validation tests
       become: yes
-      command: "ansible-playbook -i inventories/uc-engine test.yml"
+      command: >
+        ansible-playbook -i inventories/uc-engine test.yml -vv
+          --extra-vars wazo_debian_repo={{ wazo_debian_repo }}
+          --extra-vars wazo_distribution={{ wazo_distribution }}
+          --extra-vars wazo_distribution_upgrade=wazo-dev-buster
+          --extra-vars engine_api_configure_wizard=true
+          --extra-vars engine_api_root_password=secret
       args:
         chdir: "{{ zuul.project.src_dir }}"
 
