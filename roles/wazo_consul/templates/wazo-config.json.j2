@@ -1,0 +1,29 @@
+{
+    "acl_default_policy": "deny",
+    "acl_master_token": "{{ wazo_consul_token.stdout }}",
+    "acl_datacenter": "{{ wazo_consul_datacenter }}",
+    "datacenter": "{{ wazo_consul_datacenter }}",
+    "acl_enforce_version_8": false,
+    "server": true,
+    "bind_addr": "127.0.0.1",
+    "advertise_addr": "127.0.0.1",
+    "client_addr": "127.0.0.1",
+    "bootstrap_expect": 1,
+    "rejoin_after_leave": true,
+    "data_dir": "/var/lib/consul",
+    "pid_file": "/run/consul/consul.pid",
+    "disable_update_check": true,
+    "log_level": "err",
+    "ports": {
+        "dns": -1,
+{% if wazo_consul_scheme == "http" %}
+        "http": {{ wazo_consul_port }},
+        "https": -1
+{% else %}
+        "http": -1,
+        "https": {{ wazo_consul_port }}
+{% endif %}
+    },
+    "cert_file": "/usr/share/xivo-certs/server.crt",
+    "key_file": "/usr/share/xivo-certs/server.key"
+}

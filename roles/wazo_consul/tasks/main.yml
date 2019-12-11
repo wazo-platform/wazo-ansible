@@ -47,3 +47,16 @@
   command: 'cat /var/lib/consul/master_token'
   register: wazo_consul_token
   when: runtime
+
+- name: Configure Consul access token in /etc/consul.d/wazo-config.json
+  template:
+    src: templates/wazo-config.json.j2
+    dest: /etc/consul.d/wazo-config.json
+  when: runtime
+
+- name: Restart consul server
+  systemd:
+    name: consul
+    state: restarted
+    enabled: yes
+  when: runtime
