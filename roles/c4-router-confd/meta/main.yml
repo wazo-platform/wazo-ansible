@@ -1,0 +1,6 @@
+---
+galaxy_info:
+  min_ansible_version: 2.7
+dependencies:
+  - role: wazo_vars
+  - role: debian-repo-wazo

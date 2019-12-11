@@ -1,0 +1,10 @@
+---
+# Needed service : PostgreSQL database (see example inventory file for settings)
+
+- hosts:
+    - router_confd
+  become: yes
+  roles:
+    - { role: ../roles/preflight_checks }
+    - { role: ../roles/debian-repo-wazo }
+    - { role: ../roles/wazo_router_confd }

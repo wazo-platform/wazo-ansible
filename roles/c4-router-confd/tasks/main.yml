@@ -1,0 +1,4 @@
+---
+- import_tasks: wazo-packages.yml
+  tags:
+  - wazo-packages

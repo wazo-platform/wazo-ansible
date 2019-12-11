@@ -3,3 +3,5 @@ galaxy_info:
   min_ansible_version: 2.5
 dependencies:
   - role: wazo_vars
+#  - role: preflight_checks
+#  - role: debian-repo-wazo

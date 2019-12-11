@@ -31,6 +31,9 @@
         name: en_US.UTF-8
         state: present
 
+    - name: set as default locale
+      command: localectl set-locale LANG=en_US.UTF-8
+
     - name: Assert UTF-8 locale
       shell: grep 'LANG=.*\.UTF-8"\?$' /etc/default/locale
       when:

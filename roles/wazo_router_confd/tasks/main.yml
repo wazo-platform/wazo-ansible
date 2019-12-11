@@ -1,5 +1,5 @@
 ---
-- name: Install wazo-router-confd
+- name: Install wazo-router-confd debian package from wazo repository
   apt:
     name: wazo-router-confd
     state: latest
