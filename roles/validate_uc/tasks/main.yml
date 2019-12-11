@@ -1,3 +1,7 @@
+- name: check version
+  shell: "vers={{ wazo_distribution }}; echo ${vers##*-} $(cat /usr/share/wazo/WAZO-VERSION); test ${vers##*-} = $(cat /usr/share/wazo/WAZO-VERSION)"
+  when: wazo_distribution != "wazo-dev-buster"
+
 - name: Check that wazo-auth is listed in Consul services
   shell: "consul catalog services|grep wazo-auth"
   register: result

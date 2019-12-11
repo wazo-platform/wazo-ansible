@@ -6,6 +6,21 @@
     pre-run: zuul.d/pre.yaml
     run: zuul.d/run.yaml
     post-run: zuul.d/fetch-logs.yaml
+    vars:
+      wazo_debian_repo: main
+      wazo_distribution: wazo-dev-buster
+
+- job:
+    parent: base
+    name: wazo-ansible-uc-archive
+    description: Install Wazo Platform UC archive
+    timeout: 10800
+    pre-run: zuul.d/pre.yaml
+    run: zuul.d/run.yaml
+    post-run: zuul.d/fetch-logs.yaml
+    vars:
+      wazo_debian_repo: archive
+      wazo_distribution: wazo-19.17
 
 - job:
     parent: base
@@ -33,6 +48,8 @@
     check:
       jobs:
         - wazo-ansible-uc:
+            nodeset: debian10-vm
+        - wazo-ansible-uc-archive:
             nodeset: debian10-vm
         - wazo-ansible-c4-router:
             nodeset: debian10-vm
