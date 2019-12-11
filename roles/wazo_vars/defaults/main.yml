@@ -52,6 +52,8 @@ wazo_consul_datacenter: wazo-platform
 # change.
 ###################################################################################
 
+# wazo_locale: en_US.UTF-8
+
 # engine_api_db_host: localhost
 # engine_api_db_port: 5432
 # engine_api_listen_address: 127.0.0.1

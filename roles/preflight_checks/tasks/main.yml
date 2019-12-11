@@ -21,16 +21,21 @@
       when:
         - engine_api_configure_wizard == "true"
     
+    - name: Ensure the locale exists
+      locale_gen:
+        name: "{{ wazo_locale }}"
+        state: present
+      when: wazo_locale is defined
+        
+    - name: set as default locale
+      command: "localectl set-locale LANG={{ wazo_locale }}"
+      when: wazo_locale is defined
+
     - name: Check if /etc/default/locale exists
       stat:
         path: /etc/default/locale
       register: stat_result
     
-    - name: Ensure the en_US.UTF-8 locale exists
-      locale_gen:
-        name: en_US.UTF-8
-        state: present
-
     - name: Assert UTF-8 locale
       shell: grep 'LANG=.*\.UTF-8"\?$' /etc/default/locale
       when:

@@ -41,6 +41,9 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 
 ## Variables
 
+* `wazo_locale` if defined, ensure the locale is set and
+  generated. Must be an `UTF-8` locale.
+
 ### consul
 
 * `wazo_consul_host`: (default `localhost`) host running the Consul server.
