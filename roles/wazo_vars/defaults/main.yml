@@ -44,6 +44,7 @@ sbc_dispatcher_list: "1 sip:localhost:5060 16 10"
 wazo_consul_host: localhost
 wazo_consul_port: 8500
 wazo_consul_scheme: http
+wazo_consul_datacenter: wazo-platform
 
 ###################################################################################
 # The following variables must only be set for a customized value. The default
