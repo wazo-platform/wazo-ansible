@@ -4,9 +4,9 @@
     name: wazo-router-confd
     state: latest
 
-- name: Create /etc/wazo
+- name: Create /etc/wazo-router-confd
   file:
-    path: /etc/wazo
+    path: /etc/wazo-router-confd
     state: directory
 
 - name: Install wazo-router-confd.ini

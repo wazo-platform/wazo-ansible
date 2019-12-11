@@ -66,6 +66,7 @@ if ! docker image inspect --format='{{ .Id }}' wazo-platform/base; then
     - role: preflight_checks
     - role: debian_upgrade_first
     - role: debian-repo-wazo
+    - role: wazo_default
 EOF
 
     docker build -t wazo-platform/base -f- . <<EOF
@@ -136,7 +137,7 @@ RUN set -x && \
 CMD $CMD
 EOF
 
-docker run --name $BASE -it -d $BASE
+docker run --name $BASE -it -d $BASE tail -f /dev/null
 
 PKGS="$(docker exec -i $BASE dpkg-query -f '${binary:Package}-${Version} ' -W)"
 LABELS="$(docker exec -i $BASE cat /etc/ansible/labels)"

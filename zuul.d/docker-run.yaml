@@ -2,6 +2,25 @@
 - hosts: all
   tasks:
     - name: Create docker images
-      shell: "for f in $(ls -d roles/*/docker); do ./bin/role2docker $(basename $(dirname $f)); done"
+      shell: "set -e; for f in $(ls -d roles/*/docker); do ./bin/role2docker $(basename $(dirname $f)); done"
       args:
         chdir: "{{ zuul.project.src_dir }}"
+
+    - name: Launch docker-compose to test docker images 
+      command: "docker-compose up -d"
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
+
+    - name: Get Consul services
+      shell: "docker-compose exec -T consul_server consul catalog services"
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
+
+    - name: Check that RabbitMQ is listed in Consul services
+      shell: "docker-compose exec -T consul_server consul catalog services|grep rabbitmq"
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
+      register: result
+      until: result.rc == 0
+      retries: 6
+      delay: 10

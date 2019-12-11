@@ -23,4 +23,27 @@
     state: absent
   with_items:
     - /var/lib/consul/master_token
+    - /var/lib/consul/default_xivo_consul_token.yml
+    - /var/lib/consul/default_xivo_consul_config.yml
+    - /etc/consul.d/wazo-config.json
   when: not runtime
+
+- name: Read exisiting token if any
+  command: 'cat /var/lib/consul/master_token'
+  register: wazo_consul_token
+  ignore_errors: yes
+  when: runtime
+
+- name: Generate token
+  shell: 'od -An -tx4 -N32 -w /dev/urandom | tr -d " "'
+  register: wazo_consul_token_create
+  when: runtime and wazo_consul_token.rc != 0
+
+- name: Store token
+  shell: 'echo "{{ wazo_consul_token_create.stdout }}" > /var/lib/consul/master_token'
+  when: runtime and wazo_consul_token.rc != 0 and wazo_consul_token_create.rc == 0
+
+- name: Read existing token
+  command: 'cat /var/lib/consul/master_token'
+  register: wazo_consul_token
+  when: runtime

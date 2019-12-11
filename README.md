@@ -41,6 +41,12 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 
 ## Variables
 
+### consul
+
+* `wazo_consul_host`: (default `localhost`) host running the Consul server.
+* `wazo_consul_port`: (default ``8500`) port of the Consul server.
+* `wazo_consul_scheme`: (default `http`) use `http` or `https` to connect to the Consul server.
+
 ### c4-router
 
 * `debian_upgrade_first`: (default: `true`) do we `apt-get dist-upgrade` before installing Wazo Router?

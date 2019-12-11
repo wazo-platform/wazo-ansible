@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# while the TODO are not implemented
-if false; then
+DATA_DIR="/var/lib/consul"
+DEFAULT_XIVO_CONSUL_CONFIG="${DATA_DIR}/default_xivo_consul_config.yml"
+DEFAULT_XIVO_CONSUL_TOKEN="${DATA_DIR}/default_xivo_consul_token.yml"
+
 if [ ! -r /etc/wazo-auth.cfg ]; then
     # TODO get wazo-auth config from Consul
     # TODO transform /etc/wazo-auth.cfg.j2 into /etc/wazo-auth.cfg
@@ -23,9 +25,36 @@ fi
 
 install -d -o wazo-auth -g wazo-auth /var/run/wazo-auth
 
-exec /usr/bin/wazo-auth
-else
-    exec bash
+# Consul setup
+
+. /etc/wazo-platform/consul
+
+mkdir -p ${DATA_DIR}
+
+if [ -n "${WAZO_CONSUL_CACERT}" ]; then
+    echo "${WAZO_CONSUL_CACERT}" > /usr/share/xivo-certs/server.crt
+    chmod 644 /usr/share/xivo-certs/server.crt
 fi
+
+cat > ${DEFAULT_XIVO_CONSUL_CONFIG} <<EOF
+consul:
+    scheme: ${WAZO_CONSUL_SCHEME}
+    host: ${WAZO_CONSUL_HOST}
+    port: ${WAZO_CONSUL_PORT}
+    verify: /usr/share/xivo-certs/server.crt
+EOF
+chmod 644 ${DEFAULT_XIVO_CONSUL_CONFIG}
+
+if [ -n "${WAZO_CONSUL_TOKEN}" ]; then
+    cat > ${DEFAULT_XIVO_CONSUL_TOKEN} <<EOF
+consul:
+    token: ${WAZO_CONSUL_TOKEN}
+EOF
+    chmod 644 ${DEFAULT_XIVO_CONSUL_TOKEN}
+fi
+
+# Start service
+
+exec /usr/bin/wazo-auth
 
 # init ends here

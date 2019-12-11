@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -x
+
+rabbitmq-plugins --offline enable rabbitmq_peer_discovery_consul
+
+. /etc/wazo-platform/consul
+
+if [ ! -f /etc/rabbitmq/rabbitmq.conf ]; then
+    cat > /etc/rabbitmq/rabbitmq.conf <<EOF
+cluster_formation.peer_discovery_backend = rabbit_peer_discovery_consul
+
+cluster_formation.consul.host = $WAZO_CONSUL_HOST
+# 8500 is used by default
+cluster_formation.consul.port = $WAZO_CONSUL_PORT
+# http is used by default
+cluster_formation.consul.scheme = $WAZO_CONSUL_SCHEME
+EOF
+fi
+
+exec rabbitmq-server
