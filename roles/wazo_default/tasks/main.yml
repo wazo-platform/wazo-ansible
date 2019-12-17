@@ -1,0 +1,36 @@
+---
+- name: Creates directory /etc/wazo-platform
+  file:
+    path: /etc/wazo-platform
+    state: directory
+
+- name: Configure Consul access (copy)
+  copy:
+    src: files/consul
+    dest: /etc/wazo-platform/consul
+  when: not runtime
+
+- name: Configure Consul access (template)
+  template:
+    src: templates/consul.j2
+    dest: /etc/wazo-platform/consul
+  when: runtime
+
+- name: Creates directory /var/lib/consul
+  file:
+    path: /var/lib/consul
+    state: directory
+
+- name: Configure Consul access config
+  template:
+    src: templates/default_xivo_consul_config.yml.j2
+    dest: /var/lib/consul/default_xivo_consul_config.yml
+  when: runtime
+
+# be sure to call the wazo_consul role before to have
+# wazo_consul_token registered
+- name: Configure Consul access token
+  template:
+    src: templates/default_xivo_consul_token.yml.j2
+    dest: /var/lib/consul/default_xivo_consul_token.yml
+  when: runtime and wazo_consul_token is defined

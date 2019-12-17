@@ -4,14 +4,14 @@
     name: wazo-router-confd
     state: latest
 
-- name: Create /etc/wazo
+- name: Create /etc/wazo-router-confd
   file:
-    path: /etc/wazo
+    path: /etc/wazo-router-confd
     state: directory
 
 - name: Install wazo-router-confd.ini
   template:
     src: templates/wazo-router-confd.ini.j2
-    dest: /etc/wazo/wazo-router-confd.ini
+    dest: /etc/wazo-router-confd/wazo-router-confd.ini
   notify:
     - restart wazo-router-confd

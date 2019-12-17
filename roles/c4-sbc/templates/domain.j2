@@ -1,0 +1,9 @@
+id(int) domain(string) did(string) last_modified(int)
+{% if 'sbc_host' in groups %}
+{% for host in groups['sbc_host'] %}
+{{ loop.index0 * 2 + 1 }}:{{ hostvars[host].ansible_default_ipv4.address }}:{{ hostvars[host].ansible_default_ipv4.address }}:0
+{% if hostvars[host].sbc_advertise_address is defined %}
+{{ loop.index0 * 2 + 2 }}:{{ hostvars[host].sbc_advertise_address }}:{{ hostvars[host].sbc_advertise_address }}:0
+{% endif %}
+{% endfor %}
+{% endif %}

@@ -1,3 +1,14 @@
+- name: check version
+  shell: "vers={{ wazo_distribution }}; echo ${vers##*-} $(cat /usr/share/wazo/WAZO-VERSION); test ${vers##*-} = $(cat /usr/share/wazo/WAZO-VERSION)"
+  when: wazo_distribution != "wazo-dev-buster"
+
+- name: Check that wazo-auth is listed in Consul services
+  shell: "consul catalog services|grep wazo-auth"
+  register: result
+  until: result.rc == 0
+  retries: 6
+  delay: 10
+
 - name: Get token
   uri:
     url: "https://{{ engine_api_host}}:{{ engine_api_port}}{{ engine_auth_path }}/token"

@@ -2,8 +2,8 @@ debian_upgrade_first: true
 
 wazo_debian_repo: main
 wazo_debian_repo_upgrade: main
-wazo_distribution: pelican-buster
-wazo_distribution_upgrade: pelican-buster
+wazo_distribution: wazo-dev-buster
+wazo_distribution_upgrade: wazo-dev-buster
 
 engine_api_host: localhost
 engine_api_port: 443
@@ -28,8 +28,24 @@ router_api_db_confd_name: wazo_router_confd
 router_api_db_confd_user: wazo_router_confd
 router_api_db_confd_password: wazo_router_confd
 router_interface: "{{ ansible_default_ipv4.interface }}"
-router_rtpengine_list: udp:localhost:22222
+
+rtpengine_interface: "{{ ansible_default_ipv4.interface }}"
+rtpengine_private_address: "{{ ansible_default_ipv4.address }}"
+rtpengine_public_address: "{{ ansible_default_ipv4.address }}"
+rtpengine_listen_ng: "22222"
+rtpengine_port_min: "23000"
+rtpengine_port_max: "32768"
+
 runtime: true
+
+# sbc_advertise_address: democ4.wazo.community
+# sbc_advertise_port: 5060
+sbc_interface: "{{ ansible_default_ipv4.interface }}"
+sbc_dispatcher_list: "1 sip:localhost:5060 16 10"
+wazo_consul_host: localhost
+wazo_consul_port: 8500
+wazo_consul_scheme: http
+wazo_consul_datacenter: wazo-platform
 
 ###################################################################################
 # The following variables must only be set for a customized value. The default

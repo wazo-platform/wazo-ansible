@@ -24,11 +24,6 @@
       - kamailio-json-modules
       - kamailio-utils-modules
       - kamailio-extra-modules
+      - kamailio-redis-modules
       - kamailio-xml-modules
-      - wazo-kamailio-config
     state: present
-
-- name: Install kamailio-local
-  template:
-    src: templates/kamailio-local.cfg.j2
-    dest: /etc/kamailio/kamailio-local.cfg

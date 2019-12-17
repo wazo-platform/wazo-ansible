@@ -1,23 +1,40 @@
 ---
-- name: Assert Debian Buster
-  assert:
-    that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '10'
+- name: Preflight checks
+  block:
+    - name: Assert Debian Buster
+      assert:
+        that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '10'
+    
+    - name: Validate database names
+      assert:
+        that:
+          - engine_api_db_confd_name == engine_api_db_auth_name
+      when:
+        - engine_api_db_confd_name is defined
+        - engine_api_db_auth_name is defined
+    
+    - name: Assert root password for setup
+      assert:
+        that:
+          - engine_api_root_password is defined
+        fail_msg: "The variable engine_api_root_password is required when configuring the wizard."
+      when:
+        - engine_api_configure_wizard == "true"
+    
+    - name: Check if /etc/default/locale exists
+      stat:
+        path: /etc/default/locale
+      register: stat_result
+    
+    - name: Ensure the en_US.UTF-8 locale exists
+      locale_gen:
+        name: en_US.UTF-8
+        state: present
 
-- name: Validate database names
-  assert:
-    that:
-      - engine_api_db_confd_name == engine_api_db_auth_name
-  when:
-    - engine_api_db_confd_name is defined
-    - engine_api_db_auth_name is defined
+    - name: Assert UTF-8 locale
+      shell: grep 'LANG=.*\.UTF-8"\?$' /etc/default/locale
+      when:
+        - stat_result.stat.exists == True
+      register: preflight_checks_done
 
-- name: Assert root password for setup
-  assert:
-    that:
-      - engine_api_root_password is defined
-    fail_msg: "The variable engine_api_root_password is required when configuring the wizard."
-  when:
-    - engine_api_configure_wizard == "true"
-
-- name: Assert UTF-8 locale
-  shell: grep 'LANG=.*\.UTF-8"\?$' /etc/default/locale
+  when: preflight_checks_done is undefined

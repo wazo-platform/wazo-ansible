@@ -6,15 +6,26 @@
 * You can become root on the target machines (See https://docs.ansible.com/ansible/latest/user_guide/become.html)
 * Ansible 2.7.9: `pip install ansible==2.7.9`
 
-## Router (all in one machine)
+## Class 4: SBC component
 
-* Edit `inventories/router` and set your host in `[router-host]`
+* Edit `inventories/sbc` and set your host in `[sbc_host]`
 * Run:
 
 ```shell
 ansible-galaxy install -r requirements-postgresql.yml
 
-ansible-playbook -i inventories/router router.yml
+ansible-playbook -i inventories/sbc c4-sbc.yml
+```
+
+## Class 4: Router/RTPEngine component
+
+* Edit `inventories/router` and set your host in `[router_host]`
+* Run:
+
+```shell
+ansible-galaxy install -r requirements-postgresql.yml
+
+ansible-playbook -i inventories/router c4-router.yml
 ```
 
 ## UC Engine (all in one machine)
@@ -30,14 +41,33 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 
 ## Variables
 
-### router
+### consul
+
+* `wazo_consul_host`: (default `localhost`) host running the Consul server.
+* `wazo_consul_port`: (default ``8500`) port of the Consul server.
+* `wazo_consul_scheme`: (default `http`) use `http` or `https` to connect to the Consul server.
+
+### c4-router
 
 * `debian_upgrade_first`: (default: `true`) do we `apt-get dist-upgrade` before installing Wazo Router?
-* `router_api_db_host`: (default: `localhost`) PostgreSQL host
-* `router_api_db_port`: (default: `5432`) PostgreSQL port
+* `router_api_endpoint_confd`: (default: `http://localhost:8000`) URI of the wazo-router-confd service
+* `router_api_db_host`: (default: `localhost`) PostgreSQL host for wazo-router-confd
+* `router_api_db_port`: (default: `5432`) PostgreSQL port for wazo-router-confd
 * `router_api_db_confd_name`: (default: `wazo`) database name for wazo-router-confd
 * `router_api_db_confd_user`: (default: `wazo`) database username for wazo-router-confd
 * `router_api_db_confd_password`: (default: `wazo`) database password for wazo-router-confd
+* `router_interface`: (default: `{{ ansible_default_ipv4.interface }}`) network interface for Kamailio
+* `rtpengine_interface`: (default: `{{ ansible_default_ipv4.interface }}`) network interface for RTPEngine
+* `rtpengine_private_address`: (default: `{{ ansible_default_ipv4.address }}`) private IP address for RTPEngine
+* `rtpengine_public_address`: (default: `{{ ansible_default_ipv4.address }}`) public IP address for RTPEngine
+
+### c4-sbc
+
+* `debian_upgrade_first`: (default: `true`) do we `apt-get dist-upgrade` before installing Wazo Router?
+* `sbc_advertise_address`: (default: `not set`) the advertised address for Kamailio, optional
+* `sbc_advertise_port`: (default: `not set`) the advertised port for Kamailio, optional
+* `sbc_interface`: (default `{{ ansible_default_ipv4.interface }}`) network interface for Kamailio
+* `sbc_dispatcher_list`: (`1 sip:localhost:5060 16 10"`) dispatcher list configuration, replace `localhost` with the address of your router component
 
 ### uc-engine
 
@@ -121,12 +151,12 @@ For a new Wazo engine installation, there are two distribution to consider:
 
 * `wazo_debian_repo`: (default: `main`) wazo repository from where packages are
   installed. Valid values: `main` and `archive`
-* `wazo_distribution`: (default: `pelican-buster`) wazo distribution from
+* `wazo_distribution`: (default: `wazo-dev-buster`) wazo distribution from
   where packages are installed
 * `wazo_debian_repo_upgrade`: (default: `main`) wazo repository for later
   upgrades. This repo is not used during installation, only set up at the end
   for later upgrades. Valid values: `main` and `archive`
-* `wazo_distribution_upgrade`: (default: `pelican-buster`) wazo distribution
+* `wazo_distribution_upgrade`: (default: `wazo-dev-buster`) wazo distribution
   for later upgrades. This distribution is not used during installation, only
   set up at the end for later upgrades.
 

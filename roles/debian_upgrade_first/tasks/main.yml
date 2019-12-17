@@ -3,4 +3,7 @@
   apt:
     update_cache: yes
     upgrade: dist
-  when: debian_upgrade_first
+  when:
+    - debian_upgrade_first
+    - debian_upgrade_first_done is undefined
+  register: debian_upgrade_first_done

@@ -6,6 +6,7 @@
       - ntp
       - postfix
     state: latest
+
 - name: Ensure sendmail is absent
   # Debian buster: If sendmail-bin is removed but not purged, dpkg will refuse to do anything
   # See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=939885
@@ -13,6 +14,15 @@
     name: sendmail-bin
     purge: yes
     state: absent
+
+- name: Install Consul
+  include_role:
+    name: wazo_consul
+
+# need to run after wazo_consul to have wazo_consul_token registered
+- name: Set default values
+  include_role:
+    name: wazo_default
 
 - name: Install wazo-platform
   apt:

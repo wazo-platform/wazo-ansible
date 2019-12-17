@@ -1,0 +1,26 @@
+---
+- hosts: all
+  tasks:
+    - name: Run the installation script
+      become: yes
+      command: "ansible-playbook -i inventories/c4-router c4-router.yml -vv"
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
+
+    - name: Check packages
+      become: yes
+      command: "apt-get install -fs -qq"
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
+
+    - name: Check Kamailio config
+      become: yes
+      command: "kamailio -c -f /etc/kamailio/kamailio.cfg"
+
+    - name: Check Kamailio status
+      become: yes
+      command: "systemctl status kamailio"
+
+    - name: Check RTPEngine status
+      become: yes
+      command: "systemctl status ngcp-rtpengine-daemon"

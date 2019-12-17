@@ -1,0 +1,22 @@
+---
+- hosts: all
+  tasks:
+    - name: Run the installation script
+      become: yes
+      command: "ansible-playbook -i inventories/c4-sbc c4-sbc.yml -vv"
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
+
+    - name: Check packages
+      become: yes
+      command: "apt-get install -fs -qq"
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
+
+    - name: Check Kamailio config
+      become: yes
+      command: "kamailio -c -f /etc/kamailio/kamailio.cfg"
+
+    - name: Check Kamailio status
+      become: yes
+      command: "systemctl status kamailio"
