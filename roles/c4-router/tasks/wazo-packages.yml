@@ -6,16 +6,16 @@
   include_role:
     name: wazo_router_confd
 
-- name: Install the wazo-c4-router packages
-  apt:
-    name: wazo-c4-router
-    state: present
-
 - name: Install kamailio-local.cfg
   template:
     src: templates/kamailio-local.cfg.j2
     dest: /etc/kamailio/kamailio-local.cfg
   notify: restart kamailio
+
+- name: Install the wazo-c4-router packages
+  apt:
+    name: wazo-c4-router
+    state: present
 
 - name: Install dbtext/domain
   template:

@@ -2,16 +2,16 @@
   include_role:
     name: debian-repo-wazo
 
-- name: Install the wazo-c4-sbc packages
-  apt:
-    name: wazo-c4-sbc
-    state: present
-
 - name: Install kamailio-local.cfg
   template:
     src: templates/kamailio-local.cfg.j2
     dest: /etc/kamailio/kamailio-local.cfg
   notify: restart kamailio
+
+- name: Install the wazo-c4-sbc packages
+  apt:
+    name: wazo-c4-sbc
+    state: present
 
 - name: Install dispatcher.list
   template:
