@@ -24,5 +24,6 @@
       - kamailio-json-modules
       - kamailio-utils-modules
       - kamailio-extra-modules
+      - kamailio-redis-modules
       - kamailio-xml-modules
     state: present
