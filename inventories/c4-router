@@ -8,6 +8,9 @@ localhost ansible_connection=local
 [database:children]
 router_host
 
+[redis:children]
+router_host
+
 [router_api:children]
 router_host
 

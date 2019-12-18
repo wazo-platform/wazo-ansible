@@ -27,6 +27,9 @@ router_api_db_port: 5432
 router_api_db_confd_name: wazo_router_confd
 router_api_db_confd_user: wazo_router_confd
 router_api_db_confd_password: wazo_router_confd
+router_api_redis_host: localhost
+router_api_redis_port: 6379
+router_api_redis_database: 1
 router_interface: "{{ ansible_default_ipv4.interface }}"
 
 rtpengine_interface: "{{ ansible_default_ipv4.interface }}"

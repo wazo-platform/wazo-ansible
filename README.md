@@ -59,6 +59,9 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 * `router_api_db_confd_name`: (default: `wazo`) database name for wazo-router-confd
 * `router_api_db_confd_user`: (default: `wazo`) database username for wazo-router-confd
 * `router_api_db_confd_password`: (default: `wazo`) database password for wazo-router-confd
+* `router_api_redis_host`: (default: `localhost`) Redis host for wazo-router-confd
+* `router_api_redis_port`: (default: `6379`) Redis port for wazo-router-confd
+* `router_api_redis_database`: (default: `1`) Redis database for wazo-router-confd
 * `router_interface`: (default: `{{ ansible_default_ipv4.interface }}`) network interface for Kamailio
 * `rtpengine_interface`: (default: `{{ ansible_default_ipv4.interface }}`) network interface for RTPEngine
 * `rtpengine_private_address`: (default: `{{ ansible_default_ipv4.address }}`) private IP address for RTPEngine
