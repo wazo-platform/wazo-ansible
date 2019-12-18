@@ -1,4 +1,8 @@
 ---
+- name: Install Wazo repo package source
+  include_role:
+    name: debian-repo-wazo
+
 - name: Install the kamailio packages
   apt:
     name:
