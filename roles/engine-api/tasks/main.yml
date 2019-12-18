@@ -216,3 +216,6 @@
   file:
     path: /var/lib/wazo/disabled
     state: absent
+
+- include_tasks: tracing.yml
+
