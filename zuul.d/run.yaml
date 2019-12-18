@@ -19,6 +19,7 @@
           --extra-vars wazo_distribution_upgrade=wazo-dev-buster
           --extra-vars engine_api_configure_wizard=true
           --extra-vars engine_api_root_password=secret
+          --extra-vars wazo_locale=en_US.UTF-8
       args:
         chdir: "{{ zuul.project.src_dir }}"
 
