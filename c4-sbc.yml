@@ -11,6 +11,12 @@
     - role: debian_upgrade_first
 
 - hosts:
+    - redis
+  become: yes
+  roles:
+    - role: wazo_redis
+
+- hosts:
     - sbc
   become: yes
   roles:

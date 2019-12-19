@@ -8,6 +8,9 @@ debian-ssh ansible_ssh_host=localhost ansible_ssh_port=2222 ansible_user=vagrant
 [database:children]
 router_host
 
+[redis:children]
+router_host
+
 [router_api:children]
 router_host
 

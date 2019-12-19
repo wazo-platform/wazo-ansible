@@ -5,6 +5,9 @@
 [sbc_host]
 localhost ansible_connection=local
 
+[redis:children]
+sbc_host
+
 [sbc:children]
 sbc_host
 

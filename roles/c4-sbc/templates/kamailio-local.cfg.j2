@@ -15,3 +15,7 @@
 # #!define DMQ_LISTEN udp:192.168.1.1:5062
 # #!define DMQ_SERVER_ADDRESS udp:192.168.1.1:5062
 # #!define DMQ_NOTIFICATION_ADDRESS udp:192.168.1.1:5062
+
+/* Dialog replication via Redis */
+#!define WITH_REDIS_DIALOG {{ sbc_redis_dialog }}
+#!define DBURL_DIALOG "{{ sbc_dburl_dialog }}"
