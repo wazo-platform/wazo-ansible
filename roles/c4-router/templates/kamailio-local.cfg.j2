@@ -25,3 +25,7 @@
 
 /* DB url for domain module */
 #!define DOMAIN_DB_URL "text:///etc/kamailio/dbtext"
+
+/* Dialog replication via Redis */
+#!define WITH_REDIS_DIALOG {{ router_redis_dialog }}
+#!define DBURL_DIALOG "{{ router_dburl_dialog }}"

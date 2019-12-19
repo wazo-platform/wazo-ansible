@@ -18,6 +18,12 @@
     - role: wazo_db
 
 - hosts:
+    - redis
+  become: yes
+  roles:
+    - role: wazo_redis
+
+- hosts:
     - router_api
   become: yes
   roles:

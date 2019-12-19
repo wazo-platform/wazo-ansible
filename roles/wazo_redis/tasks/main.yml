@@ -1,0 +1,14 @@
+---
+- name: Install the redis packages
+  apt:
+    name:
+      - redis-server
+      - redis-tools
+    state: present
+
+- name: Listen on 0.0.0.0
+  lineinfile:
+    path: /etc/redis/redis.conf
+    regexp: '^bind 127\.0\.0\.1 ::'
+    line: "bind 0.0.0.0 ::"
+  notify: restart redis-server

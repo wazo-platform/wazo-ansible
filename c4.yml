@@ -1,34 +1,6 @@
 ---
-- hosts: all
-  become: yes
-  roles:
-    - role: preflight_checks
+- name: Include c4-router
+  import_playbook: c4-router.yml
 
-- hosts: all
-  become: yes
-  roles:
-    - role: debian_upgrade_first
-
-- hosts:
-    - database
-  become: yes
-  roles:
-    - role: wazo_db
-
-- hosts:
-    - router_api
-  become: yes
-  roles:
-    - role: c4-router
-
-- hosts:
-    - sbc
-  become: yes
-  roles:
-    - role: c4-sbc
-
-- hosts:
-    - rtpengine
-  become: yes
-  roles:
-    - role: c4-rtpengine
+- name: Include c4-sbc
+  import_playbook: c4-sbc.yml

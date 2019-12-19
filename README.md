@@ -56,10 +56,15 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 * `router_api_endpoint_confd`: (default: `http://localhost:8000`) URI of the wazo-router-confd service
 * `router_api_db_host`: (default: `localhost`) PostgreSQL host for wazo-router-confd
 * `router_api_db_port`: (default: `5432`) PostgreSQL port for wazo-router-confd
-* `router_api_db_confd_name`: (default: `wazo`) database name for wazo-router-confd
-* `router_api_db_confd_user`: (default: `wazo`) database username for wazo-router-confd
-* `router_api_db_confd_password`: (default: `wazo`) database password for wazo-router-confd
+* `router_api_db_name`: (default: `wazo`) database name for wazo-router-confd
+* `router_api_db_user`: (default: `wazo`) database username for wazo-router-confd
+* `router_api_db_password`: (default: `wazo`) database password for wazo-router-confd
+* `router_api_redis_host`: (default: `localhost`) Redis host for wazo-router-confd
+* `router_api_redis_port`: (default: `6379`) Redis port for wazo-router-confd
+* `router_api_redis_database`: (default: `1`) Redis database for wazo-router-confd
 * `router_interface`: (default: `{{ ansible_default_ipv4.interface }}`) network interface for Kamailio
+* `router_redis_dialog`: (default: `1`) enables redis-based dialog replication
+* `router_dburl_dialog`: (default: `redis://localhost:6379/2`) Redis uri to store dialogs
 * `rtpengine_interface`: (default: `{{ ansible_default_ipv4.interface }}`) network interface for RTPEngine
 * `rtpengine_private_address`: (default: `{{ ansible_default_ipv4.address }}`) private IP address for RTPEngine
 * `rtpengine_public_address`: (default: `{{ ansible_default_ipv4.address }}`) public IP address for RTPEngine
@@ -71,6 +76,8 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 * `sbc_advertise_port`: (default: `not set`) the advertised port for Kamailio, optional
 * `sbc_interface`: (default `{{ ansible_default_ipv4.interface }}`) network interface for Kamailio
 * `sbc_dispatcher_list`: (`1 sip:localhost:5060 16 10"`) dispatcher list configuration, replace `localhost` with the address of your router component
+* `sbc_redis_dialog`: (default: `1`) enables redis-based dialog replication
+* `sbc_dburl_dialog`: (default: `redis://localhost:6379/3`) Redis uri to store dialogs
 
 ### uc-engine
 
