@@ -1,21 +1,7 @@
 ---
-- name: Install APT python bindings and GPG
-  apt:
-    name:
-      - python-apt
-      - gpg
-    state: present
-
-- name: Add the apt key for kamailio official repository
-  apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: fb40d3e6508ea4c8
-
-- name: Add the kamailio official apt repository
-  apt_repository:
-    repo: deb http://deb.kamailio.org/kamailio52 buster main
-    state: present
-    update_cache: yes
+- name: Install Wazo repo package source
+  include_role:
+    name: debian-repo-wazo
 
 - name: Install the kamailio packages
   apt:
