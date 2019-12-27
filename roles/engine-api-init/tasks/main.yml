@@ -1,7 +1,7 @@
 ---
 - name: Install Wazo auth
   include_role:
-    name: wazo_auth
+    name: wazo-auth
 
 - name: Create an index.html for the home page
   become: true

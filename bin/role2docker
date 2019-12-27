@@ -19,6 +19,8 @@ else
     DEBUG=0
 fi
 
+HUBNAME=${HUBNAME:=wazoplatform}
+
 ROLE=$1
 TOP=$(cd $(dirname $0)/..; pwd)
 
@@ -57,19 +59,19 @@ cleanup() {
 trap cleanup 0
 
 # Build base image if it doesn't exist
-if ! docker image inspect --format='{{ .Id }}' wazo-platform/base; then
+if ! docker image inspect --format='{{ .Id }}' $HUBNAME/base; then
     cat > $PLAYBOOK <<EOF
 ---
 - hosts: localhost
   become: yes
   roles:
-    - role: preflight_checks
-    - role: debian_upgrade_first
+    - role: preflight-checks
+    - role: debian-upgrade-first
     - role: debian-repo-wazo
-    - role: wazo_default
+    - role: wazo-default
 EOF
 
-    docker build -t wazo-platform/base -f- . <<EOF
+    docker build -t $HUBNAME/base -f- . <<EOF
 FROM debian:buster-slim
 COPY roles /etc/ansible/roles/
 RUN set -x && \
@@ -123,7 +125,7 @@ fi
 BASE=$(tr [A-Z] [a-z] <<< $BASENAME)
 
 docker build -t $BASE -f- . <<EOF
-FROM wazo-platform/base:latest
+FROM $HUBNAME/base:latest
 COPY roles /etc/ansible/roles/
 $COPYINIT
 RUN set -x && \
@@ -142,12 +144,12 @@ docker run --name $BASE -it -d $BASE tail -f /dev/null
 PKGS="$(docker exec -i $BASE dpkg-query -f '${binary:Package}-${Version} ' -W)"
 LABELS="$(docker exec -i $BASE cat /etc/ansible/labels)"
 
-docker build -t wazo-platform/$ROLE -f- . <<EOF
+docker build -t $HUBNAME/$ROLE -f- . <<EOF
 FROM $BASE
-LABEL org.wazo-platform.pkgs="$PKGS" $LABELS
+LABEL org.$HUBNAME.pkgs="$PKGS" $LABELS
 RUN rm -rf /var/lib/apt /etc/ansible/labels
 EOF
 
-docker inspect wazo-platform/$ROLE
+docker inspect $HUBNAME/$ROLE
 
 # role2docker ends here

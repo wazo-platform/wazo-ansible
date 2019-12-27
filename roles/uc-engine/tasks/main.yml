@@ -17,12 +17,12 @@
 
 - name: Install Consul
   include_role:
-    name: wazo_consul
+    name: wazo-consul
 
 # need to run after wazo_consul to have wazo_consul_token registered
 - name: Set default values
   include_role:
-    name: wazo_default
+    name: wazo-default
 
 - name: Install wazo-platform
   apt:

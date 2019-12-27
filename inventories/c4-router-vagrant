@@ -23,6 +23,6 @@ router_api
 rtpengine
 
 [router:vars]
-# Variables are defined in ../roles/wazo_vars/defaults/main.yml
+# Variables are defined in ../roles/wazo-vars/defaults/main.yml
 wazo_distribution = wazo-dev-buster
 wazo_distribution_upgrade = wazo-dev-buster

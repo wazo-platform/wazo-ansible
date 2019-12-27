@@ -1,4 +1,0 @@
----
-- name: Install RTPEngine
-  include_role:
-    name: wazo_rtpengine

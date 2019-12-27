@@ -1,0 +1,30 @@
+- name: Install Wazo repo package source
+  include_role:
+    name: debian-repo-wazo
+
+- name: Install wazo-router-confd
+  include_role:
+    name: wazo-router-confd
+
+- name: Install kamailio-local.cfg
+  template:
+    src: templates/kamailio-local.cfg.j2
+    dest: /etc/kamailio/kamailio-local.cfg
+  notify: restart kamailio
+
+- name: Install the wazo-c4-router packages
+  apt:
+    name: wazo-c4-router
+    state: present
+
+- name: Install dbtext/domain
+  template:
+    src: templates/domain.j2
+    dest: /etc/kamailio/dbtext/domain
+  notify: restart kamailio
+
+- name: Install dbtext/rtpengine
+  template:
+    src: templates/rtpengine.j2
+    dest: /etc/kamailio/dbtext/rtpengine
+  notify: restart kamailio

@@ -2,7 +2,7 @@
 - hosts: all
   become: yes
   roles:
-    - role: preflight_checks
+    - role: preflight-checks
 
 - hosts:
     - database
@@ -10,13 +10,13 @@
     - engine-api
   become: yes
   roles:
-    - role: debian_upgrade_first
+    - role: debian-upgrade-first
 
 - hosts:
     - database
   become: yes
   roles:
-    - role: wazo_db
+    - role: wazo-db
 
 - hosts: b2bua
   become: yes

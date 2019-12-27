@@ -2,22 +2,22 @@
 - hosts: all
   become: yes
   roles:
-    - role: preflight_checks
+    - role: preflight-checks
 
 - hosts:
     - all
   become: yes
   roles:
-    - role: debian_upgrade_first
+    - role: debian-upgrade-first
 
 - hosts:
     - redis
   become: yes
   roles:
-    - role: wazo_redis
+    - role: wazo-redis
 
 - hosts:
     - sbc
   become: yes
   roles:
-    - role: c4-sbc
+    - role: wazo-c4-sbc

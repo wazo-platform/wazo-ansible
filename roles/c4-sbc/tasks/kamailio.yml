@@ -1,4 +1,0 @@
----
-- name: Install Kamailio
-  include_role:
-    name: wazo_kamailio
