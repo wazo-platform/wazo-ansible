@@ -68,7 +68,7 @@
         engine_internal_address: "{{ engine_api_host }}"
         engine_language: "{{ engine_language }}"
         engine_license: true
-        engine_password: "{{ engine_api_root_password }}"
+        engine_password: "{{ engine_api_root_password|string }}"
       status_code: 201
 
   - name: Create tenant
