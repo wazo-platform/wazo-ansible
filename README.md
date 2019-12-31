@@ -44,13 +44,13 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 * `wazo_locale` if defined, ensure the locale is set and
   generated. Must be an `UTF-8` locale.
 
-### consul
+### wazo-consul
 
 * `wazo_consul_host`: (default `localhost`) host running the Consul server.
 * `wazo_consul_port`: (default ``8500`) port of the Consul server.
 * `wazo_consul_scheme`: (default `http`) use `http` or `https` to connect to the Consul server.
 
-### c4-router
+### wazo-c4-router
 
 * `debian_upgrade_first`: (default: `true`) do we `apt-get dist-upgrade` before installing Wazo Router?
 * `router_api_endpoint_confd`: (default: `http://localhost:8000`) URI of the wazo-router-confd service
@@ -69,7 +69,7 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 * `rtpengine_private_address`: (default: `{{ ansible_default_ipv4.address }}`) private IP address for RTPEngine
 * `rtpengine_public_address`: (default: `{{ ansible_default_ipv4.address }}`) public IP address for RTPEngine
 
-### c4-sbc
+### wazo-c4-sbc
 
 * `debian_upgrade_first`: (default: `true`) do we `apt-get dist-upgrade` before installing Wazo Router?
 * `sbc_advertise_address`: (default: `not set`) the advertised address for Kamailio, optional

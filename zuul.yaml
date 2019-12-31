@@ -47,6 +47,8 @@
 - project:
     check:
       jobs:
+        - wazo-ansible-docker:
+            nodeset: debian10-vm
         - wazo-ansible-uc:
             nodeset: debian10-vm
         - wazo-ansible-uc-archive:
@@ -55,17 +57,17 @@
             nodeset: debian10-vm
         - wazo-ansible-c4-sbc:
             nodeset: debian10-vm
-        - wazo-ansible-docker:
-            nodeset: debian10-vm
     gate:
       jobs:
+        - wazo-ansible-docker:
+            nodeset: debian10-vm
         - wazo-ansible-uc:
+            nodeset: debian10-vm
+        - wazo-ansible-uc-archive:
             nodeset: debian10-vm
         - wazo-ansible-c4-router:
             nodeset: debian10-vm
         - wazo-ansible-c4-sbc:
-            nodeset: debian10-vm
-        - wazo-ansible-docker:
             nodeset: debian10-vm
     experimental:
       jobs:

@@ -24,7 +24,7 @@ engine-api
 # uc-engine-host
 
 [uc-engine:vars]
-# Variables are defined in ../roles/wazo_vars/defaults/main.yml
+# Variables are defined in ../roles/wazo-vars/defaults/main.yml
 
 # Uncomment the 2 following lines to install the stable version (default is
 # development version)

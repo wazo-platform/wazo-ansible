@@ -4,3 +4,4 @@
 
 venv/
 hosts.ini
+*.image

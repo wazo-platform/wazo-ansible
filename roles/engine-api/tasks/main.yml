@@ -5,7 +5,7 @@
 
 - name: Create/Configure SSL certs
   include_role:
-    name: wazo_certs
+    name: wazo-certs
 
 - name: Install wazo-confgend-client
   apt:
@@ -14,7 +14,7 @@
 
 - name: Install RabbitMQ
   include_role:
-    name: wazo_message_bus
+    name: wazo-message-bus
 
 - name: Create /var/lib/wazo
   file:
