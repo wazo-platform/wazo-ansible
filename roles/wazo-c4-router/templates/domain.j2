@@ -1,4 +1,6 @@
 id(int) domain(string) did(string) last_modified(int)
+{% if 'router_host' in groups %}
 {% for host in groups['router_host'] %}
 {{ loop.index }}:{{ hostvars[host].ansible_default_ipv4.address }}:{{ hostvars[host].ansible_default_ipv4.address }}:0
 {% endfor %}
+{% endif %}

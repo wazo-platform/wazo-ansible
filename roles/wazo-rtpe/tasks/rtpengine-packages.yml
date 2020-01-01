@@ -7,5 +7,6 @@
   apt:
     name:
       - ngcp-rtpengine-daemon
+      - iproute2
     state: present
     install_recommends: false

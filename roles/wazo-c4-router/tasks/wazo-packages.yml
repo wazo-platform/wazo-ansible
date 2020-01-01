@@ -17,6 +17,15 @@
     name: wazo-c4-router
     state: present
 
+- name: Install packages needed for the docker image
+  apt:
+    name:
+      - supervisor
+      - netcat-traditional
+      - iproute2
+    state: present
+  when: not runtime
+
 - name: Install dbtext/domain
   template:
     src: templates/domain.j2

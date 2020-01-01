@@ -19,13 +19,14 @@ wait_for() {
   exit 1
 }
 
+if [ -n "$ROUTER_CONFD_URI" ]; then
+    wait_for 60 $ROUTER_CONFD_URI
+fi
+
 if [ -n "$CONSUL_URI" ]; then
     wait_for 60 $CONSUL_URI
 fi
 
-if [ -z "$DISPATCHER_LIST_TPL_FILE" ]; then
-    export DISPATCHER_LIST_TPL_FILE="dispatcher-list.tpl"
-fi
 if [ -z "$INTERFACE_SIP" ]; then
     INTERFACE_SIP="eth0"
 fi
@@ -46,15 +47,25 @@ fi
 HOSTNAME=$(hostname)
 export KAMAILIO=$(which kamailio)
 
-mkdir -p /etc/kamailio/
+mkdir -p /etc/kamailio/ /etc/kamailio/dbtext
 
-echo '#!define LISTEN '$LISTEN > /etc/kamailio/kamailio-local.cfg
-echo '#!define LISTEN_XHTTP tcp:'$INTERFACE_XHTTP':'$XHTTP_PORT >> /etc/kamailio/kamailio-local.cfg
+echo '#!define LISTEN_XHTTP tcp:'$INTERFACE_XHTTP':'$XHTTP_PORT > /etc/kamailio/kamailio-local.cfg
+echo '#!define HTTP_API_ROUTING_ENDPOINT "'$HTTP_API_ROUTING_ENDPOINT'"' >> /etc/kamailio/kamailio-local.cfg
+echo '#!define HTTP_API_CDR_ENDPOINT "'$HTTP_API_CDR_ENDPOINT'"' >> /etc/kamailio/kamailio-local.cfg
+echo '#!define HTTP_API_DBTEXT_UACREG_ENDPOINT "'$HTTP_API_DBTEXT_UACREG_ENDPOINT'"' >> /etc/kamailio/kamailio-local.cfg
+echo '#!define HTTP_API_TIMEOUT '$HTTP_API_TIMEOUT >> /etc/kamailio/kamailio-local.cfg
+echo '#!define LISTEN '$LISTEN >> /etc/kamailio/kamailio-local.cfg
 if ! [ -z "$TESTING" ]; then
     echo '#!define TESTING 1' >> /etc/kamailio/kamailio-local.cfg
 fi
-if ! [ -z "$DISPATCHER_ALG" ]; then
-    echo '#!define DISPATCHER_ALG "'$DISPATCHER_ALG'"' >> /etc/kamailio/kamailio-local.cfg
+if ! [ -z "$HTTP_ASYNC_CLIENT_WORKERS" ]; then
+    echo '#!define HTTP_ASYNC_CLIENT_WORKERS '$HTTP_ASYNC_CLIENT_WORKERS  >> /etc/kamailio/kamailio-local.cfg
+fi
+if ! [ -z "$LISTEN_ADVERTISE" ]; then
+    echo '#!define LISTEN_ADVERTISE '$LISTEN_ADVERTISE >> /etc/kamailio/kamailio-local.cfg
+fi
+if ! [ -z "$ALIAS" ]; then
+    echo '#!define ALIAS '$ALIAS >> /etc/kamailio/kamailio-local.cfg
 fi
 if ! [ -z "$WITH_DMQ" ]; then
     echo '#!define WITH_DMQ 1' >> /etc/kamailio/kamailio-local.cfg
@@ -63,12 +74,8 @@ if ! [ -z "$WITH_DMQ" ]; then
     echo '#!define DMQ_SERVER_ADDRESS "sip:'$DMQ_IP':'$DMQ_PORT'"' >> /etc/kamailio/kamailio-local.cfg
     echo '#!define DMQ_NOTIFICATION_ADDRESS "'$DMQ_NOTIFICATION_ADDRESS'"' >> /etc/kamailio/kamailio-local.cfg
 fi
-
-if ! [ -z "$LISTEN_ADVERTISE" ]; then
-    echo '#!define LISTEN_ADVERTISE '$LISTEN_ADVERTISE >> /etc/kamailio/kamailio-local.cfg
-fi
-if ! [ -z "$ALIAS" ]; then
-    echo '#!define ALIAS '$ALIAS >> /etc/kamailio/kamailio-local.cfg
+if ! [ -z "$ROUTER_AUTH_SECRET" ]; then
+    echo '#!define ROUTER_AUTH_SECRET "'$ROUTER_AUTH_SECRET'"' >> /etc/kamailio/kamailio-local.cfg
 fi
 
 # test the config syntax
@@ -77,8 +84,8 @@ $KAMAILIO -f $KAMAILIO_CONF -c
 # register/de-register service in consul
 curl -i -X PUT http://${CONSUL_URI}/v1/agent/service/register -d '{
     "ID": "'$HOSTNAME'",
-    "Name": "sbc",
-    "Tags": ["sbc", "kamailio"],
+    "Name": "router",
+    "Tags": ["router", "kamailio"],
     "Address": "'$SIP_IP'",
     "Port": '$SIP_PORT',
     "Check": {
@@ -124,9 +131,8 @@ stdout_logfile_maxbytes=0
 redirect_stderr=true
 command=/usr/sbin/consul-template
     -consul-addr "%(ENV_CONSUL_URI)s"
-    -template "/consul-templates/%(ENV_DISPATCHER_LIST_TPL_FILE)s:/etc/kamailio/dispatcher.list:kamcmd dispatcher.reload"
+    -template "/consul-templates/rtp.tpl:/etc/kamailio/dbtext/rtpengine:kamcmd rtpengine.reload"
     -template "/consul-templates/domain.tpl:/etc/kamailio/dbtext/domain:kamcmd domain.reload"
-
 
 [program:kamailio]
 stdout_logfile=/dev/fd/1
@@ -143,5 +149,3 @@ while true; do sleep 1; done
 
 # exit
 exit_script
-
-# init ends here

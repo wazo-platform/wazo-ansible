@@ -33,6 +33,8 @@
             nodeset: debian10-vm
         - wazo-ansible-docker:
             nodeset: debian10-vm
+            required-projects:
+              wazo-platform/wazo-c4
         - wazo-ansible-c4-router:
             nodeset: debian10-vm
         - wazo-ansible-c4-sbc:
@@ -45,6 +47,8 @@
             nodeset: debian10-vm
         - wazo-ansible-docker:
             nodeset: debian10-vm
+            required-projects:
+              wazo-platform/wazo-c4
         - wazo-ansible-c4-router:
             nodeset: debian10-vm
         - wazo-ansible-c4-sbc:

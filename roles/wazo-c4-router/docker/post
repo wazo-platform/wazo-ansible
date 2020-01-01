@@ -1,0 +1,11 @@
+#!/bin/bash
+
+VERS=0.23.0
+
+apt-get install -y curl
+
+curl -SLOk https://releases.hashicorp.com/consul-template/${VERS}/consul-template_${VERS}_linux_amd64.tgz \
+    && tar -xvf consul-template_${VERS}_linux_amd64.tgz \
+    && chmod a+x consul-template \
+    && mv consul-template /usr/sbin/ \
+    && rm -rf consul-template*

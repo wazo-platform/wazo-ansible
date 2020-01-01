@@ -13,6 +13,15 @@
     name: wazo-c4-sbc
     state: present
 
+- name: Install packages needed for the docker image
+  apt:
+    name:
+      - supervisor
+      - netcat-traditional
+      - curl
+    state: present
+  when: not runtime
+
 - name: Install dispatcher.list
   template:
     src: templates/dispatcher.list.j2

@@ -1,13 +1,14 @@
 #!/bin/bash
 
-CFGFILE=/etc/kamailio/kamailio.cfg
-SHM_MEMORY=64
-PKG_MEMORY=8
-USER=kamailio
-GROUP=kamailio
+set -x
 
-kamailio -c -f $CFGFILE
+if [ -z "$PUBLIC_IP" ]; then
+    ip -o -4 a
+    PUBLIC_IP=$(ip -o -4 a | awk '$2 == "eth0" { gsub(/\/.*/, "", $4); print $4 }')
+fi
 
-exec /usr/sbin/kamailio -P /var/run/kamailio/kamailio.pid -f $CFGFILE -m $SHM_MEMORY -M $PKG_MEMORY -u $USER -g $GROUP
+sed -i -e "s/interface=.*/interface=$PUBLIC_IP/" /etc/rtpengine/rtpengine.conf
+
+exec rtpengine --config-file /etc/rtpengine/rtpengine.conf
 
 # init ends here
