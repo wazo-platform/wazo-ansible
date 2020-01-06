@@ -2,7 +2,7 @@
 - name: Install xivo-certs
   apt:
     name: xivo-certs
-    state: latest
+    state: present
 
 - name: Install custom certificate for HTTPS
   copy:

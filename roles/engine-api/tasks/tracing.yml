@@ -1,9 +1,9 @@
 ---
 - name: Set the X-Powered-By header in API responses
   lineinfile:
-    path: "/etc/nginx/locations/https-available/{{item}}"
+    path: "/etc/nginx/locations/https-available/{{ item }}"
     insertbefore: '^}$'
-    line: '    add_header  X-Powered-By  {{item}} always;'
+    line: '    add_header  X-Powered-By  {{ item }} always;'
   with_items:
     - asterisk
     - wazo-agentd

@@ -14,7 +14,7 @@
 - name: Install wazo-auth-keys
   apt:
     name: wazo-auth-keys
-    state: latest
+    state: present
 
 - name: Create service users with wazo-auth-keys
   command: wazo-auth-keys service update
@@ -44,16 +44,20 @@
     src: templates/xivo-manage-db.cfg.j2
     dest: /etc/xivo-manage-db.cfg.j2
 
-- name: Reset main database options for wazo-auth package
-  shell: "echo PURGE | debconf-communicate xivo-manage-db"
+- name: Reset main database options for wazo-auth package # noqa 301
+  shell: |
+    set -o pipefail
+    echo PURGE | debconf-communicate xivo-manage-db
+  args:
+    executable: /bin/bash
 
-- name: Reconfigure main database options
+- name: Reconfigure main database options # noqa 301
   command: debconf-set-selections "{{ xivo_managedb_debconf_file.path }}"
 
-- name: Initialize main database
+- name: Initialize main database # noqa 301
   command: dpkg-reconfigure xivo-manage-db --frontend noninteractive
 
-- name: Fix Twisted dropin.cache
+- name: Fix Twisted dropin.cache # noqa 301
   command: twistd --help-reactors
 
 - name: Start Wazo services

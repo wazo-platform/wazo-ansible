@@ -10,7 +10,7 @@
 - name: Install wazo-confgend-client
   apt:
     name: wazo-confgend-client
-    state: latest
+    state: present
 
 - name: Install RabbitMQ
   include_role:
@@ -47,7 +47,7 @@
 - name: Install wazo-calld
   apt:
     name: wazo-calld
-    state: latest
+    state: present
 
 - name: Create wazo-amid config dir
   file:
@@ -71,7 +71,7 @@
 - name: Install wazo-amid
   apt:
     name: wazo-amid
-    state: latest
+    state: present
 
 - name: Preconfigure database initialization
   debconf:
@@ -128,11 +128,12 @@
 - name: Install wazo-confd
   apt:
     name: wazo-confd
-    state: latest
+    state: present
+
 - name: Install wazo-confd-client-python3
   apt:
     name: wazo-confd-client-python3
-    state: latest
+    state: present
 
 - name: Create wazo-confgend config dir
   file:
@@ -158,7 +159,7 @@
 - name: Install wazo-confgend
   apt:
     name: wazo-confgend
-    state: latest
+    state: present
 
 - name: Create wazo-agid config dir
   file:
@@ -183,34 +184,34 @@
 - name: Install xivo-config
   apt:
     name: xivo-config
-    state: latest
+    state: present
 
 - name: Install wazo-agid
   apt:
     name: wazo-agid
-    state: latest
+    state: present
 
 - name: Install wazo-websocketd
   apt:
     name: wazo-websocketd
-    state: latest
+    state: present
 
 - name: Install nginx
   apt:
     name: nginx
-    state: latest
+    state: present
 
 - name: Install wazo-nginx
   apt:
     name: wazo-nginx
-    state: latest
+    state: present
   notify:
     - restart nginx
 
 - name: Install wazo-provd
   apt:
     name: wazo-provd
-    state: latest
+    state: present
 
 - name: Enable Wazo services
   file:

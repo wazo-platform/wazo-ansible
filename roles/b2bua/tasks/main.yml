@@ -6,7 +6,7 @@
 - name: Install xivo-certs
   apt:
     name: xivo-certs
-    state: latest
+    state: present
 
 - name: Install custom certificate for HTTPS
   copy:
@@ -47,7 +47,7 @@
       - asterisk-moh-opsound-wav
       - asterisk-sounds-wav-en-us
       - wazo-sounds-en-us
-    state: latest
+    state: present
 
 - name: Ensure Asterisk is started
   service:
@@ -59,9 +59,9 @@
     path: /etc/asterisk/extensions.d
     state: directory
     owner: asterisk
-    mode: 660
+    mode: 0660
 
-- name: Ensure Asterisk permissions
+- name: Ensure Asterisk permissions # noqa 301
   command: xivo-fix-paths-rights
 
 - name: Install Asterisk AGI configuration
@@ -98,7 +98,7 @@
 - name: Install wazo-confgend-client
   apt:
     name: wazo-confgend-client
-    state: latest
+    state: present
 
 - name: Install wazo-confgend-client config
   template:
@@ -124,4 +124,4 @@
 - name: Install xivo-sysconfd
   apt:
     name: xivo-sysconfd
-    state: latest
+    state: present
