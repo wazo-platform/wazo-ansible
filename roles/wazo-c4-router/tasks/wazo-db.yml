@@ -3,7 +3,7 @@
     name:
       - acl
       - sudo
-    state: latest
+    state: present
 
 - name: Create router-confd PostgreSQL database
   become: true

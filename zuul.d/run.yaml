@@ -10,7 +10,7 @@
           [uc-ui:children]
           uc-engine-host
 
-    - name: Run the installation script
+    - name: Run the installation script # noqa 301
       become: yes
       command: >
           ansible-playbook -i inventories/uc-engine uc-engine.yml -vv
@@ -23,17 +23,17 @@
       args:
         chdir: "{{ zuul.project.src_dir }}"
 
-    - name: Check packages
+    - name: Check packages # noqa 301 303
       become: yes
       command: "apt-get install -fs -qq"
       args:
         chdir: "{{ zuul.project.src_dir }}"
 
-    - name: Check services
+    - name: Check services # noqa 301
       become: yes
-      shell: "wazo-service status"
+      command: "wazo-service status"
 
-    - name: Run simple validation tests
+    - name: Run simple validation tests # noqa 301
       become: yes
       command: >
         ansible-playbook -i inventories/uc-engine test.yml -vv

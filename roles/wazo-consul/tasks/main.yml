@@ -15,7 +15,7 @@
     name:
       - systemd
       - wazo-consul-config
-    state: latest
+    state: present
 
 - name: Remove generated files
   file:
@@ -35,7 +35,11 @@
   when: runtime
 
 - name: Generate token
-  shell: 'od -An -tx4 -N32 -w /dev/urandom | tr -d " "'
+  shell: |
+    set -o pipefail
+    od -An -tx4 -N32 -w /dev/urandom | tr -d " "
+  args:
+    executable: /bin/bash
   register: wazo_consul_token_create
   when: runtime and wazo_consul_token.rc != 0
 

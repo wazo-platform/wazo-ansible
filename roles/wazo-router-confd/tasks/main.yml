@@ -2,7 +2,7 @@
 - name: Install wazo-router-confd
   apt:
     name: wazo-router-confd
-    state: latest
+    state: present
 
 - name: Create /etc/wazo-router-confd
   file:

@@ -13,7 +13,7 @@
 - name: Install wazo-auth
   apt:
     name: wazo-auth
-    state: latest
+    state: present
 
 - name: Create default wazo-auth database preconfiguration
   tempfile:
@@ -46,7 +46,11 @@
   when: not runtime
 
 - name: Reset database options for wazo-auth package
-  shell: "echo PURGE | debconf-communicate wazo-auth"
+  shell: |
+    set -o pipefail
+    echo PURGE | debconf-communicate wazo-auth
+  args:
+    executable: /bin/bash
   when: runtime
 
 - name: Reconfigure database options for wazo-auth package

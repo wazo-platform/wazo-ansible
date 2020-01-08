@@ -27,9 +27,9 @@
 - name: Install wazo-dist
   apt:
     name: wazo-dist
-    state: latest
+    state: present
 
-- name: Add persistent Wazo repository
+- name: Add persistent Wazo repository # noqa 301
   command: wazo-dist --{{ wazo_debian_repo }}-repo {{ wazo_distribution }}
 
 - name: Remove bootstrap Wazo repository

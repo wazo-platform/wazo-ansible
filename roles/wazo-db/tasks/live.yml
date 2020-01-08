@@ -3,7 +3,8 @@
 - name: Install sudo
   apt:
     name: sudo
-    state: latest
+    state: present
+
 - name: Ensure PostgreSQL Python libraries are installed.
   apt:
     name: python-psycopg2

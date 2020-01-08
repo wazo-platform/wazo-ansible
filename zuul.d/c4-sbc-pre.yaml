@@ -7,7 +7,7 @@
         generate_ssh_key: yes
         ssh_key_file: "~/.ssh/id_rsa"
 
-    - name: Capturing SSH Keys
+    - name: Capturing SSH Keys # noqa 301
       command: "cat ~/.ssh/id_rsa.pub"
       register: "_ssh_pub_key"
 
@@ -18,8 +18,8 @@
         state: present
         key: "{{ _ssh_pub_key.stdout }}"
 
-    - name: Validate root key
-      shell: "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o PreferredAuthentications=publickey root@localhost -n \"/bin/ls\""
+    - name: Validate root key # noqa 301
+      command: "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o PreferredAuthentications=publickey root@localhost -n \"/bin/ls\""
 
     - name: Install list of packages
       become: yes
@@ -27,7 +27,7 @@
         name: ansible
         state: present
 
-    - name: Install postgresql ansible module from galaxy
+    - name: Install postgresql ansible module from galaxy # noqa 301
       become: yes
       command: "ansible-galaxy install -r requirements-postgresql.yml"
       args:

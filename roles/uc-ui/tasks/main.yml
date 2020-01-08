@@ -10,12 +10,12 @@
 - name: Install nginx
   apt:
     name: nginx
-    state: latest
+    state: present
 
 - name: Install wazo-nginx
   apt:
     name: wazo-nginx
-    state: latest
+    state: present
   notify:
     - restart nginx
 
@@ -47,4 +47,4 @@
   become: true
   apt:
     name: wazo-ui
-    state: latest
+    state: present

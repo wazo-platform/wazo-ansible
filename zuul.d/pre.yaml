@@ -3,11 +3,11 @@
   tasks:
     - name: Install Ansible
       become: yes
-      apt: name={{item}} state=installed
+      apt: name={{ item }} state=installed
       with_items:
         - ansible
 
-    - name: Install postgresql ansible module from galaxy
+    - name: Install postgresql ansible module from galaxy # noqa 301
       become: yes
       command: "ansible-galaxy install -r requirements-postgresql.yml"
       args:
