@@ -8,8 +8,9 @@ services:
   message_bus:
     environment:
       WAZO_CONSUL_HOST: consul_server
-      WAZO_CONSUL_PORT: 8501
       WAZO_CONSUL_SCHEME: https
+      WAZO_CONSUL_PORT_HTTP: 8500
+      WAZO_CONSUL_PORT_HTTPS: 8501
     image: "wazopbx/wazo-message-bus"
     ports:
     - '5672:5672'

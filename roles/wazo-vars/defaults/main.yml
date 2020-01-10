@@ -51,8 +51,9 @@ sbc_redis_dialog: 1
 sbc_dburl_dialog: redis://localhost:6379/3
 
 wazo_consul_host: localhost
-wazo_consul_port: 8500
 wazo_consul_scheme: http
+wazo_consul_port_http: 8500
+wazo_consul_port_https: 8501
 wazo_consul_datacenter: wazo-platform
 
 ###################################################################################

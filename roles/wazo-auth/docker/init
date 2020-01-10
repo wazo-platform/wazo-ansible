@@ -36,6 +36,11 @@ if [ -n "${WAZO_CONSUL_CACERT}" ]; then
     chmod 644 /usr/share/xivo-certs/server.crt
 fi
 
+if [ "$WAZO_CONSUL_SCHEME" = 'http' ] ; then
+    WAZO_CONSUL_PORT=$WAZO_CONSUL_PORT_HTTP
+else
+    WAZO_CONSUL_PORT=$WAZO_CONSUL_PORT_HTTPS
+fi
 cat > ${DEFAULT_XIVO_CONSUL_CONFIG} <<EOF
 consul:
     scheme: ${WAZO_CONSUL_SCHEME}
