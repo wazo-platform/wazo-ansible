@@ -1,0 +1,54 @@
+---
+- hosts: all
+  tasks:
+    - name: Activate uc-ui in inventory
+      become: yes
+      blockinfile:
+        path: "{{ zuul.project.src_dir }}/inventories/uc-engine"
+        marker: "# Uncomment the 2 following lines if you want to deploy wazo-ui too:"
+        block: |
+          [uc-ui:children]
+          uc-engine-host
+
+    - name: Run the installation script # noqa 301
+      become: yes
+      command: >
+          ansible-playbook -i inventories/uc-engine uc-engine.yml -vv
+          --extra-vars wazo_debian_repo={{ wazo_debian_repo }}
+          --extra-vars wazo_distribution={{ wazo_distribution }}
+          --extra-vars wazo_distribution_upgrade=wazo-dev-buster
+          --extra-vars engine_api_configure_wizard=true
+          --extra-vars engine_api_root_password=secret
+          --extra-vars wazo_locale=en_US.UTF-8
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
+
+    - name: Check packages # noqa 301 303
+      become: yes
+      command: "apt-get install -fs -qq"
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
+
+    - name: Check services # noqa 301
+      become: yes
+      command: "wazo-service status"
+
+    - name: Run simple validation tests # noqa 301
+      become: yes
+      command: >
+        ansible-playbook -i inventories/uc-engine test.yml -vv
+          --extra-vars wazo_debian_repo={{ wazo_debian_repo }}
+          --extra-vars wazo_distribution={{ wazo_distribution }}
+          --extra-vars wazo_distribution_upgrade=wazo-dev-buster
+          --extra-vars engine_api_configure_wizard=true
+          --extra-vars engine_api_root_password=secret
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
+
+    - name: Get service facts
+      become: yes
+      service_facts:
+
+    - name: Assert wazo-ui is running
+      assert:
+        that: ansible_facts.services['wazo-ui.service'].state == 'running'

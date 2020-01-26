@@ -24,9 +24,9 @@
   include_role:
     name: wazo-default
 
-- name: Install wazo-platform
+- name: "Install {{ wazo_meta_package }}"
   apt:
-    name: wazo-platform
+    name: "{{ wazo_meta_package }}"
     state: present
 
 - name: Install wazo-setupd
