@@ -32,13 +32,24 @@
         port: "{{ postgresql_port | default(5432) }}"
   when: postgresql_superuser_password is defined
 
+- name: Set PostgreSQL HBA
+  set_fact:
+    default_hba:
+      - {type: local, database: all, user: postgres, auth_method: peer}
+      - {type: local, database: all, user: all, auth_method: peer}
+      - {type: host, database: all, user: all, address: '127.0.0.1/32', auth_method: md5}
+      - {type: host, database: all, user: all, address: '::1/128', auth_method: md5}
+    external_hba:
+      - {type: host, database: all, user: all, address: all, auth_method: md5}
+
 - name: Configure PostgreSQL
   include_role:
     name: geerlingguy.postgresql
   vars:
-    postgresql_hba_entries:
-      - { type: local, database: all, user: postgres, auth_method: peer }
-      - { type: host, database: all, user: all, address: all, auth_method: md5 }
+    postgresql_hba_entries: >
+       {{ default_hba + external_hba
+          if postgresql_listen_addresses is defined and postgresql_listen_addresses != '127.0.0.1'
+          else default_hba }}
     postgresql_global_config_options:
       - option: port
         value: "{{ postgresql_port | default(5432) }}"
