@@ -1,6 +1,7 @@
 # -*- conf -*-
 # You only have to change [uc-engine-host] and set variables according
-# to your needs
+# to your needs (e.g. remove localhost line and add the IP on which
+# wazo-platform will be installed)
 
 [uc-engine-host]
 localhost ansible_connection=local
