@@ -6,7 +6,7 @@
 * You can become root on the target machines (See https://docs.ansible.com/ansible/latest/user_guide/become.html)
 * Ansible 2.7.9: `pip install ansible==2.7.9`
 
-## Class 4: SBC component
+## SBC component
 
 * Edit `inventories/sbc` and set your host in `[sbc_host]`
 * Run:
@@ -17,7 +17,7 @@ ansible-galaxy install -r requirements-postgresql.yml
 ansible-playbook -i inventories/sbc c4-sbc.yml
 ```
 
-## Class 4: Router/RTPEngine component
+## SIP Router/RTPEngine component
 
 * Edit `inventories/router` and set your host in `[router_host]`
 * Run:
