@@ -39,6 +39,18 @@
     - /usr/share/xivo-certs/server.crt
   when: not runtime
 
+- name: Create asterisk drop-in directory
+  file:
+    path: /usr/lib/systemd/system/asterisk.service.d
+    state: directory
+    owner: root
+    mode: 0640
+
+- name: Asterisk drop-in service file to see output
+  template:
+    src: templates/asterisk-custom.conf
+    dest: /usr/lib/systemd/system/asterisk.service.d/asterisk-custom.conf
+
 - name: Install Asterisk
   apt:
     name:
