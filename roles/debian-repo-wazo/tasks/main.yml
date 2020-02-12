@@ -39,3 +39,11 @@
     filename: wazo-install
     update_cache: yes
   when: '"wazo-dist" not in ansible_facts.packages'
+
+- name: Add extra repository
+  apt_repository:
+    repo: "{{ wazo_extra_repository }}"
+    state: present
+    filename: "{{ wazo_extra_repository_filename }}"
+    update_cache: yes
+  when: wazo_extra_repository is defined
