@@ -5,7 +5,7 @@ wazo_debian_repo_upgrade: main
 wazo_distribution: wazo-dev-buster
 wazo_distribution_upgrade: wazo-dev-buster
 wazo_meta_package: wazo-platform
-# wazo_extra_repository:
+# wazo_extra_repository: deb http://mirror.wazo.community/extra/ extra-buster main
 # wazo_extra_repository_filename: wazo-extra
 
 engine_api_host: localhost
