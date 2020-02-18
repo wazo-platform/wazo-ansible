@@ -170,6 +170,10 @@ For a new Wazo engine installation, there are two distribution to consider:
 * `wazo_distribution_upgrade`: (default: `wazo-dev-buster`) wazo distribution
   for later upgrades. This distribution is not used during installation, only
   set up at the end for later upgrades.
+* `wazo_meta_package`: (default `wazo-platform`) meta package to
+  install an all in one setup.
+* `wazo_extra_repository`: debian repository to add to the installation.
+* `wazo_extra_repository_filename`: filename for the extra repository configuration.
 
 ### runtime
 
