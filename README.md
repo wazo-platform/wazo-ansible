@@ -173,7 +173,7 @@ For a new Wazo engine installation, there are two distribution to consider:
 * `wazo_meta_package`: (default `wazo-platform`) meta package to
   install an all in one setup.
 * `wazo_extra_repository`: debian repository to add to the installation.
-* `wazo_extra_repository_filename`: filename for the extra repository configuration.
+* `wazo_extra_repository_filename`: (default `wazo-extra`) filename for the extra repository configuration.
 
 ### runtime
 
