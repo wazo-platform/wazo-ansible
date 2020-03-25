@@ -4,12 +4,6 @@
     state: restarted
   when: runtime
 
-- name: restart wazo-amid
-  service:
-    name: wazo-amid
-    state: restarted
-  when: runtime
-
 - name: restart wazo-confd
   service:
     name: wazo-confd
