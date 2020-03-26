@@ -14,7 +14,6 @@
   when: engine_api_https_cert is defined
   notify:
     - restart wazo-auth
-    - restart wazo-amid
     - restart wazo-confd
     - reload nginx
 
@@ -28,7 +27,6 @@
   when: engine_api_https_private_key is defined
   notify:
     - restart wazo-auth
-    - restart wazo-amid
     - restart wazo-confd
     - reload nginx
 
