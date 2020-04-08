@@ -3,13 +3,13 @@
   include_role:
     name: debian-repo-wazo
 
-- name: Install the kamailio packages
+- name: Install the kamailio 5.2.6 packages
   apt:
     name:
-      - kamailio
-      - kamailio-json-modules
-      - kamailio-utils-modules
-      - kamailio-extra-modules
-      - kamailio-redis-modules
-      - kamailio-xml-modules
+      - kamailio=5.2.6
+      - kamailio-json-modules=5.2.6
+      - kamailio-utils-modules=5.2.6
+      - kamailio-extra-modules=5.2.6
+      - kamailio-redis-modules=5.2.6
+      - kamailio-xml-modules=5.2.6
     state: present
