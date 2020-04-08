@@ -1,0 +1,31 @@
+/* API endpoints */
+#!define HTTP_API_ROUTING_ENDPOINT "{{ router_api_endpoint_confd }}/kamailio/routing"
+#!define HTTP_API_CDR_ENDPOINT "{{ router_api_endpoint_confd }}/kamailio/cdr"
+#!define HTTP_API_DBTEXT_UACREG_ENDPOINT "{{ router_api_endpoint_confd }}/kamailio/dbtext/uacreg"
+
+/* add API http timeout */
+#!define HTTP_API_TIMEOUT 5000
+
+/* add listen protocol, address and port / advertise (optional) */
+{% if kamailio_advertise_address is defined and kamailio_advertise_address and kamailio_advertise_port is defined and kamailio_advertise_port %}
+#!define LISTEN udp:{{ router_interface }}:5060 advertise {{ router_advertise_address }}:{{ router_advertise_port }}
+{% else %}
+#!define LISTEN udp:{{ router_interface }}:5060
+{% endif %}
+#!define LISTEN_XHTTP tcp:lo:9600
+
+/* Address to be used to build contact address when registering to carriers */
+#!define REG_CONTACT_ADDRESS localhost:5060
+
+/* Directory to store dbtext tables */
+#!define DBTEXT_DIRECTORY "/etc/kamailio/dbtext"
+
+/* DB url for UAC registration */
+#!define REG_DB_URL "text:///etc/kamailio/dbtext"
+
+/* DB url for domain module */
+#!define DOMAIN_DB_URL "text:///etc/kamailio/dbtext"
+
+/* Dialog replication via Redis */
+#!define WITH_REDIS_DIALOG {{ router_redis_dialog }}
+#!define DBURL_DIALOG "{{ router_dburl_dialog }}"
