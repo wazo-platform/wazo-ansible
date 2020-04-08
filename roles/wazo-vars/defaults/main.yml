@@ -24,7 +24,7 @@ engine_setupd_path: /api/setupd/1.0
 
 # router_advertise_address: democ4.wazo.community
 # router_advertise_port: 5060
-router_api_endpoint_confd: http://localhost:8000
+router_api_endpoint_confd: http://localhost:9600
 router_api_db_host: localhost
 router_api_db_port: 5432
 router_api_db_name: wazo_router_confd
