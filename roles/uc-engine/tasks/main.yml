@@ -18,6 +18,7 @@
 - name: Install Consul
   include_role:
     name: wazo-consul
+  when: wazo_consul_install
 
 # need to run after wazo_consul to have wazo_consul_token registered
 - name: Set default values

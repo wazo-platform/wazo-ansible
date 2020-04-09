@@ -53,6 +53,7 @@ sbc_dispatcher_list: "1 sip:localhost:5060 16 10"
 sbc_redis_dialog: 1
 sbc_dburl_dialog: redis://localhost:6379/3
 
+wazo_consul_install: true
 wazo_consul_host: localhost
 wazo_consul_scheme: http
 wazo_consul_port_http: 8500
