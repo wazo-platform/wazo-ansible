@@ -13,7 +13,6 @@
     mode: 0640
   when: engine_api_https_cert is defined
   notify:
-    - restart wazo-auth
     - restart wazo-confd
     - reload nginx
 
@@ -26,7 +25,6 @@
     mode: 0640
   when: engine_api_https_private_key is defined
   notify:
-    - restart wazo-auth
     - restart wazo-confd
     - reload nginx
 

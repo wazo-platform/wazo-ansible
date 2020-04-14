@@ -1,9 +1,3 @@
-- name: restart wazo-auth
-  service:
-    name: wazo-auth
-    state: restarted
-  when: runtime
-
 - name: restart wazo-confd
   service:
     name: wazo-confd
