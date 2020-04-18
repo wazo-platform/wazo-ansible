@@ -29,3 +29,20 @@
     src: templates/rtpengine.j2
     dest: /etc/kamailio/dbtext/rtpengine
   notify: restart kamailio
+
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: Install Nginx default configuration
+  template:
+    src: templates/default.j2
+    dest: /etc/nginx/sites-enabled/default
+  notify: restart nginx
+
+- name: Install Wazo router confd default configuration
+  template:
+    src: templates/wazo-router-confd.j2
+    dest: /etc/wazo-router-confd/wazo-router-confd.ini
+  notify: restart wazo-router-confd
