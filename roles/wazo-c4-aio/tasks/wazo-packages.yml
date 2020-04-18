@@ -41,6 +41,11 @@
     dest: /etc/nginx/sites-enabled/default
   notify: restart nginx
 
+- name: Install Wazo Auth CLI
+  apt:
+    name: wazo-auth-cli
+    state: present
+
 - name: Install Wazo router confd default configuration
   template:
     src: templates/wazo-router-confd.j2
