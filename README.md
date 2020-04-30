@@ -30,7 +30,7 @@ ansible-playbook -i inventories/router c4-router.yml
 
 ## UC Engine (all in one machine)
 
-* Edit `inventories/uc-engine` and set your host in `[uc-engine-host]`
+* Edit `inventories/uc-engine` and set your host in `[uc_engine_host]`
 * Run:
 
 ```shell
@@ -80,7 +80,7 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 * `sbc_redis_dialog`: (default: `1`) enables redis-based dialog replication
 * `sbc_dburl_dialog`: (default: `redis://localhost:6379/3`) Redis uri to store dialogs
 
-### uc-engine
+### uc_engine
 
 * `debian_upgrade_first`: (default: `true`) do we `apt-get dist-upgrade` before installing Wazo?
 
@@ -104,7 +104,7 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 * `postgresql_superuser_password`: password for superuser `postgres`
 * `postgresql_listen_addresses`: (default: `127.0.0.1`)
 
-### engine-api
+### engine_api
 
 * `engine_api_host`: (default: `localhost`) where other services should contact the engine API
 * `engine_api_port`: (default: `443`) TCP port for HTTPS API

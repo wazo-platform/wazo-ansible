@@ -6,9 +6,9 @@ asterisk-ansible
 [database]
 postgresql-ansible
 
-[edge-proxy]
+[edge_proxy]
 edge-proxy-ansible
-[edge-proxy:vars]
+[edge_proxy:vars]
 kamailio_creatordb_host = edge-proxy-ansible
 kamailio_db_host = postgresql-ansible
 kamailio_db_port = 5432
@@ -25,10 +25,10 @@ kamailio_public_ip = 198.51.100.1
 class5_wazo_servers = ["192.0.2.13"]
 rtp_engine_servers = ["udp:192.0.2.10:2223"]
 
-[engine-api]
+[engine_api]
 engine-api-ansible
 
-[reverse-proxy]
+[reverse_proxy]
 reverse-proxy-ansible
 
 [router]
@@ -62,10 +62,10 @@ rtp_engine_servers = ["udp:192.0.2.10:2223"]
 [distributed:children]
 b2bua
 database
-edge-proxy
-engine-api
+edge_proxy
+engine_api
 nestbox
-reverse-proxy
+reverse_proxy
 router
 rtpengine
 sbc
@@ -109,7 +109,7 @@ sbc_port_kamailio_http = 8888
 mirror.wazo.io
 [repo_client_cert:children]
 b2bua
-edge-proxy
+edge_proxy
 nestbox
 rtpengine
 sbc
