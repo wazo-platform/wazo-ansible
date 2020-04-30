@@ -7,7 +7,7 @@
 - hosts:
     - database
     - b2bua
-    - engine-api
+    - engine_api
   become: yes
   roles:
     - role: debian-upgrade-first
@@ -23,14 +23,14 @@
   roles:
     - role: b2bua
 
-- hosts: engine-api
+- hosts: engine_api
   become: yes
   roles:
     - role: engine-api
     - role: engine-api-init
     - role: uc-engine
 
-- hosts: uc-ui
+- hosts: uc_ui
   become: yes
   roles:
     - role: uc-ui

@@ -1,30 +1,30 @@
 # -*- conf -*-
-# You only have to change [uc-engine-host] and set variables according
+# You only have to change [uc_engine_host] and set variables according
 # to your needs (e.g. remove localhost line and add the IP on which
 # wazo-platform will be installed)
 
-[uc-engine-host]
+[uc_engine_host]
 localhost ansible_connection=local
 
 [database:children]
-uc-engine-host
+uc_engine_host
 
-[engine-api:children]
-uc-engine-host
+[engine_api:children]
+uc_engine_host
 
 [b2bua:children]
-uc-engine-host
+uc_engine_host
 
-[uc-engine:children]
+[uc_engine:children]
 b2bua
 database
-engine-api
+engine_api
 
 # Uncomment the 2 following lines if you want to deploy wazo-ui too:
-# [uc-ui:children]
-# uc-engine-host
+# [uc_ui:children]
+# uc_engine_host
 
-[uc-engine:vars]
+[uc_engine:vars]
 # Variables are defined in ../roles/wazo-vars/defaults/main.yml
 
 # Uncomment the 2 following lines to install the stable version (default is

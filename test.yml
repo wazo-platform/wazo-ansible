@@ -1,4 +1,4 @@
 ---
-- hosts: uc-engine-host
+- hosts: uc_engine_host
   roles:
     - role: validate-uc

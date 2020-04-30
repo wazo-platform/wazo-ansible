@@ -9,7 +9,7 @@
     src: /var/www/html/index.wazo.html
     dest: /var/www/html/index.html
     state: link
-  when: groups['uc-ui'] is not defined
+  when: groups['uc_ui'] is not defined
 
 - name: Install wazo-auth-keys
   apt:
