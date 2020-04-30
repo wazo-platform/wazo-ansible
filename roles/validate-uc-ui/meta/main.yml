@@ -1,0 +1,12 @@
+---
+galaxy_info:
+  author: "Wazo Platform authors"
+  description: Unified Communication Validation role (part of Wazo Platform)
+  license: MIT
+  platforms:
+    - name: Debian
+      versions:
+        - Buster
+  min_ansible_version: 2.5
+dependencies:
+  - role: wazo-vars
