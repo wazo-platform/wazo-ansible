@@ -1,0 +1,15 @@
+- name: Get the home page
+  uri:
+    url: "https://localhost/"
+    validate_certs: false
+  register: home_page
+
+- name: debug home_page data
+  debug:
+    var: home_page
+
+- name: verify redirect url
+  assert:
+    that:
+      - home_page.url == "https://localhost/login/"
+      - home_page.redirected
