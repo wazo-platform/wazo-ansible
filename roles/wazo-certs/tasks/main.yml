@@ -13,7 +13,6 @@
     mode: 0640
   when: engine_api_https_cert is defined
   notify:
-    - restart wazo-confd
     - reload nginx
 
 - name: Install custom private key for HTTPS
@@ -25,7 +24,6 @@
     mode: 0640
   when: engine_api_https_private_key is defined
   notify:
-    - restart wazo-confd
     - reload nginx
 
 - name: Remove generated files
