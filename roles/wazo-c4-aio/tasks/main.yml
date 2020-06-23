@@ -23,12 +23,17 @@
     port: 9497
     delay: 10
 
+- name: Create a tenant
+  command: "wazo-auth-cli tenant create main"
+
 - name: Create API client
-  command: "wazo-auth-cli user create {{ api_client_name }} --tenant master --password {{ api_client_password }} --purpose external_api"
+  command: "wazo-auth-cli user create {{ api_client_name }} --tenant main --password {{ api_client_password }} --purpose external_api"
 
 - name: Create policy
-  command: "wazo-auth-cli policy create api-client-policy --tenant master --acl 'auth.admin.#'"
+  command: "wazo-auth-cli policy create api-client-policy --tenant main --acl 'auth.admin.#'"
+
+- name: Add policy to user
+  command: "wazo-auth-cli user add {{ api_client_name }} --policy wazo_default_admin_policy"
 
 - name: Enable policy for API client
-  command: "wazo-auth-cli user add master --policy api-client-policy"
-  when: engine_api_configure_wizard == "true"
+  command: "wazo-auth-cli user add {{ api_client_name }} --policy api-client-policy"
