@@ -18,14 +18,16 @@
   include_role:
     name: wazo-auth
 
-- name: Create tenant
-  command: "wazo-auth-cli tenant create master"
+- name : Wait for wazo-auth is available
+  wait_for:
+    port: 9497
+    delay: 10
 
 - name: Create API client
   command: "wazo-auth-cli user create {{ api_client_name }} --tenant master --password {{ api_client_password }} --purpose external_api"
 
 - name: Create policy
-  command: "wazo-auth-cli policy create api-client-policy --tenant master --acl '#.#'"
+  command: "wazo-auth-cli policy create api-client-policy --tenant master --acl 'auth.admin.#'"
 
 - name: Enable policy for API client
   command: "wazo-auth-cli user add master --policy api-client-policy"
