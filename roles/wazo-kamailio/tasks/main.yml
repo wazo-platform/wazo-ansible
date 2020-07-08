@@ -1,7 +1,7 @@
 ---
-#- name: Install Wazo repo package source
-#  include_role:
-#    name: debian-repo-wazo
+- name: Install Wazo repo package source
+  include_role:
+    name: debian-repo-wazo
 
 - name: Install gpg package
   apt:
@@ -10,16 +10,16 @@
     update_cache: true
     cache_valid_time: 3600
 
-- name: Add kamailio Repo Signing key
-  apt_key:
-    url: "https://deb.kamailio.org/kamailiodebkey.gpg"
-    state: present
+#- name: Add kamailio Repo Signing key
+#  apt_key:
+#    url: "https://deb.kamailio.org/kamailiodebkey.gpg"
+#    state: present
 
-- name: Add kamailio apt repository
-  apt_repository:
-    repo: deb http://deb.kamailio.org/kamailio52 buster main
-    state: present
-    filename: 'kamailio'
+#- name: Add kamailio apt repository
+#  apt_repository:
+#    repo: deb http://deb.kamailio.org/kamailio53 buster main
+#    state: present
+#    filename: 'kamailio'
 
 - name: Update APT Cache
   apt: update_cache=yes
