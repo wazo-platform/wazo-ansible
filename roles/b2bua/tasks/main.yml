@@ -53,6 +53,7 @@
   service:
     name: asterisk
     state: started
+  when: runtime
 
 - name: Create /etc/asterisk/extensions.d
   file:
