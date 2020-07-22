@@ -77,4 +77,9 @@
 
   - name: Enable policy for API client
     command: "wazo-auth-cli user add {{ api_client_name }} --policy api-client-policy"
+
+  - name: Ensure dbus is started
+    service:
+      name: dbus
+      state: started
   when: engine_api_configure_wizard == "true"
