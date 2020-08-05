@@ -23,8 +23,6 @@ if [ ! -r /etc/xivo-manage-db.cfg ]; then
     twistd --help-reactors
 fi
 
-install -d -o wazo-auth -g wazo-auth /var/run/wazo-auth
-
 # Consul setup
 
 . /etc/wazo-platform/consul
