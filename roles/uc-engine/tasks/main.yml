@@ -50,6 +50,11 @@
 - name: Change Wazo distribution for later upgrades # noqa 301
   command: wazo-dist --{{ wazo_debian_repo_upgrade }}-repo {{ wazo_distribution_upgrade }}
 
+- name: Ensure dbus is started
+  service:
+    name: dbus
+    state: started
+
 - name: Finalize engine configuration
   block:
   - name: Setup engine
@@ -77,9 +82,4 @@
 
   - name: Enable policy for API client
     command: "wazo-auth-cli user add {{ api_client_name }} --policy api-client-policy"
-
-  - name: Ensure dbus is started
-    service:
-      name: dbus
-      state: started
   when: engine_api_configure_wizard == "true"
