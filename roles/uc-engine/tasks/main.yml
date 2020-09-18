@@ -49,6 +49,26 @@
 
 - name: Change Wazo distribution for later upgrades # noqa 301
   command: wazo-dist --{{ wazo_debian_repo_upgrade }}-repo {{ wazo_distribution_upgrade }}
+  when: debian_repo_wazo__custom_repo is not defined
+
+- name: Remove custom repository used for installation
+  apt_repository:
+    repo: "{{ debian_repo_wazo__custom_repo }}"
+    state: absent
+    filename: "{{ debian_repo_wazo__custom_repo_filename }}"
+    update_cache: yes
+  when: |
+    debian_repo_wazo__custom_repo_filename is defined
+    and debian_repo_wazo__custom_repo_upgrade_filename is defined
+    and debian_repo_wazo__custom_repo_filename == debian_repo_wazo__custom_repo_upgrade_filename
+
+- name: Add custom repository for later upgrades
+  apt_repository:
+    repo: "{{ debian_repo_wazo__custom_repo_upgrade }}"
+    state: present
+    filename: "{{ debian_repo_wazo__custom_repo_upgrade_filename }}"
+    update_cache: yes
+  when: debian_repo_wazo__custom_repo_upgrade is defined
 
 - name: Ensure dbus is started
   service:

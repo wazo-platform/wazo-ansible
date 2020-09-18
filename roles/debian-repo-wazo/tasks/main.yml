@@ -12,33 +12,54 @@
     id: 2769B67EDBFF423F6874D7663F1BF7FC527FBC6A
     state: present
 
-- name: Gather packages facts
-  package_facts:
-    manager: apt
+- name: Bootstrap with wazo-dist
+  block:
 
-- name: Add bootstrap Wazo repository
+  - name: Gather packages facts
+    package_facts:
+      manager: apt
+
+  - name: Add bootstrap Wazo repository
+    apt_repository:
+      repo: deb http://mirror.wazo.community/{{ 'debian' if wazo_debian_repo == 'main' else wazo_debian_repo }} {{ wazo_distribution }} main
+      state: present
+      filename: wazo-install
+      update_cache: yes
+    when: '"wazo-dist" not in ansible_facts.packages'
+
+  - name: Install wazo-dist
+    apt:
+      name: wazo-dist
+      state: present
+
+  - name: Add persistent Wazo repository # noqa 301
+    command: wazo-dist --{{ wazo_debian_repo }}-repo {{ wazo_distribution }}
+
+  - name: Remove bootstrap Wazo repository
+    apt_repository:
+      repo: deb http://mirror.wazo.community/{{ 'debian' if wazo_debian_repo == 'main' else wazo_debian_repo }} {{ wazo_distribution }} main
+      state: absent
+      filename: wazo-install
+      update_cache: yes
+    when: '"wazo-dist" not in ansible_facts.packages'
+
+  # end block
+  when: debian_repo_wazo__custom_repo is not defined
+
+- name: Add custom repository
   apt_repository:
-    repo: deb http://mirror.wazo.community/{{ 'debian' if wazo_debian_repo == 'main' else wazo_debian_repo }} {{ wazo_distribution }} main
+    repo: "{{ debian_repo_wazo__custom_repo }}"
     state: present
-    filename: wazo-install
+    filename: "{{ debian_repo_wazo__custom_repo_filename }}"
     update_cache: yes
-  when: '"wazo-dist" not in ansible_facts.packages'
+  when: debian_repo_wazo__custom_repo is defined
 
-- name: Install wazo-dist
-  apt:
-    name: wazo-dist
+- name: Add extra distribution key
+  apt_key:
+    url: "{{ debian_repo_wazo__extra_key_url }}"
+    id: "{{ debian_repo_wazo__extra_key_id }}"
     state: present
-
-- name: Add persistent Wazo repository # noqa 301
-  command: wazo-dist --{{ wazo_debian_repo }}-repo {{ wazo_distribution }}
-
-- name: Remove bootstrap Wazo repository
-  apt_repository:
-    repo: deb http://mirror.wazo.community/{{ 'debian' if wazo_debian_repo == 'main' else wazo_debian_repo }} {{ wazo_distribution }} main
-    state: absent
-    filename: wazo-install
-    update_cache: yes
-  when: '"wazo-dist" not in ansible_facts.packages'
+  when: debian_repo_wazo__extra_key_url is defined
 
 - name: Add extra repository
   apt_repository:
