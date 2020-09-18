@@ -1,9 +1,10 @@
 ---
-- name: Install APT python bindings and GPG
+- name: Install APT python bindings, GPG and CA certificates
   apt:
     name:
       - python-apt
       - gpg
+      - ca-certificates  # for HTTPS Debian repo
     state: present
 
 - name: Add Wazo distribution key
