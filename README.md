@@ -174,6 +174,8 @@ For a new Wazo engine installation, there are two distribution to consider:
   install an all in one setup.
 * `wazo_extra_repository`: debian repository to add to the installation.
 * `wazo_extra_repository_filename`: (default `wazo-extra`) filename for the extra repository configuration.
+* `wazo_extra_repository_upgrade`: extra debian repository for later upgrades. Replaces the configuration file placed by `wazo_extra_repository`.
+* `wazo_extra_repository_upgrade_filename`: filename for the extra repository configuration.
 
 ### runtime
 

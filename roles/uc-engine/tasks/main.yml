@@ -50,6 +50,21 @@
 - name: Change Wazo distribution for later upgrades # noqa 301
   command: wazo-dist --{{ wazo_debian_repo_upgrade }}-repo {{ wazo_distribution_upgrade }}
 
+- name: Remove extra repository used for installing
+  apt_repository:
+    repo: "{{ wazo_extra_repository }}"
+    state: absent
+    filename: "{{ wazo_extra_repository_filename }}"
+  when: wazo_extra_repository is defined
+
+- name: Add extra repository for later upgrades
+  apt_repository:
+    repo: "{{ wazo_extra_repository_upgrade }}"
+    state: present
+    filename: "{{ wazo_extra_repository_upgrade_filename }}"
+    update_cache: yes
+  when: wazo_extra_repository_upgrade is defined
+
 - name: Ensure dbus is started
   service:
     name: dbus
