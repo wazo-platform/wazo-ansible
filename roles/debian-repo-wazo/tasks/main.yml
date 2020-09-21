@@ -54,18 +54,3 @@
     filename: "{{ debian_repo_wazo__custom_repo_filename }}"
     update_cache: yes
   when: debian_repo_wazo__custom_repo is defined
-
-- name: Add extra distribution key
-  apt_key:
-    url: "{{ debian_repo_wazo__extra_key_url }}"
-    id: "{{ debian_repo_wazo__extra_key_id }}"
-    state: present
-  when: debian_repo_wazo__extra_key_url is defined
-
-- name: Add extra repository
-  apt_repository:
-    repo: "{{ wazo_extra_repository }}"
-    state: present
-    filename: "{{ wazo_extra_repository_filename }}"
-    update_cache: yes
-  when: wazo_extra_repository is defined
