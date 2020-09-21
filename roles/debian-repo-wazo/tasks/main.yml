@@ -8,8 +8,8 @@
 
 - name: Add Wazo distribution key
   apt_key:
-    url: http://mirror.wazo.community/wazo_current.key
-    id: 2769B67EDBFF423F6874D7663F1BF7FC527FBC6A
+    url: "{{ debian_repo_wazo__key_url }}"
+    id: "{{ debian_repo_wazo__key_id }}"
     state: present
 
 - name: Bootstrap with wazo-dist
