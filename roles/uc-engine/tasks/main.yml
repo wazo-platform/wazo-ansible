@@ -57,16 +57,13 @@
     state: absent
     filename: "{{ debian_repo_wazo__custom_repo_filename }}"
     update_cache: yes
-  when: |
-    debian_repo_wazo__custom_repo_filename is defined
-    and debian_repo_wazo__custom_repo_upgrade_filename is defined
-    and debian_repo_wazo__custom_repo_filename == debian_repo_wazo__custom_repo_upgrade_filename
+  when: debian_repo_wazo__custom_repo_upgrade is defined
 
 - name: Add custom repository for later upgrades
   apt_repository:
     repo: "{{ debian_repo_wazo__custom_repo_upgrade }}"
     state: present
-    filename: "{{ debian_repo_wazo__custom_repo_upgrade_filename }}"
+    filename: "{{ debian_repo_wazo__custom_repo_filename }}"
     update_cache: yes
   when: debian_repo_wazo__custom_repo_upgrade is defined
 

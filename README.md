@@ -176,9 +176,7 @@ For a new Wazo engine installation, there are two distribution to consider:
 * `debian_repo_wazo__key_id`: ID of the package verification key
 * `debian_repo_wazo__custom_repo`: debian repository to replace the default Wazo repository
 * `debian_repo_wazo__custom_repo_filename`: filename for the debian repository to replace the default Wazo repository
-* `debian_repo_wazo__custom_repo_upgrade`: debian repository to replace the default Wazo repository for later upgrades
-* `debian_repo_wazo__custom_repo_upgrade_filename`: filename for the debian repository to replace the default Wazo repository for later upgrades
-
+* `debian_repo_wazo__custom_repo_upgrade`: debian repository to replace the custom repository for later upgrades
 
 ### runtime
 
