@@ -172,8 +172,11 @@ For a new Wazo engine installation, there are two distribution to consider:
   set up at the end for later upgrades.
 * `wazo_meta_package`: (default `wazo-platform`) meta package to
   install an all in one setup.
-* `wazo_extra_repository`: debian repository to add to the installation.
-* `wazo_extra_repository_filename`: (default `wazo-extra`) filename for the extra repository configuration.
+* `debian_repo_wazo__key_url`: URL for the package verification key
+* `debian_repo_wazo__key_id`: ID of the package verification key
+* `debian_repo_wazo__custom_repo`: debian repository to replace the default Wazo repository
+* `debian_repo_wazo__custom_repo_filename`: filename for the debian repository to replace the default Wazo repository
+* `debian_repo_wazo__custom_repo_upgrade`: debian repository to replace the custom repository for later upgrades
 
 ### runtime
 
