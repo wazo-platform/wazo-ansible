@@ -3,6 +3,9 @@
 # to your needs (e.g. remove localhost line and add the IP on which
 # wazo-platform will be installed)
 
+[all:vars]
+ansible_python_interpreter = /usr/bin/python3
+
 [uc_engine_host]
 localhost ansible_connection=local
 
