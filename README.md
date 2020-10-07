@@ -153,7 +153,7 @@ containing multiple packages, in a certain version:
     the installation will be the same, even a few months later (except for
     changes in the base Debian install).
 
-For a new Wazo engine installation, there are two distribution to consider:
+For a new Wazo engine installation, there are two distributions to consider:
 
 1. which distribution is used for the current installation (defined by the repo
    and distribution `wazo_debian_repo` and `wazo_distribution`)
