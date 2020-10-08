@@ -1,7 +1,7 @@
 version: '3'
 services:
   consul_server:
-    image: "wazopbx/wazo-consul"
+    image: "wazoplatform/wazo-consul"
     ports:
     - '9500:8500/tcp'
     - '9501:8501/tcp'
@@ -11,6 +11,6 @@ services:
       WAZO_CONSUL_SCHEME: https
       WAZO_CONSUL_PORT_HTTP: 8500
       WAZO_CONSUL_PORT_HTTPS: 8501
-    image: "wazopbx/wazo-message-bus"
+    image: "wazoplatform/wazo-message-bus"
     ports:
     - '5672:5672'

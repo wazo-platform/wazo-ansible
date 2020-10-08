@@ -1,6 +1,6 @@
 # use this hubname by default to be compatible with zuul jobs for
 # wazo-c4
-HUBNAME=wazopbx
+HUBNAME=wazoplatform
 
 ROLES := $(shell ls -d roles/*/docker | sed -e 's@/docker@@g' -e 's@roles/@@g')
 IMAGES := $(addsuffix .image,$(ROLES))
