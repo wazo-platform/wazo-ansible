@@ -64,7 +64,6 @@ b2bua
 database
 edge_proxy
 engine_api
-nestbox
 reverse_proxy
 router
 rtpengine
@@ -86,12 +85,6 @@ engine_api_port = 443
 engine_api_port_confgend = 8669
 engine_api_listen_address = 0.0.0.0
 
-nestbox_host = nestbox-dev-ansible
-nestbox_port = 443
-nestbox_db_host = postgresql-ansible
-nestbox_db_port = 5432
-# nestbox_db_admin_password =
-
 postgresql_port = 5432
 # postgresql_superuser_password =
 postgresql_listen_addresses = *
@@ -110,9 +103,5 @@ mirror.wazo.io
 [repo_client_cert:children]
 b2bua
 edge_proxy
-nestbox
 rtpengine
 sbc
-[repo_client_cert:vars]
-nestbox_repo_client_cert=/tmp/mirror_keys/test.crt
-nestbox_repo_client_key=/tmp/mirror_keys/test.key
