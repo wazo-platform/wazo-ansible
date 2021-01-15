@@ -18,6 +18,7 @@
 - name: Install Consul
   include_role:
     name: wazo-consul
+  notify: wazo-auth
 
 # need to run after wazo_consul to have wazo_consul_token registered
 - name: Set default values
@@ -33,14 +34,6 @@
   apt:
     name: wazo-setupd
     state: present
-
-- name: Install nestbox plugin
-  apt:
-    name:
-      - wazo-deployd-client
-      - wazo-nestbox-plugin
-    state: present
-  notify: restart wazo-setupd
 
 - name: Ensure that asterisk has been started with wazo-confgend config
   service:

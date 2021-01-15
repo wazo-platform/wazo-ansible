@@ -1,4 +1,4 @@
-- name: restart wazo-setupd
+- name: restart wazo-auth
   service:
-    name: wazo-setupd
+    name: wazo-auth
     state: restarted
