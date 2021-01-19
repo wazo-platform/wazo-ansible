@@ -18,7 +18,10 @@
 - name: Install Consul
   include_role:
     name: wazo-consul
-  notify: wazo-auth
+  notify:
+    - restart wazo-auth
+    - restart wazo-calld
+    - restart wazo-confd
 
 # need to run after wazo_consul to have wazo_consul_token registered
 - name: Set default values

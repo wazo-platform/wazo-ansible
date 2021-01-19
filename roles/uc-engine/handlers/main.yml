@@ -2,3 +2,13 @@
   service:
     name: wazo-auth
     state: restarted
+
+- name: restart wazo-calld
+  service:
+    name: wazo-calld
+    state: restarted
+
+- name: restart wazo-confd
+  service:
+    name: wazo-confd
+    state: restarted
