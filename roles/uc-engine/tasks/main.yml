@@ -38,6 +38,11 @@
     name: wazo-setupd
     state: present
 
+- name: Ensure wazo-setupd has been started with last config
+  service:
+    name: wazo-setupd
+    state: restarted
+
 - name: Ensure that asterisk has been started with wazo-confgend config
   service:
     name: asterisk
