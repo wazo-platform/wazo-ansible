@@ -6,8 +6,8 @@ ansible roles.
 
 The `bin/role2docker` script creates the Docker image for a specific Ansible
 role based on the `debian:buster-slim` image. For example: `./bin/role2docker
-wazo_message_bus` will generate the Docker image named
-`wazo-platform/wazo_message_bus`.
+wazo-message-bus` will generate the Docker image named
+`wazo-platform/wazo-message-bus`.
 
 ## Settings
 
