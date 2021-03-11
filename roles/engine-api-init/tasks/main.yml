@@ -44,7 +44,7 @@
     src: templates/xivo-manage-db.cfg.j2
     dest: /etc/xivo-manage-db.cfg.j2
 
-- name: Reset main database options for wazo-auth package # noqa 301
+- name: Reset main database options for xivo-manage-db package # noqa 301
   shell: |
     set -o pipefail
     echo PURGE | debconf-communicate xivo-manage-db
