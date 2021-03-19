@@ -91,7 +91,7 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 * `b2bua_port_ami`: (default: `5038`) TCP port for AMI
 * `b2bua_port_http`: (default: `5039`) TCP port for HTTP interfaces
 * `b2bua_port_https`: (default: `5040`) TCP port for HTTPS interfaces
-* `b2bua_port_sysconfd`: (default: `8668`) TCP port for xivo-sysconfd HTTP interface
+* `b2bua_port_sysconfd`: (default: `8668`) TCP port for wazo-sysconfd HTTP interface
 * `b2bua_https_cert`: custom certificate filename for HTTPS
 * `b2bua_https_private_key`: custom private key filename for HTTPS
 * `b2bua_ami_permit_client_address`: (default: `127.0.0.1`)

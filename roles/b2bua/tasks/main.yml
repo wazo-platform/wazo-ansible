@@ -109,20 +109,20 @@
     - engine_api_host is defined
     - engine_api_port_confgend is defined
 
-- name: Create xivo-sysconfd drop-in file directory
+- name: Create wazo-sysconfd drop-in file directory
   file:
-    path: /etc/systemd/system/xivo-sysconfd.service.d
+    path: /etc/systemd/system/wazo-sysconfd.service.d
     state: directory
 
-- name: Install xivo-sysconfd drop-in file
+- name: Install wazo-sysconfd drop-in file
   template:
-    src: templates/xivo-sysconfd.service.j2
-    dest: /etc/systemd/system/xivo-sysconfd.service.d/b2bua.conf
+    src: templates/wazo-sysconfd.service.j2
+    dest: /etc/systemd/system/wazo-sysconfd.service.d/b2bua.conf
   when:
     - b2bua_listen_address is defined
     - b2bua_port_sysconfd is defined
 
-- name: Install xivo-sysconfd
+- name: Install wazo-sysconfd
   apt:
-    name: xivo-sysconfd
+    name: wazo-sysconfd
     state: present
