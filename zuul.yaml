@@ -30,28 +30,28 @@
     check:
       jobs:
         - wazo-ansible-c4-aio:
-            nodeset: debian10-vm
+            nodeset: vm-debian-10-m1s
         - wazo-ansible-docker:
-            nodeset: debian10-vm
+            nodeset: vm-debian-10-m1s
         - wazo-ansible-c4-router:
-            nodeset: debian10-vm
+            nodeset: vm-debian-10-m1s
         - wazo-ansible-c4-sbc:
-            nodeset: debian10-vm
+            nodeset: vm-debian-10-m1s
         - ansible-lint:
-            nodeset: runc-debian-buster
+            nodeset: pod-debian-10
     gate:
       jobs:
         - wazo-ansible-c4-aio:
-            nodeset: debian10-vm
+            nodeset: vm-debian-10-m1s
         - wazo-ansible-docker:
-            nodeset: debian10-vm
+            nodeset: vm-debian-10-m1s
         - wazo-ansible-c4-router:
-            nodeset: debian10-vm
+            nodeset: vm-debian-10-m1s
         - wazo-ansible-c4-sbc:
-            nodeset: debian10-vm
+            nodeset: vm-debian-10-m1s
         - ansible-lint:
-            nodeset: runc-debian-buster
+            nodeset: pod-debian-10
     experimental:
       jobs:
-        - wazo-acceptance-job:
-            nodeset: debian10-vm
+        - wazo-acceptance:
+            nodeset: vm-debian-10-m1s

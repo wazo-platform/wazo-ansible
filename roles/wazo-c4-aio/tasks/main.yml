@@ -44,17 +44,10 @@
 
 - name: Create policy
   shell: >
-    wazo-auth-cli policy create api-client-policy --tenant main --acl 'auth.admin.#' &&
+    wazo-auth-cli policy create api-client-policy --tenant main --acl 'auth.#' &&
     touch /var/lib/ansible/{{ role_name }}/policy_created
   args:
     creates: /var/lib/ansible/{{ role_name }}/policy_created
-
-- name: Add policy to user
-  shell: >
-    wazo-auth-cli user add {{ api_client_name }} --policy wazo_default_admin_policy &&
-    touch /var/lib/ansible/{{ role_name }}/admin_policy_associated
-  args:
-    creates: /var/lib/ansible/{{ role_name }}/admin_policy_associated
 
 - name: Enable policy for API client
   shell: >
