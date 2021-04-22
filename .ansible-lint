@@ -1,0 +1,11 @@
+skip_list:
+  - role-name
+
+warn_list:
+  - experimental
+  - yaml
+
+exclude_paths:
+  - docker-compose.yaml
+  - requirements-postgresql.yml
+  - zuul.yaml
