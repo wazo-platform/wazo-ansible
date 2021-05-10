@@ -6,6 +6,8 @@
 
 - name: Enable Consul discovery in RabbitMQ
   command: "rabbitmq-plugins --offline enable rabbitmq_peer_discovery_consul"
+  become: true
+  become_user: rabbitmq
   when: runtime
 
 - name: Create /etc/rabbitmq/rabbitmq.conf
