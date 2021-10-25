@@ -1,4 +1,10 @@
 ---
+# Used to switch to user rabbitmq
+- name: Install sudo
+  apt:
+    name: sudo
+    state: present
+
 - name: Install RabbitMQ
   apt:
     name: rabbitmq-server
