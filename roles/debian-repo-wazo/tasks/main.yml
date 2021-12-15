@@ -12,6 +12,7 @@
     url: "{{ debian_repo_wazo__key_url }}"
     id: "{{ debian_repo_wazo__key_id }}"
     state: present
+    keyring: /etc/apt/trusted.gpg.d/wazo-keyring-installation.gpg
 
 - name: Bootstrap with wazo-dist
   block:
