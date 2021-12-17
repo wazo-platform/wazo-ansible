@@ -63,6 +63,20 @@
   command: wazo-dist --{{ wazo_debian_repo_upgrade }}-repo {{ wazo_distribution_upgrade }}
   when: debian_repo_wazo__custom_repo is not defined
 
+- name: Remove custom GPG key used for installation
+  apt_key:
+    id: "{{ debian_repo_wazo__key_id }}"
+    state: absent
+    keyring: /etc/apt/trusted.gpg.d/wazo-keyring-installation.gpg
+
+- name: Remove empty keyring file used for installation
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /etc/apt/trusted.gpg.d/wazo-keyring-installation.gpg
+    - /etc/apt/trusted.gpg.d/wazo-keyring-installation.gpg~
+
 - name: Remove custom repository used for installation
   apt_repository:
     repo: "{{ debian_repo_wazo__custom_repo }}"
