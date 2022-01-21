@@ -11,9 +11,7 @@
     state: present
 
 - name: Enable Consul discovery in RabbitMQ
-  command: "rabbitmq-plugins --offline enable rabbitmq_peer_discovery_consul"
-  become: true
-  become_user: rabbitmq
+  command: "sudo -u rabbitmq rabbitmq-plugins --offline enable rabbitmq_peer_discovery_consul"
   when: runtime
 
 - name: Create /etc/rabbitmq/rabbitmq.conf
