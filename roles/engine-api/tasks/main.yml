@@ -66,7 +66,7 @@
     - ami_username is defined
     - b2bua_host is defined
     - b2bua_port_ami is defined
-    - b2bua_port_https is defined
+    - b2bua_port_http is defined
 
 - name: Install wazo-amid
   apt:
