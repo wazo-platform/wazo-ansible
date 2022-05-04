@@ -94,7 +94,6 @@
   when:
     - b2bua_listen_address is defined
     - b2bua_port_http is defined
-    - b2bua_port_https is defined
 
 - name: Install wazo-confgend-client
   apt:
