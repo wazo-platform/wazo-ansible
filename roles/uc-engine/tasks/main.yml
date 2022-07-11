@@ -115,14 +115,14 @@
       status_code: 201
 
   - name: Create tenant
-    command: "wazo-auth-cli tenant create {{ tenant_name }}"
+    command: "wazo-auth-cli tenant create {{ tenant_name }}"  # noqa no-changed-when
 
   - name: Create API client
-    command: "wazo-auth-cli user create {{ api_client_name }} --tenant {{ tenant_name }} --password {{ api_client_password }} --purpose external_api"
+    command: "wazo-auth-cli user create {{ api_client_name }} --tenant {{ tenant_name }} --password {{ api_client_password }} --purpose external_api"  # noqa no-changed-when
 
   - name: Create policy
-    command: "wazo-auth-cli policy create api-client-policy --tenant {{ tenant_name }} --acl 'confd.#'"
+    command: "wazo-auth-cli policy create api-client-policy --tenant {{ tenant_name }} --acl 'confd.#'"  # noqa no-changed-when
 
   - name: Enable policy for API client
-    command: "wazo-auth-cli user add {{ api_client_name }} --policy api-client-policy"
+    command: "wazo-auth-cli user add {{ api_client_name }} --policy api-client-policy"  # noqa no-changed-when
   when: engine_api_configure_wizard == "true"
