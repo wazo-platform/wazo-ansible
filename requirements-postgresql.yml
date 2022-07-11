@@ -1,1 +1,2 @@
 - src: geerlingguy.postgresql
+  version: 3.3.1
