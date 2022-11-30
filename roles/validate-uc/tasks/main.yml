@@ -12,6 +12,7 @@
   until: result.rc == 0
   retries: 6
   delay: 10
+  when: wazo_consul_host is defined
 
 - name: Get token
   uri:

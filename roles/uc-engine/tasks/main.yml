@@ -15,25 +15,6 @@
     purge: yes
     state: absent
 
-- name: Install Consul
-  include_role:
-    name: wazo-consul
-
-- name: Ensure wazo-auth has been registered to consul
-  service:
-    name: wazo-auth
-    state: restarted
-
-- name: Ensure wazo-calld has been registered to consul
-  service:
-    name: wazo-calld
-    state: restarted
-
-- name: Ensure wazo-confd has been registered to consul
-  service:
-    name: wazo-confd
-    state: restarted
-
 # need to run after wazo_consul to have wazo_consul_token registered
 - name: Set default values
   include_role:
