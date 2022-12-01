@@ -10,15 +10,10 @@
     name: rabbitmq-server
     state: present
 
+# Used by role2docker project
 - name: Enable Consul discovery in RabbitMQ
   command: "sudo -u rabbitmq rabbitmq-plugins --offline enable rabbitmq_peer_discovery_consul"
-  when: runtime and wazo_consul_host is defined
-
-- name: Create /etc/rabbitmq/rabbitmq.conf
-  template:
-    src: templates/rabbitmq.conf.j2
-    dest: /etc/rabbitmq/rabbitmq.conf
-  when: runtime and wazo_consul_host is defined
+  when: runtime
 
 - name: Ensure RabbitMQ is restarted
   service:
