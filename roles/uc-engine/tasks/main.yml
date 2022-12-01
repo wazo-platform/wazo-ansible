@@ -15,11 +15,6 @@
     purge: yes
     state: absent
 
-# need to run after wazo_consul to have wazo_consul_token registered
-- name: Set default values
-  include_role:
-    name: wazo-default
-
 - name: "Install {{ wazo_meta_package }}"
   apt:
     name: "{{ wazo_meta_package }}"
