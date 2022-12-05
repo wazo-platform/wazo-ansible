@@ -57,9 +57,6 @@
 - name: Initialize main database # noqa 301
   command: dpkg-reconfigure xivo-manage-db --frontend noninteractive
 
-- name: Fix Twisted dropin.cache # noqa 301
-  command: twistd3 --help-reactors
-
 - name: Start Wazo services
   service:
     name: "{{ item }}"
