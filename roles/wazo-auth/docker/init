@@ -20,7 +20,6 @@ if [ ! -r /etc/xivo-manage-db.cfg ]; then
     echo PURGE | debconf-communicate xivo-manage-db
     debconf-set-selections /etc/xivo-manage-db.cfg
     dpkg-reconfigure xivo-manage-db --frontend noninteractive
-    twistd --help-reactors
 fi
 
 # Consul setup
