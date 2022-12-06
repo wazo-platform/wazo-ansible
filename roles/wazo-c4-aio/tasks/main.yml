@@ -14,6 +14,10 @@
   include_role:
     name: wazo-certs
 
+- name: Install RabbitMQ
+  include_role:
+    name: wazo-message-bus
+
 - name: Install Wazo auth
   include_role:
     name: wazo-auth
