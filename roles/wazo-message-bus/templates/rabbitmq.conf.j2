@@ -1,5 +1,0 @@
-cluster_formation.peer_discovery_backend = rabbit_peer_discovery_consul
-
-cluster_formation.consul.host = {{ wazo_consul_host }}
-cluster_formation.consul.port = {{ wazo_consul_port_http if wazo_consul_scheme == 'http' else wazo_consul_port_https }}
-cluster_formation.consul.scheme = {{ wazo_consul_scheme }}

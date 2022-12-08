@@ -2,17 +2,6 @@
   shell: "vers={{ wazo_distribution }}; echo ${vers##*-} $(cat /usr/share/wazo/WAZO-VERSION); test ${vers##*-} = $(cat /usr/share/wazo/WAZO-VERSION)"
   when: wazo_debian_repo == "archive"
 
-- name: Check that wazo-auth is listed in Consul services # noqa 301
-  shell: |
-    set -o pipefail
-    consul catalog services|grep wazo-auth
-  args:
-    executable: /bin/bash
-  register: result
-  until: result.rc == 0
-  retries: 6
-  delay: 10
-
 - name: Get token
   uri:
     url: "https://{{ engine_api_host }}:{{ engine_api_port }}{{ engine_auth_path }}/token"
