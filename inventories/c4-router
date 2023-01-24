@@ -2,6 +2,9 @@
 # You only have to change [router_host] and set variables according
 # to your needs
 
+[all:vars]
+ansible_python_interpreter = /usr/bin/python3
+
 [router_host]
 localhost ansible_connection=local
 
