@@ -1,20 +1,11 @@
-- job:
-    name: wazo-ansible-docker
-    description: Build Wazo Platform docker images
-    run: zuul.d/docker-run.yaml
-
 - project:
     templates:
       - wazo-ansible-uc-template
     check:
-        - wazo-ansible-docker:
-            nodeset: vm-debian-10-m1s
         - ansible-lint:
             nodeset: pod-debian-10
     gate:
       jobs:
-        - wazo-ansible-docker:
-            nodeset: vm-debian-10-m1s
         - ansible-lint:
             nodeset: pod-debian-10
     experimental:
