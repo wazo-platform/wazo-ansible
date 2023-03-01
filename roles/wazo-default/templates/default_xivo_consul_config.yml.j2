@@ -1,5 +1,0 @@
-consul:
-    scheme: {{ wazo_consul_scheme }}
-    host: {{ wazo_consul_host }}
-    port: {{ wazo_consul_port_http if wazo_consul_scheme == 'http' else wazo_consul_port_https }}
-    verify: /usr/share/xivo-certs/server.crt
