@@ -2,6 +2,7 @@
     templates:
       - wazo-ansible-uc-template
     check:
+      jobs:
         - ansible-lint:
             nodeset: pod-debian-10
     gate:
