@@ -22,13 +22,6 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 * `wazo_locale` if defined, ensure the locale is set and
   generated. Must be an `UTF-8` locale.
 
-### wazo-consul
-
-* `wazo_consul_host`: (default `localhost`) host running the Consul server.
-* `wazo_consul_port_scheme`: (default `http`) which port of the Consul server to use.
-* `wazo_consul_port_http`: (default `8500`) HTTP port of the Consul server.
-* `wazo_consul_port_https`: (default `8501`) HTTPS port of the Consul server.
-
 ### uc_engine
 
 * `debian_upgrade_first`: (default: `true`) do we `apt-get dist-upgrade` before installing Wazo?
