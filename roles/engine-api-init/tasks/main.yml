@@ -18,7 +18,6 @@
 
 - name: Create service users with wazo-auth-keys
   command: wazo-auth-keys service update
-  when: runtime
 
 - name: Create default main database preconfiguration
   tempfile:

@@ -4,7 +4,6 @@
   notify:
     - check nginx configuration
     - reload nginx - after config check
-  when: runtime
 
 - name: restart nginx
   debug: msg="checking config first"
@@ -12,24 +11,20 @@
   notify:
     - check nginx configuration
     - restart nginx - after config check
-  when: runtime
 
 - name: check nginx configuration
   command: "nginx -t"
   register: result
   changed_when: "result.rc != 0"
   check_mode: no
-  when: runtime
 
 - name: reload nginx - after config check
   service:
     name: nginx
     state: reloaded
-  when: runtime
 
 - name: restart nginx - after config check
   service:
     name: nginx
     state: restarted
-  when: runtime
 

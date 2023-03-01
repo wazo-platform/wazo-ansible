@@ -30,15 +30,6 @@
   notify:
     - reload asterisk
 
-- name: Remove generated files
-  file:
-    path: "{{ item }}"
-    state: absent
-  with_items:
-    - /usr/share/xivo-certs/server.key
-    - /usr/share/xivo-certs/server.crt
-  when: not runtime
-
 - name: Install Asterisk
   apt:
     name:
@@ -53,7 +44,6 @@
   service:
     name: asterisk
     state: started
-  when: runtime
 
 - name: Create /etc/asterisk/extensions.d
   file:

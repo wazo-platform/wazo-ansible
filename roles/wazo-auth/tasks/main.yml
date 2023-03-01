@@ -1,15 +1,4 @@
 ---
-- name: Preconfigure wazo-auth package
-  debconf:
-    name: wazo-auth
-    question: "{{ item }}"
-    vtype: boolean
-    value: true
-  loop:
-    - wazo-auth/bootstrap-skip
-    - wazo-auth/db-skip
-  when: not runtime
-
 - name: Install wazo-auth
   apt:
     name: wazo-auth
@@ -20,7 +9,6 @@
     state: file
     prefix: wazo_auth_debconf_file
   register: wazo_auth_debconf_file
-  when: runtime
 
 - name: Copy wazo-auth database preconfiguration if needed
   template:
@@ -37,13 +25,6 @@
     - engine_api_db_confd_user is defined
     - engine_api_db_host is defined
     - engine_api_db_port is defined
-    - runtime
-
-- name: Copy wazo-auth database preconfiguration template
-  copy:
-    src: templates/wazo-auth.cfg.j2
-    dest: /etc/wazo-auth.cfg.j2
-  when: not runtime
 
 - name: Reset database options for wazo-auth package
   shell: |
@@ -51,12 +32,9 @@
     echo PURGE | debconf-communicate wazo-auth
   args:
     executable: /bin/bash
-  when: runtime
 
 - name: Reconfigure database options for wazo-auth package
   command: debconf-set-selections "{{ wazo_auth_debconf_file.path }}"
-  when: runtime
 
 - name: Initialize wazo-auth database
   command: dpkg-reconfigure wazo-auth --frontend noninteractive
-  when: runtime

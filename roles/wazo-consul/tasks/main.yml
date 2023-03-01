@@ -3,13 +3,6 @@
   include_role:
     name: wazo-certs
 
-- name: Workaround systemd
-  file:
-    src: /bin/true
-    dest: /sbin/systemctl
-    state: link
-  when: not runtime
-
 - name: Install Consul
   apt:
     name:
@@ -17,22 +10,10 @@
       - wazo-consul-config
     state: present
 
-- name: Remove generated files
-  file:
-    path: "{{ item }}"
-    state: absent
-  with_items:
-    - /var/lib/consul/master_token
-    - /var/lib/consul/default_xivo_consul_token.yml
-    - /var/lib/consul/default_xivo_consul_config.yml
-    - /etc/consul.d/wazo-config.json
-  when: not runtime
-
 - name: Read exisiting token if any
   command: 'cat /var/lib/consul/master_token'
   register: wazo_consul_token
   ignore_errors: yes
-  when: runtime
 
 - name: Generate token
   shell: |
@@ -41,26 +22,23 @@
   args:
     executable: /bin/bash
   register: wazo_consul_token_create
-  when: runtime and wazo_consul_token.rc != 0
+  when: wazo_consul_token.rc != 0
 
 - name: Store token
   shell: 'echo "{{ wazo_consul_token_create.stdout }}" > /var/lib/consul/master_token'
-  when: runtime and wazo_consul_token.rc != 0 and wazo_consul_token_create.rc == 0
+  when: wazo_consul_token.rc != 0 and wazo_consul_token_create.rc == 0
 
 - name: Read existing token
   command: 'cat /var/lib/consul/master_token'
   register: wazo_consul_token
-  when: runtime
 
 - name: Configure Consul access token in /etc/consul.d/wazo-config.json
   template:
     src: templates/wazo-config.json.j2
     dest: /etc/consul.d/wazo-config.json
-  when: runtime
 
 - name: Restart consul server
   systemd:
     name: consul
     state: restarted
     enabled: yes
-  when: runtime
