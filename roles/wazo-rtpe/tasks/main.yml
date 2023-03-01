@@ -1,7 +1,0 @@
-- import_tasks: rtpengine-config.yml
-  tags:
-  - rtpengine
-
-- import_tasks: rtpengine-packages.yml
-  tags:
-  - rtpengine

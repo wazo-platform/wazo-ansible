@@ -1,4 +1,0 @@
-id(int,auto) setid(int) url(string) weight(int) disabled(int) stamp(int)
-{% for host in groups['rtpengine'] %}
-{{ loop.index }}:0:udp\:{{ hostvars[host].ansible_default_ipv4.address }}\:22222:1:0:0
-{% endfor %}

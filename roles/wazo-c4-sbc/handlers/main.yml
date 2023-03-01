@@ -1,4 +1,0 @@
-- name: restart kamailio
-  service:
-    name: kamailio
-    state: restarted
