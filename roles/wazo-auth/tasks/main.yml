@@ -14,6 +14,7 @@
   template:
     src: templates/wazo-auth.cfg.j2
     dest: "{{ wazo_auth_debconf_file.path }}"
+    mode: 0600
   when:
     - engine_api_db_admin_password is defined
     - engine_api_db_admin_user is defined
@@ -27,14 +28,15 @@
     - engine_api_db_port is defined
 
 - name: Reset database options for wazo-auth package
-  shell: |
-    set -o pipefail
-    echo PURGE | debconf-communicate wazo-auth
+  shell:  # noqa no-changed-when
+    cmd: |
+      set -o pipefail
+      echo PURGE | debconf-communicate wazo-auth
   args:
     executable: /bin/bash
 
 - name: Reconfigure database options for wazo-auth package
-  command: debconf-set-selections "{{ wazo_auth_debconf_file.path }}"
+  command: debconf-set-selections "{{ wazo_auth_debconf_file.path }}"  # noqa no-changed-when
 
 - name: Initialize wazo-auth database
-  command: dpkg-reconfigure wazo-auth --frontend noninteractive
+  command: dpkg-reconfigure wazo-auth --frontend noninteractive  # noqa no-changed-when

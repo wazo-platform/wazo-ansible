@@ -6,14 +6,14 @@
   uri:
     url: "https://{{ engine_api_host }}:{{ engine_api_port }}{{ engine_auth_path }}/token"
     method: POST
-    validate_certs: no
+    validate_certs: false
     body_format: json
-    force_basic_auth: yes
+    force_basic_auth: true
     user: "{{ api_client_name }}"
     password: "{{ api_client_password }}"
     body:
       expiration: 3600
-    return_content: yes
+    return_content: true
   register: token_data
 
 - name: debug token data
@@ -26,8 +26,8 @@
     headers:
       X-Auth-Token: "{{ token_data.json.data.token }}"
     method: GET
-    validate_certs: no
-    return_content: yes
+    validate_certs: false
+    return_content: true
   register: users_data
 
 - name: debug users data

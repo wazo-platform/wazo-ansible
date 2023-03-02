@@ -20,16 +20,19 @@
   file:
     path: /var/lib/wazo
     state: directory
+    mode: 02775
 
 - name: Disable Wazo services
   file:
     path: /var/lib/wazo/disabled
     state: touch
+    mode: 0644
 
 - name: Create wazo-calld config dir
   file:
     path: /etc/wazo-calld/conf.d
     state: directory
+    mode: 0755
 
 - name: Add wazo-calld config
   template:
@@ -53,6 +56,7 @@
   file:
     path: /etc/wazo-amid/conf.d
     state: directory
+    mode: 0755
 
 - name: Add wazo-amid config
   template:
@@ -84,6 +88,7 @@
   file:
     path: /etc/wazo-confd/conf.d
     state: directory
+    mode: 0755
 
 - name: Add wazo-confd config
   template:
@@ -109,6 +114,7 @@
   file:
     path: /etc/xivo-dao/conf.d
     state: directory
+    mode: 0755
 
 - name: Add xivo-dao config
   template:
@@ -139,6 +145,7 @@
   file:
     path: /etc/wazo-confgend/conf.d
     state: directory
+    mode: 0755
 
 - name: Add wazo-confgend config
   template:
@@ -165,6 +172,7 @@
   file:
     path: /etc/wazo-agid/conf.d
     state: directory
+    mode: 0755
 
 - name: Add wazo-agid config
   template:

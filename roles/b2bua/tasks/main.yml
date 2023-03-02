@@ -59,6 +59,7 @@
   template:
     src: templates/asterisk-extensions.conf.j2
     dest: /etc/asterisk/extensions.d/engine-api.conf
+    mode: 0660
   notify:
     - reload asterisk dialplan
   when:
@@ -68,6 +69,7 @@
   template:
     src: templates/asterisk-manager.conf.j2
     dest: /etc/asterisk/manager.d/999-engine-api.conf
+    mode: 0660
   notify:
     - reload asterisk manager
   when:
@@ -79,6 +81,7 @@
   template:
     src: templates/asterisk-http.conf.j2
     dest: /etc/asterisk/http.d/10-engine-api.conf
+    mode: 0660
   notify:
     - reload asterisk
   when:
@@ -94,6 +97,7 @@
   template:
     src: templates/wazo-confgend-client.conf.j2
     dest: /etc/wazo-confgend-client/config.conf
+    mode: 0644
   when:
     - engine_api_host is defined
     - engine_api_port_confgend is defined
@@ -102,11 +106,13 @@
   file:
     path: /etc/systemd/system/wazo-sysconfd.service.d
     state: directory
+    mode: 0755
 
 - name: Install wazo-sysconfd drop-in file
   template:
     src: templates/wazo-sysconfd.service.j2
     dest: /etc/systemd/system/wazo-sysconfd.service.d/b2bua.conf
+    mode: 0644
   when:
     - b2bua_listen_address is defined
     - b2bua_port_sysconfd is defined

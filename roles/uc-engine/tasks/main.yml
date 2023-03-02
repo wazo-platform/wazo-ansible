@@ -12,7 +12,7 @@
   # See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=939885
   apt:
     name: sendmail-bin
-    purge: yes
+    purge: true
     state: absent
 
 - name: "Install {{ wazo_meta_package }}"
@@ -81,7 +81,7 @@
       url: "https://{{ engine_api_host }}:{{ engine_api_port }}{{ engine_setupd_path }}/setup"
       method: POST
       timeout: 300
-      validate_certs: no
+      validate_certs: false
       body_format: json
       body:
         engine_internal_address: "{{ engine_api_host }}"

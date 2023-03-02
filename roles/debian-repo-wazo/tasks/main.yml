@@ -26,7 +26,7 @@
       repo: deb http://mirror.wazo.community/{{ 'debian' if wazo_debian_repo == 'main' else wazo_debian_repo }} {{ wazo_distribution }} main
       state: present
       filename: wazo-install
-      update_cache: yes
+      update_cache: true
     when: '"wazo-dist" not in ansible_facts.packages'
 
   - name: Install wazo-dist
@@ -42,7 +42,7 @@
       repo: deb http://mirror.wazo.community/{{ 'debian' if wazo_debian_repo == 'main' else wazo_debian_repo }} {{ wazo_distribution }} main
       state: absent
       filename: wazo-install
-      update_cache: yes
+      update_cache: true
     when: '"wazo-dist" not in ansible_facts.packages'
 
   # end block
@@ -53,5 +53,5 @@
     repo: "{{ debian_repo_wazo__custom_repo }}"
     state: present
     filename: "{{ debian_repo_wazo__custom_repo_filename }}"
-    update_cache: yes
+    update_cache: true
   when: debian_repo_wazo__custom_repo is defined
