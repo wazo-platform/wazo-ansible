@@ -5,14 +5,14 @@
 
 - name: reload nginx
   debug: msg="checking config first"
-  changed_when: True
+  changed_when: true
   notify:
     - check nginx configuration
     - reload nginx - after config check
 
 - name: restart nginx
   debug: msg="checking config first"
-  changed_when: True
+  changed_when: true
   notify:
     - check nginx configuration
     - restart nginx - after config check
@@ -32,4 +32,3 @@
   service:
     name: nginx
     state: restarted
-

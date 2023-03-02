@@ -227,4 +227,3 @@
     state: absent
 
 - include_tasks: tracing.yml
-
