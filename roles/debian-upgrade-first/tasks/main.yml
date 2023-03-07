@@ -1,7 +1,7 @@
 ---
 - name: Upgrade Debian before anything
   apt:
-    update_cache: yes
+    update_cache: true
     upgrade: dist
   when:
     - debian_upgrade_first

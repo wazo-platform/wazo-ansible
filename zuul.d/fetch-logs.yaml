@@ -2,7 +2,7 @@
 - hosts: all
   tasks:
     - name: Upload logs
-      become: yes
+      become: true
       synchronize:
         src: '/var/log'
         dest: '{{ zuul.executor.log_root }}'

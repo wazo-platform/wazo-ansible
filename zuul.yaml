@@ -1,54 +1,12 @@
-- job:
-    name: wazo-ansible-c4-router
-    description: Install Wazo Platform C4 Router use case
-    pre-run: zuul.d/c4-pre.yaml
-    run: zuul.d/c4-router-run.yaml
-    post-run: zuul.d/fetch-logs.yaml
-
-- job:
-    name: wazo-ansible-c4-sbc
-    description: Install Wazo Platform C4 SBC use case
-    pre-run: zuul.d/c4-pre.yaml
-    run: zuul.d/c4-sbc-run.yaml
-    post-run: zuul.d/fetch-logs.yaml
-
-- job:
-    name: wazo-ansible-c4-aio
-    description: Install Wazo Platform C4 AIO use case
-    pre-run: zuul.d/c4-pre.yaml
-    run: zuul.d/c4-aio-run.yaml
-    post-run: zuul.d/fetch-logs.yaml
-
-- job:
-    name: wazo-ansible-docker
-    description: Build Wazo Platform docker images
-    run: zuul.d/docker-run.yaml
-
 - project:
     templates:
       - wazo-ansible-uc-template
     check:
       jobs:
-        - wazo-ansible-c4-aio:
-            nodeset: vm-debian-10-m1s
-        - wazo-ansible-docker:
-            nodeset: vm-debian-10-m1s
-        - wazo-ansible-c4-router:
-            nodeset: vm-debian-10-m1s
-        - wazo-ansible-c4-sbc:
-            nodeset: vm-debian-10-m1s
         - ansible-lint:
             nodeset: pod-debian-10
     gate:
       jobs:
-        - wazo-ansible-c4-aio:
-            nodeset: vm-debian-10-m1s
-        - wazo-ansible-docker:
-            nodeset: vm-debian-10-m1s
-        - wazo-ansible-c4-router:
-            nodeset: vm-debian-10-m1s
-        - wazo-ansible-c4-sbc:
-            nodeset: vm-debian-10-m1s
         - ansible-lint:
             nodeset: pod-debian-10
     experimental:

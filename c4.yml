@@ -1,6 +1,0 @@
----
-- name: Include c4-router
-  import_playbook: c4-router.yml
-
-- name: Include c4-sbc
-  import_playbook: c4-sbc.yml

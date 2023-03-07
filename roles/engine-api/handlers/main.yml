@@ -21,13 +21,13 @@
 
 - name: reload nginx
   debug: msg="checking config first"
-  changed_when: True
+  changed_when: true
   notify:
     - check nginx configuration
     - reload nginx - after config check
 - name: restart nginx
   debug: msg="checking config first"
-  changed_when: True
+  changed_when: true
   notify:
     - check nginx configuration
     - restart nginx - after config check
@@ -35,7 +35,7 @@
   command: "nginx -t"
   register: result
   changed_when: "result.rc != 0"
-  check_mode: no
+  check_mode: false
 - name: reload nginx - after config check
   service:
     name: nginx
@@ -44,4 +44,3 @@
   service:
     name: nginx
     state: restarted
-

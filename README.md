@@ -6,28 +6,6 @@
 * You can become root on the target machines (See https://docs.ansible.com/ansible/latest/user_guide/become.html)
 * Ansible 2.7.9: `pip install ansible==2.7.9`
 
-## Class 4: SBC component
-
-* Edit `inventories/sbc` and set your host in `[sbc_host]`
-* Run:
-
-```shell
-ansible-galaxy install -r requirements-postgresql.yml
-
-ansible-playbook -i inventories/sbc c4-sbc.yml
-```
-
-## Class 4: Router/RTPEngine component
-
-* Edit `inventories/router` and set your host in `[router_host]`
-* Run:
-
-```shell
-ansible-galaxy install -r requirements-postgresql.yml
-
-ansible-playbook -i inventories/router c4-router.yml
-```
-
 ## UC Engine (all in one machine)
 
 * Edit `inventories/uc-engine` and set your host in `[uc_engine_host]`
@@ -43,42 +21,6 @@ ansible-playbook -i inventories/uc-engine uc-engine.yml
 
 * `wazo_locale` if defined, ensure the locale is set and
   generated. Must be an `UTF-8` locale.
-
-### wazo-consul
-
-* `wazo_consul_host`: (default `localhost`) host running the Consul server.
-* `wazo_consul_port_scheme`: (default `http`) which port of the Consul server to use.
-* `wazo_consul_port_http`: (default `8500`) HTTP port of the Consul server.
-* `wazo_consul_port_https`: (default `8501`) HTTPS port of the Consul server.
-
-### wazo-c4-router
-
-* `debian_upgrade_first`: (default: `true`) do we `apt-get dist-upgrade` before installing Wazo Router?
-* `router_api_endpoint_confd`: (default: `http://localhost:8000`) URI of the wazo-router-confd service
-* `router_api_db_host`: (default: `localhost`) PostgreSQL host for wazo-router-confd
-* `router_api_db_port`: (default: `5432`) PostgreSQL port for wazo-router-confd
-* `router_api_db_name`: (default: `wazo`) database name for wazo-router-confd
-* `router_api_db_user`: (default: `wazo`) database username for wazo-router-confd
-* `router_api_db_password`: (default: `wazo`) database password for wazo-router-confd
-* `router_api_redis_host`: (default: `localhost`) Redis host for wazo-router-confd
-* `router_api_redis_port`: (default: `6379`) Redis port for wazo-router-confd
-* `router_api_redis_database`: (default: `1`) Redis database for wazo-router-confd
-* `router_interface`: (default: `{{ ansible_default_ipv4.interface }}`) network interface for Kamailio
-* `router_redis_dialog`: (default: `1`) enables redis-based dialog replication
-* `router_dburl_dialog`: (default: `redis://localhost:6379/2`) Redis uri to store dialogs
-* `rtpengine_interface`: (default: `{{ ansible_default_ipv4.interface }}`) network interface for RTPEngine
-* `rtpengine_private_address`: (default: `{{ ansible_default_ipv4.address }}`) private IP address for RTPEngine
-* `rtpengine_public_address`: (default: `{{ ansible_default_ipv4.address }}`) public IP address for RTPEngine
-
-### wazo-c4-sbc
-
-* `debian_upgrade_first`: (default: `true`) do we `apt-get dist-upgrade` before installing Wazo Router?
-* `sbc_advertise_address`: (default: `not set`) the advertised address for Kamailio, optional
-* `sbc_advertise_port`: (default: `not set`) the advertised port for Kamailio, optional
-* `sbc_interface`: (default `{{ ansible_default_ipv4.interface }}`) network interface for Kamailio
-* `sbc_dispatcher_list`: (`1 sip:localhost:5060 16 10"`) dispatcher list configuration, replace `localhost` with the address of your router component
-* `sbc_redis_dialog`: (default: `1`) enables redis-based dialog replication
-* `sbc_dburl_dialog`: (default: `redis://localhost:6379/3`) Redis uri to store dialogs
 
 ### uc_engine
 
@@ -176,9 +118,3 @@ For a new Wazo engine installation, there are two distributions to consider:
 * `debian_repo_wazo__custom_repo`: debian repository to replace the default Wazo repository
 * `debian_repo_wazo__custom_repo_filename`: filename for the debian repository to replace the default Wazo repository
 * `debian_repo_wazo__custom_repo_upgrade`: debian repository to replace the custom repository for later upgrades
-
-### runtime
-
-* `runtime`: (default: `true`) set to `true` when services are running while
-  Ansible is executing. Set to `false` when Ansible must only make file
-  modifications and no services are running (e.g. at docker build time)

@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  become: yes
+  become: true
   roles:
     - role: preflight-checks
 
@@ -8,29 +8,29 @@
     - database
     - b2bua
     - engine_api
-  become: yes
+  become: true
   roles:
     - role: debian-upgrade-first
 
 - hosts:
     - database
-  become: yes
+  become: true
   roles:
     - role: wazo-db
 
 - hosts: b2bua
-  become: yes
+  become: true
   roles:
     - role: b2bua
 
 - hosts: engine_api
-  become: yes
+  become: true
   roles:
     - role: engine-api
     - role: engine-api-init
     - role: uc-engine
 
 - hosts: uc_ui
-  become: yes
+  become: true
   roles:
     - role: uc-ui

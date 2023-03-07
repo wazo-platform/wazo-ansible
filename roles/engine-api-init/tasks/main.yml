@@ -17,8 +17,7 @@
     state: present
 
 - name: Create service users with wazo-auth-keys
-  command: wazo-auth-keys service update
-  when: runtime
+  command: wazo-auth-keys service update  # noqa no-changed-when
 
 - name: Create default main database preconfiguration
   tempfile:
@@ -30,6 +29,7 @@
   template:
     src: templates/xivo-manage-db.cfg.j2
     dest: "{{ xivo_managedb_debconf_file.path }}"
+    mode: 0600
   when:
     - engine_api_db_admin_password is defined
     - engine_api_db_admin_user is defined
@@ -43,6 +43,7 @@
   copy:
     src: templates/xivo-manage-db.cfg.j2
     dest: /etc/xivo-manage-db.cfg.j2
+    mode: 0644
 
 - name: Reset main database options for xivo-manage-db package # noqa 301
   shell: |

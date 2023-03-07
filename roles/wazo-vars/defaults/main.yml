@@ -23,37 +23,6 @@ engine_auth_path: /api/auth/0.1
 engine_confd_path: /api/confd/1.1
 engine_setupd_path: /api/setupd/1.0
 
-# router_advertise_address: democ4.wazo.community
-# router_advertise_port: 5060
-router_api_endpoint_confd: http://127.0.0.1:9600
-router_api_db_host: 127.0.0.1
-router_api_db_port: 5432
-router_api_db_name: wazo_router_confd
-router_api_db_user: wazo_router_confd
-router_api_db_password: wazo_router_confd
-router_api_redis_host: 127.0.0.1
-router_api_redis_port: 6379
-router_api_redis_database: 1
-router_interface: "{{ ansible_default_ipv4.interface }}"
-router_redis_dialog: 1
-router_dburl_dialog: redis://127.0.0.1:6379/2
-
-rtpengine_interface: "{{ ansible_default_ipv4.interface }}"
-rtpengine_private_address: "{{ ansible_default_ipv4.address }}"
-rtpengine_public_address: "{{ ansible_default_ipv4.address }}"
-rtpengine_listen_ng: "22222"
-rtpengine_port_min: "23000"
-rtpengine_port_max: "32768"
-
-runtime: true
-
-# sbc_advertise_address: democ4.wazo.community
-# sbc_advertise_port: 5060
-sbc_interface: "{{ ansible_default_ipv4.interface }}"
-sbc_dispatcher_list: "1 sip:localhost:5060 16 10"
-sbc_redis_dialog: 1
-sbc_dburl_dialog: redis://localhost:6379/3
-
 wazo_consul_host: localhost
 wazo_consul_scheme: http
 wazo_consul_port_http: 8500

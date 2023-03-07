@@ -16,34 +16,33 @@
 
 - name: Bootstrap with wazo-dist
   block:
+    - name: Gather packages facts
+      package_facts:
+        manager: apt
 
-  - name: Gather packages facts
-    package_facts:
-      manager: apt
+    - name: Add bootstrap Wazo repository
+      apt_repository:
+        repo: deb http://mirror.wazo.community/{{ 'debian' if wazo_debian_repo == 'main' else wazo_debian_repo }} {{ wazo_distribution }} main
+        state: present
+        filename: wazo-install
+        update_cache: true
+      when: '"wazo-dist" not in ansible_facts.packages'
 
-  - name: Add bootstrap Wazo repository
-    apt_repository:
-      repo: deb http://mirror.wazo.community/{{ 'debian' if wazo_debian_repo == 'main' else wazo_debian_repo }} {{ wazo_distribution }} main
-      state: present
-      filename: wazo-install
-      update_cache: yes
-    when: '"wazo-dist" not in ansible_facts.packages'
+    - name: Install wazo-dist
+      apt:
+        name: wazo-dist
+        state: present
 
-  - name: Install wazo-dist
-    apt:
-      name: wazo-dist
-      state: present
+    - name: Add persistent Wazo repository # noqa 301
+      command: wazo-dist --{{ wazo_debian_repo }}-repo {{ wazo_distribution }}
 
-  - name: Add persistent Wazo repository # noqa 301
-    command: wazo-dist --{{ wazo_debian_repo }}-repo {{ wazo_distribution }}
-
-  - name: Remove bootstrap Wazo repository
-    apt_repository:
-      repo: deb http://mirror.wazo.community/{{ 'debian' if wazo_debian_repo == 'main' else wazo_debian_repo }} {{ wazo_distribution }} main
-      state: absent
-      filename: wazo-install
-      update_cache: yes
-    when: '"wazo-dist" not in ansible_facts.packages'
+    - name: Remove bootstrap Wazo repository
+      apt_repository:
+        repo: deb http://mirror.wazo.community/{{ 'debian' if wazo_debian_repo == 'main' else wazo_debian_repo }} {{ wazo_distribution }} main
+        state: absent
+        filename: wazo-install
+        update_cache: true
+      when: '"wazo-dist" not in ansible_facts.packages'
 
   # end block
   when: debian_repo_wazo__custom_repo is not defined
@@ -53,5 +52,5 @@
     repo: "{{ debian_repo_wazo__custom_repo }}"
     state: present
     filename: "{{ debian_repo_wazo__custom_repo_filename }}"
-    update_cache: yes
+    update_cache: true
   when: debian_repo_wazo__custom_repo is defined

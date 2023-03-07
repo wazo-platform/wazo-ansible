@@ -1,9 +1,0 @@
-#!/bin/bash
-
-dpkg --reconfigure xivo-certs
-
-cd /var/spool/asterisk
-
-exec /usr/sbin/asterisk -g -U asterisk -f
-
-# init ends here
