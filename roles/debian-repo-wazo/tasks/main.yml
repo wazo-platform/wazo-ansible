@@ -2,7 +2,7 @@
 - name: Install APT python bindings, GPG and CA certificates
   apt:
     name:
-      - python-apt
+      - python3-apt
       - gpg
       - ca-certificates  # for HTTPS Debian repo
     state: present

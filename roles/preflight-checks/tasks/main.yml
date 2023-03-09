@@ -1,9 +1,9 @@
 ---
 - name: Preflight checks
   block:
-    - name: Assert Debian Buster
+    - name: Assert Debian Bullseye
       assert:
-        that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '10'
+        that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '11'
 
     - name: Validate database names
       assert:

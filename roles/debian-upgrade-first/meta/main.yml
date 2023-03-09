@@ -6,7 +6,7 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
-        - Buster
-  min_ansible_version: 2.5
+        - bullseye
+  min_ansible_version: "2.5"
 dependencies:
   - role: wazo-vars

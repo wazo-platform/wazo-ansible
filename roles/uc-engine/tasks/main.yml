@@ -8,11 +8,8 @@
     state: present
 
 - name: Ensure sendmail is absent
-  # Debian buster: If sendmail-bin is removed but not purged, dpkg will refuse to do anything
-  # See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=939885
   apt:
     name: sendmail-bin
-    purge: true
     state: absent
 
 - name: "Install {{ wazo_meta_package }}"
