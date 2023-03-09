@@ -1,29 +1,31 @@
-- name: reload nginx
-  debug: msg="checking config first"
+- name: Reload nginx
+  ansible.builtin.debug:
+    msg: "checking config first"
   changed_when: true
   notify:
-    - check nginx configuration
-    - reload nginx - after config check
+    - Check nginx configuration
+    - Reload nginx - after config check
 
-- name: restart nginx
-  debug: msg="checking config first"
+- name: Restart nginx
+  ansible.builtin.debug:
+    msg: "checking config first"
   changed_when: true
   notify:
-    - check nginx configuration
-    - restart nginx - after config check
+    - Check nginx configuration
+    - Restart nginx - after config check
 
-- name: check nginx configuration
-  command: "nginx -t"
+- name: Check nginx configuration
+  ansible.builtin.command: "nginx -t"
   register: result
   changed_when: "result.rc != 0"
   check_mode: false
 
-- name: reload nginx - after config check
-  service:
+- name: Reload nginx - after config check
+  ansible.builtin.service:
     name: nginx
     state: reloaded
 
-- name: restart nginx - after config check
-  service:
+- name: Restart nginx - after config check
+  ansible.builtin.service:
     name: nginx
     state: restarted

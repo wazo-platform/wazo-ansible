@@ -1,6 +1,6 @@
 ---
 - name: Upgrade Debian before anything
-  apt:
+  ansible.builtin.apt:
     update_cache: true
     upgrade: dist
   when:

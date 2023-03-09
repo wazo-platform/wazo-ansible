@@ -1,12 +1,12 @@
 ---
 # Used to switch to user postgres
 - name: Install sudo
-  apt:
+  ansible.builtin.apt:
     name: sudo
     state: present
 
 - name: Ensure PostgreSQL Python libraries are installed.
-  apt:
+  ansible.builtin.apt:
     name: python3-psycopg2
     state: present
 
@@ -14,7 +14,7 @@
 # The role does not handle changing the port while changing users.
 # See https://github.com/geerlingguy/ansible-role-postgresql/issues/51
 - name: Change PostgreSQL port
-  include_role:
+  ansible.builtin.include_role:
     name: geerlingguy.postgresql
   vars:
     postgresql_global_config_options:
@@ -23,7 +23,7 @@
     postgresql_users: []
 
 - name: Set PostgreSQL superadmin password
-  include_role:
+  ansible.builtin.include_role:
     name: geerlingguy.postgresql
   vars:
     postgresql_users:
@@ -33,7 +33,7 @@
   when: postgresql_superuser_password is defined
 
 - name: Set PostgreSQL HBA
-  set_fact:
+  ansible.builtin.set_fact:
     default_hba:
       - {type: local, database: all, user: postgres, auth_method: peer}
       - {type: local, database: all, user: all, auth_method: peer}
@@ -43,7 +43,7 @@
       - {type: host, database: all, user: all, address: all, auth_method: md5}
 
 - name: Configure PostgreSQL
-  include_role:
+  ansible.builtin.include_role:
     name: geerlingguy.postgresql
   vars:
     postgresql_hba_entries: >

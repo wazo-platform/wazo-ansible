@@ -1,35 +1,36 @@
 ---
 - name: Install Wazo auth
-  include_role:
+  ansible.builtin.include_role:
     name: wazo-auth
 
 - name: Create an index.html for the home page
   become: true
-  file:
+  ansible.builtin.file:
     src: /var/www/html/index.wazo.html
     dest: /var/www/html/index.html
     state: link
   when: groups['uc_ui'] is not defined
 
 - name: Install wazo-auth-keys
-  apt:
+  ansible.builtin.apt:
     name: wazo-auth-keys
     state: present
 
 - name: Create service users with wazo-auth-keys
-  command: wazo-auth-keys service update  # noqa no-changed-when
+  ansible.builtin.command: wazo-auth-keys service update
+  changed_when: true
 
 - name: Create default main database preconfiguration
-  tempfile:
+  ansible.builtin.tempfile:
     state: file
     prefix: xivo_managedb_debconf_file
   register: xivo_managedb_debconf_file
 
 - name: Copy main database preconfiguration
-  template:
+  ansible.builtin.template:
     src: templates/xivo-manage-db.cfg.j2
     dest: "{{ xivo_managedb_debconf_file.path }}"
-    mode: 0600
+    mode: "0600"
   when:
     - engine_api_db_admin_password is defined
     - engine_api_db_admin_user is defined
@@ -40,26 +41,26 @@
     - engine_api_db_port is defined
 
 - name: Copy main database preconfiguration template
-  copy:
+  ansible.builtin.copy:
     src: templates/xivo-manage-db.cfg.j2
     dest: /etc/xivo-manage-db.cfg.j2
-    mode: 0644
+    mode: "0644"
 
 - name: Reset main database options for xivo-manage-db package # noqa 301
-  shell: |
+  ansible.builtin.shell: |
     set -o pipefail
     echo PURGE | debconf-communicate xivo-manage-db
   args:
     executable: /bin/bash
 
 - name: Reconfigure main database options # noqa 301
-  command: debconf-set-selections "{{ xivo_managedb_debconf_file.path }}"
+  ansible.builtin.command: debconf-set-selections "{{ xivo_managedb_debconf_file.path }}"
 
 - name: Initialize main database # noqa 301
-  command: dpkg-reconfigure xivo-manage-db --frontend noninteractive
+  ansible.builtin.command: dpkg-reconfigure xivo-manage-db --frontend noninteractive
 
 - name: Start Wazo services
-  service:
+  ansible.builtin.service:
     name: "{{ item }}"
     state: restarted
   loop:

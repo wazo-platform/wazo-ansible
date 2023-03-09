@@ -1,37 +1,37 @@
 ---
 - name: Install Wazo repo package source
-  include_role:
+  ansible.builtin.include_role:
     name: debian-repo-wazo
 
 - name: Install xivo-certs
-  apt:
+  ansible.builtin.apt:
     name: xivo-certs
     state: present
 
 - name: Install custom certificate for HTTPS
-  copy:
+  ansible.builtin.copy:
     src: "{{ b2bua_https_cert }}"
     dest: /usr/share/xivo-certs/server.crt
     owner: root
     group: www-data
-    mode: 0640
+    mode: "0640"
   when: b2bua_https_cert is defined
   notify:
-    - reload asterisk
+    - Reload asterisk
 
 - name: Install custom private key for HTTPS
-  copy:
+  ansible.builtin.copy:
     src: "{{ b2bua_https_private_key }}"
     dest: /usr/share/xivo-certs/server.key
     owner: root
     group: www-data
-    mode: 0640
+    mode: "0640"
   when: b2bua_https_private_key is defined
   notify:
-    - reload asterisk
+    - Reload asterisk
 
 - name: Install Asterisk
-  apt:
+  ansible.builtin.apt:
     name:
       - xivo-config
       - asterisk
@@ -41,83 +41,83 @@
     state: present
 
 - name: Ensure Asterisk is started
-  service:
+  ansible.builtin.service:
     name: asterisk
     state: started
 
 - name: Create /etc/asterisk/extensions.d
-  file:
+  ansible.builtin.file:
     path: /etc/asterisk/extensions.d
     state: directory
     owner: asterisk
-    mode: 0660
+    mode: "0660"
 
 - name: Ensure Asterisk permissions # noqa 301
-  command: xivo-fix-paths-rights
+  ansible.builtin.command: xivo-fix-paths-rights
 
 - name: Install Asterisk AGI configuration
-  template:
+  ansible.builtin.template:
     src: templates/asterisk-extensions.conf.j2
     dest: /etc/asterisk/extensions.d/engine-api.conf
-    mode: 0660
+    mode: "0660"
   notify:
-    - reload asterisk dialplan
+    - Reload asterisk dialplan
   when:
     - engine_api_host is defined
 
 - name: Install Asterisk AMI configuration
-  template:
+  ansible.builtin.template:
     src: templates/asterisk-manager.conf.j2
     dest: /etc/asterisk/manager.d/999-engine-api.conf
-    mode: 0660
+    mode: "0660"
   notify:
-    - reload asterisk manager
+    - Reload asterisk manager
   when:
     - b2bua_ami_permit_client_address is defined
     - b2bua_ami_permit_client_mask is defined
     - b2bua_port_ami is defined
 
 - name: Install Asterisk HTTP configuration
-  template:
+  ansible.builtin.template:
     src: templates/asterisk-http.conf.j2
     dest: /etc/asterisk/http.d/10-engine-api.conf
-    mode: 0660
+    mode: "0660"
   notify:
-    - reload asterisk
+    - Reload asterisk
   when:
     - b2bua_listen_address is defined
     - b2bua_port_http is defined
 
 - name: Install wazo-confgend-client
-  apt:
+  ansible.builtin.apt:
     name: wazo-confgend-client
     state: present
 
 - name: Install wazo-confgend-client config
-  template:
+  ansible.builtin.template:
     src: templates/wazo-confgend-client.conf.j2
     dest: /etc/wazo-confgend-client/config.conf
-    mode: 0644
+    mode: "0644"
   when:
     - engine_api_host is defined
     - engine_api_port_confgend is defined
 
 - name: Create wazo-sysconfd drop-in file directory
-  file:
+  ansible.builtin.file:
     path: /etc/systemd/system/wazo-sysconfd.service.d
     state: directory
-    mode: 0755
+    mode: "0755"
 
 - name: Install wazo-sysconfd drop-in file
-  template:
+  ansible.builtin.template:
     src: templates/wazo-sysconfd.service.j2
     dest: /etc/systemd/system/wazo-sysconfd.service.d/b2bua.conf
-    mode: 0644
+    mode: "0644"
   when:
     - b2bua_listen_address is defined
     - b2bua_port_sysconfd is defined
 
 - name: Install wazo-sysconfd
-  apt:
+  ansible.builtin.apt:
     name: wazo-sysconfd
     state: present

@@ -1,9 +1,10 @@
 ---
-- hosts: all
+- name: Upload logs
+  hosts: all
   tasks:
     - name: Upload logs
       become: true
-      synchronize:
+      ansible.posix.synchronize:
         src: '/var/log'
         dest: '{{ zuul.executor.log_root }}'
         mode: pull
