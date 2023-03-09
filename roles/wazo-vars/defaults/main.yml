@@ -2,8 +2,8 @@ debian_upgrade_first: true
 
 wazo_debian_repo: main
 wazo_debian_repo_upgrade: main
-wazo_distribution: wazo-dev-bullseye
-wazo_distribution_upgrade: wazo-dev-bullseye
+wazo_distribution: wazo-dev-wip-bullseye
+wazo_distribution_upgrade: wazo-dev-wip-bullseye
 wazo_meta_package: wazo-platform
 
 debian_repo_wazo__key_url: http://mirror.wazo.community/wazo_current.key
