@@ -7,7 +7,7 @@
 
 - name: Ensure PostgreSQL Python libraries are installed.
   apt:
-    name: python-psycopg2
+    name: python3-psycopg2
     state: present
 
 
