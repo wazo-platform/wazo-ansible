@@ -1,8 +1,8 @@
-- name: reload asterisk dialplan
-  command: asterisk -rx 'dialplan reload'
+- name: Reload asterisk dialplan
+  ansible.builtin.command: asterisk -rx 'dialplan reload'
 
-- name: reload asterisk manager
-  command: asterisk -rx 'manager reload'
+- name: Reload asterisk manager
+  ansible.builtin.command: asterisk -rx 'manager reload'
 
-- name: reload asterisk
-  command: asterisk -rx 'core reload'
+- name: Reload asterisk
+  ansible.builtin.command: asterisk -rx 'core reload'

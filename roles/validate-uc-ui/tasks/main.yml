@@ -1,15 +1,15 @@
 - name: Get the home page
-  uri:
+  ansible.builtin.uri:
     url: "https://localhost/"
     validate_certs: false
   register: home_page
 
-- name: debug home_page data
-  debug:
+- name: Debug home_page data
+  ansible.builtin.debug:
     var: home_page
 
-- name: verify redirect url
-  assert:
+- name: Verify redirect url
+  ansible.builtin.assert:
     that:
       - home_page.url == "https://localhost/login/"
       - home_page.redirected

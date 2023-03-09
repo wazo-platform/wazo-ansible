@@ -1,46 +1,46 @@
 ---
 - name: Install Wazo repo package source
-  include_role:
+  ansible.builtin.include_role:
     name: debian-repo-wazo
 
 - name: Create/Configure SSL certs
-  include_role:
+  ansible.builtin.include_role:
     name: wazo-certs
 
 - name: Install wazo-confgend-client
-  apt:
+  ansible.builtin.apt:
     name: wazo-confgend-client
     state: present
 
 - name: Install RabbitMQ
-  include_role:
+  ansible.builtin.include_role:
     name: wazo-message-bus
 
 - name: Create /var/lib/wazo
-  file:
+  ansible.builtin.file:
     path: /var/lib/wazo
     state: directory
-    mode: 02775
+    mode: "02775"
 
 - name: Disable Wazo services
-  file:
+  ansible.builtin.file:
     path: /var/lib/wazo/disabled
     state: touch
-    mode: 0644
+    mode: "0644"
 
 - name: Create wazo-calld config dir
-  file:
+  ansible.builtin.file:
     path: /etc/wazo-calld/conf.d
     state: directory
-    mode: 0755
+    mode: "0755"
 
 - name: Add wazo-calld config
-  template:
+  ansible.builtin.template:
     src: templates/wazo-calld.yml.j2
     dest: /etc/wazo-calld/conf.d/50-engine-api.yml
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   when:
     - ari_password is defined
     - ari_username is defined
@@ -48,23 +48,23 @@
     - b2bua_port_http is defined
 
 - name: Install wazo-calld
-  apt:
+  ansible.builtin.apt:
     name: wazo-calld
     state: present
 
 - name: Create wazo-amid config dir
-  file:
+  ansible.builtin.file:
     path: /etc/wazo-amid/conf.d
     state: directory
-    mode: 0755
+    mode: "0755"
 
 - name: Add wazo-amid config
-  template:
+  ansible.builtin.template:
     src: templates/wazo-amid.yml.j2
     dest: /etc/wazo-amid/conf.d/50-engine-api.yml
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   when:
     - ami_password is defined
     - ami_username is defined
@@ -73,31 +73,31 @@
     - b2bua_port_http is defined
 
 - name: Install wazo-amid
-  apt:
+  ansible.builtin.apt:
     name: wazo-amid
     state: present
 
 - name: Preconfigure database initialization
-  debconf:
+  ansible.builtin.debconf:
     name: xivo-manage-db
     question: xivo-manage-db/db-skip
     vtype: boolean
     value: true
 
 - name: Create wazo-confd config dir
-  file:
+  ansible.builtin.file:
     path: /etc/wazo-confd/conf.d
     state: directory
-    mode: 0755
+    mode: "0755"
 
 - name: Add wazo-confd config
-  template:
+  ansible.builtin.template:
     src: templates/wazo-confd.yml.j2
     dest: /etc/wazo-confd/conf.d/50-engine-api.yml
     owner: root
     group: root
-    mode: 0644
-  notify: restart wazo-confd
+    mode: "0644"
+  notify: Restart wazo-confd
   when:
     - ari_password is defined
     - ari_username is defined
@@ -111,19 +111,19 @@
     - engine_api_db_port is defined
 
 - name: Create xivo-dao config dir
-  file:
+  ansible.builtin.file:
     path: /etc/xivo-dao/conf.d
     state: directory
-    mode: 0755
+    mode: "0755"
 
 - name: Add xivo-dao config
-  template:
+  ansible.builtin.template:
     src: templates/xivo-dao.yml.j2
     dest: /etc/xivo-dao/conf.d/50-engine-api.yml
     owner: root
     group: root
-    mode: 0644
-  notify: restart wazo-confd
+    mode: "0644"
+  notify: Restart wazo-confd
   when:
     - engine_api_db_confd_name is defined
     - engine_api_db_confd_password is defined
@@ -132,28 +132,28 @@
     - engine_api_db_port is defined
 
 - name: Install wazo-confd
-  apt:
+  ansible.builtin.apt:
     name: wazo-confd
     state: present
 
 - name: Install wazo-confd-client-python3
-  apt:
+  ansible.builtin.apt:
     name: wazo-confd-client-python3
     state: present
 
 - name: Create wazo-confgend config dir
-  file:
+  ansible.builtin.file:
     path: /etc/wazo-confgend/conf.d
     state: directory
-    mode: 0755
+    mode: "0755"
 
 - name: Add wazo-confgend config
-  template:
+  ansible.builtin.template:
     src: templates/wazo-confgend.yml.j2
     dest: /etc/wazo-confgend/conf.d/50-engine-api.yml
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   when:
     - engine_api_db_confd_name is defined
     - engine_api_db_confd_user is defined
@@ -164,23 +164,23 @@
     - engine_api_listen_address is defined
 
 - name: Install wazo-confgend
-  apt:
+  ansible.builtin.apt:
     name: wazo-confgend
     state: present
 
 - name: Create wazo-agid config dir
-  file:
+  ansible.builtin.file:
     path: /etc/wazo-agid/conf.d
     state: directory
-    mode: 0755
+    mode: "0755"
 
 - name: Add wazo-agid config
-  template:
+  ansible.builtin.template:
     src: templates/wazo-agid.yml.j2
     dest: /etc/wazo-agid/conf.d/50-engine-api.yml
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   when:
     - engine_api_db_confd_name is defined
     - engine_api_db_confd_user is defined
@@ -190,40 +190,41 @@
     - engine_api_listen_address is defined
 
 - name: Install xivo-config
-  apt:
+  ansible.builtin.apt:
     name: xivo-config
     state: present
 
 - name: Install wazo-agid
-  apt:
+  ansible.builtin.apt:
     name: wazo-agid
     state: present
 
 - name: Install wazo-websocketd
-  apt:
+  ansible.builtin.apt:
     name: wazo-websocketd
     state: present
 
 - name: Install nginx
-  apt:
+  ansible.builtin.apt:
     name: nginx
     state: present
 
 - name: Install wazo-nginx
-  apt:
+  ansible.builtin.apt:
     name: wazo-nginx
     state: present
   notify:
-    - restart nginx
+    - Restart nginx
 
 - name: Install wazo-provd
-  apt:
+  ansible.builtin.apt:
     name: wazo-provd
     state: present
 
 - name: Enable Wazo services
-  file:
+  ansible.builtin.file:
     path: /var/lib/wazo/disabled
     state: absent
 
-- include_tasks: tracing.yml
+- name: Enable Tracing in API
+  ansible.builtin.include_tasks: tracing.yml

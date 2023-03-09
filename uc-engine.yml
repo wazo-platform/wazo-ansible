@@ -1,10 +1,12 @@
 ---
-- hosts: all
+- name: Pre-flight checks
+  hosts: all
   become: true
   roles:
     - role: preflight-checks
 
-- hosts:
+- name: Upgrade Debian
+  hosts:
     - database
     - b2bua
     - engine_api
@@ -12,25 +14,29 @@
   roles:
     - role: debian-upgrade-first
 
-- hosts:
+- name: Setup DB
+  hosts:
     - database
   become: true
   roles:
     - role: wazo-db
 
-- hosts: b2bua
+- name: Setup back-to-back user agent
+  hosts: b2bua
   become: true
   roles:
     - role: b2bua
 
-- hosts: engine_api
+- name: Setup API Engine
+  hosts: engine_api
   become: true
   roles:
     - role: engine-api
     - role: engine-api-init
     - role: uc-engine
 
-- hosts: uc_ui
+- name: Setup UI
+  hosts: uc_ui
   become: true
   roles:
     - role: uc-ui

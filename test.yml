@@ -1,7 +1,9 @@
 ---
-- hosts: uc_engine_host
+- name: UC Validation
+  hosts: uc_engine_host
   roles:
     - role: validate-uc
-- hosts: uc_ui
+- name: UC UI Validation
+  hosts: uc_ui
   roles:
     - role: validate-uc-ui
