@@ -50,6 +50,7 @@
     path: /etc/asterisk/extensions.d
     state: directory
     owner: asterisk
+    group: www-data
     mode: 0660
 
 - name: Ensure Asterisk permissions # noqa 301
@@ -59,6 +60,8 @@
   template:
     src: templates/asterisk-extensions.conf.j2
     dest: /etc/asterisk/extensions.d/engine-api.conf
+    owner: asterisk
+    group: www-data
     mode: 0660
   notify:
     - reload asterisk dialplan
@@ -69,6 +72,8 @@
   template:
     src: templates/asterisk-manager.conf.j2
     dest: /etc/asterisk/manager.d/999-engine-api.conf
+    owner: asterisk
+    group: www-data
     mode: 0660
   notify:
     - reload asterisk manager
@@ -81,6 +86,8 @@
   template:
     src: templates/asterisk-http.conf.j2
     dest: /etc/asterisk/http.d/10-engine-api.conf
+    owner: asterisk
+    group: www-data
     mode: 0660
   notify:
     - reload asterisk
