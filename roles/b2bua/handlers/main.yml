@@ -1,8 +1,11 @@
 - name: Reload asterisk dialplan
   ansible.builtin.command: asterisk -rx 'dialplan reload'
+  changed_when: true
 
 - name: Reload asterisk manager
   ansible.builtin.command: asterisk -rx 'manager reload'
+  changed_when: true
 
 - name: Reload asterisk
   ansible.builtin.command: asterisk -rx 'core reload'
+  changed_when: true
