@@ -1,12 +1,13 @@
 ---
 - name: Preflight checks
+  when: preflight_checks_done is undefined
   block:
-    - name: Assert Debian Buster
-      assert:
-        that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '10'
+    - name: Assert Debian Bullseye
+      ansible.builtin.assert:
+        that: ansible_distribution == 'Debian' and ansible_distribution_major_version == '11'
 
     - name: Validate database names
-      assert:
+      ansible.builtin.assert:
         that:
           - engine_api_db_confd_name == engine_api_db_auth_name
       when:
@@ -14,7 +15,7 @@
         - engine_api_db_auth_name is defined
 
     - name: Assert root password for setup
-      assert:
+      ansible.builtin.assert:
         that:
           - engine_api_root_password is defined
         fail_msg: "The variable engine_api_root_password is required when configuring the wizard."
@@ -22,24 +23,24 @@
         - engine_api_configure_wizard == "true"
 
     - name: Ensure the locale exists
-      locale_gen:
+      community.general.locale_gen:
         name: "{{ wazo_locale }}"
         state: present
       when: wazo_locale is defined
 
-    - name: set as default locale
-      command: "localectl set-locale LANG={{ wazo_locale }}"
+    - name: Set as default locale
+      ansible.builtin.command: "localectl set-locale LANG={{ wazo_locale }}"
+      changed_when: true
       when: wazo_locale is defined
 
     - name: Check if /etc/default/locale exists
-      stat:
+      ansible.builtin.stat:
         path: /etc/default/locale
       register: stat_result
 
     - name: Assert UTF-8 locale
-      shell: grep 'LANG=.*\.UTF-8"\?$' /etc/default/locale
+      ansible.builtin.shell: grep 'LANG=.*\.UTF-8"\?$' /etc/default/locale
+      changed_when: false
       when:
         - stat_result.stat.exists
       register: preflight_checks_done
-
-  when: preflight_checks_done is undefined

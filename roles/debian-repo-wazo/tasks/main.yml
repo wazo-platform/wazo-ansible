@@ -1,27 +1,28 @@
 ---
 - name: Install APT python bindings, GPG and CA certificates
-  apt:
+  ansible.builtin.apt:
     name:
-      - python-apt
+      - python3-apt
       - gpg
       - ca-certificates  # for HTTPS Debian repo
     state: present
 
 - name: Add Wazo distribution key
-  apt_key:
+  ansible.builtin.apt_key:
     url: "{{ debian_repo_wazo__key_url }}"
     id: "{{ debian_repo_wazo__key_id }}"
     state: present
     keyring: /etc/apt/trusted.gpg.d/wazo-keyring-installation.gpg
 
 - name: Bootstrap with wazo-dist
+  when: debian_repo_wazo__custom_repo is not defined
   block:
     - name: Gather packages facts
-      package_facts:
+      ansible.builtin.package_facts:
         manager: apt
 
     - name: Add bootstrap Wazo repository
-      apt_repository:
+      ansible.builtin.apt_repository:
         repo: deb http://mirror.wazo.community/{{ 'debian' if wazo_debian_repo == 'main' else wazo_debian_repo }} {{ wazo_distribution }} main
         state: present
         filename: wazo-install
@@ -29,26 +30,23 @@
       when: '"wazo-dist" not in ansible_facts.packages'
 
     - name: Install wazo-dist
-      apt:
+      ansible.builtin.apt:
         name: wazo-dist
         state: present
 
     - name: Add persistent Wazo repository # noqa 301
-      command: wazo-dist --{{ wazo_debian_repo }}-repo {{ wazo_distribution }}
+      ansible.builtin.command: wazo-dist --{{ wazo_debian_repo }}-repo {{ wazo_distribution }}
 
     - name: Remove bootstrap Wazo repository
-      apt_repository:
+      ansible.builtin.apt_repository:
         repo: deb http://mirror.wazo.community/{{ 'debian' if wazo_debian_repo == 'main' else wazo_debian_repo }} {{ wazo_distribution }} main
         state: absent
         filename: wazo-install
         update_cache: true
       when: '"wazo-dist" not in ansible_facts.packages'
 
-  # end block
-  when: debian_repo_wazo__custom_repo is not defined
-
 - name: Add custom repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "{{ debian_repo_wazo__custom_repo }}"
     state: present
     filename: "{{ debian_repo_wazo__custom_repo_filename }}"

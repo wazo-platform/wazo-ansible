@@ -1,14 +1,14 @@
-- name: restart wazo-confd
-  service:
+- name: Restart wazo-confd
+  ansible.builtin.service:
     name: wazo-confd
     state: restarted
 
-- name: restart wazo-confgend
-  service:
+- name: Restart wazo-confgend
+  ansible.builtin.service:
     name: wazo-confgend
     state: restarted
 
-- name: restart wazo-agid
-  service:
+- name: Restart wazo-agid
+  ansible.builtin.service:
     name: wazo-agid
     state: restarted

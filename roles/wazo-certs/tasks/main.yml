@@ -1,27 +1,27 @@
 ---
 - name: Install xivo-certs
-  apt:
+  ansible.builtin.apt:
     name: xivo-certs
     state: present
 
 - name: Install custom certificate for HTTPS
-  copy:
+  ansible.builtin.copy:
     src: "{{ engine_api_https_cert }}"
     dest: /usr/share/xivo-certs/server.crt
     owner: root
     group: www-data
-    mode: 0640
+    mode: "0640"
   when: engine_api_https_cert is defined
   notify:
-    - reload nginx
+    - Reload nginx
 
 - name: Install custom private key for HTTPS
-  copy:
+  ansible.builtin.copy:
     src: "{{ engine_api_https_private_key }}"
     dest: /usr/share/xivo-certs/server.key
     owner: root
     group: www-data
-    mode: 0640
+    mode: "0640"
   when: engine_api_https_private_key is defined
   notify:
-    - reload nginx
+    - Reload nginx

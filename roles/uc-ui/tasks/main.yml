@@ -1,50 +1,50 @@
 ---
 - name: Install Wazo repo package source
-  include_role:
+  ansible.builtin.include_role:
     name: debian-repo-wazo
 
 - name: Create/Configure SSL certs
-  include_role:
+  ansible.builtin.include_role:
     name: wazo-certs
 
 - name: Install nginx
-  apt:
+  ansible.builtin.apt:
     name: nginx
     state: present
 
 - name: Install wazo-nginx
-  apt:
+  ansible.builtin.apt:
     name: wazo-nginx
     state: present
   notify:
-    - restart nginx
+    - Restart nginx
 
 - name: Install custom certificate for HTTPS
-  copy:
+  ansible.builtin.copy:
     src: "{{ engine_api_https_cert }}"
     dest: /usr/share/xivo-certs/server.crt
     owner: root
     group: www-data
-    mode: 0640
+    mode: "0640"
   when: engine_api_https_cert is defined
   notify:
-    - restart wazo-ui
-    - reload nginx
+    - Restart wazo-ui
+    - Reload nginx
 
 - name: Install custom private key for HTTPS
-  copy:
+  ansible.builtin.copy:
     src: "{{ engine_api_https_private_key }}"
     dest: /usr/share/xivo-certs/server.key
     owner: root
     group: www-data
-    mode: 0640
+    mode: "0640"
   when: engine_api_https_private_key is defined
   notify:
-    - restart wazo-ui
-    - reload nginx
+    - Restart wazo-ui
+    - Reload nginx
 
 - name: Install wazo-ui
   become: true
-  apt:
+  ansible.builtin.apt:
     name: wazo-ui
     state: present

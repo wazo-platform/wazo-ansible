@@ -1,52 +1,49 @@
 ---
 - name: Install the ntp and postfix daemons
   # Some machines have chrony installed
-  apt:
+  ansible.builtin.apt:
     name:
       - ntp
       - postfix
     state: present
 
 - name: Ensure sendmail is absent
-  # Debian buster: If sendmail-bin is removed but not purged, dpkg will refuse to do anything
-  # See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=939885
-  apt:
+  ansible.builtin.apt:
     name: sendmail-bin
-    purge: true
     state: absent
 
 - name: "Install {{ wazo_meta_package }}"
-  apt:
+  ansible.builtin.apt:
     name: "{{ wazo_meta_package }}"
     state: present
 
 - name: Install wazo-setupd
-  apt:
+  ansible.builtin.apt:
     name: wazo-setupd
     state: present
 
 - name: Ensure wazo-setupd has been started with last config
-  service:
+  ansible.builtin.service:
     name: wazo-setupd
     state: restarted
 
 - name: Ensure that asterisk has been started with wazo-confgend config
-  service:
+  ansible.builtin.service:
     name: asterisk
     state: restarted
 
 - name: Change Wazo distribution for later upgrades # noqa 301
-  command: wazo-dist --{{ wazo_debian_repo_upgrade }}-repo {{ wazo_distribution_upgrade }}
+  ansible.builtin.command: wazo-dist --{{ wazo_debian_repo_upgrade }}-repo {{ wazo_distribution_upgrade }}
   when: debian_repo_wazo__custom_repo is not defined
 
 - name: Remove custom GPG key used for installation
-  apt_key:
+  ansible.builtin.apt_key:
     id: "{{ debian_repo_wazo__key_id }}"
     state: absent
     keyring: /etc/apt/trusted.gpg.d/wazo-keyring-installation.gpg
 
 - name: Remove empty keyring file used for installation
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: absent
   with_items:
@@ -54,7 +51,7 @@
     - /etc/apt/trusted.gpg.d/wazo-keyring-installation.gpg~
 
 - name: Remove custom repository used for installation
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "{{ debian_repo_wazo__custom_repo }}"
     state: absent
     filename: "{{ debian_repo_wazo__custom_repo_filename }}"
@@ -62,7 +59,7 @@
   when: debian_repo_wazo__custom_repo_upgrade is defined
 
 - name: Add custom repository for later upgrades
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "{{ debian_repo_wazo__custom_repo_upgrade }}"
     state: present
     filename: "{{ debian_repo_wazo__custom_repo_filename }}"
@@ -70,14 +67,15 @@
   when: debian_repo_wazo__custom_repo_upgrade is defined
 
 - name: Ensure dbus is started
-  service:
+  ansible.builtin.service:
     name: dbus
     state: started
 
 - name: Finalize engine configuration
+  when: engine_api_configure_wizard == "true"
   block:
     - name: Setup engine
-      uri:
+      ansible.builtin.uri:
         url: "https://{{ engine_api_host }}:{{ engine_api_port }}{{ engine_setupd_path }}/setup"
         method: POST
         timeout: 300
@@ -87,18 +85,23 @@
           engine_internal_address: "{{ engine_api_host }}"
           engine_language: "{{ engine_language }}"
           engine_license: true
-          engine_password: "{{ engine_api_root_password|string }}"
+          engine_password: "{{ engine_api_root_password | string }}"
         status_code: 201
 
     - name: Create tenant
-      command: "wazo-auth-cli tenant create {{ tenant_name }}"  # noqa no-changed-when
+      ansible.builtin.command: "wazo-auth-cli tenant create {{ tenant_name }}"
+      changed_when: true
 
     - name: Create API client
-      command: "wazo-auth-cli user create {{ api_client_name }} --tenant {{ tenant_name }} --password {{ api_client_password }} --purpose external_api"  # noqa no-changed-when
+      ansible.builtin.command: |
+        wazo-auth-cli user create {{ api_client_name }} \
+          --tenant {{ tenant_name }} --password {{ api_client_password }} --purpose external_api
+      changed_when: true
 
     - name: Create policy
-      command: "wazo-auth-cli policy create api-client-policy --tenant {{ tenant_name }} --acl 'confd.#'"  # noqa no-changed-when
+      ansible.builtin.command: "wazo-auth-cli policy create api-client-policy --tenant {{ tenant_name }} --acl 'confd.#'"
+      changed_when: true
 
     - name: Enable policy for API client
-      command: "wazo-auth-cli user add {{ api_client_name }} --policy api-client-policy"  # noqa no-changed-when
-  when: engine_api_configure_wizard == "true"
+      ansible.builtin.command: "wazo-auth-cli user add {{ api_client_name }} --policy api-client-policy"
+      changed_when: true

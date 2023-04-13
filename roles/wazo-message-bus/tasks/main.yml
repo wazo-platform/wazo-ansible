@@ -1,16 +1,16 @@
 ---
 # Used to switch to user rabbitmq
 - name: Install sudo
-  apt:
+  ansible.builtin.apt:
     name: sudo
     state: present
 
 - name: Install RabbitMQ
-  apt:
+  ansible.builtin.apt:
     name: rabbitmq-server
     state: present
 
 - name: Ensure RabbitMQ is restarted
-  service:
+  ansible.builtin.service:
     name: rabbitmq-server
     state: restarted

@@ -1,15 +1,15 @@
 - project:
     templates:
-      - wazo-ansible-uc-template
+      - wazo-ansible-uc-bullseye
     check:
       jobs:
         - ansible-lint:
-            nodeset: pod-debian-10
+            nodeset: pod-debian-11
     gate:
       jobs:
         - ansible-lint:
-            nodeset: pod-debian-10
+            nodeset: pod-debian-11
     experimental:
       jobs:
         - wazo-acceptance:
-            nodeset: vm-debian-10-m1s
+            nodeset: vm-debian-11-m1s

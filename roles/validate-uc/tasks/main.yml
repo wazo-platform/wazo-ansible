@@ -1,9 +1,13 @@
-- name: check version
-  shell: "vers={{ wazo_distribution }}; echo ${vers##*-} $(cat /usr/share/wazo/WAZO-VERSION); test ${vers##*-} = $(cat /usr/share/wazo/WAZO-VERSION)"
+- name: Check version
+  ansible.builtin.shell: |
+    vers={{ wazo_distribution }};
+    echo ${vers##*-} $(cat /usr/share/wazo/WAZO-VERSION);
+    test ${vers##*-} = $(cat /usr/share/wazo/WAZO-VERSION)
   when: wazo_debian_repo == "archive"
+  changed_when: false
 
 - name: Get token
-  uri:
+  ansible.builtin.uri:
     url: "https://{{ engine_api_host }}:{{ engine_api_port }}{{ engine_auth_path }}/token"
     method: POST
     validate_certs: false
@@ -16,12 +20,12 @@
     return_content: true
   register: token_data
 
-- name: debug token data
-  debug:
+- name: Debug token data
+  ansible.builtin.debug:
     var: token_data
 
 - name: Get users
-  uri:
+  ansible.builtin.uri:
     url: "https://{{ engine_api_host }}:{{ engine_api_port }}{{ engine_confd_path }}/users"
     headers:
       X-Auth-Token: "{{ token_data.json.data.token }}"
@@ -30,6 +34,6 @@
     return_content: true
   register: users_data
 
-- name: debug users data
-  debug:
+- name: Debug users data
+  ansible.builtin.debug:
     var: users_data

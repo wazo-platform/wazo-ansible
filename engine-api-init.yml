@@ -1,5 +1,6 @@
 ---
-- hosts: engine_api
+- name: Setup API Engine
+  hosts: engine_api
   become: true
   roles:
     - engine-api-init

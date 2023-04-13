@@ -1,46 +1,56 @@
-- name: restart wazo-auth
-  service:
+- name: Restart wazo-auth
+  ansible.builtin.service:
     name: wazo-auth
     state: restarted
-- name: restart wazo-amid
-  service:
+
+- name: Restart wazo-amid
+  ansible.builtin.service:
     name: wazo-amid
     state: restarted
-- name: restart wazo-confd
-  service:
+
+- name: Restart wazo-confd
+  ansible.builtin.service:
     name: wazo-confd
     state: restarted
-- name: restart wazo-confgend
-  service:
+
+- name: Restart wazo-confgend
+  ansible.builtin.service:
     name: wazo-confgend
     state: restarted
-- name: restart wazo-agid
-  service:
+
+- name: Restart wazo-agid
+  ansible.builtin.service:
     name: wazo-agid
     state: restarted
 
-- name: reload nginx
-  debug: msg="checking config first"
+- name: Reload nginx
+  ansible.builtin.debug:
+    msg: "checking config first"
   changed_when: true
   notify:
-    - check nginx configuration
-    - reload nginx - after config check
-- name: restart nginx
-  debug: msg="checking config first"
+    - Check nginx configuration
+    - Reload nginx - after config check
+
+- name: Restart nginx
+  ansible.builtin.debug:
+    msg: "checking config first"
   changed_when: true
   notify:
-    - check nginx configuration
-    - restart nginx - after config check
-- name: check nginx configuration
-  command: "nginx -t"
+    - Check nginx configuration
+    - Restart nginx - after config check
+
+- name: Check nginx configuration
+  ansible.builtin.command: "nginx -t"
   register: result
   changed_when: "result.rc != 0"
   check_mode: false
-- name: reload nginx - after config check
-  service:
+
+- name: Reload nginx - after config check
+  ansible.builtin.service:
     name: nginx
     state: reloaded
-- name: restart nginx - after config check
-  service:
+
+- name: Restart nginx - after config check
+  ansible.builtin.service:
     name: nginx
     state: restarted
