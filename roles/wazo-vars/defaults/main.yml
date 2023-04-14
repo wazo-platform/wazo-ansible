@@ -6,8 +6,8 @@ wazo_distribution: wazo-dev-bullseye
 wazo_distribution_upgrade: wazo-dev-bullseye
 wazo_meta_package: wazo-platform
 
-debian_repo_wazo__key_url: http://mirror.wazo.community/wazo_current.key
-debian_repo_wazo__key_id: 2769B67EDBFF423F6874D7663F1BF7FC527FBC6A
+debian_repo_wazo__key_url: https://mirror.wazo.community/wazo_current.key
+debian_repo_wazo__key_id: 012391C4B871734F505B1F3A778B8E0319121AED
 
 engine_api_host: localhost
 engine_api_port: 443
