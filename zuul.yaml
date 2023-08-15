@@ -11,5 +11,4 @@
             nodeset: pod-debian-11
     experimental:
       jobs:
-        - wazo-acceptance:
-            nodeset: vm-debian-11-m1s
+        - wazo-acceptance-bullseye
