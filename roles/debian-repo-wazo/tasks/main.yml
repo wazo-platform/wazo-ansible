@@ -34,7 +34,7 @@
         name: wazo-dist
         state: present
 
-    - name: Add persistent Wazo repository # noqa 301
+    - name: Add persistent Wazo repository # noqa no-changed-when
       ansible.builtin.command: wazo-dist --{{ wazo_debian_repo }}-repo {{ wazo_distribution }}
 
     - name: Remove bootstrap Wazo repository

@@ -32,7 +32,7 @@
     name: asterisk
     state: restarted
 
-- name: Change Wazo distribution for later upgrades # noqa 301
+- name: Change Wazo distribution for later upgrades # noqa no-changed-when
   ansible.builtin.command: wazo-dist --{{ wazo_debian_repo_upgrade }}-repo {{ wazo_distribution_upgrade }}
   when: debian_repo_wazo__custom_repo is not defined
 
