@@ -46,17 +46,17 @@
     dest: /etc/xivo-manage-db.cfg.j2
     mode: "0644"
 
-- name: Reset main database options for xivo-manage-db package # noqa 301
+- name: Reset main database options for xivo-manage-db package # noqa no-changed-when
   ansible.builtin.shell: |
     set -o pipefail
     echo PURGE | debconf-communicate xivo-manage-db
   args:
     executable: /bin/bash
 
-- name: Reconfigure main database options # noqa 301
+- name: Reconfigure main database options # noqa no-changed-when
   ansible.builtin.command: debconf-set-selections "{{ xivo_managedb_debconf_file.path }}"
 
-- name: Initialize main database # noqa 301
+- name: Initialize main database # noqa no-changed-when
   ansible.builtin.command: dpkg-reconfigure xivo-manage-db --frontend noninteractive
 
 - name: Start Wazo services

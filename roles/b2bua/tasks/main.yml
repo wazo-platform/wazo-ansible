@@ -53,7 +53,7 @@
     group: www-data
     mode: "0660"
 
-- name: Ensure Asterisk permissions # noqa 301
+- name: Ensure Asterisk permissions # noqa no-changed-when
   ansible.builtin.command: xivo-fix-paths-rights
 
 - name: Install Asterisk AGI configuration
