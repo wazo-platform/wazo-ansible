@@ -3,15 +3,15 @@
   ansible.builtin.include_role:
     name: debian-repo-wazo
 
-- name: Install xivo-certs
+- name: Install wazo-certs
   ansible.builtin.apt:
-    name: xivo-certs
+    name: wazo-certs
     state: present
 
 - name: Install custom certificate for HTTPS
   ansible.builtin.copy:
     src: "{{ b2bua_https_cert }}"
-    dest: /usr/share/xivo-certs/server.crt
+    dest: /usr/share/wazo-certs/server.crt
     owner: root
     group: www-data
     mode: "0640"
@@ -22,7 +22,7 @@
 - name: Install custom private key for HTTPS
   ansible.builtin.copy:
     src: "{{ b2bua_https_private_key }}"
-    dest: /usr/share/xivo-certs/server.key
+    dest: /usr/share/wazo-certs/server.key
     owner: root
     group: www-data
     mode: "0640"
