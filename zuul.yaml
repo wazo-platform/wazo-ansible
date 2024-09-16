@@ -1,8 +1,8 @@
 - project:
-    templates:
-      - wazo-ansible-uc-bullseye
     wazo-check:
       jobs:
+        - wazo-ansible-uc-bullseye:
+            nodeset: vm-debian-11-m1m
         - ansible-lint:
             nodeset: pod-debian-11
     wazo-gate:
