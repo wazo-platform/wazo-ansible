@@ -118,3 +118,4 @@ For a new Wazo engine installation, there are two distributions to consider:
 * `debian_repo_wazo__custom_repo`: debian repository to replace the default Wazo repository
 * `debian_repo_wazo__custom_repo_filename`: filename for the debian repository to replace the default Wazo repository
 * `debian_repo_wazo__custom_repo_upgrade`: debian repository to replace the custom repository for later upgrades
+
