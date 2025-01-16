@@ -82,7 +82,7 @@
     name: xivo-manage-db
     question: xivo-manage-db/db-skip
     vtype: boolean
-    value: true
+    value: 'true'
 
 - name: Create wazo-confd config dir
   ansible.builtin.file:
