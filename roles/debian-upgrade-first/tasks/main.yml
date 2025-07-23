@@ -1,4 +1,16 @@
 ---
+- name: Delete vanished bullseye-backports repository
+  ansible.builtin.apt_repository:
+    repo: deb http://deb.debian.org/debian bullseye-backports main
+    state: absent
+    update_cache: false
+
+- name: Delete vanished bullseye-backports source repository
+  ansible.builtin.apt_repository:
+    repo: deb-src http://deb.debian.org/debian bullseye-backports main
+    state: absent
+    update_cache: false
+
 - name: Upgrade Debian before anything
   ansible.builtin.apt:
     update_cache: true
