@@ -4,11 +4,11 @@
     wazo-check:
       jobs:
         - ansible-lint:
-            nodeset: pod-debian-11
+            nodeset: vm-debian-12-m1s
     wazo-gate:
       jobs:
         - ansible-lint:
-            nodeset: pod-debian-11
+            nodeset: vm-debian-12-m1s
     experimental:
       jobs:
         - wazo-acceptance-bookworm
