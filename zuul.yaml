@@ -1,6 +1,6 @@
 - project:
     templates:
-      - wazo-ansible-uc-bullseye
+      - wazo-ansible-uc-bookworm
     wazo-check:
       jobs:
         - ansible-lint:
@@ -11,4 +11,4 @@
             nodeset: pod-debian-11
     experimental:
       jobs:
-        - wazo-acceptance-bullseye
+        - wazo-acceptance-bookworm
