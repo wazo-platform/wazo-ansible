@@ -20,6 +20,8 @@
     postgresql_global_config_options:
       - option: port
         value: "{{ postgresql_port | default(5432) }}"
+      - option: log_directory  # See https://github.com/geerlingguy/ansible-role-postgresql/issues/217
+        value: 'log'
     postgresql_users: []
 
 - name: Set PostgreSQL superadmin password
@@ -55,3 +57,5 @@
         value: "{{ postgresql_port | default(5432) }}"
       - option: listen_addresses
         value: "{{ postgresql_listen_addresses | default('127.0.0.1') }}"
+      - option: log_directory  # See https://github.com/geerlingguy/ansible-role-postgresql/issues/217
+        value: 'log'
