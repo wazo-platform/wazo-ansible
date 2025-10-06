@@ -1,9 +1,10 @@
 ---
-- name: Install the ntp and postfix daemons
-  # Some machines have chrony installed
+- name: Install the ntpsec and postfix daemons
+  # Default bookworm installation has systemd-timesyncd installed
+  # It also solve issue when chrony or openntpd is installed
   ansible.builtin.apt:
     name:
-      - ntp
+      - ntpsec
       - postfix
     state: present
 
