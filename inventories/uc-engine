@@ -32,8 +32,8 @@ engine_api
 
 # Uncomment the 2 following lines to install the stable version (default is
 # development version)
-# wazo_distribution = wazo-dev-bullseye
-# wazo_distribution_upgrade = wazo-dev-bullseye
+# wazo_distribution = wazo-dev-bookworm
+# wazo_distribution_upgrade = wazo-dev-bookworm
 
 # PostgreSQL settings
 # postgresql_port = 5432

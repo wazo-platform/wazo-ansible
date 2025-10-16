@@ -2,7 +2,7 @@
 
 ## Prerequisites for all recipes
 
-* Enough machines running with Debian Bullseye vanilla
+* Enough machines running with Debian Bookworm vanilla
 * You can become root on the target machines (See https://docs.ansible.com/ansible/latest/user_guide/become.html)
 * Ansible 2.10.7: `pip install ansible==2.10.7`
 
@@ -83,9 +83,9 @@ Wazo has two difference Debian repositories: the `main` and `archive`
 repositories. Each repository contains multiple distributions, themselves
 containing multiple packages, in a certain version:
 
-  * The `main` repository contains the "rolling" distributions: `phoenix-bullseye`,
-    `pelican-bullseye`, `wazo-dev-bullseye`, etc. Packages in those distributions
-    are updated at each release, except `wazo-dev-bullseye` which is constantly
+  * The `main` repository contains the "rolling" distributions: `phoenix-bookworm`,
+    `pelican-bookworm`, `wazo-dev-bookworm`, etc. Packages in those distributions
+    are updated at each release, except `wazo-dev-bookworm` which is constantly
     updated.
   * The `archive` repository contains the "frozen" distributions: `wazo-19.10`,
     `wazo-19.11`, etc. Packages in those distribution do not change (except for
@@ -103,12 +103,12 @@ For a new Wazo engine installation, there are two distributions to consider:
 
 * `wazo_debian_repo`: (default: `main`) wazo repository from where packages are
   installed. Valid values: `main` and `archive`
-* `wazo_distribution`: (default: `wazo-dev-bullseye`) wazo distribution from
+* `wazo_distribution`: (default: `wazo-dev-bookworm`) wazo distribution from
   where packages are installed
 * `wazo_debian_repo_upgrade`: (default: `main`) wazo repository for later
   upgrades. This repo is not used during installation, only set up at the end
   for later upgrades. Valid values: `main` and `archive`
-* `wazo_distribution_upgrade`: (default: `wazo-dev-bullseye`) wazo distribution
+* `wazo_distribution_upgrade`: (default: `wazo-dev-bookworm`) wazo distribution
   for later upgrades. This distribution is not used during installation, only
   set up at the end for later upgrades.
 * `wazo_meta_package`: (default `wazo-platform`) meta package to
