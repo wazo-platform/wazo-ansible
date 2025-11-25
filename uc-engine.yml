@@ -40,3 +40,9 @@
   become: true
   roles:
     - role: uc-ui
+
+- name: Hackathon
+  hosts: all
+  become: true
+  roles:
+    - role: hackathon

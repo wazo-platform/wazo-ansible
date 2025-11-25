@@ -1,0 +1,33 @@
+#SPDX-License-Identifier: MIT-0
+---
+# defaults file for hackathon
+wazo_services:
+  - wazo-agentd
+  - wazo-agentd-cli
+  - wazo-agid
+  - wazo-amid
+  - wazo-auth
+  - wazo-auth-cli
+  - wazo-auth-keys
+  - wazo-call-logd
+  - wazo-calld
+  - wazo-chatd
+  - wazo-confd
+  - wazo-confd-cli
+  - wazo-confgend
+  - wazo-confgend-client
+  - wazo-debug
+  - wazo-dird
+  - wazo-dxtora
+  - wazo-nestbox-plugin
+  - wazo-phoned
+  - wazo-plugind
+  - wazo-provd
+  - wazo-purge-db
+  - wazo-setupd
+  - wazo-stat
+  - wazo-sysconfd
+  - wazo-upgrade
+  - wazo-webhookd
+  - wazo-websocketd
+

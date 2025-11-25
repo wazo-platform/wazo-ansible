@@ -1,0 +1,69 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for hackathon
+
+- name: Create wazo-gitd etc directory
+  ansible.builtin.file:
+    path: /etc/wazo-gitd
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+
+- name: Git init /etc/wazo-gitd
+  ansible.builtin.command: git init
+  args:
+    chdir: /etc/wazo-gitd
+
+- name: Make etckeeper not complaining when it is invoked by cron
+  community.general.git_config:
+    name: user.email
+    repo: /etc/wazo-gitd
+    scope: local
+    value: 'gitd@localhost'
+
+- name: Make etckeeper not complaining when it is invoked by cron
+  community.general.git_config:
+    name: user.name
+    repo: /etc/wazo-gitd
+    scope: local
+    value: 'gitd@localhost'
+
+- name: Copy each folder into /etc/wazo-gitd
+  ansible.builtin.copy:
+    src: "/etc/{{ item }}"
+    dest: "/etc/wazo-gitd/"
+    remote_src: true
+    mode: preserve
+  loop: "{{ wazo_services }}"
+
+- name: Remove
+  ansible.builtin.file:
+    path: "/etc/{{ item }}"
+    state: absent
+  loop: "{{ wazo_services }}"
+
+- name: Create symlinks
+  ansible.builtin.file:
+    dest: "/etc/{{ item }}"
+    src: "/etc/wazo-gitd/{{ item }}"
+    owner: root
+    group: root
+    state: link
+  loop: "{{ wazo_services }}"
+
+- name: Check git logs
+  ansible.builtin.command: git log
+  register: _git_log
+  ignore_errors: true
+  args:
+    chdir: /etc/wazo-gitd
+
+- name: First commit
+  ansible.builtin.shell: |
+    git add .
+    git commit -m "First commit"
+  args:
+    chdir: /etc/wazo-gitd
+  when: _git_log.rc > 0
