@@ -1,0 +1,36 @@
+---
+- name: Push gilgamesh.py
+  ansible.builtin.template:
+    src: gilgamesh.py
+    dest: "{{ hackathon_gilgamesh_script }}"
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Push systemd unit
+  ansible.builtin.template:
+    src: gilgamesh.service
+    dest: /etc/systemd/system/wazo-gilgamesh.service
+    owner: root
+    group: root
+    mode: "0644"
+    register: _unit
+
+- name: Push systemd timer
+  ansible.builtin.template:
+    src: gilgamesh.timer
+    dest: /etc/systemd/system/wazo-gilgamesh.timer
+    owner: root
+    group: root
+    mode: "0644"
+    register: _timer
+
+- name: systemd daemon-reload
+  ansible.builtin.systemd:
+    daemon-reload: true
+  when: _unit.changed or _timer.changed
+
+- name: timer start
+  ansible.builtin.service:
+    name: wazo-gilgamesh.timer
+    state: started

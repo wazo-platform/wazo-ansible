@@ -31,3 +31,5 @@ wazo_services:
   - wazo-webhookd
   - wazo-websocketd
 
+hackathon_gilgamesh_script: /usr/local/bin/wazo-gilgamesh.py
+hackathon_gitd_folder: /etc/wazo-gitd

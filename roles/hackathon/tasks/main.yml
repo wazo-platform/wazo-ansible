@@ -4,36 +4,36 @@
 
 - name: Create wazo-gitd etc directory
   ansible.builtin.file:
-    path: /etc/wazo-gitd
+    path: "{{ hackathon_gitd_folder }}"
     state: directory
     owner: root
     group: root
     mode: '0755'
 
 
-- name: Git init /etc/wazo-gitd
+- name: Git init "{{ hackathon_gitd_folder }}"
   ansible.builtin.command: git init
   args:
-    chdir: /etc/wazo-gitd
+    chdir: "{{ hackathon_gitd_folder }}"
 
 - name: Make etckeeper not complaining when it is invoked by cron
   community.general.git_config:
     name: user.email
-    repo: /etc/wazo-gitd
+    repo: "{{ hackathon_gitd_folder }}"
     scope: local
     value: 'gitd@localhost'
 
 - name: Make etckeeper not complaining when it is invoked by cron
   community.general.git_config:
     name: user.name
-    repo: /etc/wazo-gitd
+    repo: "{{ hackathon_gitd_folder }}"
     scope: local
     value: 'gitd@localhost'
 
-- name: Copy each folder into /etc/wazo-gitd
+- name: Copy each folder into "{{ hackathon_gitd_folder }}"
   ansible.builtin.copy:
     src: "/etc/{{ item }}"
-    dest: "/etc/wazo-gitd/"
+    dest: "{{ hackathon_gitd_folder }}/"
     remote_src: true
     mode: preserve
   loop: "{{ wazo_services }}"
@@ -47,7 +47,7 @@
 - name: Create symlinks
   ansible.builtin.file:
     dest: "/etc/{{ item }}"
-    src: "/etc/wazo-gitd/{{ item }}"
+    src: "{{ hackathon_gitd_folder }}/{{ item }}"
     owner: root
     group: root
     state: link
@@ -58,12 +58,15 @@
   register: _git_log
   ignore_errors: true
   args:
-    chdir: /etc/wazo-gitd
+    chdir: "{{ hackathon_gitd_folder }}"
 
 - name: First commit
   ansible.builtin.shell: |
     git add .
     git commit -m "First commit"
   args:
-    chdir: /etc/wazo-gitd
+    chdir: "{{ hackathon_gitd_folder }}"
   when: _git_log.rc > 0
+
+- name: Deploy cron
+  ansible.builtin.import_tasks: cron.yml

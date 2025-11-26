@@ -1,0 +1,9 @@
+[Unit]
+Description="Launch wazo-giglamesh every minute"
+
+[Timer]
+Unit=wazo-gilgamesh.service
+OnCalendar=*-*-* *:*:52
+
+[Install]
+WantedBy=timers.target

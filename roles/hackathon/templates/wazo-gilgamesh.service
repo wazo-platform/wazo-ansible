@@ -1,0 +1,8 @@
+[Unit]
+Description="Wazo Gilgamesh script. Very complicated piece of work which will auto commit modified files"
+
+[Service]
+Type=simple
+ExecStart={{ hackathon_gilgamesh_script }} {{ hackathon_gitd_folder }}
+User=root
+Group=root
