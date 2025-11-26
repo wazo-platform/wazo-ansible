@@ -9,21 +9,21 @@
 
 - name: Push systemd unit
   ansible.builtin.template:
-    src: gilgamesh.service
+    src: wazo-gilgamesh.service
     dest: /etc/systemd/system/wazo-gilgamesh.service
     owner: root
     group: root
     mode: "0644"
-    register: _unit
+  register: _unit
 
 - name: Push systemd timer
   ansible.builtin.template:
-    src: gilgamesh.timer
+    src: wazo-gilgamesh.timer
     dest: /etc/systemd/system/wazo-gilgamesh.timer
     owner: root
     group: root
     mode: "0644"
-    register: _timer
+  register: _timer
 
 - name: systemd daemon-reload
   ansible.builtin.systemd:
