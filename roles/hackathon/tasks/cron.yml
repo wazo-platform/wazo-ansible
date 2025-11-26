@@ -1,7 +1,7 @@
 ---
 - name: Push gilgamesh.py
   ansible.builtin.template:
-    src: gilgamesh.py
+    src: wazo-gilgamesh.py
     dest: "{{ hackathon_gilgamesh_script }}"
     owner: root
     group: root
