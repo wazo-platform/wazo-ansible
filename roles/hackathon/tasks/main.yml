@@ -21,14 +21,14 @@
     name: user.email
     repo: "{{ hackathon_gitd_folder }}"
     scope: local
-    value: 'gitd@localhost'
+    value: 'wazo-gitd@localhost'
 
 - name: Make etckeeper not complaining when it is invoked by cron
   community.general.git_config:
     name: user.name
     repo: "{{ hackathon_gitd_folder }}"
     scope: local
-    value: 'gitd@localhost'
+    value: 'wazo-gitd@localhost'
 
 - name: Copy each folder into "{{ hackathon_gitd_folder }}"
   ansible.builtin.copy:
@@ -70,3 +70,13 @@
 
 - name: Deploy cron
   ansible.builtin.import_tasks: cron.yml
+
+- name: Upload sysconfd config
+  ansible.builtin.copy:
+    dest: /etc/wazo-sysconfd/conf.d/10-gitd.yml
+    content: |
+      config_diff:
+        repo_path: /etc/wazo-gitd
+    owner: root
+    group: root
+    mode: '0644'
