@@ -23,6 +23,17 @@
     scope: local
     value: 'wazo-gitd@localhost'
 
+- name: Add gitignore file to keep the service to adding swap files
+  ansible.builtin.copy:
+    content: |
+      *.swp
+      ~*
+      *~
+    dest: "{{ hackathon_gitd_folder }}/.gitignore"
+    owner: root
+    group: root
+    mode: '0644'
+
 - name: Make etckeeper not complaining when it is invoked by cron
   community.general.git_config:
     name: user.name
