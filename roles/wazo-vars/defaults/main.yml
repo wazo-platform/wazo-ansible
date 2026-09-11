@@ -11,7 +11,6 @@ debian_repo_wazo__key_id: 07BD80E9769F598C0C8281253130D90DD87E06EF
 
 engine_api_host: localhost
 engine_api_port: 443
-engine_api_tracing: false
 engine_language: en_US
 
 api_client_name: api-client

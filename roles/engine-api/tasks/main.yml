@@ -225,6 +225,3 @@
   ansible.builtin.file:
     path: /var/lib/wazo/disabled
     state: absent
-
-- name: Enable Tracing in API
-  ansible.builtin.include_tasks: tracing.yml
